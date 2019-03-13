@@ -3,6 +3,8 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/news">News</router-link> |
+      <router-link to="/training">Training</router-link> |
+      <router-link to="/admin">Admin</router-link> |
       <router-link to="/about">About</router-link>
     </div>
     <router-view />
@@ -30,3 +32,5 @@
   color: #42b983;
 }
 </style>
+
+<style src="./styles/styles.css"></style>
