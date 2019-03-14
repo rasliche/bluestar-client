@@ -3,11 +3,10 @@
         <form>
             <label for="name">Operator Name</label>
             <input type="text" id="name" v-model="name">
+            <label for="password">Operator Password</label>
+            <input type="text" id="password" v-model="password">
             <button @click.prevent="submitOperator">Create</button>
         </form>
-        <div>
-            <p>Operator Name: {{ name }}</p>
-        </div>
     </div>
 </template>
 
@@ -19,7 +18,7 @@ export default {
     data() {
         return {
             name: '',
-            region: ''
+            password: ''
         }
     },
     methods: {
@@ -28,10 +27,12 @@ export default {
         ]),
         submitOperator() {
             const newOperator = {
-                name: this.name
+                name: this.name,
+                password: this.password
             }
             this.createNewOperator(newOperator)
             this.name = ''
+            this.password = ''
         }
     }
 }
