@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+// lessons
+import AboutFKNMS from "./views/lessons/AboutFKNMS.vue"
 
 Vue.use(Router);
 
@@ -38,7 +40,14 @@ export default new Router({
       // this generates a separate chunk (training.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () =>
-        import(/* webpackChunkName: "training" */ "./views/Training.vue")
+        import(/* webpackChunkName: "training" */ "./views/Training.vue"),
+      children: [
+        {
+          path: 'about-fknms',
+          name: "About FKNMS",
+          component: AboutFKNMS
+        },
+      ]
     },
     {
       path: "/admin",
