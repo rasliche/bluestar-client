@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>This is a question component</h2>
+        <h1>This is a question component</h1>
     </div>
 </template>
 
