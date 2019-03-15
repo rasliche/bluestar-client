@@ -31,7 +31,7 @@
 
 <script>
 // @ is an alias to /src
-import Quiz from '@/components/Quiz.vue'
+import Quiz from '@/components/quiz/Quiz.vue'
 
 export default {
   name: "about-fknms",
