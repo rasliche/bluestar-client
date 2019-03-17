@@ -11,29 +11,29 @@ export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
-    {
-      path: "/",
-      name: "home",
-      component: Home
-    },
-    {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
-    },
-    {
-      path: "/operators",
-      name: "operators",
-      // route level code-splitting
-      // this generates a separate chunk (operators.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "operators" */ "./views/Operators.vue")
-    },
+    // {
+    //   path: "/",
+    //   name: "home",
+    //   component: Home
+    // },
+    // {
+    //   path: "/about",
+    //   name: "about",
+    //   // route level code-splitting
+    //   // this generates a separate chunk (about.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () =>
+    //     import(/* webpackChunkName: "about" */ "./views/About.vue")
+    // },
+    // {
+    //   path: "/operators",
+    //   name: "operators",
+    //   // route level code-splitting
+    //   // this generates a separate chunk (operators.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () =>
+    //     import(/* webpackChunkName: "operators" */ "./views/Operators.vue")
+    // },
     {
       path: "/operators/:slug",
       name: "operator",
@@ -43,17 +43,18 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "operator" */ "./views/Operator.vue")
     },
+    // {
+    //   path: "/news",
+    //   name: "news",
+    //   // route level code-splitting
+    //   // this generates a separate chunk (news.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () =>
+    //     import(/* webpackChunkName: "news" */ "./views/News.vue")
+    // },
     {
-      path: "/news",
-      name: "news",
-      // route level code-splitting
-      // this generates a separate chunk (news.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "news" */ "./views/News.vue")
-    },
-    {
-      path: "/training",
+      path: '/',
+      // path: "/training",
       // route level code-splitting
       // this generates a separate chunk (training.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -69,6 +70,11 @@ export default new Router({
           path: 'about-fknms',
           name: "about-fknms",
           component: AboutFKNMS
+        },
+        {
+          path: "*",
+          name: "four-oh-four",
+          component: () => import(/* webpackChunkName: "fourohfour" */ "./views/404.vue")
         },
       ]
     },
