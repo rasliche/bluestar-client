@@ -10,7 +10,8 @@
         </p>
       </div>
       <div class="w-1/2">
-        <h3>Staff</h3>
+        <h3>Users</h3>
+        <UsersList :users="users" />
       </div>
       <div class="w-1/2">
         <h3>Lessons</h3>
@@ -30,13 +31,21 @@
 
 <script>
 // @ is an alias to /src
+import axios from 'axios'
 import CreateOperator from "@/components/CreateOperator.vue"
+import UsersList from "@/components/UsersList.vue"
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: "home",
   components: {
-    CreateOperator
+    CreateOperator,
+    UsersList
+  },
+  data() {
+    return {
+      users: []
+    }
   },
   computed: {
       ...mapGetters([
@@ -48,7 +57,9 @@ export default {
           'fetchAllOperators'
       ])
   },
-  mounted() {
+  async created() {
+    let users = await axios.get('http://localhost:3000/api/users')
+    this.users = users.data
     this.fetchAllOperators()
   }
 }
