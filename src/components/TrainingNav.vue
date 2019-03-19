@@ -22,6 +22,14 @@ export default {
 </script>
 
 <style>
+a {
+  @apply mt-2;
+}
+
+a:first-child {
+  @apply mt-0;
+}
+
 a.router-link-exact-active {
   color: #42b983;
 }
