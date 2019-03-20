@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="mx-auto border-2 rounded">
         <h1>Register</h1>
         <form class="flex flex-wrap">
-            <label for="name" class="w-1/2 text-right pr-2 border border-red">Name:</label>
+            <label for="name" class="text-right pr-2 border border-red">Name:</label>
             <input type="text" name="name" id="name" v-model="name" class="w-1/2 text-left pl-2 border border-red">
             <label for="email" class="w-1/2 text-right pr-2 border border-red">Email:</label>
             <input type="text" name="email" id="email" v-model="email" class="w-1/2 text-left pl-2 border border-red">
@@ -16,13 +16,12 @@
             <label for="shopPassword" class="w-1/2 text-right pr-2 border border-red">Shop Password:</label>
             <input type="text" name="shopPassword" id="shopPassword" v-model="shopPassword" class="w-1/2">
 
-            <button @click.prevent="onSubmit">Register</button>
+            <button @click.prevent="submitRegister">Register</button>
         </form>
     </div>
 </template>
 
 <script>
-import axios from '@/services/axios-auth'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -41,7 +40,7 @@ export default {
         ])
     },
     methods: {
-        async onSubmit() {
+        async submitRegister() {
             const formData = {
                 name: this.name,
                 email: this.email,
@@ -49,8 +48,7 @@ export default {
                 // shopChoice: this.shopChoice,
                 // shopPassword: this.shopPassword
             }
-            const result = await axios.post('/api/users', formData)
-            console.log(result)
+            this.$store.dispatch('register', formData)
         }
     }
 }
