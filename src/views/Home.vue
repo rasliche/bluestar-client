@@ -1,21 +1,28 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    {{ user }}
+    {{ quiz }}
     <HelloWorld msg="Welcome to Your Vue.js App" />
-    <CreateOperator />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue"
-import CreateOperator from "@/components/CreateOperator.vue"
+import { mapState } from 'vuex'
 
 export default {
   name: "home",
   components: {
     HelloWorld,
-    CreateOperator
+  },
+  computed: {
+    ...mapState('user', {
+      user: 'user'
+    }),
+    ...mapState('quiz', {
+      quiz: 'quiz'
+    }),
   }
 }
 </script>
