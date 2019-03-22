@@ -6,15 +6,26 @@ const state = {
 }
 
 const getters = {
-
+    isAuthenticated: state => state.token !== null,
+    isAdmin: state => {
+        if (state.user && state.user.isAdmin) {
+            return true
+}
+    }
 }
 
 const mutations = {
-    authUser: (state, { user, token }) => {
+    authUser: (state, userData) => {
+        console.log(userData)
+        const { user, token } = userData
         state.token = token
         state.user = user
         Api.defaults.headers.common['Authorization'] = `Bearer: ${state.token}`
       },
+    clearAuth: (state) => {
+        state.token = null
+        state.user = null
+}
 }
 
 const actions = {
