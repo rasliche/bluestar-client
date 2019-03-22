@@ -1,5 +1,21 @@
 const state = {
-    quiz: 'A blue star quiz'
+    quizzes: [
+        { 
+            title: 'a quiz title',
+            description: 'a quiz description',
+            questions: [
+                {
+                    title: 'question text',
+                    answers: [
+                        { text: 'possible answer A', isRight: true },
+                        { text: 'possible answer B', isRight: false },
+                        { text: 'possible answer C', isRight: false },
+                        { text: 'possible answer D', isRight: false },
+                    ]
+                }
+            ]
+        }
+    ]
 }
 
 const getters = {
@@ -7,7 +23,7 @@ const getters = {
 }
 
 const mutations = {
-
+    
 }
 
 const actions = {
