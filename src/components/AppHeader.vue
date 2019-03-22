@@ -1,18 +1,24 @@
 <template>
-    <div class="flex">
-      <router-link to="/" class="text-3xl bg-blue-darkest text-blue-lightest no-underline">Blue Star</router-link>
-      <router-link to="/login" class="bg-blue-darkest text-blue-lightest">Login</router-link>
-      {{ user }}
+    <div class="flex bg-blue-darkest">
+      <router-link to="/" class="text-3xl text-blue-lightest no-underline">Blue Star</router-link>
+      <router-link v-if="!auth" to="/login" class="text-blue-lightest">Login</router-link>
+      <button v-if="auth" @click="logout" class="text-blue-lightest">Logout</button>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapState('user', {
-      user: 'user'
+    ...mapGetters('user', {
+      auth: 'isAuthenticated'
+    })
+  },
+  methods: {
+    ...mapActions('user', {
+      logout: 'logout'
     })
   }
 }
