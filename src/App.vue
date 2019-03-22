@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import AppNav from '@/components/AppNav.vue'
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
@@ -21,14 +20,6 @@ export default {
     AppNav,
     AppHeader,
     AppFooter,
-  },
-  methods: {
-    ...mapActions([
-      'fetchAllOperators'
-    ])
-  },
-  mounted() {
-    this.fetchAllOperators()
   }
 }
 </script>
