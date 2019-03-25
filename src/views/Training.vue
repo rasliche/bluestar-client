@@ -10,7 +10,7 @@ import TrainingNav from '@/components/TrainingNav.vue'
 
 export default {
   components: {
-    TrainingNav
+    TrainingNav,
   }
 }
 </script>
