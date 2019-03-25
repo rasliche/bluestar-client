@@ -5,9 +5,9 @@
       <div>
         <h3>Operators</h3>
         <CreateOperator />
-        <p v-for="operator in operators" :key="operator._id">
-          {{ operator.name }}
-        </p>
+        <div v-for="operator in operators" :key="operator._id">
+          <router-link :to="{ name: 'operator', params: { id: operator.slug }}">{{ operator.name }}</router-link>
+        </div>
       </div>
       <div>
         <h3>Users</h3>
@@ -58,9 +58,8 @@ export default {
       ])
   },
   async created() {
-    let users = await axios.get('http://localhost:3000/api/users')
-    this.users = users.data
-    this.fetchAllOperators()
+    const { data } = await axios.get('http://localhost:3000/api/users')
+    this.users = data
   }
 }
 </script>
