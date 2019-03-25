@@ -9,13 +9,14 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapActions } from 'vuex'
 
 export default {
     data() {
         return {
-            title: ''
+            title: '',
+            description: null,
+            lessonSlug: null
         }
     },
     methods: {
@@ -25,6 +26,8 @@ export default {
         submitQuiz() {
             const newQuiz = {
                 title: this.title,
+                description: this.description,
+                lessonSlug: this.lessonSlug
             }
             this.createNewQuiz(newQuiz)
             this.title = ''
