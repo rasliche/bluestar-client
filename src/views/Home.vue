@@ -1,20 +1,18 @@
 <template>
   <div class="home">
-    {{ user }}
-    {{ quiz }}
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <TrainingHome />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue"
+import TrainingHome from '@/views/lessons/TrainingHome.vue'
 import { mapState } from 'vuex'
 
 export default {
   name: "home",
   components: {
-    HelloWorld,
+    TrainingHome
   },
   computed: {
     ...mapState('user', {
