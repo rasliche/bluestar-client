@@ -1,4 +1,5 @@
 import Api from '../services/axios-api'
+import router from '../router'
 
 const state = {
     token: null,
@@ -10,7 +11,7 @@ const getters = {
     isAdmin: state => {
         if (state.user && state.user.isAdmin) {
             return true
-}
+        }
     }
 }
 
@@ -20,25 +21,63 @@ const mutations = {
         const { user, token } = userData
         state.token = token
         state.user = user
-        Api.defaults.headers.common['Authorization'] = `Bearer: ${state.token}`
-      },
+    },
     clearAuth: (state) => {
         state.token = null
         state.user = null
-}
+    }
 }
 
 const actions = {
-    register: async ({ commit }, formData) => {
-        const { data } = await Api.post('http://localhost:3000/api/users', formData)
-        console.log(data)
-        commit('authUser', data)
-      },
-    login: async ({ commit }, authData) => {
-    const { data } = await Api.post('http://localhost:3000/api/auth/login', authData)
-    console.log(data)
-    commit('authUser', data)
-    },  
+    setLogoutTimer: ({ commit }, expirationTime) => {
+        setTimeout(() => {
+            commit('clearAuth')
+            console.log('You have been logged out.')
+        }, expirationTime * 1000)
+    },
+    register: async ({ commit, dispatch }, formData) => {
+        try {
+            const { data } = await Api.post('/users', formData)
+            console.log(data)
+            commit('authUser', data)
+            const now = new Date()
+            const expirationDate = new Date(now.getTime() + 3600000)
+            localStorage.setItem('bs-auth-time', expirationDate)
+            localStorage.setItem('bs-auth-token', data.token)
+            dispatch('setLogoutTimer', 3600)
+        } catch (err) {
+            console.log('There was an error', err)
+        }
+    },
+    login: async ({ commit, dispatch }, authData) => {
+        try {
+            const { data } = await Api.post('/auth/login', authData)
+            console.log(data)
+            commit('authUser', data)
+            const now = new Date()
+            const expirationDate = new Date(now.getTime() + 3600000)
+            localStorage.setItem('bs-auth-time', expirationDate)
+            localStorage.setItem('bs-auth-token', data.token)
+            dispatch('setLogoutTimer', 3600)
+        } catch (err) {
+            console.log('There was an error', err)
+        }
+    },
+    tryAutoLogin: () => {
+        const token = localStorage.getItem('bs-auth-token')
+        if (!token) return
+        const expirationDate = localStorage.getItem('bs-auth-time')
+        const now = new Date()
+        if (now >= expirationDate) {
+            return
+        }
+        // TODO: Fetch user stored in token?
+        commit('authUser', { token, user })
+    },
+    logout: ({ commit }) => {
+        commit('clearAuth')
+        router.replace('/login')
+    }
 }
 
 export default {
