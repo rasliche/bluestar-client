@@ -20,6 +20,9 @@ export default {
     AppNav,
     AppHeader,
     AppFooter,
+  },
+  created() {
+    this.$store.dispatch('user/tryAutoLogin')
   }
 }
 </script>

@@ -42,11 +42,25 @@ export default new Router({
     {
       path: "/operators",
       name: "operators",
+      beforeEnter (to, from, next) {
+        if (store.state.user.token) {
+          next()
+        } else {
+          next('/login')
+        }
+      },
       component: () => import(/* webpackChunkName: "operators" */ "./views/Operators.vue")
     },
     {
       path: "/operators/:slug",
       name: "operator",
+      beforeEnter (to, from, next) {
+        if (store.state.user.token) {
+          next()
+        } else {
+          next('/login')
+        }
+      },
       // route level code-splitting
       // this generates a separate chunk (operator.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -76,11 +90,25 @@ export default new Router({
     {
       path: "/admin",
       name: "admin",
+      beforeEnter (to, from, next) {
+        if (store.state.user.token) {
+          next()
+        } else {
+          next('/login')
+        }
+      },
       component: () => import(/* webpackChunkName: "admin" */ "./views/Admin.vue")
     },
     {
       path: '/quiz/create',
       name: 'quizcreate',
+      beforeEnter (to, from, next) {
+        if (store.state.user.token) {
+          next()
+        } else {
+          next('/login')
+        }
+      },
       component: () => import(/* webpackChunkName: "quizcreate" */ "./views/quiz/CreateQuiz.vue")
     },
     {

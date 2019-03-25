@@ -1,4 +1,4 @@
-import Api from '../services/axios-api'
+import Api from '../services/Api'
 import router from '../router'
 
 const state = {
@@ -7,6 +7,7 @@ const state = {
 }
 
 const getters = {
+    user: state => state.user,
     isAuthenticated: state => state.token !== null,
     isAdmin: state => {
         if (state.user && state.user.isAdmin) {
@@ -32,7 +33,7 @@ const actions = {
     setLogoutTimer: ({ commit }, expirationTime) => {
         setTimeout(() => {
             commit('clearAuth')
-            console.log('You have been logged out.')
+            console.log('You have been logged out after 2 hours.')
         }, expirationTime * 1000)
     },
     register: async ({ commit, dispatch }, formData) => {
@@ -41,10 +42,10 @@ const actions = {
             console.log(data)
             commit('authUser', data)
             const now = new Date()
-            const expirationDate = new Date(now.getTime() + 3600000)
+            const expirationDate = new Date(now.getTime() + 7200000)
             localStorage.setItem('bs-auth-time', expirationDate)
             localStorage.setItem('bs-auth-token', data.token)
-            dispatch('setLogoutTimer', 3600)
+            dispatch('setLogoutTimer', 7200)
         } catch (err) {
             console.log('There was an error', err)
         }
@@ -63,7 +64,7 @@ const actions = {
             console.log('There was an error', err)
         }
     },
-    tryAutoLogin: () => {
+    tryAutoLogin: async ({ commit }) => {
         const token = localStorage.getItem('bs-auth-token')
         if (!token) return
         const expirationDate = localStorage.getItem('bs-auth-time')
@@ -71,10 +72,16 @@ const actions = {
         if (now >= expirationDate) {
             return
         }
-        // TODO: Fetch user stored in token?
-        commit('authUser', { token, user })
+        const { data } = await Api.get('/users/me', {
+            headers: {
+                Authorization: `Bearer: ${token}`
+            }
+        })
+        commit('authUser', data)
     },
     logout: ({ commit }) => {
+        localStorage.removeItem('bs-auth-token')
+        localStorage.removeItem('bs-auth-time')
         commit('clearAuth')
         router.replace('/login')
     }
