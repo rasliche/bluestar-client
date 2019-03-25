@@ -19,7 +19,7 @@
               <div>Response Div once answers. $emit isRight back up to quiz from question component?</div>
               <div slot-scope="{ question, answers, handleAnswer }" class="question">
                 <p class="font-bold">{{ question }}</p>
-                <div class="answer-choices" v-for="(answer, index) in answers">
+                <div class="answer-choices" v-for="(answer, index) in answers" :key="index">
                   <button @click="handleAnswer(index)">{{ answer.text }}</button>
                 </div>
               </div>
