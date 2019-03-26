@@ -75,10 +75,6 @@ export default new Router({
     {
       path: "/training",
       beforeEnter: (to, from, next) => {
-        console.log("beforeEnter route guard")
-        console.log("Alert user they are not signed in")
-        console.log(to)
-        console.log(from)
         next()
       },
       component: () => import(/* webpackChunkName: "training" */ "./views/Training.vue"),

@@ -85,7 +85,6 @@ export default {
         this.questionStage = false
         this.resultStage = true
       }
-      console.log('parent correct')
     },
     wrongAnswer: function() {
       if (this.questionIndex < this.quiz.questions.length-1) {
@@ -94,10 +93,8 @@ export default {
         this.questionStage = false
         this.resultStage = true
       }
-      console.log('parent wrong')
     },
     submitScoreAndContinue: function() {
-      console.log("submit score to user profile if logged in via vuex/axios, otherwise continue and display alert saying user should login, but save score")
       this.$router.push('/training')
     }
   }

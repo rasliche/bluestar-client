@@ -18,7 +18,6 @@ const getters = {
 
 const mutations = {
     authUser: (state, userData) => {
-        console.log(userData)
         const { user, token } = userData
         state.token = token
         state.user = user
@@ -33,13 +32,11 @@ const actions = {
     setLogoutTimer: ({ commit }, expirationTime) => {
         setTimeout(() => {
             commit('clearAuth')
-            console.log('You have been logged out after 2 hours.')
         }, expirationTime * 1000)
     },
     register: async ({ commit, dispatch }, formData) => {
         try {
             const { data } = await Api.post('/users', formData)
-            console.log(data)
             commit('authUser', data)
             const now = new Date()
             const expirationDate = new Date(now.getTime() + 7200000)
@@ -47,13 +44,11 @@ const actions = {
             localStorage.setItem('bs-auth-token', data.token)
             dispatch('setLogoutTimer', 7200)
         } catch (err) {
-            console.log('There was an error', err)
         }
     },
     login: async ({ commit, dispatch }, authData) => {
         try {
             const { data } = await Api.post('/auth/login', authData)
-            console.log(data)
             commit('authUser', data)
             const now = new Date()
             const expirationDate = new Date(now.getTime() + 3600000)
@@ -61,7 +56,6 @@ const actions = {
             localStorage.setItem('bs-auth-token', data.token)
             dispatch('setLogoutTimer', 3600)
         } catch (err) {
-            console.log('There was an error', err)
         }
     },
     tryAutoLogin: async ({ commit }) => {

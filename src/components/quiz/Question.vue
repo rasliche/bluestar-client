@@ -12,13 +12,10 @@ export default {
     methods: {
         handleAnswer(i) {
             if (this.answers[i].isRight) {
-                console.log("Your answer was right.")
                 this.$emit('correctAnswer')
             } else {
-                console.log("Your answer was incorrect.")
                 this.$emit('wrongAnswer')
             }
-            console.log("handled an answer")
         }
     }
 }

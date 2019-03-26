@@ -28,7 +28,6 @@ export default {
             })
             this.operators = data
         } catch (err) {
-            console.log(err)
         }
     },
 }
