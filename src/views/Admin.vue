@@ -34,7 +34,7 @@
 import axios from 'axios'
 import CreateOperator from "@/components/CreateOperator.vue"
 import UsersList from "@/components/UsersList.vue"
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: "home",
