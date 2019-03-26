@@ -5,13 +5,3 @@
         <p>Please select your dive/snorkel shop from the drop down menu and enter your shop's password.</p>
     </div>
 </template>
-
-<script>
-export default {
-
-}
-</script>
-
-<style>
-
-</style>
