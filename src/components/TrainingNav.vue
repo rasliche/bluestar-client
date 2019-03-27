@@ -14,9 +14,3 @@
         <router-link :to="{ name: 'invasive-lionfish'}">Invasive Lionfish</router-link>
     </nav>
 </template>
-
-<script>
-export default {
-
-}
-</script>
