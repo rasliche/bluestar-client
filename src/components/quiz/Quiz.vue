@@ -1,13 +1,13 @@
 <template>
-  <div class="quiz">
-    <h3>Take a quiz to pass this lesson: {{ quiz.title }}</h3>
+  <div class="quiz h-auto">
+    <h3 class="text-center mx-auto">Take a quiz to pass this lesson: {{ quiz.title }}</h3>
     <transition name="fade" mode="out-in">
-      <div v-if="introStage" key="intro">
+      <div v-if="introStage" key="intro" class="text-center mx-auto">
         <p>{{ quiz.description }}</p>
-        <button @click="startQuiz">Start Quiz</button>
+        <button @click="startQuiz" class="border border-green bg-green-light p-2 m-2 rounded">Start Quiz</button>
       </div>
 
-      <div v-if="questionStage" key="questions">
+      <div v-if="questionStage" key="questions" class="text-center mx-auto">
         <!-- <div v-for="question in quiz.questions"> -->
           <transition name="fade" mode="out-in">
             <Question
@@ -21,13 +21,18 @@
 
               <template v-slot="{ question, answers, handleAnswer, showReviewText, reviewText, isRight }">
                 <div class="question">
-                  <div v-if="showReviewText" :class="[ isRight ? 'bg-green-lightest' : 'bg-red-lightest', 'text-center', 'text-sm' ]">{{ reviewText }}</div>
+                  <div v-if="showReviewText" :class="[ isRight ? 'bg-green-lightest' : 'bg-red-lightest', 'text-center', 'text-sm', 'h-16' ]">
+                    <strong>{{ isRight ? 'Nice!' : 'Sorry!' }}</strong>
+                    {{ reviewText }}
+                  </div>
                   <p class="font-bold">{{ question }}</p>
-                  <div class="answer-choices">
-                    <button v-for="(answer, index) in answers" :key="index" @click="handleAnswer(index)">{{ answer.text }}</button>
+                  <div class="answer-choices flex flex-wrap justify-center">
+                    <button v-for="(answer, index) in answers" :key="index" @click="handleAnswer(index)" class="p-2 m-2 border rounded border-blue-darker">
+                      {{ answer.text }}
+                    </button>
                   </div>
                   <div v-if="showReviewText">
-                    <button @click="nextQuestion">Next</button>
+                    <button @click="nextQuestion" class="border rounded p-2 m-2">Next -></button>
                   </div>
                 </div>
               </template>
@@ -38,18 +43,17 @@
       </div>
 
     
-      <div v-if="resultStage" key="results">
+      <div v-if="resultStage" key="results" class="text-center mx-auto">
         <h3>You finished the quiz</h3>
         <p>Your score was: {{ correct }}</p>
         <div v-if="passingScore">
           <p>Nice Job. You can move on to the next lesson or retake the quiz for a better score.</p>
-          <button @click="submitScoreAndContinue">Next Lesson</button>
-          <button @click="startQuiz">Retake the quiz.</button>
+          <button @click="submitScoreAndContinue" class="border border-green bg-green-light p-2 m-2 rounded">Next Lesson</button>
         </div>
         <div v-else>
           <p>Sorry, but you did not achieve a passing score this time.</p>
-          <button @click="startQuiz">Retake the quiz.</button>
         </div>
+        <button @click="startQuiz" class="border border-yellow bg-yellow-light p-2 m-2 rounded">Retake the quiz.</button>
       </div>
     </transition>
   </div>
