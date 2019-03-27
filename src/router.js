@@ -109,8 +109,7 @@ export default new Router({
     },
     {
       path: "*",
-      name: "four-oh-four",
-      component: () => import(/* webpackChunkName: "fourohfour" */ "./views/404.vue")
+      redirect: '/'
     },
   ]
 });
