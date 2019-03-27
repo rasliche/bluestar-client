@@ -60,17 +60,16 @@ const actions = {
     },
     tryAutoLogin: async ({ commit }) => {
         const token = localStorage.getItem('bs-auth-token')
-        if (!token) return
+        if (!token) { return }
         const expirationDate = localStorage.getItem('bs-auth-time')
         const now = new Date()
-        if (now >= expirationDate) {
-            return
-        }
+        if (now >= expirationDate) { return }
         const { data } = await Api.get('/users/me', {
             headers: {
                 Authorization: `Bearer: ${token}`
             }
         })
+        data.token = token
         commit('authUser', data)
     },
     logout: ({ commit }) => {

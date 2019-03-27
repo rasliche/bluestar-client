@@ -12,17 +12,26 @@
           <transition name="fade" mode="out-in">
             <Question
               :key="questionIndex"
+              :showReviewText="showReviewText"
               :question="quiz.questions[questionIndex].text" 
+              :reviewText="quiz.questions[questionIndex].theMoreYouKnow" 
               :answers="quiz.questions[questionIndex].answers" 
               v-on:correctAnswer="correctAnswer" 
               v-on:wrongAnswer="wrongAnswer">
-              <div>Response Div once answers. $emit isRight back up to quiz from question component?</div>
-              <div slot-scope="{ question, answers, handleAnswer }" class="question">
-                <p class="font-bold">{{ question }}</p>
-                <div class="answer-choices" v-for="(answer, index) in answers" :key="index">
-                  <button @click="handleAnswer(index)">{{ answer.text }}</button>
+
+              <template v-slot="{ question, answers, handleAnswer, showReviewText, reviewText, isRight }">
+                <div class="question">
+                  <div v-if="showReviewText" :class="[ isRight ? 'bg-green-lightest' : 'bg-red-lightest', 'text-center', 'text-sm' ]">{{ reviewText }}</div>
+                  <p class="font-bold">{{ question }}</p>
+                  <div class="answer-choices">
+                    <button v-for="(answer, index) in answers" :key="index" @click="handleAnswer(index)">{{ answer.text }}</button>
+                  </div>
+                  <div v-if="showReviewText">
+                    <button @click="nextQuestion">Next</button>
+                  </div>
                 </div>
-              </div>
+              </template>
+              
             </Question>
           </transition>
         <!-- </div> -->
@@ -61,7 +70,8 @@ export default {
       questionStage: false,
       resultStage: false,
       questionIndex: 0,
-      correct: 0
+      correct: 0,
+      showReviewText: false,
     }
   },
   computed: {
@@ -76,23 +86,23 @@ export default {
       this.introStage = false
       this.questionStage = true
       this.resultStage = false
+      this.showReviewText = false
+    },
+    nextQuestion: function() {
+      if (this.questionIndex < this.quiz.questions.length-1) {
+        this.questionIndex +=1
+        this.showReviewText = false
+      } else {
+        this.questionStage = false
+        this.resultStage = true
+      }
     },
     correctAnswer: function() {
       this.correct +=1
-      if (this.questionIndex < this.quiz.questions.length-1) {
-        this.questionIndex +=1
-      } else {
-        this.questionStage = false
-        this.resultStage = true
-      }
+      this.showReviewText = true;
     },
     wrongAnswer: function() {
-      if (this.questionIndex < this.quiz.questions.length-1) {
-        this.questionIndex +=1
-      } else {
-        this.questionStage = false
-        this.resultStage = true
-      }
+      this.showReviewText = true;
     },
     submitScoreAndContinue: function() {
       this.$router.push('/training')
@@ -103,6 +113,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.disabled {
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
