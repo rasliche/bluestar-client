@@ -11,8 +11,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapActions } from 'vuex'
+import Api from '../services/Api.js'
 
 export default {
     data() {
@@ -22,15 +21,16 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'createNewOperator'
-        ]),
-        submitOperator() {
+        async submitOperator() {
             const newOperator = {
                 name: this.name,
                 password: this.password
             }
-            this.createNewOperator(newOperator)
+            const { data } = await Api.post('/operators', newOperator, {
+                headers: {
+                    Authorization: `Bearer: ${this.$store.state.user.token}`
+                    }
+                })
             this.name = ''
             this.password = ''
         }

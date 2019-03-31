@@ -17,9 +17,9 @@ export default {
             programs: []
         }
     },
-    watch: {
-        '$route': 'fetchOperator'
-    },
+    // watch: {
+    //     '$route': 'fetchOperator'
+    // },
     methods: {
         async fetchOperator() {
             this.loading = true
@@ -34,7 +34,7 @@ export default {
             this.loading = false
         }
     },
-    created() {
+    mounted() {
         this.fetchOperator()
     }
     
