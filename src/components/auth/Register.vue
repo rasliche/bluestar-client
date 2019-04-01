@@ -50,7 +50,7 @@ export default {
                 // shopChoice: this.shopChoice,
                 // shopPassword: this.shopPassword
             }
-            this.$store.dispatch('register', formData)
+            this.$store.dispatch('user/register', formData)
         }
     }
 }

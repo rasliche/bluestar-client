@@ -34,7 +34,6 @@
 import axios from 'axios'
 import CreateOperator from "@/components/CreateOperator.vue"
 import UsersList from "@/components/UsersList.vue"
-import { mapGetters } from 'vuex'
 
 export default {
   name: "home",
@@ -46,11 +45,6 @@ export default {
     return {
       users: []
     }
-  },
-  computed: {
-      ...mapGetters([
-          'operators'
-      ])
   },
   async created() {
     const { data } = await axios.get('http://localhost:3000/api/users', {
