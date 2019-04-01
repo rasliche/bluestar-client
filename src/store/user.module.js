@@ -49,13 +49,21 @@ const actions = {
     login: async ({ commit, dispatch }, authData) => {
         try {
             const { data } = await Api.post('/auth/login', authData)
-            commit('authUser', data)
+            if (!data.user) {
+                console.log(data)
+                console.log("error'd out")
+                return
+            }
+            console.log(data.user)
+            // commit('authUser', data)
             const now = new Date()
             const expirationDate = new Date(now.getTime() + 3600000)
             localStorage.setItem('bs-auth-time', expirationDate)
             localStorage.setItem('bs-auth-token', data.token)
             dispatch('setLogoutTimer', 3600)
+            router.push('/')
         } catch (err) {
+            console.log(err)
         }
     },
     tryAutoLogin: async ({ commit }) => {
