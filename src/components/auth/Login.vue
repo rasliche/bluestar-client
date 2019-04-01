@@ -18,8 +18,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
     data() {
         return {
@@ -34,7 +32,7 @@ export default {
                 password: this.password
             }
 
-            this.$store.dispatch('user/login', authData)
+            this.$store.dispatch('login', authData)
         }
     }
 }

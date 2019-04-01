@@ -26,7 +26,7 @@ export default new Router({
       path: '/me',
       name: 'me',
       beforeEnter (to, from, next) {
-        if (store.state.user.token) {
+        if (store.state.token) {
           next()
         } else {
           next('/login')
@@ -43,7 +43,7 @@ export default new Router({
       path: "/operators",
       name: "operators",
       beforeEnter (to, from, next) {
-        if (store.state.user.token) {
+        if (store.state.token) {
           next()
         } else {
           next('/login')
@@ -55,7 +55,7 @@ export default new Router({
       path: "/operators/:slug",
       name: "operator",
       beforeEnter (to, from, next) {
-        if (store.state.user.token) {
+        if (store.state.token) {
           next()
         } else {
           next('/login')
@@ -87,7 +87,7 @@ export default new Router({
       path: "/admin",
       name: "admin",
       beforeEnter (to, from, next) {
-        if (store.state.user.token) {
+        if (store.state.token) {
           next()
         } else {
           next('/login')
@@ -99,7 +99,7 @@ export default new Router({
       path: '/quiz/create',
       name: 'quizcreate',
       beforeEnter (to, from, next) {
-        if (store.state.user.token) {
+        if (store.state.token) {
           next()
         } else {
           next('/login')

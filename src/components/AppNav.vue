@@ -13,7 +13,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('user', {
+    ...mapGetters({
       auth: 'isAuthenticated',
       admin: 'isAdmin'
     })
