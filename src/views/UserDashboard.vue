@@ -9,16 +9,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import axios from 'axios'
 
 export default {
-    data() {
-        return {
-            user: null
-        }
-    },
-    created() {
-        this.user = this.$store.state.user.user
+    computed: {
+        ...mapGetters(['user'])
     }
 }
 </script>

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Api from '../services/Api.js'
+import { mapActions } from 'vuex'
 
 export default {
     data() {
@@ -21,16 +21,15 @@ export default {
         }
     },
     methods: {
+        ...mapActions({
+            addOperator: 'addOperator'
+        }),
         async submitOperator() {
             const newOperator = {
                 name: this.name,
                 password: this.password
             }
-            const { data } = await Api.post('/operators', newOperator, {
-                headers: {
-                    Authorization: `Bearer: ${this.$store.state.user.token}`
-                    }
-                })
+            this.addOperator(newOperator)
             this.name = ''
             this.password = ''
         }

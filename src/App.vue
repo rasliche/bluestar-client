@@ -22,7 +22,7 @@ export default {
     AppFooter,
   },
   created() {
-    this.$store.dispatch('user/tryAutoLogin')
+    this.$store.dispatch('tryAutoLogin')
   }
 }
 </script>

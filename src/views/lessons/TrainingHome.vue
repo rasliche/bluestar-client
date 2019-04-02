@@ -1,7 +1,21 @@
 <template>
     <div>
-        <h1>Blue Star Training</h1>
-        <p>Welcome to the Blue Star training. This training is required for your dive/snorkel shop to be recognized as a Blue Star operator.</p>
-        <p>Please select your dive/snorkel shop from the drop down menu and enter your shop's password.</p>
+        <LessonCard v-for="lesson in lessons" :to="{ name: lesson.name}" :key="lesson.name" />
     </div>
 </template>
+
+<script>
+import lessons from '@/helpers/lessons'
+import LessonCard from '@/components/LessonCard.vue'
+
+export default {
+    data() {
+        return {
+            lessons
+        }
+    },
+    components: {
+        LessonCard
+    }
+}
+</script>

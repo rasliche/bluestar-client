@@ -110,7 +110,8 @@ export default {
       this.showReviewText = true;
     },
     submitScoreAndContinue: function() {
-      this.$router.push('/training')
+      const score = (this.correct / this.quiz.questions.length) * 100
+      this.$store.actions.submitQuizScore(score)
     }
   }
 };

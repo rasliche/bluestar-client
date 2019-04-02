@@ -1,8 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+
 // lessons
-import AboutFKNMS from "./views/lessons/AboutFKNMS.vue"
+import lessons from './helpers/lessons.js'
+console.log(lessons)
+
 import TrainingHome from "./views/lessons/TrainingHome.vue"
 
 import store from './store'
@@ -79,8 +82,8 @@ export default new Router({
       },
       component: () => import(/* webpackChunkName: "training" */ "./views/Training.vue"),
       children: [
+        ...lessons,
         { path: '', name: "training", component: TrainingHome },
-        { path: 'about-fknms', name: "about-fknms", component: AboutFKNMS },
       ]
     },
     {

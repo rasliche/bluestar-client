@@ -10,10 +10,10 @@
                 <label for="email" class="text-blue-darker pr-2">Email</label>
                 <input type="text" name="email" id="email" v-model="email" class="pl-2 border-b-2 border-blue-lighter">
             </div>
-            <div>
+            <!-- <div>
                 <label for="password" class="text-blue-darker pr-2">Password</label>
                 <input type="text" name="password" id="password" v-model="password" class="pl-2 border-b-2 border-blue-lighter">
-            </div>
+            </div> -->
             <!-- <label for="shopChoice" class="w-1/2 text-right pr-2">Choose a Shop to Join:</label>
             <select name="shopChoice" id="shopChoice" class="w-1/2" v-model="shopChoice">
                 <option default>Choose a Shop:</option>
@@ -35,7 +35,7 @@ export default {
         return {
             name: '',
             email: '',
-            password: '',
+            // password: '',
             shopChoice: null,
             shopPassword: '',
             operators: []
@@ -46,7 +46,7 @@ export default {
             const formData = {
                 name: this.name,
                 email: this.email,
-                password: this.password,
+                // password: this.password,
                 // shopChoice: this.shopChoice,
                 // shopPassword: this.shopPassword
             }

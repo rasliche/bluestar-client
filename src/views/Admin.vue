@@ -6,14 +6,14 @@
         <h3>Operators</h3>
         <CreateOperator />
         <div v-for="operator in operators" :key="operator._id">
-          <router-link :to="{ name: 'operator', params: { id: operator.slug }}">{{ operator.name }}</router-link>
+          <router-link :to="{ name: 'operator', params: { slug: operator.slug }}">{{ operator.name }}</router-link>
         </div>
       </div>
       <div>
         <h3>Users</h3>
         <UsersList :users="users" />
       </div>
-      <div>
+      <!-- <div>
         <h3>Lessons</h3>
       </div>
       <div>
@@ -24,16 +24,16 @@
       </div>
       <div>
         <h3>Events</h3>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import axios from 'axios'
 import CreateOperator from "@/components/CreateOperator.vue"
 import UsersList from "@/components/UsersList.vue"
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: "home",
@@ -43,16 +43,22 @@ export default {
   },
   data() {
     return {
-      users: []
+      users: [],
     }
   },
-  async created() {
-    const { data } = await axios.get('http://localhost:3000/api/users', {
-      headers: {
-        Authorization: `Bearer: ${this.$store.state.user.token}`
-      }
+  computed: {
+    ...mapGetters({
+      operators: 'operators'
     })
-    this.users = data
+  },
+  methods: {
+    ...mapActions({
+      fetchOperators: 'fetchOperators',
+
+    })
+  },
+  created() {
+    this.fetchOperators()
   }
 }
 </script>
