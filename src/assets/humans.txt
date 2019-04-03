@@ -1,0 +1,20 @@
+/* TEAM */
+                            
+Lead developer: Eric Raslich
+                            
+Site: sanctuarybluestar.org
+                            
+Twitter: @rasliche
+                            
+Location: Key West, FL USA
+
+
+/* SITE */
+                            
+Last update: 2019/04/02 
+                            
+Standards: HTML5, CSS3, ES6
+                            
+Components: Tailwind CSS, Vue.js, MongoDB, Express, Node.js
+                            
+Software: Built with VS Code, tested with Postman, previewed on Brave
