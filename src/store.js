@@ -132,8 +132,8 @@ export default new Vuex.Store({
     submitQuizScore: async ({ commit, state }, record) => {
       // asynchronously add score to user profile in database
       // do logic to update a score if previous score was worse
-      commit('recordScore', score)
-      this.$router.push('training')
+      commit('recordScore', record)
+      router.push('/training')
     }
   }
 });
