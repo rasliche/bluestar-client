@@ -1,12 +1,12 @@
 <template>
     <div class="flex flex-wrap">
-        <!-- <LessonCard 
+        <LessonCard 
             class="m-2"
             v-for="lesson in lessons" 
             :key="lesson.name" 
             :name="lesson.name" 
             :tags="lesson.tags" 
-            :path="lesson.path" /> -->
+            :path="lesson.path" />
     </div>
 </template>
 

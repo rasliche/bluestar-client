@@ -24,42 +24,42 @@
 
         <p class="w-5/6 pt-4">Within the boundaries of the sanctuary lie spectacular, unique, and nationally significant marine environments. The sanctuary protects the world’s third largest barrier reef, which is composed of more than 6,000 individual reefs. More than 2,000 square nautical miles of seagrass meadows blanket the seafloor of South Florida. Approximately 1,700 mangrove-fringed islands stretch for over 1,800 miles of shoreline within the sanctuary. More than 6,000 species of marine life – including more than 500 species of fish and 50 species of coral – call these habitats home. The sanctuary also protects pieces of our nation’s history such as shipwrecks and other archeological treasures.</p>
 
-        <div class="w-5/6 pt-4 flex">
-          <p class="w-1/3 text-right text-4xl">Vast mangrove forests.</p>
+        <div class="w-5/6 pt-4 flex items-center">
+          <p class="w-1/3 text-right leading-loose text-4xl border-r-4 pr-4 mr-24">Vast mangrove forests.</p>
           <div class="w-2/3">
             <img src="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/mangroves.jpg" />
           </div>
         </div>
 
-        <div class="w-5/6 pt-4 flex">
+        <div class="w-5/6 pt-4 flex items-center">
           <div class="w-2/3">
             <img src="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164244/fknms-bluestar/about-fknms/apal-coral.jpg" />
           </div>
-          <p class="w-1/3 text-left text-4xl">Famous stands of elkhorn coral.</p>
+          <p class="w-1/3 text-left leading-loose text-4xl border-l-4 pl-4 ml-24">Famous stands of elkhorn coral.</p>
         </div>
 
-        <div class="w-5/6 pt-4 flex">
-          <p class="w-1/3 text-right text-4xl">Historic shipwrecks.</p>
+        <div class="w-5/6 pt-4 flex items-center">
+          <p class="w-1/3 text-right leading-loose text-4xl border-r-4 pr-4 mr-24">Historic shipwrecks.</p>
           <div class="w-2/3">
             <img src="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164240/fknms-bluestar/about-fknms/shipwreck.jpg" />
           </div>
         </div>
 
-        <div class="w-5/6 pt-4 flex">
+        <div class="w-5/6 pt-4 flex items-center">
           <div class="w-2/3">
             <img width="2592" src="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164249/fknms-bluestar/about-fknms/seagrass.jpg" />
           </div>
-          <p class="w-1/3 text-left text-4xl">Lush seagrass beds.</p>
+          <p class="w-1/3 text-left leading-loose text-4xl border-l-4 pl-4 ml-24">Lush seagrass beds.</p>
         </div>
 
-        <div class="w-5/6 pt-4 flex">
-          <p class="w-1/3 text-right text-4xl">Extensive coral reefs.</p>
-          <div class="w-2/3">
+        <div class="w-5/6 pt-4 flex items-center">
+          <p class="w-1/3 text-right leading-loose text-4xl border-r-4 pr-4 mr-24">Extensive coral reefs.</p>
+          <span class="w-2/3">
             <img src="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164246/fknms-bluestar/about-fknms/aerial-reef.jpg" />
-          </div>
+          </span>
         </div>
 
-        <p class="w-5/6 pt-4">As a Blue Star partner, you are playing an important role in protecting these unique and valuable sanctuary resources.</p>
+        <p class="w-5/6 pt-4 text-center font-semibold">As a Blue Star partner, you are playing an important role in protecting these unique and valuable sanctuary resources.</p>
         
         <Quiz class="w-5/6 pt-4 mt-4 border-t-2 border-blue" :quiz="quiz" />
   </div>
