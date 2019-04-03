@@ -3,10 +3,9 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 
 // lessons
-import lessons from './helpers/lessons.js'
-console.log(lessons)
-
 import TrainingHome from "./views/lessons/TrainingHome.vue"
+import AboutBlueStar from "./views/lessons/AboutBlueStar.vue"
+import AboutFKNMS from "./views/lessons/AboutFKNMS.vue"
 
 import store from './store'
 
@@ -82,8 +81,9 @@ export default new Router({
       },
       component: () => import(/* webpackChunkName: "training" */ "./views/Training.vue"),
       children: [
-        ...lessons,
         { path: '', name: "training", component: TrainingHome },
+        { path: 'about-blue-star', name: 'about-blue-star', component: AboutBlueStar },
+        { path: 'about-fknms', name: 'about-fknms', component: AboutFKNMS },
       ]
     },
     {
