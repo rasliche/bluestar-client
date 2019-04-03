@@ -76,10 +76,11 @@ export default {
   },
   data() {
     return {
+      lessonId: 0,
       quiz: {
         title: "About FKNMS",
         description: "FKNMS is a large marine protected area.",
-        passingScorePercent: 1,
+        passingScorePercent: 100,
         questions: [
           {
             text: "The Florida Keys National Marine Sanctuary is part of a _________ system of marine protected areas, managed by the _________.",

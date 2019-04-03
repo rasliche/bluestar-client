@@ -1,21 +1,25 @@
 <template>
-    <div>
-        <LessonCard v-for="lesson in lessons" :to="{ name: lesson.name}" :key="lesson.name" />
+    <div class="flex flex-wrap">
+        <!-- <LessonCard 
+            class="m-2"
+            v-for="lesson in lessons" 
+            :key="lesson.name" 
+            :name="lesson.name" 
+            :tags="lesson.tags" 
+            :path="lesson.path" /> -->
     </div>
 </template>
 
 <script>
-import lessons from '@/helpers/lessons'
 import LessonCard from '@/components/LessonCard.vue'
 
 export default {
-    data() {
-        return {
-            lessons
-        }
-    },
     components: {
         LessonCard
+    },
+    data() {
+        return {
+        }
     }
 }
 </script>

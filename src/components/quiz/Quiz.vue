@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Question from './Question.vue'
 
 export default {
@@ -85,6 +86,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['submitQuizScore']),
     startQuiz: function() {
       this.correct = 0
       this.questionIndex = 0
@@ -111,7 +113,7 @@ export default {
     },
     submitScoreAndContinue: function() {
       const score = (this.correct / this.quiz.questions.length) * 100
-      this.$store.actions.submitQuizScore(score)
+      this.submitQuizScore({ _id: this.quiz._id, score: score })
     }
   }
 };

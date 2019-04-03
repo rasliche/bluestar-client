@@ -1,7 +1,6 @@
 <template>
   <div class="about-fknms flex flex-wrap justify-center">
         <h1 class="border-blue-lighter border-b-4 mb-4 w-5/6">About Blue Star</h1>
-       
         <p class="lg:w-5/6 pt-4 italic">Did you know that Florida Keys National Marine Sanctuary protects North America’s only living coral barrier reef? From beautiful reefs and lush kelp forests to deep-sea canyons and mysterious underwater shipwrecks, national marine sanctuaries located around the country protect some of our nation’s most unique riches.</p>
         <p class="lg:w-5/6 pt-4 italic">In this section, you will learn about the National Marine Sanctuary System, the history of Florida Keys National Marine Sanctuary, and about the areas and resources that the sanctuary protect.</p>
 
