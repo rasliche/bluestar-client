@@ -1,17 +1,17 @@
 <template>
     <div class="flex flex-wrap">
-        <LessonCard 
-            class="m-2"
-            v-for="lesson in lessons" 
-            :key="lesson.name" 
-            :name="lesson.name" 
-            :tags="lesson.tags" 
-            :path="lesson.path" />
+        <LessonCard v-for="lesson in lessons"
+            :key="lesson._id" 
+            :title="lesson.title"
+            :description="lesson.description"
+            :programs="lesson.programs" 
+            :slug="lesson.slug" />
     </div>
 </template>
 
 <script>
-import LessonCard from '@/components/LessonCard.vue'
+import Api from '@/services/Api'
+import LessonCard from '@/components/lesson/LessonCard.vue'
 
 export default {
     components: {
@@ -19,7 +19,13 @@ export default {
     },
     data() {
         return {
+            lessons: []
         }
+    },
+    async mounted() {
+        const { data } = await Api.get('/lessons')
+        this.lessons = data
     }
+
 }
 </script>

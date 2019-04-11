@@ -1,64 +1,8 @@
 <template>
-  <div class="home">
-    <h1>Admin Dashboard</h1>
-    <div>
-      <div>
-        <h3>Operators</h3>
-        <CreateOperator />
-        <div v-for="operator in operators" :key="operator._id">
-          <router-link :to="{ name: 'operator', params: { slug: operator.slug }}">{{ operator.name }}</router-link>
-        </div>
-      </div>
-      <div>
-        <h3>Users</h3>
-        <UsersList :users="users" />
-      </div>
-      <!-- <div>
-        <h3>Lessons</h3>
-      </div>
-      <div>
-        <h3>Quizzes</h3>
-      </div>
-      <div>
-        <h3>Blog Posts</h3>
-      </div>
-      <div>
-        <h3>Events</h3>
-      </div> -->
-    </div>
+  <div class="admin">
+    <nav>
+      <!-- <router-link></router-link> -->
+    </nav>
+    <router-view></router-view>
   </div>
 </template>
-
-<script>
-// @ is an alias to /src
-import CreateOperator from "@/components/CreateOperator.vue"
-import UsersList from "@/components/UsersList.vue"
-import { mapGetters, mapActions } from 'vuex'
-
-export default {
-  name: "home",
-  components: {
-    CreateOperator,
-    UsersList
-  },
-  data() {
-    return {
-      users: [],
-    }
-  },
-  computed: {
-    ...mapGetters({
-      operators: 'operators'
-    })
-  },
-  methods: {
-    ...mapActions({
-      fetchOperators: 'fetchOperators',
-
-    })
-  },
-  created() {
-    this.fetchOperators()
-  }
-}
-</script>

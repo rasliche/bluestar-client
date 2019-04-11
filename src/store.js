@@ -9,19 +9,16 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token: null,
-    user: null,
-    operators: [],
+    userId: null,
+    isAdmin: false
   },
   getters: {
-    user: state => state.user,
-    userQuizzes: state => state.user.quizzes,
     isAuthenticated: state => state.token !== null,
     isAdmin: state => {
       if (state.user && state.user.isAdmin) {
         return true
       }
     },
-    operators: state => state.operators
   },
   mutations: {
     authUser: (state, userData) => {
@@ -32,13 +29,6 @@ export default new Vuex.Store({
     clearAuth: (state) => {
       state.token = null
       state.user = null
-    },
-    //operators
-    setOperators: (state, operators) => {
-      state.operators = operators
-    },
-    addOperator: (state, newOperator) => {
-      state.operators.push(newOperator)
     },
     // users
     recordScore: (state, record) => {
@@ -110,23 +100,6 @@ export default new Vuex.Store({
       localStorage.removeItem('bs-auth-time')
       commit('clearAuth')
       router.replace('/login')
-    },
-    // shops
-    fetchOperators: async ({ commit, state }) => {
-      const { data } = await Api.get('/operators', {
-        headers: {
-          Authorization: `Bearer: ${state.token}`
-        }
-      })
-      commit('setOperators', data)
-    },
-    addOperator: async ({ commit, state }, newOperator) => {
-      const { data } = await Api.post('/operators', newOperator, {
-        headers: {
-          Authorization: `Bearer: ${state.token}`
-        }
-      })
-      commit('addOperator', data)
     },
     // users
     submitQuizScore: async ({ commit, state }, record) => {

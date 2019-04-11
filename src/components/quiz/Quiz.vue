@@ -82,7 +82,7 @@ export default {
   },
   computed: {
     passingScore: function() {
-      return (this.correct >= (this.quiz.questions.length * this.quiz.passingScorePercent)) ? true : false
+      return ((this.correct / this.quiz.questions.length * 100) >= this.quiz.passingScorePercent) ? true : false
     }
   },
   methods: {

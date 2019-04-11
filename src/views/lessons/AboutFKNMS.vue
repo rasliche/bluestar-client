@@ -1,16 +1,20 @@
 <template>
   <div class="about-fknms flex flex-wrap justify-center">
-        <h1 class="border-blue-lighter border-b-4 mb-4 w-5/6">About Florida Keys National Marine Sanctuary</h1>
-       
-        <p class="lg:w-5/6 pt-4 italic">Did you know that Florida Keys National Marine Sanctuary protects North America’s only living coral barrier reef? From beautiful reefs and lush kelp forests to deep-sea canyons and mysterious underwater shipwrecks, national marine sanctuaries located around the country protect some of our nation’s most unique riches.</p>
-        <p class="lg:w-5/6 pt-4 italic">In this section, you will learn about the National Marine Sanctuary System, the history of Florida Keys National Marine Sanctuary, and about the areas and resources that the sanctuary protect.</p>
+    <section class="w-5/6">
+        <h1 class="border-blue-lighter border-b-4 mb-4">About Florida Keys National Marine Sanctuary</h1>   
+        <p class="pt-4 italic">Did you know that Florida Keys National Marine Sanctuary protects North America’s only living coral barrier reef? From beautiful reefs and lush kelp forests to deep-sea canyons and mysterious underwater shipwrecks, national marine sanctuaries located around the country protect some of our nation’s most unique riches.</p>
+        <p class="pt-4 italic">In this section, you will learn about the National Marine Sanctuary System, the history of Florida Keys National Marine Sanctuary, and about the areas and resources that the sanctuary protect.</p>
+    </section>
 
+    <section>
+      
+    </section>
         <iframe class="pt-4" width="560" height="315" frameborder='0' allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src='https://www.youtube.com/embed/F2QnOyEvOa0'></iframe>
 
         <p class="w-5/6 pt-4">First established in 1972, the National Marine Sanctuary System has grown to include 13 sanctuaries and one national monument. Managed by the National Oceanic and Atmospheric Administration (or “NOAA”), the mission of these marine protected areas cover more than 150,000 square miles of marine and Great Lakes waters from Washington State to the Gulf of Mexico, Lake Huron, and American Samoa. Ranging in size from less than one square mile to 137,792 square miles, each sanctuary site is a special place, managed to conserve, protect, and enhance biodiversity, ecological integrity and cultural legacy.</p>
         
         <div class="w-5/6 mx-auto pt-4">
-          <img width="1871" src="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/onms-map.jpg" />
+          <img class="w-5/6 pt-4" src="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/onms-map.jpg" />
         </div>
 
         <h2 class="w-5/6 pt-4">A Sanctuary in the Florida Keys</h2>
@@ -46,7 +50,7 @@
         </div>
 
         <div class="w-5/6 pt-4 flex items-center">
-          <div class="w-2/3">
+          <div class="w-2/3 rounded">
             <img width="2592" src="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164249/fknms-bluestar/about-fknms/seagrass.jpg" />
           </div>
           <p class="w-1/3 text-left leading-loose text-4xl border-l-4 pl-4 ml-24">Lush seagrass beds.</p>
@@ -76,7 +80,8 @@ export default {
   },
   data() {
     return {
-      lessonId: 0,
+      lessonName: "About FKNMS",
+      lessonSlug: "about-fknms",
       quiz: {
         title: "About FKNMS",
         description: "FKNMS is a large marine protected area.",

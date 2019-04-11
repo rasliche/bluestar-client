@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import Api from '../services/Api'
 
 export default {
     data() {
@@ -18,27 +18,14 @@ export default {
             programs: []
         }
     },
-    // watch: {
-    //     '$route': 'fetchOperator'
-    // },
-    methods: {
-        async fetchOperator() {
-            this.loading = true
-            const { data } = await axios.get(`http://localhost:3000/api/operators/${this.$route.params.slug}`, {
-                headers: {
-                    Authorization: `Bearer: ${this.$store.state.user.token}`
-                }
-            })
-            this.name = data.name
-            this.slug = data.slug
-            this.programs = data.programs
-            this.loading = false
-        }
-    },
-    mounted() {
-        this.fetchOperator()
+    async mounted() {
+        this.loading = true
+        const { data } = await Api.get(`http://localhost:3000/api/operators/${this.$route.params.slug}`)
+        this.name = data.name
+        this.slug = data.slug
+        this.programs = data.programs
+        this.loading = false
     }
-    
 }
 </script>
 
