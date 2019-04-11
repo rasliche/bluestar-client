@@ -1,5 +1,5 @@
 <template>
-    <article class="lesson">
+    <article class="lesson w-5/6 mx-auto">
         <h1>Create a Lesson</h1>
         <form>
             <label for="title">Title</label>
@@ -13,11 +13,9 @@
                 </label>
             </div>
         </form>
-        <div>
-            {{ lesson.programs }}
-        </div>
-        <editor-menu-bar :editor="editor">
-            <div slot-scope="{ commands, isActive }">
+
+        <editor-menu-bar :editor="editor" class="mt-2">
+            <div class="commands" slot-scope="{ commands, isActive }">
                 <button :class="{ 'bg-red-light': isActive.bold() }" @click="commands.bold">
                     Bold
                 </button>
@@ -32,7 +30,7 @@
                 </button>
             </div>
         </editor-menu-bar>
-        <editor-content :editor="editor" />
+        <editor-content :editor="editor" class="mt-2" />
         <button @click.prevent="logLesson" class="border-2 rounded border-blue">Log Lesson to Console</button>
     </article>
 </template>
@@ -127,3 +125,21 @@ export default {
     },
 }
 </script>
+
+<style lang="postcss">
+.commands {
+    @apply flex;
+}
+
+.commands button {
+    @apply p-1 border border-black;
+}
+
+.commands button:first-of-type {
+    @apply rounded-l;
+}
+
+.commands button:last-of-type {
+    @apply rounded-r;
+}
+</style>
