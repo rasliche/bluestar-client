@@ -5,9 +5,8 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 
-Vue.config.productionTip = false;
-
 Vue.use(Vuelidate)
+Vue.config.productionTip = false;
 
 new Vue({
   router,
