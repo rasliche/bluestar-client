@@ -4,15 +4,15 @@
         <form>
             <div>
                 <label for="name" class="text-blue-darker pr-2">Name</label>
-                <input type="text" name="name" id="name" v-model="name" class="border-blue-lighter border-b-2 pl-2">
+                <input type="text" name="name" id="name" v-model="$v.name.$model" class="border-blue-lighter border-b-2 pl-2">
             </div>
             <div>
                 <label for="email" class="text-blue-darker pr-2">Email</label>
-                <input type="text" name="email" id="email" v-model="email" class="pl-2 border-b-2 border-blue-lighter">
+                <input type="text" name="email" id="email" v-model="$v.email.$model" class="pl-2 border-b-2 border-blue-lighter">
             </div>
             <div>
                 <label for="password" class="text-blue-darker pr-2">Password</label>
-                <input type="text" name="password" id="password" v-model="password" class="pl-2 border-b-2 border-blue-lighter">
+                <input type="text" name="password" id="password" v-model="$v.password.$model" class="pl-2 border-b-2 border-blue-lighter">
             </div>
             <!-- <label for="shopChoice" class="w-1/2 text-right pr-2">Choose a Shop to Join:</label>
             <select name="shopChoice" id="shopChoice" class="w-1/2" v-model="shopChoice">
@@ -29,6 +29,11 @@
 
 <script>
 import axios from 'axios'
+import { 
+    required, 
+    minLength, 
+    maxLength 
+    } from 'vuelidate/lib/validators'
 
 export default {
     data() {
@@ -40,6 +45,22 @@ export default {
             shopPassword: '',
             operators: []
         }
+    },
+    validations: {
+        name: {
+            required,
+            minLength: minLength(1),
+            maxLength: maxLength(255),
+        },
+        email: {
+            required,
+            minLength: minLength(5),
+            maxLength: maxLength(255)
+        },
+        password: {
+            required,
+            minLength: minLength(6),
+        },
     },
     methods: {
         async submitRegister() {
