@@ -102,7 +102,7 @@ export default new Vuex.Store({
       router.replace('/login')
     },
     // users
-    submitQuizScore: async ({ commit, state }, record) => {
+    submitQuizScore: async ({ commit }, record) => {
       // asynchronously add score to user profile in database
       // do logic to update a score if previous score was worse
       commit('recordScore', record)
