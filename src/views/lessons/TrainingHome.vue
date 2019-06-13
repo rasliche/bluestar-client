@@ -1,21 +1,22 @@
 <template>
     <div class="flex flex-wrap">
-        <LessonCard v-for="lesson in lessons"
+        <BSLessonCard v-for="lesson in lessons"
             :key="lesson._id" 
             :title="lesson.title"
             :description="lesson.description"
             :programs="lesson.programs" 
-            :slug="lesson.slug" />
+            :slug="lesson.slug"
+            class="flex-1" />
     </div>
 </template>
 
 <script>
 import Api from '@/services/Api'
-import LessonCard from '@/components/lesson/LessonCard.vue'
+import BSLessonCard from '@/components/lesson/BSLessonCard.vue'
 
 export default {
     components: {
-        LessonCard
+        BSLessonCard
     },
     data() {
         return {

@@ -22,15 +22,18 @@
                 <button :class="{ 'bg-red-light': isActive.italic() }" @click="commands.italic">
                     Italic
                 </button>
-                <button :class="{ 'bg-red-light': isActive.heading() }" @click="commands.heading({ level: 2 })">
+                <button :class="{ 'bg-red-light': isActive.heading() }" @click="commands.heading({ level: 3 })">
                     H3
+                </button>
+                <button :class="{ 'bg-red-light': isActive.heading() }" @click="commands.heading({ level: 2 })">
+                    H2
                 </button>
                 <button @click="showImagePrompt(commands.image)">
                     Image
                 </button>
             </div>
         </editor-menu-bar>
-        <editor-content :editor="editor" class="mt-2" />
+        <editor-content :editor="editor" class="mt-2 shadow-inner" />
         <button @click.prevent="logLesson" class="border-2 rounded border-blue">Log Lesson to Console</button>
     </article>
 </template>

@@ -15,6 +15,7 @@
 
 <script>
 export default {
+    name: 'BSLessonCard',
     props: ['slug', 'title', 'programs', 'thumbnail', 'description']
 }
 </script>

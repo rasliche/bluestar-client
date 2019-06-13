@@ -8,8 +8,27 @@
 
 <script>
 import Api from '@/services/Api'
+import { Editor, EditorContent, EditorMenuBar } from 'tiptap'
+import {
+  Blockquote,
+//   CodeBlock,
+  HardBreak,
+  Heading,
+  OrderedList,
+  BulletList,
+  ListItem,
+//   TodoItem,
+//   TodoList,
+  Bold,
+//   Code,
+  Italic,
+  Image,
+  Link,
+  Strike,
+  Underline,
+  History,
+} from 'tiptap-extensions'
 import { mapGetters } from 'vuex'
-import { Editor, EditorContent } from 'tiptap'
 
 export default {
     components: {
@@ -29,6 +48,25 @@ export default {
         this.title = data.title
         this.editor = new Editor({
             editable: false,
+            extensions: [
+                new Blockquote(),
+                // new CodeBlock(),
+                new HardBreak(),
+                new Heading({ levels: [1, 2, 3] }),
+                new BulletList(),
+                new OrderedList(),
+                new ListItem(),
+                // new TodoItem(),
+                // new TodoList(),
+                new Bold(),
+                // new Code(),
+                new Italic(),
+                new Image(),
+                new Link(),
+                new Strike(),
+                new Underline(),
+                new History(),
+            ],
             content: data.content,
         })
     },
@@ -38,6 +76,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="postcss" scoped>
+img {
+    @apply w-2/3;
+}
 </style>
