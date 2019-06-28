@@ -28,7 +28,7 @@ export default {
         async submitLogin() {
             const authData = { 
                 email: this.email,
-                // password: this.password
+                password: this.password
             }
 
             this.$store.dispatch('login', authData)

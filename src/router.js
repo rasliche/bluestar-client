@@ -4,9 +4,8 @@ import Home from "./views/Home.vue";
 
 // lessons
 import TrainingHome from "./views/lessons/TrainingHome.vue"
-import Lesson from "./views/lessons/Lesson.vue"
-import MangrovesAndSeagrasses from "./views/lessons/MangrovesAndSeagrasses.vue"
 import AboutFKNMS from "./views/lessons/AboutFKNMS.vue"
+import RegulationsAndZones from "./views/lessons/RegulationsAndZones.vue"
 
 import store from './store'
 
@@ -84,9 +83,8 @@ export default new Router({
       component: () => import(/* webpackChunkName: "training" */ "./views/Training.vue"),
       children: [
         { path: '', name: "training", component: TrainingHome },
-        { path: ':slug', name: "lesson", component: Lesson },
-        { path: 'mangroves-and-seagrasses', name: 'mangroves-and-seagrasses', component: MangrovesAndSeagrasses },
         { path: 'about-fknms', name: 'about-fknms', component: AboutFKNMS },
+        { path: 'regulations-and-zones', name: 'regulations-and-zones', component: RegulationsAndZones },
       ]
     },
     {
@@ -105,6 +103,11 @@ export default new Router({
         { path: 'operator/new', name: 'operatorcreate', component: () => import(/* webpackChunkName: "operatorcreate" */ "./views/admin/CreateOperator.vue") },
         { path: 'quiz/new', name: 'quizcreate', component: () => import(/* webpackChunkName: "quizcreate" */ "./views/admin/CreateQuiz.vue") },
       ]
+    },
+    {
+      path: "/design",
+      name: "design",
+      component: () => import(/* webpackChunkName: "design" */ './views/Design.vue'),
     },
     {
       path: "*",

@@ -1,31 +1,20 @@
 <template>
     <div class="flex flex-wrap">
-        <LessonCard v-for="lesson in lessons"
-            :key="lesson._id" 
-            :title="lesson.title"
-            :description="lesson.description"
-            :programs="lesson.programs" 
-            :slug="lesson.slug" />
+        <LessonCard
+            key="about-fknms" 
+            title="About FKNMS"
+            description="FKNMS is a large marine protected area."
+            :programs="['diving', 'fishing']" 
+            slug="about-fknms" />
     </div>
 </template>
 
 <script>
-import Api from '@/services/Api'
 import LessonCard from '@/components/lesson/LessonCard.vue'
 
 export default {
     components: {
         LessonCard
     },
-    data() {
-        return {
-            lessons: []
-        }
-    },
-    async mounted() {
-        const { data } = await Api.get('/lessons')
-        this.lessons = data
-    }
-
 }
 </script>

@@ -46,7 +46,7 @@ export default {
             const formData = {
                 name: this.name,
                 email: this.email,
-                // password: this.password,
+                password: this.password,
                 // shopChoice: this.shopChoice,
                 // shopPassword: this.shopPassword
             }

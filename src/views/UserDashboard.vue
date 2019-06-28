@@ -9,12 +9,26 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import axios from 'axios'
+import { mapState } from 'vuex'
+import Api from '@/services/Api'
 
 export default {
-    computed: {
-        ...mapGetters(['user'])
+    data() {
+        return {
+            user: null
+        }
+    },
+    // computed: {
+    //     ...mapState(['token'])
+    // },
+    async created() {
+        const { data } = await Api.get('/users/me', {
+            headers: {
+            Authorization: `Bearer: ${this.$store.state.token}`
+            }
+        })
+        this.user = data.user
+        // this.user = await Api.get('users/me')
     }
 }
 </script>

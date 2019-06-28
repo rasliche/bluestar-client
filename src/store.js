@@ -19,6 +19,7 @@ export default new Vuex.Store({
         return true
       }
     },
+    token: state => state.token
   },
   mutations: {
     authUser: (state, userData) => {
@@ -84,7 +85,7 @@ export default new Vuex.Store({
     tryAutoLogin: async ({ commit }) => {
       const token = localStorage.getItem('bs-auth-token')
       if (!token) { return }
-      const expirationDate = localStorage.getItem('bs-auth-time')
+      const expirationDate = new Date(localStorage.getItem('bs-auth-time'))
       const now = new Date()
       if (now >= expirationDate) { return }
       const { data } = await Api.get('/users/me', {

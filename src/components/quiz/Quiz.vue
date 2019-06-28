@@ -49,7 +49,8 @@
         <p>You finished the quiz. Your score was: <span class="text-3xl">{{ correct }}</span></p>
         <div v-if="passingScore">
           <p>Nice Job. You can move on to the next lesson or retake the quiz for a better score.</p>
-          <button @click="submitScoreAndContinue" class="border border-green bg-green-light p-2 m-2 rounded">Next Lesson</button>
+          <router-link tag="button" to="/training" class="border border-green bg-green-light p-2 m-2 rounded">Training Home</router-link>
+          <!-- <button @click="submitScoreAndContinue" class="border border-green bg-green-light p-2 m-2 rounded">Next Lesson</button> -->
         </div>
         <div v-else>
           <p>Sorry, but you did not achieve a passing score this time.</p>
