@@ -1,21 +1,20 @@
 <template>
     <nav class="flex flex-col bg-blue-darker min-h-screen">
-      <!-- <router-link to="/news" class="pl-10 mt-10 no-underline text-blue-light">News</router-link> -->
-      <router-link :to="{ name: 'training' }" class="pl-10 mt-3 no-underline text-blue-light">Training</router-link>
-      <!-- <router-link v-if="auth" to="/operators" class="pl-10 mt-3 no-underline text-blue-light">Operators</router-link> -->
-      <!-- <router-link to="/about" class="pl-10 mt-3 no-underline text-blue-light">About</router-link> -->
-      <router-link :to="{ name: 'admin' }" class="pl-10 mt-3 no-underline text-blue-light">Admin</router-link>
+      <router-link v-if="isAuthenticated" :to="{ name: 'training' }" class="pl-10 mt-3 no-underline text-blue-light">Training</router-link>
+      <router-link v-if="isAuthenticated" :to="{ name: 'me' }" class="pl-10 mt-3 no-underline text-blue-light">Me</router-link>
+      <!-- <router-link :to="{ name: 'news' }" class="pl-10 mt-10 no-underline text-blue-light">News</router-link> -->
+      <router-link v-if="isAdmin" :to="{ name: 'admin' }" class="pl-10 mt-3 no-underline text-blue-light">Admin</router-link>
     </nav>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters({
-      auth: 'isAuthenticated',
-      admin: 'isAdmin'
+    ...mapState({
+      isAuthenticated: 'token',
+      isAdmin: 'isAdmin'
     })
   }
 }
