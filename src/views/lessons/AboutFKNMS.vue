@@ -1,7 +1,7 @@
 <template>
   <div class="about-fknms flex flex-wrap justify-center">
     <section class="w-5/6">
-        <h1 class="border-blue-lighter border-b-4 mb-4">About Florida Keys National Marine Sanctuary</h1>   
+        <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">About Florida Keys National Marine Sanctuary</h1>   
         <p class="pt-4 italic">Did you know that Florida Keys National Marine Sanctuary protects North America’s only living coral barrier reef? From beautiful reefs and lush kelp forests to deep-sea canyons and mysterious underwater shipwrecks, national marine sanctuaries located around the country protect some of our nation’s most unique riches.</p>
         <p class="pt-4 italic">In this section, you will learn about the National Marine Sanctuary System, the history of Florida Keys National Marine Sanctuary, and about the areas and resources that the sanctuary protect.</p>
     </section>
@@ -26,19 +26,29 @@
 
         <p class="pt-4">Within the boundaries of the sanctuary lie spectacular, unique, and nationally significant marine environments. The sanctuary protects the world’s third largest barrier reef, which is composed of more than 6,000 individual reefs. More than 2,000 square nautical miles of seagrass meadows blanket the seafloor of South Florida. Approximately 1,700 mangrove-fringed islands stretch for over 1,800 miles of shoreline within the sanctuary. More than 6,000 species of marine life – including more than 500 species of fish and 50 species of coral – call these habitats home. The sanctuary also protects pieces of our nation’s history such as shipwrecks and other archeological treasures.</p>
 
-        <BSImageWithBigCaption imageSide="right" imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/mangroves.jpg">
+        <BSImageWithBigCaption 
+          imageSide="right" 
+          imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/mangroves.jpg">
           Vast mangrove forests.
         </BSImageWithBigCaption>
-        <BSImageWithBigCaption imageSide="left" imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164244/fknms-bluestar/about-fknms/apal-coral.jpg">
+        <BSImageWithBigCaption 
+          imageSide="left" 
+          imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164244/fknms-bluestar/about-fknms/apal-coral.jpg">
           Famous stands of elkhorn coral.
         </BSImageWithBigCaption>
-        <BSImageWithBigCaption imageSide="right" imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164240/fknms-bluestar/about-fknms/shipwreck.jpg">
+        <BSImageWithBigCaption 
+          imageSide="right" 
+          imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164240/fknms-bluestar/about-fknms/shipwreck.jpg">
           Historic shipwrecks.
         </BSImageWithBigCaption>
-        <BSImageWithBigCaption imageSide="left" imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164249/fknms-bluestar/about-fknms/seagrass.jpg">
+        <BSImageWithBigCaption 
+          imageSide="left" 
+          imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164249/fknms-bluestar/about-fknms/seagrass.jpg">
           Lush seagrass beds.
         </BSImageWithBigCaption>
-        <BSImageWithBigCaption imageSide="right" imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164246/fknms-bluestar/about-fknms/aerial-reef.jpg">
+        <BSImageWithBigCaption 
+          imageSide="right" 
+          imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164246/fknms-bluestar/about-fknms/aerial-reef.jpg">
           Extensive coral reefs.
         </BSImageWithBigCaption>
 
@@ -47,7 +57,11 @@
         <BSImage imageSource="hermitcrab.jpg" />
         <BSImage imageSource="nassaugrouper.jpg" />
     </section>
-        <Quiz class="w-5/6 pt-4 mt-4 border-t-2 border-blue" :quiz="quiz" />
+        <Quiz 
+          class="w-5/6 pt-4 mt-4 border-t-2 border-blue" 
+          :quiz="quiz" 
+          :lessonName="lessonName" 
+          :lessonSlug="lessonSlug" />
   </div>
 </template>
 

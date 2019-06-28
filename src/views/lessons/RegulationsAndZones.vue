@@ -1,7 +1,7 @@
 <template>
   <div class="about-fknms flex flex-wrap justify-center">
     <section class="w-5/6">
-        <h1 class="border-blue-lighter border-b-4 mb-4">Regulations and Zones</h1>   
+        <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">Regulations and Zones</h1>   
         <p class="pt-4 italic">Florida Keys National Marine Sanctuary visitors are invited to dive, swim, snorkel, or fish; however, rules and regulations are in place to make sure that these activities only happen in ways – and at places – that are not harmful to sanctuary resources.</p>
 
         <BSImage imageSource="intro.jpg" />
