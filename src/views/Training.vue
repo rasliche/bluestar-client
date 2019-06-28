@@ -1,6 +1,6 @@
 <template>
   <div class="training">
-    <TrainingNav />
+    <TrainingNav v-if="this.$route.name !== 'training'" />
     <router-view></router-view>
   </div>
 </template>
