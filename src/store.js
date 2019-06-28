@@ -43,7 +43,12 @@ export default new Vuex.Store({
     // users
     recordScore: (state, record) => {
       // do logic to update a score if needed
-      state.user.quizScores.push(record)
+      if (!state.lessonScores) {
+        state.lessonScores = [record]
+      }
+      else {
+        state.lessonScores.push(record)
+      }
     }
   },
   actions: {
@@ -111,8 +116,9 @@ export default new Vuex.Store({
       commit('clearAuth')
       router.replace('/login')
     },
+
     // users
-    submitQuizScore: async ({ commit, state }, record) => {
+    submitLessonScore: async ({ commit, state }, record) => {
       // asynchronously add score to user profile in database
       // do logic to update a score if previous score was worse
       commit('recordScore', record)
