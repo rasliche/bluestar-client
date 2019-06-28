@@ -10,7 +10,11 @@ export default new Vuex.Store({
   state: {
     token: null,
     userId: null,
-    isAdmin: false
+    name: '',
+    email: '',
+    operators: [],
+    lessonScores: [],
+    isAdmin: false,
   },
   getters: {
     isAuthenticated: state => state.token !== null,
@@ -23,9 +27,14 @@ export default new Vuex.Store({
   },
   mutations: {
     authUser: (state, userData) => {
-      const { user, token } = userData
+      const { token, user } = userData
+      state.userId = user._id
       state.token = token
-      state.user = user
+      state.name = user.name
+      state.email = user.email
+      state.operators = user.operators
+      state.lessonScores = user.lessonScores
+      state.isAdmin = user.isAdmin
     },
     clearAuth: (state) => {
       state.token = null
