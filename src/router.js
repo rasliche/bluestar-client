@@ -16,24 +16,24 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     { path: "/", name: "home", component: Home },
-    {
-      path: "/login",
-      name: "login",
-      // route level code-splitting
-      // this generates a separate chunk (login.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "login" */ "./views/Login.vue")
-    },
+    // {
+    //   path: "/login",
+    //   name: "login",
+    //   // route level code-splitting
+    //   // this generates a separate chunk (login.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () => import(/* webpackChunkName: "login" */ "./views/Login.vue")
+    // },
     {
       path: '/me',
       name: 'me',
-      // beforeEnter (to, from, next) {
-      //   if (store.state.token) {
-      //     next()
-      //   } else {
-      //     next('/login')
-      //   }
-      // },
+      beforeEnter (to, from, next) {
+        if (store.state.token) {
+          next()
+        } else {
+          next('/')
+        }
+      },
       component: () => import(/* webpackChunkName: 'me' */ "./views/UserDashboard.vue")
     },
     // {
