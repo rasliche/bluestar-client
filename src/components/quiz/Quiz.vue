@@ -49,8 +49,8 @@
         <p>You finished the quiz. Your score was: <span class="text-3xl">{{ correct }}</span></p>
         <div v-if="passingScore">
           <p>Nice Job. You can move on to the next lesson or retake the quiz for a better score.</p>
-          <router-link tag="button" to="/training" class="border border-green bg-green-light p-2 m-2 rounded">Training Home</router-link>
-          <!-- <button @click="submitScoreAndContinue" class="border border-green bg-green-light p-2 m-2 rounded">Next Lesson</button> -->
+          <!-- <router-link tag="button" to="/training" class="border border-green bg-green-light p-2 m-2 rounded">Training Home</router-link> -->
+          <button @click="submitScoreAndContinue" class="border border-green bg-green-light p-2 m-2 rounded">Submit Score and Continue</button>
         </div>
         <div v-else>
           <p>Sorry, but you did not achieve a passing score this time.</p>
@@ -70,7 +70,7 @@ export default {
   components: {
     Question
   },
-  props: ['quiz'],
+  props: ['quiz', 'lessonName', 'lessonSlug'],
   data() {
     return {
       introStage: true,
@@ -87,7 +87,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['submitQuizScore']),
+    ...mapActions(['submitLessonScore']),
     startQuiz: function() {
       this.correct = 0
       this.questionIndex = 0
@@ -114,7 +114,10 @@ export default {
     },
     submitScoreAndContinue: function() {
       const score = (this.correct / this.quiz.questions.length) * 100
-      this.submitQuizScore({ _id: this.quiz._id, score: score })
+      this.submitLessonScore({ 
+        lessonSlug: this.lessonSlug, 
+        lessonName: this.lessonName,
+        score: score })
     }
   }
 };
