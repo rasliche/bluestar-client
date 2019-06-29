@@ -7,6 +7,7 @@
         <p>Name: {{ name }}</p>
         <p>Email: {{ email }}</p>
         <p>Operators: {{ operators || 'None yet' }}</p>
+        <p>Lesson Scores: {{ lessonScores }}</p>
         <p v-if="isAdmin">You are an admin.</p>
     </div>
 </div>
