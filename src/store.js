@@ -36,6 +36,14 @@ export default new Vuex.Store({
       state.lessonScores = user.lessonScores
       state.isAdmin = user.isAdmin
     },
+    setUser: (state, user) => {
+      state.userId = user._id
+      state.name = user.name
+      state.email = user.email
+      state.operators = user.operators
+      state.lessonScores = user.lessonScores
+      state.isAdmin = user.isAdmin
+    },
     clearAuth: (state) => {
       state.token = null
       state.user = null
@@ -120,8 +128,17 @@ export default new Vuex.Store({
     // users
     submitLessonScore: async ({ commit, state }, record) => {
       // asynchronously add score to user profile in database
+      const { data } = await Api.put(`/users/${state.userId}`,
+      {
+        record: record
+      },
+      {
+        headers: {
+          Authorization: `Bearer: ${state.token}`
+        }
+      })
       // do logic to update a score if previous score was worse
-      commit('recordScore', record)
+      commit('setUser', data)
       router.push('/training')
     }
   }
