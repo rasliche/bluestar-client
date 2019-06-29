@@ -6,6 +6,12 @@
             description="FKNMS is a large marine protected area."
             :programs="['diving', 'fishing']" 
             slug="about-fknms" />
+        <LessonCard
+            key="regulations-and-zones" 
+            title="Regulations and Zones"
+            description="Know the different rules that apply to different zones."
+            :programs="['diving', 'fishing']" 
+            slug="regulations-and-zones" />
     </div>
 </template>
 
