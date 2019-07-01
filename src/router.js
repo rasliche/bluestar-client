@@ -3,11 +3,11 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 
 // lessons
-import TrainingHome from "./views/lessons/TrainingHome.vue"
-import AboutFKNMS from "./views/lessons/AboutFKNMS.vue"
-import RegulationsAndZones from "./views/lessons/RegulationsAndZones.vue"
+import TrainingHome from "./views/lessons/TrainingHome.vue";
+import AboutFKNMS from "./views/lessons/AboutFKNMS.vue";
+import RegulationsAndZones from "./views/lessons/RegulationsAndZones.vue";
 
-import store from './store'
+import store from "./store";
 
 Vue.use(Router);
 
@@ -25,16 +25,17 @@ export default new Router({
     //   component: () => import(/* webpackChunkName: "login" */ "./views/Login.vue")
     // },
     {
-      path: '/me',
-      name: 'me',
-      beforeEnter (to, from, next) {
+      path: "/me",
+      name: "me",
+      beforeEnter(to, from, next) {
         if (store.state.token) {
-          next()
+          next();
         } else {
-          next('/')
+          next("/");
         }
       },
-      component: () => import(/* webpackChunkName: 'me' */ "./views/UserDashboard.vue")
+      component: () =>
+        import(/* webpackChunkName: 'me' */ "./views/UserDashboard.vue")
     },
     // {
     //   path: "/about",
@@ -77,14 +78,19 @@ export default new Router({
     {
       path: "/training",
       beforeEnter: (to, from, next) => {
-        console.log("Entered Training Route")
-        next()
+        console.log("Entered Training Route");
+        next();
       },
-      component: () => import(/* webpackChunkName: "training" */ "./views/Training.vue"),
+      component: () =>
+        import(/* webpackChunkName: "training" */ "./views/Training.vue"),
       children: [
-        { path: '', name: "training", component: TrainingHome },
-        { path: 'about-fknms', name: 'about-fknms', component: AboutFKNMS },
-        { path: 'regulations-and-zones', name: 'regulations-and-zones', component: RegulationsAndZones },
+        { path: "", name: "training", component: TrainingHome },
+        { path: "about-fknms", name: "about-fknms", component: AboutFKNMS },
+        {
+          path: "regulations-and-zones",
+          name: "regulations-and-zones",
+          component: RegulationsAndZones
+        }
       ]
     },
     {
@@ -96,7 +102,8 @@ export default new Router({
       //     next('/login')
       //   }
       // },
-      component: () => import(/* webpackChunkName: "admin" */ './views/Admin.vue'), 
+      component: () =>
+        import(/* webpackChunkName: "admin" */ "./views/Admin.vue")
       // children: [
       //   { path: '', name: 'admin', component: () => import(/* webpackChunkName: "admin" */ "./views/admin/AdminHome.vue") },
       //   { path: 'lesson/new', name: 'lessoncreate', component: () => import(/* webpackChunkName: "lessoncreate" */ "./views/admin/CreateLesson.vue") },
@@ -107,11 +114,12 @@ export default new Router({
     {
       path: "/design",
       name: "design",
-      component: () => import(/* webpackChunkName: "design" */ './views/Design.vue'),
+      component: () =>
+        import(/* webpackChunkName: "design" */ "./views/Design.vue")
     },
     {
       path: "*",
-      redirect: '/'
-    },
+      redirect: "/"
+    }
   ]
 });

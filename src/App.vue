@@ -3,34 +3,34 @@
     <AppHeader id="head" />
 
     <AppNav id="nav" />
-    
+
     <router-view id="main" />
-    
+
     <AppFooter id="foot" />
   </div>
 </template>
 
 <script>
-import AppNav from '@/components/AppNav.vue'
-import AppHeader from '@/components/AppHeader.vue'
-import AppFooter from '@/components/AppFooter.vue'
+import AppNav from "@/components/AppNav.vue";
+import AppHeader from "@/components/AppHeader.vue";
+import AppFooter from "@/components/AppFooter.vue";
 
 export default {
   components: {
     AppNav,
     AppHeader,
-    AppFooter,
+    AppFooter
   },
   created() {
-    this.$store.dispatch('tryAutoLogin')
+    this.$store.dispatch("tryAutoLogin");
   }
-}
+};
 </script>
 
 <style>
 #app {
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
     "head head"
     "nav main"
     "nav foot";
@@ -54,6 +54,5 @@ export default {
   grid-area: main;
 }
 </style>
-
 
 <style src="./styles/styles.css"></style>
