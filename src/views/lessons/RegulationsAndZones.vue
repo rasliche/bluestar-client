@@ -37,7 +37,11 @@
         <p class="w-5/6 pt-4 text-center font-semibold">As you have already learned, the sanctuary protects spectacular, unique, and nationally significant marine environments. As a Blue Star partner, you are playing an important role in protecting these valuable sanctuary resources. Through educating yourselves and your customers you can help ensure our sanctuary is healthy and vibrant for future generations of divers.</p>
       </section>
         
-    <Quiz class="w-5/6 pt-4 mt-4 border-t-2 border-blue" :quiz="quiz" />
+    <Quiz 
+          class="w-5/6 pt-4 mt-4 border-t-2 border-blue" 
+          :quiz="quiz" 
+          :lessonName="lessonName" 
+          :lessonSlug="lessonSlug" />
   </div>
 </template>
 
@@ -46,22 +50,22 @@
 import Quiz from '@/components/quiz/Quiz.vue'
 
 export default {
-  name: "about-fknms",
+  name: "regulations-and-zones",
   components: {
     Quiz,
   },
   data() {
     return {
-      lessonName: "About FKNMS",
-      lessonSlug: "about-fknms",
+      lessonName: "Regulations and Zones",
+      lessonSlug: "regulations-and-zones",
       programs: [
         'diving',
         'fishing',
       ],
       quiz: {
-        title: "About FKNMS",
+        title: "Regulations and Zones",
         description: "FKNMS is a large marine protected area.",
-        passingScorePercent: 100,
+        passingScorePercent: 50,
         questions: [
           {
             text: "The Florida Keys National Marine Sanctuary is part of a _________ system of marine protected areas, managed by the _________.",
