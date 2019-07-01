@@ -7,7 +7,11 @@
       <p>Name: {{ name }}</p>
       <p>Email: {{ email }}</p>
       <p>Operators: {{ operators || "None yet" }}</p>
-      <p>Lesson Scores: {{ lessonScores }}</p>
+      <p>Lesson Scores: </p>
+      <div class="score m-auto w-5/6 flex flex-row" v-for="lesson in lessonScores" :key="lesson._id">
+        <p class="mr-auto self-start">{{ lesson.lessonName }}</p>
+        <p class="ml-auto self-end">{{ lesson.score }}%</p>
+      </div>
       <p v-if="isAdmin">You are an admin.</p>
     </div>
   </div>
@@ -23,5 +27,3 @@ export default {
   }
 };
 </script>
-
-<style></style>
