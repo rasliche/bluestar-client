@@ -3,21 +3,27 @@
         <h1 class="">Register</h1>
         <form>
             <div>
-                <label for="name" class="text-blue-darker pr-2">Name</label>
-                <input type="text" name="name" id="name" v-model.lazy="$v.name.$model" class="border-blue-lighter border-b-2 pl-2">
-                <p class="text-red text-sm" v-if="!$v.name.required">this field is required</p>
+                <label for="fname" class="text-blue-darker pr-2">Name</label>
+                <input type="text" name="fname" id="fname" v-model.lazy="$v.formResponses.name.$model" class="border-blue-lighter border-b-2 pl-2">
+                <p class="text-red text-sm" v-if="!$v.formResponses.name.required">this field is required</p>
             </div>
             <div>
-                <label for="email" class="text-blue-darker pr-2">Email</label>
-                <input type="text" name="email" id="email" v-model.lazy="$v.email.$model" class="pl-2 border-b-2 border-blue-lighter">
-                <p class="text-red text-sm" v-if="!$v.email.required">this field is required</p>
-                <p class="text-red text-sm" v-if="!$v.email.minLength">Field must have at least {{ $v.email.$params.minLength.min }} characters.</p>
+                <label for="femail" class="text-blue-darker pr-2">Email</label>
+                <input type="text" name="femail" id="femail" v-model.lazy="$v.formResponses.email.$model" class="pl-2 border-b-2 border-blue-lighter">
+                <p class="text-red text-sm" v-if="!$v.formResponses.email.required">this field is required</p>
+                <p class="text-red text-sm" v-if="!$v.formResponses.email.minLength">Field must have at least {{ $v.formResponses.email.$params.minLength.min }} characters.</p>
             </div>
             <div>
-                <label for="password" class="text-blue-darker pr-2">Password</label>
-                <input type="text" name="password" id="password" v-model.lazy="$v.password.$model" class="pl-2 border-b-2 border-blue-lighter">
-                <p class="text-red text-sm" v-if="!$v.password.required">this field is required</p>
-                <p class="text-red text-sm" v-if="!$v.password.minLength">Field must have at least {{ $v.password.$params.minLength.min }} characters.</p>
+                <label for="fpassword1" class="text-blue-darker pr-2">Password</label>
+                <input type="password" name="fpassword1" id="fpassword1" v-model.lazy="$v.formResponses.password1.$model" class="pl-2 border-b-2 border-blue-lighter">
+                <p class="text-red text-sm" v-if="!$v.formResponses.password1.required">this field is required</p>
+                <p class="text-red text-sm" v-if="!$v.formResponses.password1.minLength">Field must have at least {{ $v.formResponses.password1.$params.minLength.min }} characters.</p>
+            </div>
+            <div>
+                <label for="fpassword2" class="text-blue-darker pr-2">Retype Password</label>
+                <input type="password" name="fpassword2" id="fpassword2" v-model.lazy="$v.formResponses.password2.$model" class="pl-2 border-b-2 border-blue-lighter">
+                <p class="text-red text-sm" v-if="!$v.formResponses.password2.required">this field is required</p>
+                <p class="text-red text-sm" v-if="!$v.formResponses.password2.sameAsPassword">passwords must match</p>
             </div>
             <!-- <label for="shopChoice" class="w-1/2 text-right pr-2">Choose a Shop to Join:</label>
             <select name="shopChoice" id="shopChoice" class="w-1/2" v-model="shopChoice">
@@ -42,35 +48,45 @@ import axios from 'axios'
 import { 
     required, 
     minLength, 
-    maxLength 
+    maxLength,
+    sameAs
     } from 'vuelidate/lib/validators'
 
 export default {
     data() {
         return {
-            name: '',
-            email: '',
-            password: '',
-            shopChoice: null,
-            shopPassword: '',
-            operators: []
+            formResponses: {
+                name: null,
+                email: null,
+                password1: null,
+                password2: null,
+                // shopChoice: null,
+                // shopPassword: null,
+                // operators: []
+            }
         }
     },
     validations: {
-        name: {
-            required,
-            minLength: minLength(1),
-            maxLength: maxLength(255),
-        },
-        email: {
-            required,
-            minLength: minLength(5),
-            maxLength: maxLength(255)
-        },
-        password: {
-            required,
-            minLength: minLength(6),
-        },
+        formResponses: {
+            name: {
+                required,
+                minLength: minLength(1),
+                maxLength: maxLength(255),
+            },
+            email: {
+                required,
+                minLength: minLength(5),
+                maxLength: maxLength(255)
+            },
+            password1: {
+                required,
+                minLength: minLength(6),
+            },
+            password2: {
+                required,
+                sameAsPassword: sameAs("password1")
+            },
+        }
     },
     methods: {
         async submitRegister() {
@@ -84,6 +100,5 @@ export default {
             this.$store.dispatch('register', formData)
         }
     }
-  }
-};
+  };
 </script>
