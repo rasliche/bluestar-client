@@ -1,32 +1,27 @@
 <template>
-    <div class="flex flex-wrap">
-        <BSLessonCard v-for="lesson in lessons"
-            :key="lesson._id" 
-            :title="lesson.title"
-            :description="lesson.description"
-            :programs="lesson.programs" 
-            :slug="lesson.slug"
-            class="flex-1" />
-    </div>
+  <div class="flex flex-wrap">
+    <BSLessonCard
+      key="about-fknms"
+      title="About FKNMS"
+      description="FKNMS is a large marine protected area."
+      :programs="['diving', 'fishing']"
+      slug="about-fknms"
+    />
+    <BSLessonCard
+      key="regulations-and-zones"
+      title="Regulations and Zones"
+      description="Know the different rules that apply to different zones."
+      :programs="['diving', 'fishing']"
+      slug="regulations-and-zones"
+    />
+  </div>
 </template>
 
 <script>
-import Api from '@/services/Api'
-import BSLessonCard from '@/components/lesson/BSLessonCard.vue'
-
+import BSLessonCard from "@/components/lesson/BSLessonCard.vue";
 export default {
-    components: {
-        BSLessonCard
-    },
-    data() {
-        return {
-            lessons: []
-        }
-    },
-    async mounted() {
-        const { data } = await Api.get('/lessons')
-        this.lessons = data
-    }
-
-}
+  components: {
+    BSLessonCard
+  }
+};
 </script>
