@@ -15,7 +15,7 @@
       <div>
         <label for="password" class="text-blue-darker pr-2">Password</label>
         <input
-          type="text"
+          type="password"
           name="password"
           id="password"
           v-model="password"
