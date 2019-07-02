@@ -9,6 +9,7 @@
           name="email"
           id="email"
           v-model="email"
+          autocomplete="section-login email"
           class="border-blue-lighter border-b-2 pl-2"
         />
       </div>
@@ -19,6 +20,7 @@
           name="password"
           id="password"
           v-model="password"
+          autocomplete="section-login current-password"
           class="border-blue-lighter border-b-2 pl-2"
         />
       </div>
