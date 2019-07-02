@@ -158,6 +158,7 @@ export default {
   },
   data() {
     return {
+      quizMode: false,
       lessonName: "About FKNMS",
       lessonSlug: "about-fknms",
       programs: ["diving", "fishing"],
