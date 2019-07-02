@@ -27,9 +27,14 @@
             <label for="shopPassword" class="w-1/2 text-right pr-2">Shop Password:</label>
             <input type="text" name="shopPassword" id="shopPassword" v-model="shopPassword" class="w-1/2"> -->
 
-            <button @click.prevent="submitRegister" class="border-2 rounded border-blue">Register</button>
-        </form>
-    </div>
+      <button
+        @click.prevent="submitRegister"
+        class="border-2 rounded border-blue"
+      >
+        Register
+      </button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -79,5 +84,6 @@ export default {
             this.$store.dispatch('register', formData)
         }
     }
-}
+  }
+};
 </script>

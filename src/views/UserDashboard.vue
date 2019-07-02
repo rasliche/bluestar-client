@@ -1,24 +1,29 @@
 <template>
-    <div>
-        <h1>User Dashboard Page</h1>
-        <div v-for="(value, key) in user" :key="key">
-            {{ key }}: {{ value }}
-        </div>
-        {{ user }}
+  <div class="user-dashboard justify-center">
+    <div class="w-5/6">
+      <h1 class="border-blue-lighter border-b-4 mb-4">User Dashboard Page</h1>
     </div>
+    <div class="w-5/6">
+      <p>Name: {{ name }}</p>
+      <p>Email: {{ email }}</p>
+      <p>Operators: {{ operators || "None yet" }}</p>
+      <p>Lesson Scores: </p>
+      <div class="score m-auto w-5/6 flex flex-row" v-for="lesson in lessonScores" :key="lesson._id">
+        <p class="mr-auto self-start">{{ lesson.lessonName }}</p>
+        <p class="ml-auto self-end">{{ lesson.score }}%</p>
+      </div>
+      <p v-if="isAdmin">You are an admin.</p>
+    </div>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import axios from 'axios'
+import { mapState } from "vuex";
+// import Api from "@/services/Api";
 
 export default {
-    computed: {
-        ...mapGetters(['user'])
-    }
-}
+  computed: {
+    ...mapState(["name", "email", "operators", "lessonScores", "isAdmin"])
+  }
+};
 </script>
-
-<style>
-
-</style>
