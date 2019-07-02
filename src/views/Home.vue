@@ -18,7 +18,6 @@
 // @ is an alias to /src
 import Login from "@/components/auth/Login.vue";
 import Register from "@/components/auth/Register.vue";
-import { mapState } from "vuex";
 
 export default {
   name: "home",
@@ -26,13 +25,5 @@ export default {
     Login,
     Register
   },
-  computed: {
-    ...mapState("user", {
-      user: "user"
-    }),
-    ...mapState("quiz", {
-      quiz: "quiz"
-    })
-  }
 };
 </script>
