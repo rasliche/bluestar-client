@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    alert: false,
     token: null,
     userId: null,
     name: "",
@@ -18,11 +19,7 @@ export default new Vuex.Store({
   },
   getters: {
     isAuthenticated: state => state.token !== null,
-    isAdmin: state => {
-      if (state.user && state.user.isAdmin) {
-        return true;
-      }
-    },
+    isAdmin: state => state.isAdmin === true,
     token: state => state.token
   },
   mutations: {
@@ -56,9 +53,20 @@ export default new Vuex.Store({
       } else {
         state.lessonScores.push(record);
       }
+    },
+    setAlertState: (state, payload) => {
+      state.alert = payload
     }
   },
   actions: {
+    // Alert Stuff
+    setAlert: ({ commit }) => {
+      commit('setAlertState', true)
+      setTimeout(() => {
+        commit('setAlertState', false)
+      }, 5000)
+    },
+    // Auth Stuff
     setLogoutTimer: ({ commit }, expirationTime) => {
       setTimeout(() => {
         commit("clearAuth");

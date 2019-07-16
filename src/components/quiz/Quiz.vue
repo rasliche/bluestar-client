@@ -179,26 +179,3 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-fast-enter-active,
-.fade-fast-leave-active {
-  transition: opacity 0.25s;
-}
-
-.fade-fast-enter,
-.fade-fast-leave-to {
-  opacity: 0;
-}
-</style>

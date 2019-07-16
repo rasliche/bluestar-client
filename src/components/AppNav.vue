@@ -26,7 +26,7 @@
       >Admin</router-link
     >
 
-    <a v-if="isAuthenticated" @click="logout" class="pl-10 mt-3 no-underline text-blue-light"
+    <a v-if="isAuthenticated" @click="logout" class="pl-10 mt-3 no-underline text-blue-light cursor-pointer"
       >Logout</a
     >
   </nav>

@@ -95,21 +95,21 @@ export default new Router({
     },
     {
       path: "/admin",
-      // beforeEnter (to, from, next) {
-      //   if (store.state.token) {
-      //     next()
-      //   } else {
-      //     next('/login')
-      //   }
-      // },
+      beforeEnter (to, from, next) {
+        if (store.getters.isAuthenticated && store.getters.isAdmin) {
+          next()
+        } else {
+          next('/login')
+        }
+      },
       component: () =>
-        import(/* webpackChunkName: "admin" */ "./views/Admin.vue")
-      // children: [
-      //   { path: '', name: 'admin', component: () => import(/* webpackChunkName: "admin" */ "./views/admin/AdminHome.vue") },
-      //   { path: 'lesson/new', name: 'lessoncreate', component: () => import(/* webpackChunkName: "lessoncreate" */ "./views/admin/CreateLesson.vue") },
-      //   { path: 'operator/new', name: 'operatorcreate', component: () => import(/* webpackChunkName: "operatorcreate" */ "./views/admin/CreateOperator.vue") },
-      //   { path: 'quiz/new', name: 'quizcreate', component: () => import(/* webpackChunkName: "quizcreate" */ "./views/admin/CreateQuiz.vue") },
-      // ]
+        import(/* webpackChunkName: "admin" */ "./views/Admin.vue"),
+      children: [
+        { path: '', name: 'admin', component: () => import(/* webpackChunkName: "admin" */ "./views/admin/AdminHome.vue") },
+        // { path: 'lesson/new', name: 'lessoncreate', component: () => import(/* webpackChunkName: "lessoncreate" */ "./views/admin/CreateLesson.vue") },
+        // { path: 'operator/new', name: 'operatorcreate', component: () => import(/* webpackChunkName: "operatorcreate" */ "./views/admin/CreateOperator.vue") },
+        // { path: 'quiz/new', name: 'quizcreate', component: () => import(/* webpackChunkName: "quizcreate" */ "./views/admin/CreateQuiz.vue") },
+      ]
     },
     {
       path: "/design",
