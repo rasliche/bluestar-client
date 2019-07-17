@@ -9,7 +9,7 @@
     <AppFooter id="foot" />
 
     <transition name="alert-slide">
-      <BSFlashMessage v-if="alert.type" :type="alert.type" :text="alert.text"></BSFlashMessage>
+      <BSFlashMessage v-if="type" :type="type" :text="text"></BSFlashMessage>
     </transition>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
     this.$store.dispatch("tryAutoLogin");
   },
   computed: {
-    ...mapState(['alert'])
+    ...mapState(['type', 'text'])
   }
 };
 </script>

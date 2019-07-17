@@ -1,8 +1,6 @@
 const state = {
-    alert: {
-        text: '',
-        type: null
-    }
+    text: '',
+    type: null
 }
 
 const getters = {
@@ -27,12 +25,12 @@ const actions = {
 
 const mutations = {
     clearAlertState: (state) => {
-        state.alert.type = null
-        state.alert.text = ''
+        state.type = null
+        state.text = ''
     },
     setAlertState: (state, { type, text }) => {
-        state.alert.type = type
-        state.alert.text = text
+        state.type = type
+        state.text = text
       },
 }
 
