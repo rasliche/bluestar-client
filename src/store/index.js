@@ -79,6 +79,10 @@ export default new Vuex.Store({
           return;
         }
         commit("authUser", data);
+        dispatch('alert/setAlert', {
+          type: 'success',
+          text: 'You have created a new account and been logged in.'
+        })
         const now = new Date();
         const expirationDate = new Date(now.getTime() + 7200000);
         localStorage.setItem("bs-auth-time", expirationDate);
@@ -99,6 +103,10 @@ export default new Vuex.Store({
         }
         console.log(data);
         commit("authUser", data);
+        dispatch('alert/setAlert', {
+          type: 'success',
+          text: 'You have been logged in.'
+        })
         const now = new Date();
         const expirationDate = new Date(now.getTime() + 7200000);
         localStorage.setItem("bs-auth-time", expirationDate);
@@ -109,7 +117,7 @@ export default new Vuex.Store({
         console.log(err);
       }
     },
-    tryAutoLogin: async ({ commit }) => {
+    tryAutoLogin: async ({ commit, dispatch }) => {
       const token = localStorage.getItem("bs-auth-token");
       if (!token) {
         return;
@@ -126,11 +134,19 @@ export default new Vuex.Store({
       });
       data.token = token;
       commit("authUser", data);
+      dispatch('alert/setAlert', {
+        type: 'success',
+        text: 'You have been automatically logged in. Make sure to Logout if this is a shared computer.'
+      })
     },
-    logout: ({ commit }) => {
+    logout: ({ commit, dispatch }) => {
       localStorage.removeItem("bs-auth-token");
       localStorage.removeItem("bs-auth-time");
       commit("clearAuth");
+      dispatch('alert/setAlert', {
+        type: 'success',
+        text: 'You have been logged out.'
+      })
       router.replace("/login");
     },
     
