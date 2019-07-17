@@ -1,14 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import alert from './modules/alert'
 
-import Api from "./services/Api";
-import router from "./router";
+import Api from "../services/Api";
+import router from "../router";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    alert: false,
     token: null,
     userId: null,
     name: "",
@@ -43,7 +43,13 @@ export default new Vuex.Store({
     },
     clearAuth: state => {
       state.token = null;
-      state.user = null;
+      state.userId = null;
+      state.name = "";
+      state.email = "";
+      state.operators = [];
+      state.lessonScores = [];
+      state.isAdmin = false;
+
     },
     // users
     recordScore: (state, record) => {
@@ -54,18 +60,10 @@ export default new Vuex.Store({
         state.lessonScores.push(record);
       }
     },
-    setAlertState: (state, payload) => {
-      state.alert = payload
-    }
+    
   },
   actions: {
-    // Alert Stuff
-    setAlert: ({ commit }) => {
-      commit('setAlertState', true)
-      setTimeout(() => {
-        commit('setAlertState', false)
-      }, 5000)
-    },
+    
     // Auth Stuff
     setLogoutTimer: ({ commit }, expirationTime) => {
       setTimeout(() => {
@@ -135,7 +133,7 @@ export default new Vuex.Store({
       commit("clearAuth");
       router.replace("/login");
     },
-
+    
     // users
     submitLessonScore: async ({ commit, state }, record) => {
       // Check if it is a new score for user
@@ -144,9 +142,9 @@ export default new Vuex.Store({
       if (state.lessonScores) {
         previousLessonRecord = state.lessonScores.find(
           r => r.lessonSlug === record.lessonSlug
-        );
-      }
-      console.log("Previous Lesson: ", previousLessonRecord);
+          );
+        }
+        console.log("Previous Lesson: ", previousLessonRecord);
       if (!previousLessonRecord || previousLessonRecord.score < record.score) {
         // asynchronously add score to user profile in database
         const { data } = await Api.put(
@@ -159,16 +157,21 @@ export default new Vuex.Store({
               Authorization: `Bearer: ${state.token}`
             }
           }
-        );
-        console.log("New lesson score added.");
-        commit("setUser", data);
-        router.push("/training");
-      } else {
-        // do logic to update a score if previous score was worse
-        // Should have Flash Message showing that nothing was added
-        console.log("No new lesson score added.");
-        router.push("/me");
+          );
+          console.log("New lesson score added.");
+          commit("setUser", data);
+          router.push("/training");
+        } else {
+          // do logic to update a score if previous score was worse
+          // Should have Flash Message showing that nothing was added
+          console.log("No new lesson score added.");
+          router.push("/me");
+        }
       }
-    }
-  }
-});
+    },
+    modules: {
+      alert
+    },
+    strict: process.env.NODE_ENV !== 'production',
+  });
+  

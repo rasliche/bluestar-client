@@ -13,6 +13,7 @@
 
 <script>
 export default {
-
+    name: 'BSFlashMessage',
+    props: ['type', 'text']
 }
 </script>

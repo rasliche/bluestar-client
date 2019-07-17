@@ -8,8 +8,8 @@
 
     <AppFooter id="foot" />
 
-    <transition name="alert-slide" v-if="alert">
-      <BSFlashMessage></BSFlashMessage>
+    <transition name="alert-slide">
+      <BSFlashMessage v-if="alert.type" :type="alert.type" :text="alert.text"></BSFlashMessage>
     </transition>
   </div>
 </template>
@@ -18,7 +18,8 @@
 import AppNav from "@/components/AppNav.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
-import { mapState } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('alert')
 
 export default {
   components: {
@@ -65,19 +66,19 @@ export default {
 /* transitions */
 .alert-slide-enter-active,
 .alert-slide-leave-active {
-  transition: opacity 1s;
+  transition: all 1s;
 }
 
 .alert-slide-enter,
 .alert-slide-leave-to {
   opacity: 0;
-  /* transform: translateX(-100px); */
+  transform: translateX(100px);
 }
 
 .alert-slide-enter-to,
 .alert-slide-leave {
   opacity: 1;
-  /* transform: translateX(0); */
+  transform: translateX(0px);
 }
 
 .alert-slide-fast-enter-active,

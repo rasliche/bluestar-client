@@ -7,7 +7,7 @@ import TrainingHome from "./views/lessons/TrainingHome.vue";
 import AboutFKNMS from "./views/lessons/AboutFKNMS.vue";
 import RegulationsAndZones from "./views/lessons/RegulationsAndZones.vue";
 
-import store from "./store";
+import store from "./store/index";
 
 Vue.use(Router);
 
