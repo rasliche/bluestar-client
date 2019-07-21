@@ -138,23 +138,31 @@
       <BSImage imageSource="hermitcrab.jpg" />
       <BSImage imageSource="nassaugrouper.jpg" />
     </section>
-    <Quiz
-      class="w-5/6 pt-4 mt-4 border-t-2 border-blue"
-      :quiz="quiz"
-      :lessonName="lessonName"
-      :lessonSlug="lessonSlug"
-    />
+    <button @click="quizMode = true" class="w-5/6">Take the Quiz</button>
+    <Modal 
+      :modalOpen="quizMode" 
+      @dismiss="quizMode = false"
+    >
+      <Quiz
+        class="w-5/6 pt-4 mt-4 border-t-2 border-blue"
+        :quiz="quiz"
+        :lessonName="lessonName"
+        :lessonSlug="lessonSlug"
+      />
+    </Modal>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import Modal from "@/components/Modal.vue"
 import Quiz from "@/components/quiz/Quiz.vue";
 
 export default {
   name: "about-fknms",
   components: {
-    Quiz
+    Quiz,
+    Modal
   },
   data() {
     return {
