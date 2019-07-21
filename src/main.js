@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuelidate from "vuelidate";
+import PortalVue from 'portal-vue';
 import App from "./App.vue";
 import router from "./router";
 import store from "./store/index";
@@ -16,6 +17,7 @@ Vue.component("BSFlashMessage", BSFlashMessage);
 Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
+Vue.use(PortalVue);
 
 new Vue({
   router,
