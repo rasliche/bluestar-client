@@ -13,7 +13,6 @@
           Start Quiz
         </button>
       </div>
-
       <div v-if="questionStage" key="questions" class="text-center mx-auto">
         <!-- <div v-for="question in quiz.questions"> -->
         <transition name="fade" mode="out-in">
@@ -109,6 +108,12 @@
         >
           Retake the quiz.
         </button>
+        <button
+          @click="$emit('dismiss')"
+          class="border border-yellow bg-yellow-light p-2 m-2 rounded"
+        >
+          Review the content.
+        </button>
       </div>
     </transition>
   </div>
@@ -179,3 +184,25 @@ export default {
   }
 };
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-fast-enter-active,
+.fade-fast-leave-active {
+  transition: opacity 0.25s;
+}
+
+.fade-fast-enter,
+.fade-fast-leave-to {
+  opacity: 0;
+}
+</style>
