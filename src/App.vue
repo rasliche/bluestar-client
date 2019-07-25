@@ -69,7 +69,11 @@ export default {
   transition: all 1s;
 }
 
-.alert-slide-enter,
+.alert-slide-enter {
+  opacity: 0;
+  transform: translateY(100px)
+}
+
 .alert-slide-leave-to {
   opacity: 0;
   transform: translateX(100px);
