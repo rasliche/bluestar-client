@@ -13,11 +13,24 @@
 
 <script>
 export default {
-    props: ['show'],
+        preventBackgroundScrolling: { default: true }
+    },
     methods: {
         dismiss() {
             this.$emit('close')
         }
+        show: {
+            immediate: true,
+            handler: function (show) {
+                    if (show) {
+                        this.preventBackgroundScrolling && document.body.style.setProperty('overflow', 'hidden')
+                    } else {
+                        this.preventBackgroundScrolling && document.body.style.removeProperty('overflow')
+                    }
+                }
+            }
+    },
+    created() {
     }
 }
 </script>
