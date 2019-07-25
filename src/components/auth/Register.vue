@@ -44,7 +44,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { 
     required, 
     minLength, 
@@ -92,8 +91,8 @@ export default {
     methods: {
         async submitRegister() {
             const formData = {
-                name: this.name,
-                email: this.email,
+                name: this.formResponses.name,
+                email: this.formResponses.email,
                 // password: this.password,
                 // shopChoice: this.shopChoice,
                 // shopPassword: this.shopPassword
