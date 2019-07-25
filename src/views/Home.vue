@@ -13,8 +13,8 @@
       <p class="text-xs pt-4" v-else>If you are registered, you can just <span class="underline cursor-pointer" @click="currentComponent = 'Login'">login</span>.</p>
     </section>
     <button @click="setAlert({ type: 'warn', text: 'info you should know!'})">Make alert</button>
-    <button @click="showModal = true">Show Modal</button>
-    <Modal 
+    <!-- <button @click="showModal = true">Show Modal</button> -->
+    <!-- <Modal 
       :show="showModal" 
       @close="showModal = false"
     >
@@ -24,7 +24,7 @@
       <slot>
         <p class="text-center text-grey-darkest">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut quasi tempore eveniet ex doloribus, ipsam dolores nulla aut dolore minima delectus illum itaque nihil ab beatae sapiente. Consequatur, quidem omnis.</p>
       </slot>
-    </Modal>
+    </Modal> -->
   </div>
 </template>
 
@@ -46,7 +46,6 @@ export default {
   },
   data() {
     return {
-      showModal: true,
       currentComponent: 'Login'
     }
   },
