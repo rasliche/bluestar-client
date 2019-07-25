@@ -13,12 +13,16 @@
 
 <script>
 export default {
+    props: {
+        show: { required: true},
         preventBackgroundScrolling: { default: true }
     },
     methods: {
         dismiss() {
             this.$emit('close')
         }
+    },
+    watch: {
         show: {
             immediate: true,
             handler: function (show) {
@@ -31,6 +35,15 @@ export default {
             }
     },
     created() {
+        const escapeHandler = (e) => {
+            if (e.key === 'Escape' && this.show) {
+                this.dismiss()
+            }
     }
+        document.addEventListener('keydown', escapeHandler)
+        this.$once('hook:destroyed', () => {
+            document.removeEventListener('keydown', escapeHandler)
+        })
+    },
 }
 </script>
