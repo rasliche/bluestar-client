@@ -5,7 +5,7 @@
 
         <slot name="default"></slot>
 
-        <div class="text-center">
+        <div class="text-center" v-if="!noCloseButton">
             <button @click="dismiss" class="bg-blue-light px-4 py-2 border-blue border-2 rounded-lg">Close</button>
         </div>
     </div>
@@ -16,7 +16,8 @@
 export default {
     props: {
         show: { required: true},
-        preventBackgroundScrolling: { default: true }
+        preventBackgroundScrolling: { default: true },
+        noCloseButton: { default: false },
     },
     methods: {
         dismiss() {
