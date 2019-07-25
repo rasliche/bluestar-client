@@ -1,6 +1,6 @@
 <template>
   <div class="about-fknms flex flex-wrap justify-center">
-    <section class="w-5/6">
+    <article class="w-5/6">
       <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">
         About Florida Keys National Marine Sanctuary
       </h1>
@@ -16,9 +16,7 @@
         System, the history of Florida Keys National Marine Sanctuary, and about
         the areas and resources that the sanctuary protect.
       </p>
-    </section>
 
-    <section class="w-5/6">
       <iframe
         class="pt-4"
         width="560"
@@ -137,14 +135,14 @@
 
       <BSImage imageSource="hermitcrab.jpg" />
       <BSImage imageSource="nassaugrouper.jpg" />
-    </section>
+    </article>
     <button @click="quizMode = true" class="w-5/6">Take the Quiz</button>
     <Modal 
-      :modalOpen="quizMode" 
-      @dismiss="quizMode = false"
+      :show="quizMode" 
+      @close="quizMode = false"
     >
       <Quiz
-        class="w-5/6 pt-4 mt-4 border-t-2 border-blue"
+        class="mx-auto pt-4 mt-4 border-t-2 border-blue"
         :quiz="quiz"
         :lessonName="lessonName"
         :lessonSlug="lessonSlug"
