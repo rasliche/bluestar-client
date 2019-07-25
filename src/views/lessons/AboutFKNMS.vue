@@ -141,7 +141,6 @@
         :lessonName="lessonName"
         :lessonSlug="lessonSlug"
       />
-      <!-- <button @click="quizMode = true" class="w-5/6">Take the Quiz</button> -->
     </article>
   </div>
 </template>
