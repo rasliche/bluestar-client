@@ -135,19 +135,14 @@
 
       <BSImage imageSource="hermitcrab.jpg" />
       <BSImage imageSource="nassaugrouper.jpg" />
-    </article>
-    <button @click="quizMode = true" class="w-5/6">Take the Quiz</button>
-    <Modal 
-      :show="quizMode" 
-      @close="quizMode = false"
-    >
       <Quiz
         class="mx-auto pt-4 mt-4 border-t-2 border-blue"
         :quiz="quiz"
         :lessonName="lessonName"
         :lessonSlug="lessonSlug"
       />
-    </Modal>
+      <!-- <button @click="quizMode = true" class="w-5/6">Take the Quiz</button> -->
+    </article>
   </div>
 </template>
 
