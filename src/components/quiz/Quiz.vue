@@ -17,72 +17,72 @@
       :noCloseButton="true"
       @close="closeModalAndResetQuiz"
     >
-    <transition name="fade" mode="out-in">
-      <div v-if="questionStage" key="questions" class="text-center mx-auto">
-        <!-- <div v-for="question in quiz.questions"> -->
-        <transition name="fade" mode="out-in">
-          <Question
-            :key="questionIndex"
-            :showReviewText="showReviewText"
-            :question="quiz.questions[questionIndex].text"
-            :reviewText="quiz.questions[questionIndex].theMoreYouKnow"
-            :answers="quiz.questions[questionIndex].answers"
-            v-on:correctAnswer="correctAnswer"
-            v-on:wrongAnswer="wrongAnswer"
-          >
-            <template
-              v-slot="{
-                question,
-                answers,
-                handleAnswer,
-                showReviewText,
-                reviewText,
-                isRight
-              }"
+      <transition name="fade" mode="out-in">
+        <div v-if="questionStage" key="questions" class="text-center mx-auto">
+          <!-- <div v-for="question in quiz.questions"> -->
+          <transition name="fade" mode="out-in">
+            <Question
+              :key="questionIndex"
+              :showReviewText="showReviewText"
+              :question="quiz.questions[questionIndex].text"
+              :reviewText="quiz.questions[questionIndex].theMoreYouKnow"
+              :answers="quiz.questions[questionIndex].answers"
+              v-on:correctAnswer="correctAnswer"
+              v-on:wrongAnswer="wrongAnswer"
             >
-              <div class="question">
-                <p class="font-bold">{{ question }}</p>
-                <transition name="fade-fast" mode="out-in">
-                  <div
-                    v-if="showReviewText"
-                    :class="[
-                      isRight ? 'bg-green-lightest' : 'bg-red-lightest',
-                      'text-center',
-                      'text-sm',
-                      'h-16',
-                      'p-2',
-                      'm-2',
-                      'rounded'
-                    ]"
-                    key="feedback"
-                  >
-                    <strong>{{ isRight ? "Nice!" : "Sorry!" }}</strong>
-                    {{ reviewText }}
-                  </div>
-                  <div
-                    v-if="!showReviewText"
-                    class="answer-choices flex flex-wrap justify-center"
-                    key="answers"
-                  >
-                    <button
-                      v-for="(answer, index) in answers"
-                      :key="index"
-                      @click="handleAnswer(index)"
-                      class="p-2 m-2 border rounded border-blue-darker"
+              <template
+                v-slot="{
+                  question,
+                  answers,
+                  handleAnswer,
+                  showReviewText,
+                  reviewText,
+                  isRight
+                }"
+              >
+                <div class="question">
+                  <p class="font-bold">{{ question }}</p>
+                  <transition name="fade-fast" mode="out-in">
+                    <div
+                      v-if="showReviewText"
+                      :class="[
+                        isRight ? 'bg-green-lightest' : 'bg-red-lightest',
+                        'text-center',
+                        'text-sm',
+                        'h-16',
+                        'p-2',
+                        'm-2',
+                        'rounded'
+                      ]"
+                      key="feedback"
                     >
-                      {{ answer.text }}
+                      <strong>{{ isRight ? "Nice!" : "Sorry!" }}</strong>
+                      {{ reviewText }}
+                    </div>
+                    <div
+                      v-if="!showReviewText"
+                      class="answer-choices flex flex-wrap justify-center"
+                      key="answers"
+                    >
+                      <button
+                        v-for="(answer, index) in answers"
+                        :key="index"
+                        @click="handleAnswer(index)"
+                        class="p-2 m-2 border rounded border-blue-darker"
+                      >
+                        {{ answer.text }}
+                      </button>
+                    </div>
+                  </transition>
+                  <div v-if="showReviewText">
+                    <button @click="nextQuestion" class="border rounded p-2 m-2">
+                      Next ->
                     </button>
                   </div>
-                </transition>
-                <div v-if="showReviewText">
-                  <button @click="nextQuestion" class="border rounded p-2 m-2">
-                    Next ->
-                  </button>
                 </div>
-              </div>
-            </template>
-          </Question>
-        </transition>
+              </template>
+            </Question>
+          </transition>
         </div>
 
         <div v-if="resultStage" key="results" class="text-center mx-auto">
