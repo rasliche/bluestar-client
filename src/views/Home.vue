@@ -14,7 +14,17 @@
     </section>
     <button @click="setAlert({ type: 'warn', text: 'info you should know!'})">Make alert</button>
     <button @click="showModal = true">Show Modal</button>
-    <Modal v-show="showModal" @close="showModal = false"></Modal>
+    <Modal 
+      :show="showModal" 
+      @close="showModal = false"
+    >
+      <slot name="heading">
+        <h1 class="text-center text-2xl text-blue-darkest mb-4">Notice you've just have to see!</h1>
+      </slot>
+      <slot>
+        <p class="text-center text-grey-darkest">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut quasi tempore eveniet ex doloribus, ipsam dolores nulla aut dolore minima delectus illum itaque nihil ab beatae sapiente. Consequatur, quidem omnis.</p>
+      </slot>
+    </Modal>
   </div>
 </template>
 
@@ -36,7 +46,7 @@ export default {
   },
   data() {
     return {
-      showModal: false,
+      showModal: true,
       currentComponent: 'Login'
     }
   },
