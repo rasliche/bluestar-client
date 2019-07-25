@@ -8,6 +8,7 @@
 
     <AppFooter id="foot" />
 
+    <portal-target name="modals"></portal-target>
     <transition name="alert-slide">
       <BSFlashMessage v-if="type" :type="type" :text="text"></BSFlashMessage>
     </transition>
