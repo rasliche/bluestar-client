@@ -1,9 +1,14 @@
 <template>
-<div class="fixed pin p-8" style="background-color: rgba(0, 0, 0, 0.5);" v-show="show">
-    <div class="mx-auto mt-8 p-2 rounded-lg bg-white max-w-xl">
-        <h1>Notice you've just have to see!</h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut quasi tempore eveniet ex doloribus, ipsam dolores nulla aut dolore minima delectus illum itaque nihil ab beatae sapiente. Consequatur, quidem omnis.</p>
-        <slot></slot>
+<div class="fixed pin p-8" style="background-color: rgba(0, 0, 0, 0.6);" v-show="show">
+    <div class="mx-auto mt-8 p-2 rounded-lg bg-white max-w-xl shadow-lg">
+        <slot name="heading">
+            <h1 class="text-center text-2xl text-blue-darkest mb-4">Notice you've just have to see!</h1>
+        </slot>
+
+        <slot name="default">
+            <p class="text-center text-grey-darkest">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut quasi tempore eveniet ex doloribus, ipsam dolores nulla aut dolore minima delectus illum itaque nihil ab beatae sapiente. Consequatur, quidem omnis.</p>
+        </slot>
+        
         <div class="text-center">
             <button @click="dismiss" class="bg-blue-light px-4 py-2 border-blue border-2 rounded-lg">Close</button>
         </div>
@@ -39,7 +44,7 @@ export default {
             if (e.key === 'Escape' && this.show) {
                 this.dismiss()
             }
-    }
+        }
         document.addEventListener('keydown', escapeHandler)
         this.$once('hook:destroyed', () => {
             document.removeEventListener('keydown', escapeHandler)
