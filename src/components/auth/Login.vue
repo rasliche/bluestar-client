@@ -46,7 +46,6 @@
 </template>
 
 <script>
-// import Alert from '@/components/Alert.vue'
 import { required, } from 'vuelidate/lib/validators'
 import Api from '@/services/Api'
 
@@ -72,7 +71,7 @@ export default {
               required,
           },
           password: {
-            required,
+              required,
           }
       }
   },
