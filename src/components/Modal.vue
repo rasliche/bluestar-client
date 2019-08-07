@@ -1,15 +1,17 @@
 <template>
-<div class="fixed pin p-8" style="background-color: rgba(0, 0, 0, 0.6);" v-show="show">
-    <div class="mx-auto mt-8 p-2 rounded-lg bg-white max-w-xl shadow-lg">
-        <slot name="heading"></slot>
+<portal to="modals">
+    <div class="fixed pin p-8" style="background-color: rgba(0, 0, 0, 0.6);" v-show="show">
+        <div class="mx-auto mt-8 p-2 rounded-lg bg-white max-w-xl shadow-lg">
+            <slot name="heading"></slot>
 
-        <slot name="default"></slot>
+            <slot name="default"></slot>
 
-        <div class="text-center" v-if="!noCloseButton">
-            <button @click="dismiss" class="bg-blue-light px-4 py-2 border-blue border-2 rounded-lg">Close</button>
+            <div class="text-center" v-if="!noCloseButton">
+                <button @click="dismiss" class="bg-blue-light px-4 py-2 border-blue border-2 rounded-lg">Close</button>
+            </div>
         </div>
     </div>
-</div>
+</portal>
 </template>
 
 <script>
