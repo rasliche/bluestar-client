@@ -1,6 +1,9 @@
 const state = {
-    text: '',
-    type: null
+    alert: {
+        text: '',
+        type: null,
+    },
+    timer: null,
 }
 
 const getters = {
@@ -9,14 +12,16 @@ const getters = {
 
 const actions = {
     // Alert Stuff
-    setAlert: ({ commit }, payload) => {
+    setAlert: ({ commit, }, payload) => {
+        const timer = setTimeout(() => {
+            commit('clearAlertState')
+        }, 5000)
+
         commit('setAlertState', {
             type: payload.type,
             text: payload.text,
         })
-        setTimeout(() => {
-            commit('clearAlertState')
-        }, 5000)
+        commit('setTimerState', timer)
     },
     clearAlert: ({ commit }) => {
         commit('clearAlertState')
@@ -24,14 +29,19 @@ const actions = {
 }
 
 const mutations = {
-    clearAlertState: (state) => {
-        state.type = null
-        state.text = ''
-    },
     setAlertState: (state, { type, text }) => {
-        state.type = type
-        state.text = text
+        state.alert.type = type
+        state.alert.text = text
+    },
+    setTimerState: (state, timer) => {
+        clearTimeout(state.timer)
+        state.timer = timer
       },
+    clearAlertState: (state) => {
+        state.alert.type = null
+        state.alert.text = ''
+        clearTimeout(state.timer)
+    },
 }
 
 export default {
