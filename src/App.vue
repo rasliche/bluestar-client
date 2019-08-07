@@ -10,7 +10,7 @@
 
     <portal-target name="modals"></portal-target>
     <transition name="alert-slide">
-      <BSFlashMessage v-if="type" :type="type" :text="text"></BSFlashMessage>
+      <Alert v-if="alert.type" :type="alert.type" :text="alert.text"></Alert>
     </transition>
   </div>
 </template>
@@ -19,6 +19,7 @@
 import AppNav from "@/components/AppNav.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
+import Alert from "@/components/Alert.vue";
 import { createNamespacedHelpers } from 'vuex'
 const { mapState } = createNamespacedHelpers('alert')
 
@@ -27,12 +28,13 @@ export default {
     AppNav,
     AppHeader,
     AppFooter,
+    Alert
   },
   created() {
-    this.$store.dispatch("tryAutoLogin");
+    this.$store.dispatch("auth/tryAutoLogin");
   },
   computed: {
-    ...mapState(['type', 'text'])
+    ...mapState(['alert', 'timer'])
   }
 };
 </script>
