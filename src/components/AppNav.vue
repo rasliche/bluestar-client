@@ -45,8 +45,8 @@ export default {
     }),
   },
   methods: {
-    ...mapActions({
-      logout: "logout"
+    ...mapActions('auth', {
+      logout: "logoutUser"
     })
   }
 };
