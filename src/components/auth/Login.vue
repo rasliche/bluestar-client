@@ -48,6 +48,7 @@
 <script>
 import { required, } from 'vuelidate/lib/validators'
 import Api from '@/services/Api'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -76,25 +77,32 @@ export default {
       }
   },
   methods: {
+    ...mapActions('alert', ['setAlert']),
+    ...mapActions('user', ['setCurrentUser']),
+    ...mapActions('auth', ['authUser']),
     async submitLoginForm() {
       this.formTouched = !this.$v.formResponses.$anyDirty
       this.errors = this.$v.formResponses.$anyError
       this.uiState = 'submit clicked'
       if (this.errors === false && this.formTouched === false) {
-      const authData = {
-        email: this.formResponses.email,
-        password: this.formResponses.password
-      };
+        const authData = {
+          email: this.formResponses.email,
+          password: this.formResponses.password
+        };
         this.uiState = 'form submitted'
-      try {
-        const response = await Api.post("/auth/login", authData);
-        // const { data, message } = await Api.post("/auth/login", authData);
-        // if (message) { this.formFeedback = message}
-        console.log(response)
-      } catch (err) {
-        console.log(err)
+        try {
+          const { data } = await Api.post("/auth/login", authData);
+          this.setCurrentUser(data.user)
+          this.authUser(data.token)
+          this.setAlert({ 
+            type: 'success', 
+            text: 'You have been logged in.'
+          })
+        } catch (err) {
+          console.warn(err)
+
+        }
       }
-      // this.$store.dispatch("login", authData);
     }
   }
 };
