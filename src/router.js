@@ -28,7 +28,7 @@ export default new Router({
       path: "/me",
       name: "me",
       beforeEnter(to, from, next) {
-        if (store.state.token) {
+        if (store.state.auth.token) {
           next();
         } else {
           next("/");
@@ -96,9 +96,10 @@ export default new Router({
     {
       path: "/admin",
       beforeEnter (to, from, next) {
-        if (store.getters.isAuthenticated && store.getters.isAdmin) {
+        if (store.getters['auth/isAuthenticated'] && store.getters['user/isAdmin']) {
           next()
         } else {
+          console.log('failed to navigate')
           next('/login')
         }
       },
