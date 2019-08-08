@@ -15,9 +15,31 @@ const getters = {
 }
 
 const mutations = {
+    setUser: (state, user) => {
+        state.userId = user._id;
+        state.name = user.name;
+        state.email = user.email;
+        state.operators = user.operators;
+        state.lessonScores = user.lessonScores;
+        state.isAdmin = user.isAdmin;
+      },
+      clearUser: (state) => {
+        state.userId = null;
+        state.name = "";
+        state.email = "";
+        state.operators = [];
+        state.lessonScores = [];
+        state.isAdmin = false;
+      },
 }
 
 const actions = {
+    setCurrentUser: ({ commit }, user) => {
+        commit('setUser', user)
+    },
+    clearCurrentUser: ({ commit }) => {
+        commit('clearUser')
+    }
 }
 
 export default {
