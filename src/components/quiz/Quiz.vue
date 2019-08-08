@@ -12,11 +12,6 @@
         Start Quiz
       </button>
     </div>
-    <Modal 
-      :show="quizModalOpen"
-      :noCloseButton="true"
-      @close="closeModalAndResetQuiz"
-    >
       <transition name="fade" mode="out-in">
         <div v-if="questionStage" key="questions" class="text-center mx-auto">
           <!-- <div v-for="question in quiz.questions"> -->
@@ -42,7 +37,7 @@
               >
                 <div class="question">
                   <p class="font-bold">{{ question }}</p>
-                  <transition name="fade-fast" mode="out-in">
+                  <transition-group name="fade-fast" mode="out-in">
                     <div
                       v-if="showReviewText"
                       :class="[
@@ -73,7 +68,7 @@
                         {{ answer.text }}
                       </button>
                     </div>
-                  </transition>
+                  </transition-group>
                   <div v-if="showReviewText">
                     <button @click="nextQuestion" class="border rounded p-2 m-2">
                       Next ->
@@ -113,14 +108,13 @@
             Retake the quiz.
           </button>
           <button
-            @click="closeModalAndResetQuiz"
+            @click="quitQuiz"
             class="border border-yellow bg-yellow-light p-2 m-2 rounded"
           >
             Review the content.
           </button>
         </div>
       </transition>
-    </Modal>
         <!-- </div> -->
   </div>
 </template>
@@ -128,18 +122,18 @@
 <script>
 import { mapActions } from "vuex";
 import Question from "./Question.vue";
-import Modal from "../Modal.vue";
+// import Modal from "../Modal.vue";
 
 export default {
   name: "quiz",
   components: {
     Question,
-    Modal
+    // Modal
   },
   props: ["quiz", "lessonName", "lessonSlug"],
   data() {
     return {
-      quizModalOpen: false,
+      // quizModalOpen: false,
       introStage: true,
       questionStage: false,
       resultStage: false,
@@ -191,14 +185,14 @@ export default {
         score: score
       });
     },
-    closeModalAndResetQuiz: function() {
-      this.quizModalOpen = false;
+    quitQuiz: function() {
       this.introStage = true;
       this.questionStage = false;
       this.resultStage = false;
       this.questionIndex = 0;
       this.correct = 0;
       this.showReviewText = false;
+      this.$emit('close');
     }
   }
 };
