@@ -77,10 +77,15 @@ export default {
   },
   methods: {
     async submitLoginForm() {
+      this.formTouched = !this.$v.formResponses.$anyDirty
+      this.errors = this.$v.formResponses.$anyError
+      this.uiState = 'submit clicked'
+      if (this.errors === false && this.formTouched === false) {
       const authData = {
         email: this.formResponses.email,
         password: this.formResponses.password
       };
+        this.uiState = 'form submitted'
       try {
         const response = await Api.post("/auth/login", authData);
         // const { data, message } = await Api.post("/auth/login", authData);
