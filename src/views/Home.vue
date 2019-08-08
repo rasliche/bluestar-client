@@ -12,9 +12,9 @@
       <p class="text-xs pt-4" v-if="currentComponent === 'Login'">Do you need to <span class="underline cursor-pointer" @click="currentComponent = 'Register'">register</span> first?</p>
       <p class="text-xs pt-4" v-else>If you are registered, you can just <span class="underline cursor-pointer" @click="currentComponent = 'Login'">login</span>.</p>
     </section>
-    <button @click="setAlert({ type: 'warn', text: 'info you should know!'})">Make alert</button>
-    <!-- <button @click="showModal = true">Show Modal</button> -->
-    <!-- <Modal 
+    <!-- <button @click="setAlert({ type: 'warn', text: 'info you should know!'})">Make alert</button> -->
+    <!-- <button @click="showModal = true">Show Modal</button>
+    <Modal 
       :show="showModal" 
       @close="showModal = false"
     >
@@ -46,6 +46,7 @@ export default {
   },
   data() {
     return {
+      // showModal: false,
       currentComponent: 'Login'
     }
   },
