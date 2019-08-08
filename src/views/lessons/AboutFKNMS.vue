@@ -147,7 +147,6 @@
           @close="quizMode = false"
           >
             <Quiz
-              
               :quiz="quiz"
               :lessonName="lessonName"
               :lessonSlug="lessonSlug"
