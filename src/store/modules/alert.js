@@ -41,6 +41,7 @@ const mutations = {
         state.alert.type = null
         state.alert.text = ''
         clearTimeout(state.timer)
+        state.timer = null
     },
 }
 
