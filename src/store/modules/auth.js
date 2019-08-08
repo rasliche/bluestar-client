@@ -11,33 +11,11 @@ const getters = {
 }
 
 const mutations = {
-    authUser: (state, userData) => {
-        const { token, user } = userData;
-        state.userId = user._id;
+  setToken: (state, token) => {
         state.token = token;
-        state.name = user.name;
-        state.email = user.email;
-        state.operators = user.operators;
-        state.lessonScores = user.lessonScores;
-        state.isAdmin = user.isAdmin;
       },
-      setUser: (state, user) => {
-        state.userId = user._id;
-        state.name = user.name;
-        state.email = user.email;
-        state.operators = user.operators;
-        state.lessonScores = user.lessonScores;
-        state.isAdmin = user.isAdmin;
-      },
-      clearAuth: state => {
+  clearToken: state => {
         state.token = null;
-        state.userId = null;
-        state.name = "";
-        state.email = "";
-        state.operators = [];
-        state.lessonScores = [];
-        state.isAdmin = false;
-  
       },
 }
 
