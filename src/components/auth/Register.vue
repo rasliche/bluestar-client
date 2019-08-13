@@ -1,5 +1,5 @@
 <template>
-<div class="border-2 rounded w-1/2 mx-auto text-center">
+<div class="border-2 rounded w-1/2">
   <h1 class="">Register</h1>
   <form>
     <div>
