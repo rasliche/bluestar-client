@@ -77,9 +77,12 @@ export default new Router({
     // },
     {
       path: "/training",
-      beforeEnter: (to, from, next) => {
-        console.log("Entered Training Route");
-        next();
+      beforeEnter (to, from, next) {
+        if (store.getters['auth/isAuthenticated']) {
+          next()
+        } else {
+          next('/login')
+        }
       },
       component: () =>
         import(/* webpackChunkName: "training" */ "./views/Training.vue"),
