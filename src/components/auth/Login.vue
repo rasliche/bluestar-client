@@ -2,7 +2,7 @@
   <div class="border-2 rounded w-1/2">
     <h1 class="">Login</h1>
     <form>
-      <div class="m-2">
+      <section class="relative pb-6">
         <label for="femail" class="text-blue-darker pr-2">Email</label>
         <input
           type="text"
@@ -12,11 +12,11 @@
           autocomplete="section-login email"
           class="border-blue-lighter border-b-2 pl-2"
         />
-        <p>
+        <p v-if="errors" class="absolute">
           <span class="text-red text-sm" v-if="!$v.formResponses.email.required">this field is required</span>
         </p>
-      </div>
-      <div>
+      </section>
+      <section class="relative pb-6">
         <label for="fpassword" class="text-blue-darker pr-2">Password</label>
         <input
           type="password"
@@ -26,21 +26,21 @@
           autocomplete="section-login current-password"
           class="border-blue-lighter border-b-2 pl-2"
         />
-        <p>
+        <p v-if="errors" class="absolute">
           <span class="text-red text-sm" v-if="!$v.formResponses.password.required">this field is required</span>
         </p>
-      </div>
-      <div>
+      </section>
+      <section class="relative pb-6">
         <!-- <p v-if="formFeedback">{{ formFeedback }}</p> -->
-      </div>
-      <button @click.prevent="submitLoginForm" class="border-2 m-2 p-2 rounded border-blue mx-auto">
-        Login
-        <!-- <Alert 
-          v-if="loginSuccess"
-          type="success" 
-          text="Successfully logged in!">
-        </Alert> -->
-      </button>
+        <button @click.prevent="submitLoginForm" class="border-2 m-2 p-2 rounded border-blue mx-auto">
+          Login
+          <!-- <Alert 
+            v-if="loginSuccess"
+            type="success" 
+            text="Successfully logged in!">
+          </Alert> -->
+        </button>
+      </section>
     </form>
   </div>
 </template>

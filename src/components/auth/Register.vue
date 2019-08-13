@@ -2,22 +2,22 @@
 <div class="border-2 rounded w-1/2">
   <h1 class="">Register</h1>
   <form>
-    <div>
+    <section class="relative pb-6">
       <label for="fname" class="text-blue-darker pr-2">Name</label>
       <input type="text" name="fname" id="fname" v-model.lazy="$v.formResponses.name.$model" class="border-blue-lighter border-b-2 pl-2">
-      <p>
+      <p v-if="errors" class="absolute">
         <span class="text-red text-sm" v-if="!$v.formResponses.name.required">this field is required</span>
       </p>
-    </div>
-    <div>
+    </section>
+    <section class="relative pb-6">
       <label for="femail" class="text-blue-darker pr-2">Email</label>
       <input type="text" name="femail" id="femail" v-model.lazy="$v.formResponses.email.$model" class="pl-2 border-b-2 border-blue-lighter">
-      <p>
+      <p v-if="errors">
         <span class="text-red text-sm" v-if="!$v.formResponses.email.required">this field is required</span>
         <span class="text-red text-sm" v-if="!$v.formResponses.email.minLength">Field must have at least {{ $v.formResponses.email.$params.minLength.min }} characters.</span>
       </p>
-    </div>
-    <div>
+    </section>
+    <section class="relative pb-6">
       <label for="fpassword1" class="text-blue-darker pr-2">Password</label>
       <input 
         type="password" 
@@ -26,12 +26,12 @@
         v-model.lazy="$v.formResponses.password1.$model"
         autocomplete="section-register new-password" 
         class="pl-2 border-b-2 border-blue-lighter">
-      <p>
+      <p v-if="errors">
         <span class="text-red text-sm" v-if="!$v.formResponses.password1.required">this field is required</span>
         <span class="text-red text-sm" v-if="!$v.formResponses.password1.minLength">Field must have at least {{ $v.formResponses.password1.$params.minLength.min }} characters.</span>
       </p>
-    </div>
-    <div>
+    </section>
+    <section class="relative pb-6">
       <label for="fpassword2" class="text-blue-darker pr-2">Retype Password</label>
       <input 
         type="password" 
@@ -40,11 +40,11 @@
         v-model.lazy="$v.formResponses.password2.$model" 
         autocomplete="section-register new-password"
         class="pl-2 border-b-2 border-blue-lighter">
-      <p>
+      <p v-if="errors">
         <span class="text-red text-sm" v-if="!$v.formResponses.password2.required">this field is required</span>
         <span class="text-red text-sm" v-if="!$v.formResponses.password2.sameAsPassword">passwords must match</span>
       </p>
-    </div>
+    </section>
         <!-- SHOP SEARCH MULTI SELECT -->
         <!-- <label for="shopChoice" class="w-1/2 text-right pr-2">Choose a Shop to Join:</label>
         <select name="shopChoice" id="shopChoice" class="w-1/2" v-model="shopChoice">
@@ -54,14 +54,11 @@
         <label for="shopPassword" class="w-1/2 text-right pr-2">Shop Password:</label>
         <input type="text" name="shopPassword" id="shopPassword" v-model="shopPassword" class="w-1/2"> -->
 
-    <button
-      @click.prevent="submitRegisterForm"
-      class="border-2 m-2 p-2 rounded border-blue mx-auto"
-    >
+    <button @click.prevent="submitRegisterForm" class="border-2 m-2 p-2 rounded border-blue mx-auto">
       Register
     </button>
   </form>
-  {{ uiState }}
+  <!-- {{ uiState }} -->
 </div>
 </template>
 
@@ -128,12 +125,11 @@ export default {
                 }
                 this.uiState = 'form submitted'
                 try {
-                    
+                    console.log("send form data to register here")
                 } catch (error) {
-                    
+                  console.log('got here due to an error: ', error)
                 }
             }
-            console.log(formData)
             // this.$store.dispatch('register', formData)
         }
     }
