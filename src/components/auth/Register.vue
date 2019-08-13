@@ -1,45 +1,66 @@
 <template>
 <div class="border-2 rounded w-1/2">
-  <h1 class="">Register</h1>
+  <h1 class="text-center">Register</h1>
   <form>
-    <section class="relative pb-6">
-      <label for="fname" class="text-blue-darker pr-2">Name</label>
-      <input type="text" name="fname" id="fname" v-model.lazy="$v.formResponses.name.$model" class="border-blue-lighter border-b-2 pl-2">
+    <section class="relative px-4 pb-6 flex">
+      <label 
+        for="fname" 
+        class="text-blue-darker w-1/3 text-right pr-4"
+        >Name</label>
+      <input 
+        type="text" 
+        name="fname" 
+        id="fname" 
+        v-model.lazy="$v.formResponses.name.$model" 
+        class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute">
         <span class="text-red text-sm" v-if="!$v.formResponses.name.required">this field is required</span>
       </p>
     </section>
-    <section class="relative pb-6">
-      <label for="femail" class="text-blue-darker pr-2">Email</label>
-      <input type="text" name="femail" id="femail" v-model.lazy="$v.formResponses.email.$model" class="pl-2 border-b-2 border-blue-lighter">
+
+    <section class="relative px-4 pb-6 flex">
+      <label 
+        for="femail" 
+        class="text-blue-darker w-1/3 text-right pr-4"
+        >Email</label>
+      <input type="text" name="femail" id="femail" v-model.lazy="$v.formResponses.email.$model" 
+        class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors">
         <span class="text-red text-sm" v-if="!$v.formResponses.email.required">this field is required</span>
         <span class="text-red text-sm" v-if="!$v.formResponses.email.minLength">Field must have at least {{ $v.formResponses.email.$params.minLength.min }} characters.</span>
       </p>
     </section>
-    <section class="relative pb-6">
-      <label for="fpassword1" class="text-blue-darker pr-2">Password</label>
+
+    <section class="relative px-4 pb-6 flex">
+      <label 
+        for="fpassword1" 
+        class="text-blue-darker w-1/3 text-right pr-4"
+        >Password</label>
       <input 
         type="password" 
         name="fpassword1" 
         id="fpassword1" 
         v-model.lazy="$v.formResponses.password1.$model"
         autocomplete="section-register new-password" 
-        class="pl-2 border-b-2 border-blue-lighter">
+        class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors">
         <span class="text-red text-sm" v-if="!$v.formResponses.password1.required">this field is required</span>
         <span class="text-red text-sm" v-if="!$v.formResponses.password1.minLength">Field must have at least {{ $v.formResponses.password1.$params.minLength.min }} characters.</span>
       </p>
     </section>
-    <section class="relative pb-6">
-      <label for="fpassword2" class="text-blue-darker pr-2">Retype Password</label>
+
+    <section class="relative px-4 pb-6 flex">
+      <label 
+        for="fpassword2" 
+        class="text-blue-darker w-1/3 text-right pr-4"
+        >Retype Password</label>
       <input 
         type="password" 
         name="fpassword2" 
         id="fpassword2" 
         v-model.lazy="$v.formResponses.password2.$model" 
         autocomplete="section-register new-password"
-        class="pl-2 border-b-2 border-blue-lighter">
+        class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors">
         <span class="text-red text-sm" v-if="!$v.formResponses.password2.required">this field is required</span>
         <span class="text-red text-sm" v-if="!$v.formResponses.password2.sameAsPassword">passwords must match</span>
@@ -54,9 +75,11 @@
         <label for="shopPassword" class="w-1/2 text-right pr-2">Shop Password:</label>
         <input type="text" name="shopPassword" id="shopPassword" v-model="shopPassword" class="w-1/2"> -->
 
-    <button @click.prevent="submitRegisterForm" class="border-2 m-2 p-2 rounded border-blue mx-auto">
-      Register
-    </button>
+    <section class="relative px-4 pb-6 flex">
+      <button @click.prevent="submitRegisterForm" class="border-2 p-1 rounded border-blue mx-auto">
+        Register
+      </button>
+    </section>
   </form>
   <!-- {{ uiState }} -->
 </div>

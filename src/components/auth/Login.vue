@@ -1,44 +1,43 @@
 <template>
   <div class="border-2 rounded w-1/2">
-    <h1 class="">Login</h1>
+    <h1 class="text-center">Login</h1>
     <form>
-      <section class="relative pb-6">
-        <label for="femail" class="text-blue-darker pr-2">Email</label>
-        <input
-          type="text"
-          name="femail"
-          id="femail"
-          v-model.lazy="$v.formResponses.email.$model"
-          autocomplete="section-login email"
-          class="border-blue-lighter border-b-2 pl-2"
+      <section class="relative px-4 pb-6 flex">
+        <label 
+          for="femail" 
+          class="text-blue-darker w-1/3 text-right pr-4"
+        >Email</label>
+        <input 
+          type="text" 
+          name="femail" 
+          id="femail" 
+          v-model.lazy="$v.formResponses.email.$model" 
+          autocomplete="section-login email" 
+          class="border-blue-lighter border-b-2 pl-2 w-2/3"
         />
         <p v-if="errors" class="absolute">
           <span class="text-red text-sm" v-if="!$v.formResponses.email.required">this field is required</span>
         </p>
       </section>
-      <section class="relative pb-6">
-        <label for="fpassword" class="text-blue-darker pr-2">Password</label>
+
+      <section class="relative px-4 pb-6 flex">
+        <label for="fpassword" class="text-blue-darker w-1/3 text-right pr-4">Password</label>
         <input
           type="password"
           name="fpassword"
           id="fpassword"
           v-model.lazy="$v.formResponses.password.$model"
           autocomplete="section-login current-password"
-          class="border-blue-lighter border-b-2 pl-2"
+          class="border-blue-lighter border-b-2 pl-2 w-2/3"
         />
         <p v-if="errors" class="absolute">
           <span class="text-red text-sm" v-if="!$v.formResponses.password.required">this field is required</span>
         </p>
       </section>
-      <section class="relative pb-6">
-        <!-- <p v-if="formFeedback">{{ formFeedback }}</p> -->
-        <button @click.prevent="submitLoginForm" class="border-2 m-2 p-2 rounded border-blue mx-auto">
+
+      <section class="relative px-4 pb-6 flex">
+        <button @click.prevent="submitLoginForm" class="border-2 p-1 rounded border-blue mx-auto">
           Login
-          <!-- <Alert 
-            v-if="loginSuccess"
-            type="success" 
-            text="Successfully logged in!">
-          </Alert> -->
         </button>
       </section>
     </form>
