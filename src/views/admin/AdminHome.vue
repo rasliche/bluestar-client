@@ -11,7 +11,7 @@
       <section>
         <h3>Operators</h3>
         <CreateOperator />
-        <!-- <ul v-if="operators.length">
+        <ul v-if="operators.length">
           <router-link
             tag="li"
             v-for="operator in operators"
@@ -20,7 +20,7 @@
             >{{ operator.name }}</router-link
           >
         </ul>
-        <p v-else>No operators yet.</p> -->
+        <p v-else>No operators yet.</p>
       </section>
 
       <section>
@@ -78,26 +78,26 @@ export default {
   },
   data() {
     return {
-      // users: [],
-      // operators: [],
-      // lessons: [],
-      // posts: [],
-      // quizzes: []
+      users: [],
+      operators: [],
+      lessons: [],
+      posts: [],
+      quizzes: []
     };
   },
   methods: {},
-  // async created() {
-  //   const operators = await Api.get("/operators");
-  //   const users = await Api.get("/users");
-  //   const lessons = await Api.get("/lessons");
-  //   const posts = await Api.get("/posts");
-  //   const quizzes = await Api.get("/quizzes");
-  //   this.operators = operators.data;
-  //   this.users = users.data;
-  //   this.lessons = lessons.data;
-  //   this.posts = posts.data;
-  //   this.quizzes = quizzes.data;
-  //   console.log("Admin Home Mounted");
-  // }
+  async created() {
+    const operators = await Api.get("/operators");
+    // const users = await Api.get("/users");
+    // const lessons = await Api.get("/lessons");
+    // const posts = await Api.get("/posts");
+    // const quizzes = await Api.get("/quizzes");
+    this.operators = operators.data;
+    // this.users = users.data;
+    // this.lessons = lessons.data;
+    // this.posts = posts.data;
+    // this.quizzes = quizzes.data;
+    console.log("Admin Home Mounted");
+  }
 };
 </script>
