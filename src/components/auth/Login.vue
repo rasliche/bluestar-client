@@ -41,6 +41,7 @@
         </button>
       </section>
     </form>
+    {{ formFeedback }}
   </div>
 </template>
 
@@ -90,6 +91,8 @@ export default {
         };
         this.uiState = 'form submitted'
         try {
+          const response = await Api.post("/auth/login", authData);
+          console.log(response)
           const { data } = await Api.post("/auth/login", authData);
           this.setCurrentUser(data.user)
           this.authUser(data.token)
@@ -98,8 +101,8 @@ export default {
             text: 'You have been logged in.'
           })
         } catch (err) {
-          console.warn(err)
-
+          console.log(err.message)
+          // this.formFeedback = err.message
         }
       }
     }
