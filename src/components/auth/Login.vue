@@ -100,9 +100,10 @@ export default {
             type: 'success', 
             text: 'You have been logged in.'
           })
-        } catch (err) {
-          console.log(err.message)
-          // this.formFeedback = err.message
+        } catch (error) {
+          const { message } = error.response.data
+          console.log(error.response)
+          this.formFeedback = message
         }
       }
     }
