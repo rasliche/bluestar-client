@@ -1,4 +1,13 @@
 # bluestar-client
+This project is meant to serve as the staff training and reporting portal for the Blue Star recognition program run by Florida Keys National Marine Sanctuary.
+
+## Technology Choices
+- [Vue.js](https://vuejs.org/)
+- - [Vuelidate](https://vuelidate.netlify.com/)
+- - [PortalVue](https://linusborg.github.io/portal-vue/#/)
+- [Tailwind.js](https://tailwindcss.com/)
+- [Jest](https://jestjs.io/)
+
 
 ## Project setup
 ```
