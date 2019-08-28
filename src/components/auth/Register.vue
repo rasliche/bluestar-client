@@ -1,8 +1,8 @@
 <template>
 <div class="border-2 rounded w-1/2">
-  <h1 class="text-center">Register</h1>
+  <h1 class="text-center pb-8">Register</h1>
   <form>
-    <section class="relative px-4 pb-6 flex">
+    <section class="relative px-4 pb-8 flex">
       <label 
         for="fname" 
         class="text-blue-darker w-1/3 text-right pr-4"
@@ -13,25 +13,25 @@
         id="fname" 
         v-model.lazy="$v.formResponses.name.$model" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
-      <p v-if="errors" class="absolute">
+      <p v-if="errors" class="absolute pin-b pin-x text-center">
         <span class="text-red text-sm" v-if="!$v.formResponses.name.required">this field is required</span>
       </p>
     </section>
 
-    <section class="relative px-4 pb-6 flex">
+    <section class="relative px-4 pb-8 flex">
       <label 
         for="femail" 
         class="text-blue-darker w-1/3 text-right pr-4"
         >Email</label>
       <input type="text" name="femail" id="femail" v-model.lazy="$v.formResponses.email.$model" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
-      <p v-if="errors">
+      <p v-if="errors" class="absolute pin-b pin-x text-center">
         <span class="text-red text-sm" v-if="!$v.formResponses.email.required">this field is required</span>
         <span class="text-red text-sm" v-if="!$v.formResponses.email.minLength">Field must have at least {{ $v.formResponses.email.$params.minLength.min }} characters.</span>
       </p>
     </section>
 
-    <section class="relative px-4 pb-6 flex">
+    <section class="relative px-4 pb-8 flex">
       <label 
         for="fpassword1" 
         class="text-blue-darker w-1/3 text-right pr-4"
@@ -43,17 +43,17 @@
         v-model.lazy="$v.formResponses.password1.$model"
         autocomplete="section-register new-password" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
-      <p v-if="errors">
+      <p v-if="errors" class="absolute pin-b pin-x text-center">
         <span class="text-red text-sm" v-if="!$v.formResponses.password1.required">this field is required</span>
         <span class="text-red text-sm" v-if="!$v.formResponses.password1.minLength">Field must have at least {{ $v.formResponses.password1.$params.minLength.min }} characters.</span>
       </p>
     </section>
 
-    <section class="relative px-4 pb-6 flex">
+    <section class="relative px-4 pb-8 flex">
       <label 
         for="fpassword2" 
         class="text-blue-darker w-1/3 text-right pr-4"
-        >Retype Password</label>
+        >Re-type Password</label>
       <input 
         type="password" 
         name="fpassword2" 
@@ -61,7 +61,7 @@
         v-model.lazy="$v.formResponses.password2.$model" 
         autocomplete="section-register new-password"
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
-      <p v-if="errors">
+      <p v-if="errors" class="absolute pin-b pin-x text-center">
         <span class="text-red text-sm" v-if="!$v.formResponses.password2.required">this field is required</span>
         <span class="text-red text-sm" v-if="!$v.formResponses.password2.sameAsPassword">passwords must match</span>
       </p>
@@ -81,7 +81,9 @@
       </button>
     </section>
   </form>
-  <!-- {{ uiState }} -->
+  <!-- TODO: Style this feedback -->
+  {{ formFeedback }}
+  {{ uiState }}
 </div>
 </template>
 
@@ -96,20 +98,21 @@ import {
 export default {
     name: "Register",
     data() {
-        return {
-            uiState: 'submit not clicked',
-            errors: false,
-            formTouched: true,
-            formResponses: {
-                name: null,
-                email: null,
-                password1: null,
-                password2: null,
-                // shopChoice: null,
-                // shopPassword: null,
-                // operators: []
-            }
+      return {
+        formFeedback: null,
+        uiState: 'submit not clicked',
+        errors: false,
+        formTouched: true,
+        formResponses: {
+          name: null,
+          email: null,
+          password1: null,
+          password2: null,
+          // shopChoice: null,
+          // shopPassword: null,
+          // operators: []
         }
+      }
     },
     validations: {
         formResponses: {
@@ -134,27 +137,28 @@ export default {
         }
     },
     methods: {
-        async submitRegisterForm() {
-            this.formTouched = !this.$v.formResponses.$anyDirty
-            this.errors = this.$v.formResponses.$anyError
-            this.uiState = 'submit clicked'
-            if (this.errors === false && this.formTouched === false) {
-                const formData = {
-                    name: this.formResponses.name,
-                    email: this.formResponses.email,
-                    password: this.password,
-                    // shopChoice: this.shopChoice,
-                    // shopPassword: this.shopPassword
-                }
-                this.uiState = 'form submitted'
-                try {
-                    console.log("send form data to register here")
-                } catch (error) {
-                  console.log('got here due to an error: ', error)
-                }
-            }
-            // this.$store.dispatch('register', formData)
+      async submitRegisterForm() {
+        this.formTouched = !this.$v.formResponses.$anyDirty
+        this.errors = this.$v.formResponses.$anyError
+        this.uiState = 'submit clicked'
+        if (this.errors === false && this.formTouched === false) {
+          const formData = {
+            name: this.formResponses.name,
+            email: this.formResponses.email,
+            password: this.password,
+            // shopChoice: this.shopChoice,
+            // shopPassword: this.shopPassword
+          }
+          this.uiState = 'form submitted'
+          try {
+            console.log("send form data to register here")
+            console.log(formData)
+          } catch (error) {
+            console.log('got here due to an error: ', error)
+          }
         }
+        // this.$store.dispatch('register', formData)
+      }
     }
   };
 </script>

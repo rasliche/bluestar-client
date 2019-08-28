@@ -1,8 +1,8 @@
 <template>
   <div class="border-2 rounded w-1/2">
-    <h1 class="text-center">Login</h1>
+    <h1 class="text-center pb-8">Login</h1>
     <form>
-      <section class="relative px-4 pb-6 flex">
+      <section class="relative px-4 pb-8 flex">
         <label 
           for="femail" 
           class="text-blue-darker w-1/3 text-right pr-4"
@@ -20,7 +20,7 @@
         </p>
       </section>
 
-      <section class="relative px-4 pb-6 flex">
+      <section class="relative px-4 pb-8 flex">
         <label for="fpassword" class="text-blue-darker w-1/3 text-right pr-4">Password</label>
         <input
           type="password"
@@ -43,6 +43,7 @@
     </form>
     <!-- TODO: Style this feedback -->
     {{ formFeedback }}
+    {{ uiState }}
   </div>
 </template>
 
