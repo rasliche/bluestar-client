@@ -123,7 +123,8 @@ export default new Router({
     },
     {
       path: "*",
-      redirect: "/"
-    }
+      name: "404",
+      component: () => import(/* webpackChunkName: "404" */ "./views/404.vue")
+    },
   ]
 });
