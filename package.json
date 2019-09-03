@@ -34,5 +34,8 @@
     "eslint-plugin-vue": "^5.0.0",
     "tailwindcss": "^0.7.4",
     "vue-template-compiler": "^2.6.10"
+  },
+  "gitHooks": {
+
   }
 }
