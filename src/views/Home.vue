@@ -19,17 +19,12 @@
 // @ is an alias to /src
 import Login from "@/components/auth/Login.vue";
 import Register from "@/components/auth/Register.vue";
-import Modal from '@/components/Modal.vue'
-import { createNamespacedHelpers } from 'vuex'
-
-const { mapActions } = createNamespacedHelpers('alert')
 
 export default {
   name: "home",
   components: {
     Login,
     Register,
-    Modal,
   },
   data() {
     return {
@@ -37,8 +32,5 @@ export default {
       currentComponent: 'Login'
     }
   },
-  methods: {
-    ...mapActions(['setAlert'])
-  }
 };
 </script>

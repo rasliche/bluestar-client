@@ -16,22 +16,26 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     { path: "/", name: "home", component: Home },
-    // {
-    //   path: "/login",
-    //   name: "login",
-    //   // route level code-splitting
-    //   // this generates a separate chunk (login.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import(/* webpackChunkName: "login" */ "./views/Login.vue")
-    // },
+    {
+      path: "/login",
+      name: "login",
+      // route level code-splitting
+      // this generates a separate chunk (login.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "login" */ "./views/Login.vue")
+    },
     {
       path: "/me",
       name: "me",
       beforeEnter(to, from, next) {
-        if (store.state.auth.token) {
+        if (store.getters['auth/isAuthenticated']) {
           next();
         } else {
-          next("/");
+          // store.dispatch('alert/setAlert', {
+          //   type: "error",
+          //   text: "You must be logged in to visit that page!"
+          // })
+          next("login");
         }
       },
       component: () =>
@@ -102,7 +106,6 @@ export default new Router({
         if (store.getters['auth/isAuthenticated'] && store.getters['user/isAdmin']) {
           next()
         } else {
-          console.log('failed to navigate')
           next('/login')
         }
       },
