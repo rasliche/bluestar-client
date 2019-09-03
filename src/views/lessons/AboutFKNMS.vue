@@ -4,21 +4,20 @@
       <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">
         About Florida Keys National Marine Sanctuary
       </h1>
-      <p class="pt-4 italic">
+      <p class="w-5/6 pt-4 italic mx-auto">
         Did you know that Florida Keys National Marine Sanctuary protects North
         America’s only living coral barrier reef? From beautiful reefs and lush
         kelp forests to deep-sea canyons and mysterious underwater shipwrecks,
         national marine sanctuaries located around the country protect some of
         our nation’s most unique riches.
       </p>
-      <p class="pt-4 italic">
+      <p class="w-5/6 pt-4 italic mx-auto">
         In this section, you will learn about the National Marine Sanctuary
         System, the history of Florida Keys National Marine Sanctuary, and about
         the areas and resources that the sanctuary protect.
       </p>
 
       <iframe
-        class="pt-4"
         width="560"
         height="315"
         frameborder="0"
