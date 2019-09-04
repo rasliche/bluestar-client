@@ -1,5 +1,5 @@
 # bluestar-client
-This project is meant to serve as the staff training and reporting portal for the Blue Star recognition program run by Florida Keys National Marine Sanctuary.
+This project is meant to serve as the staff training and reporting portal for the Blue Star recognition program run by Florida Keys National Marine Sanctuary. Reaches out to the [Blue Star server](https://github.com/rasliche/bluestar-server).
 
 ## Technology Choices
 - [Vue.js](https://vuejs.org/)
