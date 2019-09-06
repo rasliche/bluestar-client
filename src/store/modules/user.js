@@ -11,7 +11,12 @@ const state = {
 }
 
 const getters = {
-    isAdmin: state => state.isAdmin === true,
+    userId: state => state.userId,
+    name: state => state.name,
+    email: state => state.email,
+    operators: state => state.operators,
+    lessonScores: state => state.lessonScores,
+    isAdmin: state => state.isAdmin,
 }
 
 const mutations = {
