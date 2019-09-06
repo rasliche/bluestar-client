@@ -151,7 +151,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["submitLessonScore"]),
+    ...mapActions('user', ["submitLessonScore"]),
     startQuiz: function() {
       this.quizModalOpen = true;
       this.correct = 0;
