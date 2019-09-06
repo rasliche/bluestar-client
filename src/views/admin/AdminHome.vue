@@ -3,8 +3,8 @@
     <h1>Admin Dashboard</h1>
     <nav>
       Do we need a nav here?
-      <!-- <router-link :to="{ name: 'operatorcreate' }">Create Operator</router-link> -->
-      <!-- <router-link :to="{ name: 'lessoncreate' }">Create Lesson</router-link>
+      <!-- <router-link :to="{ name: 'operatorcreate' }">Create Operator</router-link>
+      <router-link :to="{ name: 'lessoncreate' }">Create Lesson</router-link>
       <router-link :to="{ name: 'quizcreate' }">Create Quiz</router-link> -->
     </nav>
     <div>
