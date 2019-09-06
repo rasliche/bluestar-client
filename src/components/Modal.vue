@@ -7,7 +7,10 @@
             <slot name="default"></slot>
 
             <div class="text-center" v-if="!noCloseButton">
-                <button @click="dismiss" class="bg-blue-light px-4 py-2 border-blue border-2 rounded-lg">Close</button>
+                <slot name="buttons"></slot>
+                <button @click="cancel" class="bg-blue-light px-4 py-2 border-blue border-2 rounded-lg">
+                    Close
+                </button>
             </div>
         </div>
     </div>
@@ -22,7 +25,7 @@ export default {
         noCloseButton: { default: false },
     },
     methods: {
-        dismiss() {
+        cancel() {
             this.$emit('close')
         }
     },
@@ -41,7 +44,7 @@ export default {
     created() {
         const escapeHandler = (e) => {
             if (e.key === 'Escape' && this.show) {
-                this.dismiss()
+                this.cancel()
             }
         }
         document.addEventListener('keydown', escapeHandler)
