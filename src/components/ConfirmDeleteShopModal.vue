@@ -11,17 +11,19 @@
 
 <script>
 import Modal from '@/components/Modal.vue'
+import Api from '@/services/Api.js'
 
 export default {
     components: {
         Modal,
     },
-    props: ['show', 'shopId', 'operator'],
+    props: ['show', 'operator'],
     methods: {
         cancel() {
             this.$emit('close')
         },
-        deleteOperator() {
+        async deleteOperator() {
+            await Api.delete(`/operators/${this.operator._id}`)
             console.log("Baleted.")
             this.cancel()
         }
