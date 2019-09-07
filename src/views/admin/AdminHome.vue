@@ -12,13 +12,21 @@
         <h3>Operators</h3>
         <CreateOperator />
         <ul v-if="operators.length">
-          <router-link
-            tag="li"
-            v-for="operator in operators"
-            :key="operator._id"
-            :to="{ name: 'operator', params: { slug: operator.slug } }"
-            >{{ operator.name }}</router-link
-          >
+          <li v-for="operator in operators" :key="operator._id">
+            <router-link
+              :to="{ name: 'operator', params: { slug: operator.slug } }">
+                {{ operator.name }}
+            </router-link>
+            <button @click="confirmDeleteModalOpen = true">
+                Delete Shop
+                <ConfirmDeleteShopModal 
+                :show="confirmDeleteModalOpen" 
+                @close="confirmDeleteModalOpen = false"
+                :operator="operator">
+                </ConfirmDeleteShopModal>
+            </button>
+
+          </li>
         </ul>
         <p v-else>No operators yet.</p>
       </section>
@@ -69,15 +77,18 @@
 import Api from "../../services/Api";
 import UsersList from "@/components/UsersList.vue";
 import CreateOperator from "@/components/CreateOperator.vue";
+import ConfirmDeleteShopModal from "@/components/ConfirmDeleteShopModal.vue";
 
 export default {
   name: "home",
   components: {
     UsersList,
-    CreateOperator
+    CreateOperator,
+    ConfirmDeleteShopModal
   },
   data() {
     return {
+      confirmDeleteModalOpen: false,
       users: [],
       operators: [],
       lessons: [],
@@ -87,12 +98,12 @@ export default {
   },
   methods: {},
   async created() {
-    const operators = await Api.get("/operators");
+    const { data } = await Api.get("/operators");
     // const users = await Api.get("/users");
     // const lessons = await Api.get("/lessons");
     // const posts = await Api.get("/posts");
     // const quizzes = await Api.get("/quizzes");
-    this.operators = operators.data;
+    this.operators = data;
     // this.users = users.data;
     // this.lessons = lessons.data;
     // this.posts = posts.data;
