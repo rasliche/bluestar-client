@@ -10,7 +10,16 @@
     <div>
       <section >
         <h3>Operators</h3>
-        <CreateOperator @operatorCreated="fetchOperators"/>
+        <button 
+          @click="createOperatorModalOpen = true"
+          >
+          Add a new operator
+          <CreateOperatorModal 
+            :show="createOperatorModalOpen" 
+            @close="createOperatorModalOpen = false"
+          >
+          </CreateOperatorModal>
+        </button>
         <ul v-if="operators.length">
           <li v-for="operator in operators" :key="operator._id">
             <router-link
@@ -76,18 +85,20 @@
 // @ is an alias to /src
 import Api from "../../services/Api";
 import UsersList from "@/components/UsersList.vue";
-import CreateOperator from "@/components/CreateOperator.vue";
+import CreateOperatorModal from "@/components/CreateOperatorModal.vue";
 import ConfirmDeleteShopModal from "@/components/ConfirmDeleteShopModal.vue";
+import { mapGetters } from 'vuex'
 
 export default {
   name: "home",
   components: {
+    CreateOperatorModal,
     UsersList,
-    CreateOperator,
     ConfirmDeleteShopModal
   },
   data() {
     return {
+      createOperatorModalOpen: false,
       confirmDeleteModalOpen: false,
       users: [],
       operators: [],
@@ -96,6 +107,9 @@ export default {
       quizzes: []
     };
   },
+  computed: {
+    // ...mapGetters(['operators'])
+  },
   methods: {
     async fetchOperators() {
       const { data } = await Api.get("/operators");
@@ -103,15 +117,7 @@ export default {
     }
   },
   async created() {
-    fetchOperators()
-    // const users = await Api.get("/users");
-    // const lessons = await Api.get("/lessons");
-    // const posts = await Api.get("/posts");
-    // const quizzes = await Api.get("/quizzes");
-    // this.users = users.data;
-    // this.lessons = lessons.data;
-    // this.posts = posts.data;
-    // this.quizzes = quizzes.data;
+    await this.fetchOperators()
     console.log("Admin Home Mounted");
   }
 };
