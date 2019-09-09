@@ -4,9 +4,7 @@ import Vuex from "vuex";
 import auth from './modules/auth'
 import user from './modules/user'
 import alert from './modules/alert'
-
-import Api from "../services/Api";
-import router from "../router";
+import operator from './modules/operator'
 
 Vue.use(Vuex);
 
@@ -16,18 +14,19 @@ export default new Vuex.Store({
     auth,
     user,
     alert,
+    operator
   },
-  // state: {
+  state: {
     
-  // },
-  // getters: {
+  },
+  getters: {
     
-  // },
-  // mutations: {
+  },
+  mutations: {
     
-  // },
-  // actions: {    
-
-  //   },
-  });
+  },
+  actions: {
+    
+  },
+})
   
