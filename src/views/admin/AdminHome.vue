@@ -87,13 +87,13 @@ import Api from "../../services/Api";
 import UsersList from "@/components/UsersList.vue";
 import CreateOperatorModal from "@/components/CreateOperatorModal.vue";
 import ConfirmDeleteShopModal from "@/components/ConfirmDeleteShopModal.vue";
+import { mapGetters } from 'vuex'
 
 export default {
   name: "home",
   components: {
     CreateOperatorModal,
     UsersList,
-    CreateOperator,
     ConfirmDeleteShopModal
   },
   data() {
@@ -107,6 +107,9 @@ export default {
       quizzes: []
     };
   },
+  computed: {
+    // ...mapGetters(['operators'])
+  },
   methods: {
     async fetchOperators() {
       const { data } = await Api.get("/operators");
@@ -114,15 +117,7 @@ export default {
     }
   },
   async created() {
-    fetchOperators()
-    // const users = await Api.get("/users");
-    // const lessons = await Api.get("/lessons");
-    // const posts = await Api.get("/posts");
-    // const quizzes = await Api.get("/quizzes");
-    // this.users = users.data;
-    // this.lessons = lessons.data;
-    // this.posts = posts.data;
-    // this.quizzes = quizzes.data;
+    await this.fetchOperators()
     console.log("Admin Home Mounted");
   }
 };
