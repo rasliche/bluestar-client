@@ -76,18 +76,20 @@
 // @ is an alias to /src
 import Api from "../../services/Api";
 import UsersList from "@/components/UsersList.vue";
-import CreateOperator from "@/components/CreateOperator.vue";
+import CreateOperatorModal from "@/components/CreateOperatorModal.vue";
 import ConfirmDeleteShopModal from "@/components/ConfirmDeleteShopModal.vue";
 
 export default {
   name: "home",
   components: {
+    CreateOperatorModal,
     UsersList,
     CreateOperator,
     ConfirmDeleteShopModal
   },
   data() {
     return {
+      createOperatorModalOpen: false,
       confirmDeleteModalOpen: false,
       users: [],
       operators: [],
