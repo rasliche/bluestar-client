@@ -12,18 +12,26 @@
 <script>
 import Modal from '@/components/Modal.vue'
 import Api from '@/services/Api.js'
+import { mapGetters } from 'vuex'
 
 export default {
     components: {
         Modal,
     },
     props: ['show', 'operator'],
+    computed: {
+        ...mapGetters('auth', ['token'])
+    },
     methods: {
         cancel() {
             this.$emit('close')
         },
         async deleteOperator() {
-            await Api.delete(`/operators/${this.operator._id}`)
+            await Api.delete(`/operators/${this.operator._id}`, {}, {
+                headers: {
+                    Authorization: `Bearer: ${this.token}`
+                }
+            })
             console.log("Baleted.")
             this.cancel()
         }
