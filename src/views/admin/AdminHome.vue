@@ -8,9 +8,9 @@
       <router-link :to="{ name: 'quizcreate' }">Create Quiz</router-link> -->
     </nav>
     <div>
-      <section>
+      <section >
         <h3>Operators</h3>
-        <CreateOperator />
+        <CreateOperator @operatorCreated="fetchOperators"/>
         <ul v-if="operators.length">
           <li v-for="operator in operators" :key="operator._id">
             <router-link
@@ -96,14 +96,18 @@ export default {
       quizzes: []
     };
   },
-  methods: {},
+  methods: {
+    async fetchOperators() {
+      const { data } = await Api.get("/operators");
+      this.operators = data;
+    }
+  },
   async created() {
-    const { data } = await Api.get("/operators");
+    fetchOperators()
     // const users = await Api.get("/users");
     // const lessons = await Api.get("/lessons");
     // const posts = await Api.get("/posts");
     // const quizzes = await Api.get("/quizzes");
-    this.operators = data;
     // this.users = users.data;
     // this.lessons = lessons.data;
     // this.posts = posts.data;
