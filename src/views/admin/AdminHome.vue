@@ -10,7 +10,16 @@
     <div>
       <section >
         <h3>Operators</h3>
-        <CreateOperator @operatorCreated="fetchOperators"/>
+        <button 
+          @click="createOperatorModalOpen = true"
+          >
+          Add a new operator
+          <CreateOperatorModal 
+            :show="createOperatorModalOpen" 
+            @close="createOperatorModalOpen = false"
+          >
+          </CreateOperatorModal>
+        </button>
         <ul v-if="operators.length">
           <li v-for="operator in operators" :key="operator._id">
             <router-link
