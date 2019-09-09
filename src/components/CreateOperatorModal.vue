@@ -68,7 +68,6 @@
 </template>
 
 <script>
-import Api from "@/services/Api";
 import { required } from 'vuelidate/lib/validators'
 import { mapActions, mapGetters } from 'vuex'
 import Modal from "@/components/Modal.vue"
@@ -105,6 +104,7 @@ export default {
   },
   methods: {
     ...mapActions('alert', ['setAlert']),
+    ...mapActions('operator', ['postOperator']),
     cancel() {
       this.$emit('close')
     },
@@ -118,21 +118,18 @@ export default {
           programs: this.formResponses.programs
         };
         try {
-          const { data } = await Api.post("/operators", 
-              shopData,
-              {
-                headers: {
-                  Authorization: `Bearer: ${this.token}`
-                }
-              });
-          this.$emit('operatorCreated')
-          this.setAlert({ 
-            type: 'success', 
-            text: `${data.name} was created.`
-          })
+          await this.postOperator(shopData)
+          // const { data } = await Api.post("/operators", 
+          //     shopData,
+          //     {
+          //       headers: {
+          //         Authorization: `Bearer: ${this.token}`
+          //       }
+          //     });
+          // this.$emit('operatorCreated')
           this.cancel()
         } catch (error) {
-          console.log(error.response)
+          console.log(error)
           this.cancel()
         }
       }
