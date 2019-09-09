@@ -1,5 +1,5 @@
 <template>
-<portal to="modals">
+<portal to="modals" v-if="show">
     <div class="fixed pin p-8" style="background-color: rgba(0, 0, 0, 0.6);" v-show="show">
         <div class="mx-auto mt-8 p-2 rounded-lg bg-white max-w-xl shadow-lg">
             <slot name="heading"></slot>
