@@ -119,14 +119,6 @@ export default {
         };
         try {
           await this.postOperator(shopData)
-          // const { data } = await Api.post("/operators", 
-          //     shopData,
-          //     {
-          //       headers: {
-          //         Authorization: `Bearer: ${this.token}`
-          //       }
-          //     });
-          // this.$emit('operatorCreated')
           this.cancel()
         } catch (error) {
           console.log(error)
