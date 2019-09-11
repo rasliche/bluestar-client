@@ -65,38 +65,7 @@ export default {
 #app > #main {
   grid-area: main;
 }
-
-/* transitions */
-.alert-slide-enter-active,
-.alert-slide-leave-active {
-  transition: all 1s;
-}
-
-.alert-slide-enter {
-  opacity: 0;
-  transform: translateY(100px)
-}
-
-.alert-slide-leave-to {
-  opacity: 0;
-  transform: translateX(100px);
-}
-
-.alert-slide-enter-to,
-.alert-slide-leave {
-  opacity: 1;
-  transform: translateX(0px);
-}
-
-.alert-slide-fast-enter-active,
-.alert-slide-fast-leave-active {
-  transition: opacity 0.25s;
-}
-
-.alert-slide-fast-enter,
-.alert-slide-fast-leave-to {
-  opacity: 0;
-}
 </style>
 
 <style src="./styles/styles.css"></style>
+<style src="./styles/transitions.css"></style>
