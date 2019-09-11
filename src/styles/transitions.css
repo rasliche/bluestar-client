@@ -10,7 +10,7 @@
 
 .fade-fast-enter-active,
 .fade-fast-leave-active {
-  transition: opacity 0.25s;
+  transition: opacity 0.5s;
 }
 
 .fade-fast-enter,
