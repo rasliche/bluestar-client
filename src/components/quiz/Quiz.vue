@@ -37,7 +37,7 @@
               >
                 <div class="question">
                   <p class="font-bold">{{ question }}</p>
-                  <transition-group name="fade-fast" mode="out-in">
+                  <transition-group name="fade" mode="out-in">
                     <div
                       v-if="showReviewText"
                       :class="[
@@ -199,7 +199,7 @@ export default {
 </script>
 
 <style>
-.fade-enter-active,
+/* .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
@@ -217,5 +217,5 @@ export default {
 .fade-fast-enter,
 .fade-fast-leave-to {
   opacity: 0;
-}
+} */
 </style>
