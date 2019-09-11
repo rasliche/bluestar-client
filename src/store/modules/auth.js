@@ -100,7 +100,7 @@ const actions = {
       type: 'success',
       text: 'You have been logged out.'
     }, { root: true })
-    router.replace("/login");
+    router.replace("/");
   },  
 }
 
