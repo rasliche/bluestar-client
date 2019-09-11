@@ -23,7 +23,7 @@ const actions = {
   setLogoutTimer: ({ commit }, expirationTime) => {
       setTimeout(() => {
         commit('user/clearUser', {}, { root: true })
-        commit("clearAuth");
+        commit("clearToken");
       }, expirationTime * 1000);
     },
   register: async ({ commit, dispatch }, formData) => {
@@ -100,7 +100,7 @@ const actions = {
       type: 'success',
       text: 'You have been logged out.'
     }, { root: true })
-    router.replace("/login");
+    router.replace("/");
   },  
 }
 
