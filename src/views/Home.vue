@@ -14,6 +14,14 @@
       <p class="text-xs pt-4 text-center" v-else>If you are registered, you can just <span class="underline cursor-pointer" @click="currentComponent = 'Login'">login</span>.</p>
     </section>
       <section class="w-5/6 pt-4 mx-auto" v-else>
+        <p class="text-4xl pt-4 text-center">Welcome, {{ name }}.</p>
+        <!-- links show based on user permissions and roles -->
+        <router-link :to="{ name: 'me' }">
+          Check your progress
+        </router-link>
+        <router-link to="#">
+          Manage your shop staff
+        </router-link>
       </section>
     </transition>
   </div>
