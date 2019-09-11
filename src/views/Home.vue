@@ -7,11 +7,15 @@
         dive/snorkel shop to be recognized as a Blue Star operator.
       </p>
     </section>
-    <section class="w-5/6 pt-4 mx-auto">
+    <transition name="fade-fast" mode="out-in">
+      <section class="w-5/6 pt-4 mx-auto" v-if="!isAuthenticated">
       <Component :is="currentComponent" class="mx-auto"></Component>
       <p class="text-xs pt-4 text-center" v-if="currentComponent === 'Login'">Do you need to <span class="underline cursor-pointer" @click="currentComponent = 'Register'">register</span> first?</p>
       <p class="text-xs pt-4 text-center" v-else>If you are registered, you can just <span class="underline cursor-pointer" @click="currentComponent = 'Login'">login</span>.</p>
     </section>
+      <section class="w-5/6 pt-4 mx-auto" v-else>
+      </section>
+    </transition>
   </div>
 </template>
 
