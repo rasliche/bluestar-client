@@ -76,7 +76,10 @@
         <input type="text" name="shopPassword" id="shopPassword" v-model="shopPassword" class="w-1/2"> -->
 
     <section class="relative px-4 pb-6 flex">
-      <button @click.prevent="submitRegisterForm" class="border-2 p-1 rounded border-blue mx-auto">
+      <button 
+        @click.prevent="submitRegisterForm" 
+        class="border-2 p-1 rounded border-blue mx-auto"
+        :disabled="uiState === 'formSubmitted'">
         Register
       </button>
     </section>

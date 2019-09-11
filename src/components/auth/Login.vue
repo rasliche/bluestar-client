@@ -38,7 +38,8 @@
       <section class="relative px-4 pb-6 flex">
         <button 
           @click.prevent="submitLoginForm" 
-          class="border-2 p-1 rounded border-blue mx-auto"
+          class="border-2 p-1 rounded border-blue mx-auto disabled:opacity-50"
+          :disabled="uiState === 'formSubmitted'"
           >Login
         </button>
       </section>

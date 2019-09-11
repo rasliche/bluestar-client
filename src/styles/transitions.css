@@ -1,6 +1,27 @@
+/* Slides */
+/* Used by: Alert */
+.alert-slide-enter-active,
+.alert-slide-leave-active {
+  transition: all 1s;
+}
+
+.alert-slide-enter,
+.alert-slide-leave-to {
+  opacity: 0;
+  transform: translatex(500px)
+}
+
+.alert-slide-enter-to,
+.alert-slide-leave {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+/* Fades */
+/* Used by: Quiz and Questions */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.25;
 }
 
 .fade-enter,
@@ -8,12 +29,7 @@
   opacity: 0;
 }
 
-.fade-fast-enter-active,
-.fade-fast-leave-active {
-  transition: opacity 0.25s;
-}
-
-.fade-fast-enter,
-.fade-fast-leave-to {
-  opacity: 0;
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
 }
