@@ -1,5 +1,5 @@
 <template>
-  <div class="border-2 rounded w-1/2">
+  <div class="border-2 rounded">
     <h1 class="text-center pb-8">Login</h1>
     <form>
       <section class="relative px-4 pb-8 flex">
@@ -45,8 +45,7 @@
       </section>
     </form>
     <!-- TODO: Style this feedback -->
-    <!-- {{ formFeedback }}
-    {{ uiState }} -->
+    <!-- {{ formFeedback }} -->
   </div>
 </template>
 
