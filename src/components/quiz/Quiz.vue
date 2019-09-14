@@ -37,7 +37,7 @@
               >
                 <div class="question">
                   <p class="font-bold">{{ question }}</p>
-                  <transition-group name="fade-fast" mode="out-in">
+                  <transition-group name="fade" mode="out-in">
                     <div
                       v-if="showReviewText"
                       :class="[
@@ -151,7 +151,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["submitLessonScore"]),
+    ...mapActions('user', ["submitLessonScore"]),
     startQuiz: function() {
       this.quizModalOpen = true;
       this.correct = 0;
@@ -197,25 +197,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-fast-enter-active,
-.fade-fast-leave-active {
-  transition: opacity 0.25s;
-}
-
-.fade-fast-enter,
-.fade-fast-leave-to {
-  opacity: 0;
-}
-</style>

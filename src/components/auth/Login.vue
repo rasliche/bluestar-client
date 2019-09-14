@@ -1,5 +1,5 @@
 <template>
-  <div class="border-2 rounded w-1/2">
+  <div class="border-2 rounded">
     <h1 class="text-center pb-8">Login</h1>
     <form>
       <section class="relative px-4 pb-8 flex">
@@ -36,14 +36,16 @@
       </section>
 
       <section class="relative px-4 pb-6 flex">
-        <button @click.prevent="submitLoginForm" class="border-2 p-1 rounded border-blue mx-auto">
-          Login
+        <button 
+          @click.prevent="submitLoginForm" 
+          class="border-2 p-1 rounded border-blue mx-auto disabled:opacity-50"
+          :disabled="uiState === 'formSubmitted'"
+          >Login
         </button>
       </section>
     </form>
     <!-- TODO: Style this feedback -->
-    {{ formFeedback }}
-    {{ uiState }}
+    <!-- {{ formFeedback }} -->
   </div>
 </template>
 
@@ -93,8 +95,6 @@ export default {
         };
         this.uiState = 'form submitted'
         try {
-          const response = await Api.post("/auth/login", authData);
-          console.log(response)
           const { data } = await Api.post("/auth/login", authData);
           this.setCurrentUser(data.user)
           this.authUser(data.token)

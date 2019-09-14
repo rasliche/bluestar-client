@@ -143,12 +143,12 @@
           <Modal 
           :show="quizMode"
           :noCloseButton="true"
-          @close="quizMode = false"
           >
             <Quiz
               :quiz="quiz"
               :lessonName="lessonName"
               :lessonSlug="lessonSlug"
+              @close="quizMode = false"
             />
           </Modal>
         </button>

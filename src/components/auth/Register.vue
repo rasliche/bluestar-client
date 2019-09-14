@@ -1,5 +1,5 @@
 <template>
-<div class="border-2 rounded w-1/2">
+<div class="border-2 rounded">
   <h1 class="text-center pb-8">Register</h1>
   <form>
     <section class="relative px-4 pb-8 flex">
@@ -76,7 +76,10 @@
         <input type="text" name="shopPassword" id="shopPassword" v-model="shopPassword" class="w-1/2"> -->
 
     <section class="relative px-4 pb-6 flex">
-      <button @click.prevent="submitRegisterForm" class="border-2 p-1 rounded border-blue mx-auto">
+      <button 
+        @click.prevent="submitRegisterForm" 
+        class="border-2 p-1 rounded border-blue mx-auto"
+        :disabled="uiState === 'formSubmitted'">
         Register
       </button>
     </section>

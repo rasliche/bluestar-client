@@ -25,18 +25,20 @@ describe("Question.vue", () => {
                 default: '<p>{{props.index}},{{props.text}}</p>'
             }
         });
-        wrapper.vm.handleAnswer(0)
-        wrapper.vm.handleAnswer(1)
     })
-
-    it("emits correctAnswer when given index of correct answer", () => {
-      expect(wrapper.emitted().correctAnswer.length).toBe(1)
-      expect(wrapper.emitted().correctAnswer).toBeTruthy()
+    
+    it("emits 'correctAnswer' when given index of correct answer", () => {
+        wrapper.vm.handleAnswer(1)
+        expect(wrapper.emitted().correctAnswer.length).toBe(1)
+        expect(wrapper.emitted().correctAnswer).toBeTruthy()
+        expect(wrapper.vm.isRight).toBe(true)
     });
     
-    it("emits wrongAnswer when given index of a wrong answer", () => {
+    it("emits 'wrongAnswer' when given index of a wrong answer", () => {
+        wrapper.vm.handleAnswer(0)
         expect(wrapper.emitted().wrongAnswer.length).toBe(1)
         expect(wrapper.emitted().wrongAnswer).toBeTruthy()
+        expect(wrapper.vm.isRight).toBe(false)
     });
 });
 

@@ -39,7 +39,7 @@ export default new Router({
         }
       },
       component: () =>
-        import(/* webpackChunkName: 'me' */ "./views/UserDashboard.vue")
+        import(/* webpackChunkName: 'me' */ "./views/Me.vue")
     },
     // {
     //   path: "/about",

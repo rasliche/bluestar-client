@@ -3,22 +3,39 @@
     <h1>Admin Dashboard</h1>
     <nav>
       Do we need a nav here?
-      <!-- <router-link :to="{ name: 'operatorcreate' }">Create Operator</router-link> -->
-      <!-- <router-link :to="{ name: 'lessoncreate' }">Create Lesson</router-link>
+      <!-- <router-link :to="{ name: 'operatorcreate' }">Create Operator</router-link>
+      <router-link :to="{ name: 'lessoncreate' }">Create Lesson</router-link>
       <router-link :to="{ name: 'quizcreate' }">Create Quiz</router-link> -->
     </nav>
     <div>
-      <section>
+      <section >
         <h3>Operators</h3>
-        <CreateOperator />
-        <ul v-if="operators.length">
-          <router-link
-            tag="li"
-            v-for="operator in operators"
-            :key="operator._id"
-            :to="{ name: 'operator', params: { slug: operator.slug } }"
-            >{{ operator.name }}</router-link
+        <button 
+          @click="createOperatorModalOpen = true"
           >
+          Add a new operator
+          <CreateOperatorModal 
+            :show="createOperatorModalOpen" 
+            @close="createOperatorModalOpen = false"
+          >
+          </CreateOperatorModal>
+        </button>
+        <ul v-if="operators.length">
+          <li v-for="operator in operators" :key="operator._id">
+            <router-link
+              :to="{ name: 'operator', params: { slug: operator.slug } }">
+                {{ operator.name }}
+            </router-link>
+            <button @click="confirmDeleteModalOpen = true">
+                Delete Shop
+                <ConfirmDeleteShopModal 
+                :show="confirmDeleteModalOpen" 
+                @close="confirmDeleteModalOpen = false"
+                :operator="operator">
+                </ConfirmDeleteShopModal>
+            </button>
+
+          </li>
         </ul>
         <p v-else>No operators yet.</p>
       </section>
@@ -68,35 +85,35 @@
 // @ is an alias to /src
 import Api from "../../services/Api";
 import UsersList from "@/components/UsersList.vue";
-import CreateOperator from "@/components/CreateOperator.vue";
+import CreateOperatorModal from "@/components/CreateOperatorModal.vue";
+import ConfirmDeleteShopModal from "@/components/ConfirmDeleteShopModal.vue";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: "home",
   components: {
+    CreateOperatorModal,
     UsersList,
-    CreateOperator
+    ConfirmDeleteShopModal
   },
   data() {
     return {
+      createOperatorModalOpen: false,
+      confirmDeleteModalOpen: false,
       users: [],
-      operators: [],
       lessons: [],
       posts: [],
       quizzes: []
     };
   },
-  methods: {},
-  async created() {
-    const operators = await Api.get("/operators");
-    // const users = await Api.get("/users");
-    // const lessons = await Api.get("/lessons");
-    // const posts = await Api.get("/posts");
-    // const quizzes = await Api.get("/quizzes");
-    this.operators = operators.data;
-    // this.users = users.data;
-    // this.lessons = lessons.data;
-    // this.posts = posts.data;
-    // this.quizzes = quizzes.data;
+  computed: {
+    ...mapGetters('operator', ['operators'])
+  },
+  methods: {
+    ...mapActions('operator', ['getOperators'])
+  },
+  created() {
+    this.getOperators()
     console.log("Admin Home Mounted");
   }
 };
