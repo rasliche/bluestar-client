@@ -18,7 +18,7 @@ export default {
       programs: []
     };
   },
-  async mounted() {
+  async created() {
     this.loading = true;
     const { data } = await Api.get(
       `http://localhost:3000/api/operators/${this.$route.params.slug}`
