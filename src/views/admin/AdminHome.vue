@@ -8,7 +8,7 @@
       <router-link :to="{ name: 'quizcreate' }">Create Quiz</router-link> -->
     </nav>
     <div>
-      <section >
+      <section>
         <h3>Operators</h3>
         <button 
           @click="createOperatorModalOpen = true"
@@ -83,8 +83,8 @@
 
 <script>
 // @ is an alias to /src
-import Api from "../../services/Api";
-import UsersList from "@/components/UsersList.vue";
+// import Api from "../../services/Api";
+// import UsersList from "@/components/UsersList.vue";
 import CreateOperatorModal from "@/components/CreateOperatorModal.vue";
 import ConfirmDeleteShopModal from "@/components/ConfirmDeleteShopModal.vue";
 import { mapGetters, mapActions } from 'vuex'
@@ -93,7 +93,7 @@ export default {
   name: "home",
   components: {
     CreateOperatorModal,
-    UsersList,
+    // UsersList,
     ConfirmDeleteShopModal
   },
   data() {
