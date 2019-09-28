@@ -11,16 +11,22 @@
         Here is a caption in a slot.
       </BSImageWithBigCaption>
     </section>
+    <section>
+      <h2>WYSIWYG</h2>
+      <WYSIWYG></WYSIWYG>
+    </section>
   </div>
 </template>
 
 <script>
 import BSImage from "@/components/BSImage.vue";
 import BSImageWithBigCaption from "@/components/BSImageWithBigCaption.vue";
+import WYSIWYG from "@/components/WYSIWYG.vue";
 
 export default {
   components: {
     BSImage,
+    WYSIWYG,
     BSImageWithBigCaption
   }
 };
