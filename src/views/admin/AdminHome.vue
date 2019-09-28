@@ -84,7 +84,6 @@
 <script>
 // @ is an alias to /src
 import Api from "../../services/Api";
-import UsersList from "@/components/UsersList.vue";
 import CreateOperatorModal from "@/components/CreateOperatorModal.vue";
 import ConfirmDeleteShopModal from "@/components/ConfirmDeleteShopModal.vue";
 import { mapGetters, mapActions } from 'vuex'
@@ -93,7 +92,6 @@ export default {
   name: "home",
   components: {
     CreateOperatorModal,
-    UsersList,
     ConfirmDeleteShopModal
   },
   data() {
