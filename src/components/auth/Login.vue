@@ -45,7 +45,7 @@
       </section>
     </form>
     <!-- TODO: Style this feedback -->
-    <!-- {{ formFeedback }} -->
+    {{ formFeedback }}
   </div>
 </template>
 
@@ -103,9 +103,8 @@ export default {
             text: 'You have been logged in.'
           })
         } catch (error) {
-          const { message } = error.response.data
-          console.log(error.response)
-          this.formFeedback = message
+          // console.log(error.response)
+          this.formFeedback = error.response.data
         }
       }
     }
