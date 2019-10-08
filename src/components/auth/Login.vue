@@ -16,7 +16,7 @@
           class="border-blue-lighter border-b-2 pl-2 w-2/3"
         />
         <p v-if="errors" class="absolute pin-b pin-x text-center">
-          <span class="text-red text-sm" v-if="!$v.formResponses.email.required">this field is required</span>
+          <span class="text-red text-sm" v-if="!$v.formResponses.email.required">This field is required.</span>
         </p>
       </section>
 
@@ -31,7 +31,7 @@
           class="border-blue-lighter border-b-2 pl-2 w-2/3"
         />
         <p v-if="errors" class="absolute pin-b pin-x text-center">
-          <span class="text-red text-sm" v-if="!$v.formResponses.password.required">this field is required</span>
+          <span class="text-red text-sm" v-if="!$v.formResponses.password.required">This field is required.</span>
         </p>
       </section>
 

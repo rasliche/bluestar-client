@@ -14,7 +14,7 @@
         v-model="$v.formResponses.name.$model" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">
-        <span class="text-red text-sm" v-if="!$v.formResponses.name.required">this field is required</span>
+        <span class="text-red text-sm" v-if="!$v.formResponses.name.required">This field is required.</span>
       </p>
     </section>
 
@@ -26,7 +26,7 @@
       <input type="text" name="femail" id="femail" v-model="$v.formResponses.email.$model" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">
-        <span class="text-red text-sm" v-if="!$v.formResponses.email.required">this field is required</span>
+        <span class="text-red text-sm" v-if="!$v.formResponses.email.required">This field is required. </span>
         <span class="text-red text-sm" v-if="!$v.formResponses.email.minLength">Field must have at least {{ $v.formResponses.email.$params.minLength.min }} characters.</span>
       </p>
     </section>
@@ -44,7 +44,7 @@
         autocomplete="section-register new-password" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">
-        <span class="text-red text-sm" v-if="!$v.formResponses.password1.required">this field is required</span>
+        <span class="text-red text-sm" v-if="!$v.formResponses.password1.required">This field is required. </span>
         <span class="text-red text-sm" v-if="!$v.formResponses.password1.minLength">Field must have at least {{ $v.formResponses.password1.$params.minLength.min }} characters.</span>
       </p>
     </section>
@@ -62,19 +62,20 @@
         autocomplete="section-register new-password"
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">
-        <span class="text-red text-sm" v-if="!$v.formResponses.password2.required">this field is required</span>
-        <span class="text-red text-sm" v-if="!$v.formResponses.password2.sameAsPassword">passwords must match</span>
+        <span class="text-red text-sm" v-if="!$v.formResponses.password2.required">This field is required. </span>
+        <span class="text-red text-sm" v-if="!$v.formResponses.password2.sameAsPassword">Passwords must match.</span>
       </p>
     </section>
         <!-- SHOP SEARCH MULTI SELECT -->
-        <!-- <label for="shopChoice" class="w-1/2 text-right pr-2">Choose a Shop to Join:</label>
+    <!-- <section class="relative px-4 pb-8 flex">
+        <label for="shopChoice" class="w-1/2 text-right pr-2">Choose a Shop to Join:</label>
         <select name="shopChoice" id="shopChoice" class="w-1/2" v-model="shopChoice">
             <option default>Choose a Shop:</option>
             <option v-for="operator in operators" :value="operator._id" :key="operator._id">{{ operator.name }}</option>
         </select>
         <label for="shopPassword" class="w-1/2 text-right pr-2">Shop Password:</label>
-        <input type="text" name="shopPassword" id="shopPassword" v-model="shopPassword" class="w-1/2"> -->
-
+        <input type="text" name="shopPassword" id="shopPassword" v-model="shopPassword" class="w-1/2">
+    </section> -->
     <section class="relative px-4 pb-6 flex">
       <button 
         @click.prevent="submitRegisterForm" 
@@ -92,8 +93,8 @@
 
 <script>
 import { 
-    required, 
-    minLength, 
+    required,
+    minLength,
     maxLength,
     sameAs
     } from 'vuelidate/lib/validators'
