@@ -14,7 +14,7 @@
         v-model="$v.formResponses.name.$model" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">
-        <span class="text-red text-sm" v-if="!$v.formResponses.name.required">This field is required.</span>
+        <span class="error" v-if="!$v.formResponses.name.required">This field is required.</span>
       </p>
     </section>
 
@@ -26,8 +26,8 @@
       <input type="text" name="femail" id="femail" v-model="$v.formResponses.email.$model" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">
-        <span class="text-red text-sm" v-if="!$v.formResponses.email.required">This field is required. </span>
-        <span class="text-red text-sm" v-if="!$v.formResponses.email.minLength">Field must have at least {{ $v.formResponses.email.$params.minLength.min }} characters.</span>
+        <span class="error" v-if="!$v.formResponses.email.required">This field is required. </span>
+        <span class="error" v-if="!$v.formResponses.email.minLength">Field must have at least {{ $v.formResponses.email.$params.minLength.min }} characters.</span>
       </p>
     </section>
 
@@ -44,8 +44,8 @@
         autocomplete="section-register new-password" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">
-        <span class="text-red text-sm" v-if="!$v.formResponses.password1.required">This field is required. </span>
-        <span class="text-red text-sm" v-if="!$v.formResponses.password1.minLength">Field must have at least {{ $v.formResponses.password1.$params.minLength.min }} characters.</span>
+        <span class="error" v-if="!$v.formResponses.password1.required">This field is required. </span>
+        <span class="error" v-if="!$v.formResponses.password1.minLength">Field must have at least {{ $v.formResponses.password1.$params.minLength.min }} characters.</span>
       </p>
     </section>
 
@@ -62,8 +62,8 @@
         autocomplete="section-register new-password"
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">
-        <span class="text-red text-sm" v-if="!$v.formResponses.password2.required">This field is required. </span>
-        <span class="text-red text-sm" v-if="!$v.formResponses.password2.sameAsPassword">Passwords must match.</span>
+        <span class="error" v-if="!$v.formResponses.password2.required">This field is required. </span>
+        <span class="error" v-if="!$v.formResponses.password2.sameAsPassword">Passwords must match.</span>
       </p>
     </section>
         <!-- SHOP SEARCH MULTI SELECT -->
@@ -80,7 +80,7 @@
       <button 
         @click.prevent="submitRegisterForm" 
         class="border-2 p-1 rounded border-blue mx-auto"
-        :disabled="uiState === 'formSubmitted'">
+        :disabled="uiState === 'form submitted'">
         Register
       </button>
     </section>
@@ -166,3 +166,9 @@ export default {
     }
   };
 </script>
+
+<style lang="postcss" scoped>
+.error {
+  @apply text-red text-sm italic;
+}
+</style>
