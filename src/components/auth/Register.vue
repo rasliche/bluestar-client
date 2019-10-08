@@ -11,7 +11,7 @@
         type="text" 
         name="fname" 
         id="fname" 
-        v-model.lazy="$v.formResponses.name.$model" 
+        v-model="$v.formResponses.name.$model" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">
         <span class="text-red text-sm" v-if="!$v.formResponses.name.required">this field is required</span>
@@ -23,7 +23,7 @@
         for="femail" 
         class="text-blue-darker w-1/3 text-right pr-4"
         >Email</label>
-      <input type="text" name="femail" id="femail" v-model.lazy="$v.formResponses.email.$model" 
+      <input type="text" name="femail" id="femail" v-model="$v.formResponses.email.$model" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">
         <span class="text-red text-sm" v-if="!$v.formResponses.email.required">this field is required</span>
@@ -40,7 +40,7 @@
         type="password" 
         name="fpassword1" 
         id="fpassword1" 
-        v-model.lazy="$v.formResponses.password1.$model"
+        v-model="$v.formResponses.password1.$model"
         autocomplete="section-register new-password" 
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">
@@ -58,7 +58,7 @@
         type="password" 
         name="fpassword2" 
         id="fpassword2" 
-        v-model.lazy="$v.formResponses.password2.$model" 
+        v-model="$v.formResponses.password2.$model" 
         autocomplete="section-register new-password"
         class="border-blue-lighter border-b-2 pl-2 w-2/3">
       <p v-if="errors" class="absolute pin-b pin-x text-center">

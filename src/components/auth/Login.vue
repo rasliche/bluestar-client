@@ -11,7 +11,7 @@
           type="text" 
           name="femail" 
           id="femail" 
-          v-model.lazy="$v.formResponses.email.$model" 
+          v-model="$v.formResponses.email.$model" 
           autocomplete="section-login email" 
           class="border-blue-lighter border-b-2 pl-2 w-2/3"
         />
@@ -26,7 +26,7 @@
           type="password"
           name="fpassword"
           id="fpassword"
-          v-model.lazy="$v.formResponses.password.$model"
+          v-model="$v.formResponses.password.$model"
           autocomplete="section-login current-password"
           class="border-blue-lighter border-b-2 pl-2 w-2/3"
         />
