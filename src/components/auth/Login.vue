@@ -1,11 +1,11 @@
 <template>
-  <div class="border-2 rounded">
-    <h1 class="text-center pb-8">Login</h1>
-    <form>
-      <section class="relative px-4 pb-8 flex">
+  <div class="w-full max-w-xs">
+    <!-- <h1 class="text-center pb-8">Login</h1> -->
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <div class="relative mb-6 pb-3">
         <label 
           for="femail" 
-          class="text-blue-darker w-1/3 text-right pr-4"
+          class="block text-blue-darker font-bold text-sm mb-2"
         >Email</label>
         <input 
           type="text" 
@@ -13,36 +13,38 @@
           id="femail" 
           v-model="$v.formResponses.email.$model" 
           autocomplete="section-login email" 
-          class="border-blue-lighter border-b-2 pl-2 w-2/3"
+          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-        <p v-if="errors" class="absolute pin-b pin-x text-center">
-          <span class="text-red text-sm" v-if="!$v.formResponses.email.required">This field is required.</span>
+        <p v-if="errors" class="absolute pin-b pin-x">
+          <span class="error" v-if="!$v.formResponses.email.required">This field is required.</span>
         </p>
-      </section>
+      </div>
 
-      <section class="relative px-4 pb-8 flex">
-        <label for="fpassword" class="text-blue-darker w-1/3 text-right pr-4">Password</label>
+      <div class="relative mb-6 pb-3">
+        <label for="fpassword" class="block text-blue-darker font-bold text-sm mb-2">Password</label>
         <input
           type="password"
           name="fpassword"
           id="fpassword"
           v-model="$v.formResponses.password.$model"
           autocomplete="section-login current-password"
-          class="border-blue-lighter border-b-2 pl-2 w-2/3"
+          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-        <p v-if="errors" class="absolute pin-b pin-x text-center">
-          <span class="text-red text-sm" v-if="!$v.formResponses.password.required">This field is required.</span>
+        <p v-if="errors" class="absolute pin-b pin-x">
+          <span class="error" v-if="!$v.formResponses.password.required">This field is required.</span>
         </p>
-      </section>
+      </div>
 
-      <section class="relative px-4 pb-6 flex">
-        <button 
+      <div class="flex items-center justify-between">
+        <button
+          type="button"
           @click.prevent="submitLoginForm" 
-          class="border-2 p-1 rounded border-blue mx-auto disabled:opacity-50"
+          class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
           :disabled="uiState === 'formSubmitted'"
           >Login
         </button>
-      </section>
+        <a href="#" class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">Forgot password?</a>
+      </div>
     </form>
     <!-- TODO: Style this feedback -->
     <!-- {{ formFeedback }} -->
@@ -112,3 +114,9 @@ export default {
   }
 };
 </script>
+
+<style lang="postcss" scoped>
+.error {
+  @apply text-red text-sm italic;
+}
+</style>
