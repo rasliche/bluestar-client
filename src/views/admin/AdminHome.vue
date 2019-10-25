@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <main class="home">
     <h1>Admin Dashboard</h1>
     <nav>
       Do we need a nav here?
@@ -78,7 +78,7 @@
         <h3>Events</h3>
       </section>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
