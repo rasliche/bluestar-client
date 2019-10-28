@@ -25,6 +25,14 @@ export default new Router({
       component: () => import(/* webpackChunkName: "login" */ "./views/Login.vue")
     },
     {
+      path: "/register-admin",
+      name: "register-admin",
+      // route level code-splitting
+      // this generates a separate chunk (login.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "register-admin" */ "./views/RegisterAdmin.vue")
+    },
+    {
       path: "/me",
       name: "me",
       beforeEnter(to, from, next) {
