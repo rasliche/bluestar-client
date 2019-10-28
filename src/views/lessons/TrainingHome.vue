@@ -14,6 +14,13 @@
       :programs="['diving', 'fishing']"
       slug="regulations-and-zones"
     />
+    <BSLessonCard
+      key="reef-etiquette"
+      title="Reef Etiquette"
+      description="Your actions on and off the water can have positive or negative effects on the reef community."
+      :programs="['diving',]"
+      slug="reef-etiquette"
+    />
   </div>
 </template>
 

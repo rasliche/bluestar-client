@@ -4,8 +4,6 @@ import Home from "./views/Home.vue";
 
 // lessons
 import TrainingHome from "./views/lessons/TrainingHome.vue";
-import AboutFKNMS from "./views/lessons/AboutFKNMS.vue";
-import RegulationsAndZones from "./views/lessons/RegulationsAndZones.vue";
 
 import store from "./store/index";
 
@@ -100,11 +98,20 @@ export default new Router({
         import(/* webpackChunkName: "training" */ "./views/Training.vue"),
       children: [
         { path: "", name: "training", component: TrainingHome },
-        { path: "about-fknms", name: "about-fknms", component: AboutFKNMS },
+        { 
+          path: "about-fknms", 
+          name: "about-fknms", 
+          component: () => import(/* webpackChunkName: "about-fknms" */ "./views/lessons/AboutFKNMS.vue") 
+        },
+        { 
+          path: "reef-etiquette", 
+          name: "reef-etiquette", 
+          component: () => import(/* webpackChunkName: "reef-etiquette" */ "./views/lessons/ReefEtiquette.vue") 
+        },
         {
           path: "regulations-and-zones",
           name: "regulations-and-zones",
-          component: RegulationsAndZones
+          component: () => import(/* webpackChunkName: "regulations-and-zones" */ "./views/lessons/RegulationsAndZones.vue")
         }
       ]
     },
