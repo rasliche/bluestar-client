@@ -1,8 +1,8 @@
 <template>
   <div class="w-full max-w-xs">
-    <!-- <h1 class="text-center pb-8">Login</h1> -->
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <div class="relative mb-6 pb-3">
+      <h1 class="text-center pb-3">Login</h1>
+      <section class="relative mb-6 pb-3">
         <label 
           for="femail" 
           class="block text-blue-darker font-bold text-sm mb-2"
@@ -18,10 +18,13 @@
         <p v-if="errors" class="absolute pin-b pin-x">
           <span class="error" v-if="!$v.formResponses.email.required">This field is required.</span>
         </p>
-      </div>
+      </section>
 
-      <div class="relative mb-6 pb-3">
-        <label for="fpassword" class="block text-blue-darker font-bold text-sm mb-2">Password</label>
+      <section class="relative mb-6 pb-3">
+        <label 
+          for="fpassword" 
+          class="block text-blue-darker font-bold text-sm mb-2"
+          >Password</label>
         <input
           type="password"
           name="fpassword"
@@ -33,9 +36,9 @@
         <p v-if="errors" class="absolute pin-b pin-x">
           <span class="error" v-if="!$v.formResponses.password.required">This field is required.</span>
         </p>
-      </div>
+      </section>
 
-      <div class="flex items-center justify-between">
+      <section class="flex items-center justify-between">
         <button
           type="button"
           @click.prevent="submitLoginForm" 
@@ -44,10 +47,11 @@
           >Login
         </button>
         <a href="#" class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">Forgot password?</a>
-      </div>
+      </section>
     </form>
     <!-- TODO: Style this feedback -->
-    <!-- {{ formFeedback }} -->
+    {{ formFeedback }}
+    {{ uiState }}
   </div>
 </template>
 
@@ -117,6 +121,10 @@ export default {
 
 <style lang="postcss" scoped>
 .error {
-  @apply text-red text-sm italic;
+  @apply text-red text-sm;
+}
+
+.error-border {
+  @apply border-red;
 }
 </style>

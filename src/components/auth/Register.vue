@@ -1,40 +1,48 @@
 <template>
-<div class="border-2 rounded">
-  <h1 class="text-center pb-8">Register</h1>
-  <form>
-    <section class="relative px-4 pb-8 flex">
+<div class="w-full max-w-xs">
+  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <h1 class="text-center pb-3">Register</h1>
+    <section class="relative mb-6 pb-3">
       <label 
         for="fname" 
-        class="text-blue-darker w-1/3 text-right pr-4"
+        class="block text-blue-darker font-bold text-sm mb-2"
         >Name</label>
       <input 
         type="text" 
         name="fname" 
         id="fname" 
-        v-model="$v.formResponses.name.$model" 
-        class="border-blue-lighter border-b-2 pl-2 w-2/3">
-      <p v-if="errors" class="absolute pin-b pin-x text-center">
+        v-model="$v.formResponses.name.$model"
+        autocomplete="section-register name"
+        class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      <p v-if="errors" class="absolute pin-b pin-x">
         <span class="error" v-if="!$v.formResponses.name.required">This field is required.</span>
       </p>
     </section>
 
-    <section class="relative px-4 pb-8 flex">
+    <section class="relative mb-6 pb-3">
       <label 
         for="femail" 
-        class="text-blue-darker w-1/3 text-right pr-4"
+        class="block text-blue-darker font-bold text-sm mb-2"
         >Email</label>
-      <input type="text" name="femail" id="femail" v-model="$v.formResponses.email.$model" 
-        class="border-blue-lighter border-b-2 pl-2 w-2/3">
-      <p v-if="errors" class="absolute pin-b pin-x text-center">
+      <input 
+        type="text" 
+        name="femail" 
+        id="femail" 
+        v-model="$v.formResponses.email.$model" 
+        autocomplete="section-register email"
+        class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+      />
+      <p v-if="errors" class="absolute pin-b pin-x">
         <span class="error" v-if="!$v.formResponses.email.required">This field is required. </span>
         <span class="error" v-if="!$v.formResponses.email.minLength">Field must have at least {{ $v.formResponses.email.$params.minLength.min }} characters.</span>
       </p>
     </section>
 
-    <section class="relative px-4 pb-8 flex">
+    <section class="relative mb-6 pb-3">
       <label 
         for="fpassword1" 
-        class="text-blue-darker w-1/3 text-right pr-4"
+        class="block text-blue-darker font-bold text-sm mb-2"
         >Password</label>
       <input 
         type="password" 
@@ -42,17 +50,18 @@
         id="fpassword1" 
         v-model="$v.formResponses.password1.$model"
         autocomplete="section-register new-password" 
-        class="border-blue-lighter border-b-2 pl-2 w-2/3">
-      <p v-if="errors" class="absolute pin-b pin-x text-center">
+        class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+      />
+      <p v-if="errors" class="absolute pin-b pin-x">
         <span class="error" v-if="!$v.formResponses.password1.required">This field is required. </span>
         <span class="error" v-if="!$v.formResponses.password1.minLength">Field must have at least {{ $v.formResponses.password1.$params.minLength.min }} characters.</span>
       </p>
     </section>
 
-    <section class="relative px-4 pb-8 flex">
+    <section class="relative mb-6 pb-3">
       <label 
         for="fpassword2" 
-        class="text-blue-darker w-1/3 text-right pr-4"
+        class="block text-blue-darker font-bold text-sm mb-2"
         >Re-type Password</label>
       <input 
         type="password" 
@@ -60,8 +69,9 @@
         id="fpassword2" 
         v-model="$v.formResponses.password2.$model" 
         autocomplete="section-register new-password"
-        class="border-blue-lighter border-b-2 pl-2 w-2/3">
-      <p v-if="errors" class="absolute pin-b pin-x text-center">
+        class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+      />
+      <p v-if="errors" class="absolute pin-b pin-x">
         <span class="error" v-if="!$v.formResponses.password2.required">This field is required. </span>
         <span class="error" v-if="!$v.formResponses.password2.sameAsPassword">Passwords must match.</span>
       </p>
@@ -76,13 +86,15 @@
         <label for="shopPassword" class="w-1/2 text-right pr-2">Shop Password:</label>
         <input type="text" name="shopPassword" id="shopPassword" v-model="shopPassword" class="w-1/2">
     </section> -->
-    <section class="relative px-4 pb-6 flex">
-      <button 
+    <section class="flex items-center justify-between">
+      <button
+        type="button"
         @click.prevent="submitRegisterForm" 
-        class="border-2 p-1 rounded border-blue mx-auto"
+        class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
         :disabled="uiState === 'form submitted'">
         Register
       </button>
+      <!-- <a href="#" class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">Forgot password?</a> -->
     </section>
   </form>
   <!-- TODO: Style this feedback -->
@@ -169,6 +181,6 @@ export default {
 
 <style lang="postcss" scoped>
 .error {
-  @apply text-red text-sm italic;
+  @apply text-red text-sm;
 }
 </style>
