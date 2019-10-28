@@ -1,7 +1,6 @@
 <template>
 <Modal :show="show" @close="cancel">
     <template v-slot:heading>Delete Shop?</template>
-    Auth Token: {{ token }}
     <template v-slot:buttons>
         <button @click="deleteOperator" class="bg-red-light px-4 py-2 border-red border-2 rounded-lg mr-2">
             Delete {{ operator.name }}
