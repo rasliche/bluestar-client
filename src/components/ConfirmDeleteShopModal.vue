@@ -27,7 +27,7 @@ export default {
             this.$emit('close')
         },
         async deleteOperator() {
-            await Api.delete(`/operators/${this.operator._id}`, {}, {
+            await Api.delete(`/operators/${this.operator._id}`, {
                 headers: {
                     Authorization: `Bearer: ${this.token}`
                 }

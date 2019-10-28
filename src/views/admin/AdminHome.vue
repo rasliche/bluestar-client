@@ -20,8 +20,8 @@
           >
           </CreateOperatorModal>
         </button>
-        <ul v-if="operators.length">
-          <li v-for="operator in operators" :key="operator._id">
+        <div v-if="operators.length">
+          <div v-for="operator in operators" :key="operator._id">
             <router-link
               :to="{ name: 'operator', params: { slug: operator.slug } }">
                 {{ operator.name }}
@@ -30,13 +30,12 @@
                 Delete Shop
                 <ConfirmDeleteShopModal 
                 :show="confirmDeleteModalOpen" 
-                @close="confirmDeleteModalOpen = false"
+                @close="confirmDeleteModalOpen = false; getOperators()"
                 :operator="operator">
                 </ConfirmDeleteShopModal>
             </button>
-
-          </li>
-        </ul>
+          </div>
+        </div>
         <p v-else>No operators yet.</p>
       </section>
 
