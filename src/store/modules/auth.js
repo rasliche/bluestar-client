@@ -75,15 +75,14 @@ const actions = {
     if (now >= expirationDate) {
       return;
     }
-    const { data } = await Api.get("/users/me", {
+    const { data: user } = await Api.get("/users/me", {
       headers: {
         Authorization: `Bearer: ${token}`
       }
     });
-    commit("setToken", data.token);
     dispatch(
       'user/setCurrentUser', 
-      data.user, 
+      user, 
       { root: true })
     dispatch('alert/setAlert', {
       type: 'success',
