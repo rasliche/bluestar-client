@@ -1,11 +1,11 @@
 <template>
   <div class="max-w-sm rounded overflow-hidden shadow-lg m-2">
-    <img
-      class="w-full"
-      src="https://tailwindcss.com/img/card-top.jpg"
-      alt="Sunset in the mountains"
-    />
     <router-link tag="div" :to="{ name: slug }" class="px-6 py-4">
+      <img
+        class="w-full"
+        src="https://tailwindcss.com/img/card-top.jpg"
+        alt="Sunset in the mountains"
+      />
       <div class="font-bold text-xl mb-2">{{ title }}</div>
       <p class="text-grey-darker text-base">
         {{ description }}
