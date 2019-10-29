@@ -65,7 +65,7 @@ const actions = {
       })
     }
   },
-  tryAutoLogin: async ({ commit, dispatch }) => {
+  tryAutoLogin: async ({ dispatch, }) => {
     const token = localStorage.getItem("bs-auth-token");
     if (!token) {
       return;
@@ -73,6 +73,7 @@ const actions = {
     const expirationDate = new Date(localStorage.getItem("bs-auth-time"));
     const now = new Date();
     if (now >= expirationDate) {
+      dispatch('logoutUser')
       return;
     }
     const { data: user } = await Api.get("/users/me", {
