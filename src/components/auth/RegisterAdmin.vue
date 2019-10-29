@@ -133,9 +133,6 @@ export default {
           password1: null,
           password2: null,
           adminPass: null,
-          // shopChoice: null,
-          // shopPassword: null,
-          // operators: []
         }
       }
     },
@@ -175,8 +172,6 @@ export default {
             email: this.formResponses.email,
             password: this.formResponses.password,
             adminPass: this.formResponses.adminPass
-            // shopChoice: this.shopChoice,
-            // shopPassword: this.shopPassword
           }
           this.uiState = 'form submitted'
           try {
