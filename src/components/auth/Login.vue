@@ -101,9 +101,9 @@ export default {
         };
         this.uiState = 'form submitted'
         try {
-          const { data } = await Api.post("/auth/login", authData);
-          this.setCurrentUser(data.user)
-          this.authUser(data.token)
+          const { data: { token, _v, ...userData } } = await Api.post("/auth/login", authData);
+          this.setCurrentUser(userData)
+          this.authUser(token)
           this.setAlert({ 
             type: 'success', 
             text: 'You have been logged in.'
