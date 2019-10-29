@@ -109,9 +109,7 @@ export default {
             text: 'You have been logged in.'
           })
         } catch (error) {
-          const { message } = error.response.data
-          console.log(error.response)
-          this.formFeedback = message
+          console.log(error)
         }
       }
     }
