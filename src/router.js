@@ -64,9 +64,9 @@ export default new Router({
     //   // },
     //   component: () => import(/* webpackChunkName: "operators" */ "./views/Operators.vue")
     // },
-    // {
-    //   path: "/operators/:slug",
-    //   name: "operator",
+    {
+      path: "/operators/:slug",
+      name: "operator",
     //   // beforeEnter (to, from, next) {
     //   //   if (store.state.token) {
     //   //     next()
@@ -74,12 +74,12 @@ export default new Router({
     //   //     next('/login')
     //   //   }
     //   // },
-    //   // route level code-splitting
-    //   // this generates a separate chunk (operator.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () =>
-    //     import(/* webpackChunkName: "operator" */ "./views/Operator.vue")
-    // },
+    // route level code-splitting
+    // this generates a separate chunk (operator.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "operator" */ "./views/Operator.vue")
+    },
     // {
     //   path: "/news",
     //   name: "news",
