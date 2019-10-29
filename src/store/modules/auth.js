@@ -65,11 +65,12 @@ const actions = {
       })
     }
   },
-  tryAutoLogin: async ({ dispatch, }) => {
+  tryAutoLogin: async ({ commit, dispatch, }) => {
     const token = localStorage.getItem("bs-auth-token");
     if (!token) {
       return;
     }
+    commit('setToken', token)
     const expirationDate = new Date(localStorage.getItem("bs-auth-time"));
     const now = new Date();
     if (now >= expirationDate) {
