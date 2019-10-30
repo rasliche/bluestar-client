@@ -2,7 +2,9 @@
   <div>
     <router-link :to="{ name: 'admin' }">Return to Admin</router-link>
     <h1>This is a single operator</h1>
-    <p>Name: {{ name }}</p>
+    <section>
+      <p v-for="(value, name) in operatorWithoutInternals" :key="name">{{ name }}: {{ value }}</p>
+    </section>
   </div>
 </template>
 
