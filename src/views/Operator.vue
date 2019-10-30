@@ -21,10 +21,16 @@
 
 <script>
 import Api from "../services/Api";
+import ConfirmDeleteShopModal from "@/components/ConfirmDeleteShopModal"
 
 export default {
+  name: "operator",
+  components: {
+    ConfirmDeleteShopModal
+  },
   data() {
     return {
+      confirmDeleteModalOpen: false,
       loading: true,
       name: null,
       slug: null,
