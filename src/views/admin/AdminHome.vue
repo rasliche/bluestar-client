@@ -26,6 +26,7 @@
               :to="{ name: 'operator', params: { slug: operator.slug } }">
                 {{ operator.name }}
             </router-link>
+            <!-- TODO: Stats on operator (date contacted, staffers done) -->
           </div>
         </div>
         <p v-else>No operators yet.</p>
