@@ -37,9 +37,12 @@ export default {
       programs: []
     };
   },
-  async mounted() {
-    this.loading = true;
-    const { data } = await Api.get(
+  computed: {
+    operatorWithoutInternals() {
+      const { _id, __v, ...restOfOperator} = this.operator
+      return restOfOperator
+    }
+  },
       `http://localhost:3000/api/operators/${this.$route.params.slug}`
     );
     this.name = data.name;
