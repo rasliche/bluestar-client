@@ -26,14 +26,6 @@
               :to="{ name: 'operator', params: { slug: operator.slug } }">
                 {{ operator.name }}
             </router-link>
-            <button @click="confirmDeleteModalOpen = true">
-                Delete Shop
-                <ConfirmDeleteShopModal 
-                :show="confirmDeleteModalOpen" 
-                @close="confirmDeleteModalOpen = false; getOperators()"
-                :operator="operator">
-                </ConfirmDeleteShopModal>
-            </button>
           </div>
         </div>
         <p v-else>No operators yet.</p>
