@@ -39,9 +39,7 @@ export default {
     return {
       confirmDeleteModalOpen: false,
       loading: true,
-      name: null,
-      slug: null,
-      programs: []
+      operator: { }, // for reactivity, populated on created hook
     };
   },
   computed: {
@@ -50,12 +48,16 @@ export default {
       return restOfOperator
     }
   },
+  async created() {
+    this.loading = true
+    const { data: operator } = await Api.get(
       `http://localhost:3000/api/operators/${this.$route.params.slug}`
-    );
-    this.name = data.name;
-    this.slug = data.slug;
-    this.programs = data.programs;
-    this.loading = false;
+    )
+    console.log(this.operator)
+    for (let key of Object.keys(operator)) {
+      this.$set(this.operator, key, operator[key])
+    }
+    this.loading = false
   }
 };
 </script>
