@@ -90,7 +90,7 @@
         class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
       />
       <p v-if="errors" class="absolute pin-b pin-x">
-        <span class="error" v-if="!$v.formResponses.fadminPass.required">This field is required.</span>
+        <span class="error" v-if="!$v.formResponses.adminPass.required">This field is required.</span>
       </p>
     </section>
 
