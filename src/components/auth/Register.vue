@@ -104,6 +104,8 @@
 </template>
 
 <script>
+import Api from '../../services/Api'
+import { mapActions } from 'vuex'
 import { 
     required,
     minLength,
@@ -153,6 +155,9 @@ export default {
         }
     },
     methods: {
+      ...mapActions('alert', ['setAlert']),
+      ...mapActions('user', ['setCurrentUser']),
+      ...mapActions('auth', ['authUser']),
       async submitRegisterForm() {
         this.formTouched = !this.$v.formResponses.$anyDirty
         this.errors = this.$v.formResponses.$anyError
@@ -161,13 +166,19 @@ export default {
           const formData = {
             name: this.formResponses.name,
             email: this.formResponses.email,
-            password: this.password,
+            password: this.formResponses.password1,
             // shopChoice: this.shopChoice,
             // shopPassword: this.shopPassword
           }
           this.uiState = 'form submitted'
           try {
-            console.log("send form data to register here")
+            const { data: { token, _v, ...userData } } = await Api.post("/users", formData);
+            this.setCurrentUser(userData)
+            this.authUser(token)
+            this.setAlert({ 
+              type: 'success', 
+              text: 'You have been logged in.'
+            })
             console.log(formData)
           } catch (error) {
             console.log('got here due to an error: ', error)
