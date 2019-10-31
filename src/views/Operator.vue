@@ -13,15 +13,15 @@
         class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
         >
           Delete Shop
-        <!-- This modal should send a request to archive a shop to the API
-        If successful, remove from the displayed list.
-        what TODO if unsuccessful? -->
-        <ConfirmDeleteShopModal 
-          :show="confirmDeleteModalOpen" 
-          @close="confirmDeleteModalOpen = false"
-          :operator="operator">
-        </ConfirmDeleteShopModal>
-    </button>
+          <!-- This modal should send a request to archive a shop to the API
+          If successful, remove from the displayed list.
+          what TODO if unsuccessful? -->
+          <ConfirmDeleteShopModal 
+            :show="confirmDeleteModalOpen" 
+            @close="confirmDeleteModalOpen = false"
+            :operator="operator">
+          </ConfirmDeleteShopModal>
+      </button>
     </section>
   </div>
 </template>
@@ -51,7 +51,7 @@ export default {
   async created() {
     this.loading = true
     const { data: operator } = await Api.get(
-      `http://localhost:3000/api/operators/${this.$route.params.slug}`
+      `/operators/${this.$route.params.slug}`
     )
     console.log(this.operator)
     for (let key of Object.keys(operator)) {
