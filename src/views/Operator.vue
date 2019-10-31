@@ -5,8 +5,14 @@
     <section>
       <p v-for="(value, name) in operatorWithoutInternals" :key="name">{{ name }}: {{ value }}</p>
     </section>
-    <button @click="confirmDeleteModalOpen = true">
-        Delete Shop {{ operator }}
+
+    <h2>Danger Zone</h2>
+    <section class="border border-red flex items-center justify-between">
+      <button 
+        @click="confirmDeleteModalOpen = true"
+        class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
+        >
+          Delete Shop
         <!-- This modal should send a request to archive a shop to the API
         If successful, remove from the displayed list.
         what TODO if unsuccessful? -->
@@ -16,6 +22,7 @@
           :operator="operator">
         </ConfirmDeleteShopModal>
     </button>
+    </section>
   </div>
 </template>
 
