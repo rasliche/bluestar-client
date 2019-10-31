@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     operatorWithoutInternals() {
-      const { _id, __v, ...restOfOperator} = this.operator
+      const { _id, __v, slug, ...restOfOperator} = this.operator
       return restOfOperator
     }
   },
