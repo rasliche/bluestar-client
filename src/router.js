@@ -80,11 +80,11 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "operator" */ "./views/Operator.vue")
     },
-    // {
-    //   path: "/news",
-    //   name: "news",
-    //   component: () => import(/* webpackChunkName: "news" */ "./views/News.vue")
-    // },
+    {
+      path: "/news",
+      name: "news",
+      component: () => import(/* webpackChunkName: "news" */ "./views/News.vue")
+    },
     {
       path: "/training",
       beforeEnter (to, from, next) {
