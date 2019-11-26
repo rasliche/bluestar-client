@@ -44,7 +44,9 @@
           @click.prevent="submitLoginForm" 
           class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
           :disabled="uiState === 'formSubmitted'"
-          >Login
+          >
+          <span class="simple-spinner"></span>
+          Login
         </button>
         <a href="#" class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">Forgot password?</a>
       </section>
@@ -124,5 +126,19 @@ export default {
 
 .error-border {
   @apply border-red;
+}
+
+.simple-spinner {
+  height: 48px;
+  width: 48px;
+  border: 5px solid rgba(150, 150, 150, 0.2);
+  border-radius: 50%;
+  border-top-color: rgb(150, 150, 150);
+  animation: rotate 1s 0s infinite ease-in-out alternate;
+}
+
+@keyframes rotate {
+  0%   { transform: rotate(0);      }
+  100% { transform: rotate(360deg); }
 }
 </style>
