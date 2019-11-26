@@ -38,25 +38,25 @@
         </router-link>
       </div>
 
-      <div class="w-full inline-block px-4 lg:items-center lg:w-auto">
+      <div class="w-full inline-block lg:items-center lg:w-auto">
         <router-link 
           v-if="!isAuthenticated" 
           to="/login" 
-          class="p-2 mt-3 ml-4 no-underline text-blue-light rounded hover:bg-blue-lightest">
+          class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
             Login
         </router-link>
         <router-link
           v-if="isAuthenticated"
           :to="{ name: 'me' }"
-          class="p-2 mt-3 ml-4 no-underline text-blue-light rounded hover:bg-blue-lightest">
+          class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
             Me
         </router-link>
-        <a 
+        <button 
           v-if="isAuthenticated" 
           @click="logout" 
-          class="p-2 mt-3 ml-4 no-underline text-blue-light rounded hover:bg-blue-lightest cursor-pointer">
+          class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
             Logout
-        </a>
+        </button>
       </div>
     </div>
 
