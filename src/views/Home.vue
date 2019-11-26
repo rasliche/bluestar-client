@@ -6,6 +6,13 @@
         Welcome to the Blue Star training. This training is required for your
         dive/snorkel shop to be recognized as a Blue Star operator.
       </p>
+      <svg width="400" height="400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <!-- Dive flag triangles -->
+        <polygon points="50 130 50 300 320 300" stroke="red" fill="red" />
+        <polygon points="80 100 350 100 350 270" stroke="red" fill="red" />
+        <!-- Dive flag border -->
+        <rect x="50" y="100" width="300" height="200" stroke="lightblue" fill="transparent" stroke-width="5" />
+      </svg>
     </section>
     <transition name="fade" mode="out-in">
       <!-- These two elements have the same tag name, so they need the 'key' attribute so Vue can tell them apart and transition -->
