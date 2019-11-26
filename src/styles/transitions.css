@@ -18,10 +18,10 @@
 }
 
 /* Fades */
-/* Used by: Quiz and Questions */
+/* Used by: Quiz and Questions, Login and Register */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.25;
+  transition: opacity 0.5;
 }
 
 .fade-enter,

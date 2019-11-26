@@ -134,7 +134,7 @@
 
       <BSImage imageSource="hermitcrab.jpg" />
       <BSImage imageSource="nassaugrouper.jpg" />
-      <div class="mx-auto pt-4 mt-4 border-t-2 border-blue">
+      <section class="flex items-center justify-between mx-auto pt-4 mt-4 border-t-2 border-blue">
         <button
           @click="quizMode = true"
           class="border border-green bg-green-light p-2 m-2 rounded"
@@ -152,7 +152,9 @@
             />
           </Modal>
         </button>
-      </div>
+        <p>if previousScore && not qualified for current year, show score and suggest retaking the quiz.</p>
+        <p>if previous score is good, show score, let them retake quiz.</p>
+      </section>
     </article>
   </div>
 </template>
