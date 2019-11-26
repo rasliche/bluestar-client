@@ -46,7 +46,7 @@
           :disabled="uiState === 'formSubmitted'"
           >
           <span 
-            v-if="uiState==='submitClicked'" 
+            v-if="uiState==='submit clicked'" 
             class="simple-spinner">
           </span>
           Login
