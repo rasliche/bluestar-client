@@ -3,6 +3,7 @@
     <BSLessonCard
       key="about-fknms"
       title="About FKNMS"
+      thumbnail="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/mangroves.jpg"
       description="FKNMS is a large marine protected area."
       :programs="['diving', 'fishing']"
       slug="about-fknms"
@@ -10,6 +11,7 @@
     <BSLessonCard
       key="regulations-and-zones"
       title="Regulations and Zones"
+      thumbnail="https://res.cloudinary.com/duzmgsio4/image/upload/v1562004372/regulations-and-zones/intro.jpg"
       description="Know the different rules that apply to different zones."
       :programs="['diving', 'fishing']"
       slug="regulations-and-zones"
