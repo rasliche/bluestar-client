@@ -25,7 +25,16 @@
 <script>
 export default {
     name: 'BSLessonCard',
-    props: ['slug', 'title', 'programs', 'thumbnail', 'description']
+    props: {
+      slug: String,
+      title: String,
+      programs: Array, 
+      thumbnail: {
+        type: String,
+        default: 'https://floridakeys.noaa.gov/onthewater/bs_logomed.jpg'
+      }, 
+      description: String
+    }
 }
 </script>
 
