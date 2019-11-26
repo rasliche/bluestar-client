@@ -17,7 +17,9 @@
     <transition name="fade" mode="out-in">
       <!-- These two elements have the same tag name, so they need the 'key' attribute so Vue can tell them apart and transition -->
       <section class="sm:w-5/6 md:w-3/4 lg:w-1/2 w-full mx-auto px-2" key="forms" v-if="!isAuthenticated">
+      <!-- <transition name="fade" mode="out-in"> -->
         <Component :is="currentComponent" class="mx-auto"></Component>
+      <!-- </transition> -->
         <p class="text-xs pt-4 text-center" v-if="currentComponent === 'Login'">Do you need to <span class="underline cursor-pointer" @click="currentComponent = 'Register'">register</span> first?</p>
         <p class="text-xs pt-4 text-center" v-else>If you are registered, you can just <span class="underline cursor-pointer" @click="currentComponent = 'Login'">login</span>.</p>
       </section>
