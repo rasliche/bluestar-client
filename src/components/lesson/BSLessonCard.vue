@@ -1,9 +1,9 @@
 <template>
   <div class="max-w-sm rounded overflow-hidden shadow-lg m-2">
-    <router-link tag="div" :to="{ name: slug }" class="px-6 py-4">
+    <router-link tag="div" :to="{ name: slug }" class="px-6 py-4 cursor-pointer">
       <img
-        class="w-full"
-        src="https://tailwindcss.com/img/card-top.jpg"
+        class="w-full object-cover"
+        :src="thumbnail"
         alt="Sunset in the mountains"
       />
       <div class="font-bold text-xl mb-2">{{ title }}</div>
