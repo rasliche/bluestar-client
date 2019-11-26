@@ -45,10 +45,10 @@
           class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
           :disabled="uiState === 'formSubmitted'"
           >
-          <span 
-            v-if="uiState==='submit clicked'" 
+          <div 
+            v-if="uiState==='form submitted'" 
             class="simple-spinner">
-          </span>
+          </div>
           Login
         </button>
         <a href="#" class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">Forgot password?</a>
