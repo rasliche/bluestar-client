@@ -17,7 +17,7 @@
 <script>
 import AppNav from "@/components/AppNav.vue";
 import AppFooter from "@/components/AppFooter.vue";
-import Alert from "@/components/Alert.vue";
+import Alert from "@/components/Alert/Alert.vue";
 import { createNamespacedHelpers } from 'vuex'
 const { mapState } = createNamespacedHelpers('alert')
 
