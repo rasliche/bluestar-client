@@ -15,7 +15,7 @@ const actions = {
     setAlert: ({ commit, }, payload) => {
         const timer = setTimeout(() => {
             commit('clearAlertState')
-        }, 5000)
+        }, 7000)
 
         commit('setAlertState', {
             type: payload.type,
