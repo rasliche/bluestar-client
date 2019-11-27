@@ -2,7 +2,7 @@
   <div id="app">
     <AppNav />
 
-    <router-view></router-view>
+    <router-view class="px-2"></router-view>
 
     <AppFooter />
     <!-- Notifications and Portals -->
