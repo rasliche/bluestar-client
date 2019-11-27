@@ -2,9 +2,6 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 
-// lessons
-import TrainingHome from "./views/lessons/TrainingHome.vue";
-
 import store from "./store/index";
 
 Vue.use(Router);
@@ -87,6 +84,7 @@ export default new Router({
     },
     {
       path: "/training",
+      name: "training",
       beforeEnter (to, from, next) {
         if (store.getters['auth/isAuthenticated']) {
           next()
@@ -95,28 +93,11 @@ export default new Router({
         }
       },
       component: () =>
-        import(/* webpackChunkName: "training" */ "./views/Training.vue"),
-      children: [
-        { path: "", name: "training", component: TrainingHome },
-        { 
-          path: "about-fknms", 
-          name: "about-fknms", 
-          component: () => import(/* webpackChunkName: "about-fknms" */ "./views/lessons/AboutFKNMS.vue") 
-        },
-        { 
-          path: "reef-etiquette", 
-          name: "reef-etiquette", 
-          component: () => import(/* webpackChunkName: "reef-etiquette" */ "./views/lessons/ReefEtiquette.vue") 
-        },
-        {
-          path: "regulations-and-zones",
-          name: "regulations-and-zones",
-          component: () => import(/* webpackChunkName: "regulations-and-zones" */ "./views/lessons/RegulationsAndZones.vue")
-        }
-      ]
+      import(/* webpackChunkName: "training" */ "./views/Training.vue"),
     },
     {
-      path: "/admin",
+      path: "/lesson/create",
+      name: "create-lesson",
       beforeEnter (to, from, next) {
         if (store.getters['auth/isAuthenticated'] && store.getters['user/isAdmin']) {
           next()
@@ -124,14 +105,37 @@ export default new Router({
           next('/login')
         }
       },
-      component: () =>
-        import(/* webpackChunkName: "admin" */ "./views/Admin.vue"),
-      children: [
-        { path: '', name: 'admin', component: () => import(/* webpackChunkName: "admin" */ "./views/admin/AdminHome.vue") },
-        // { path: 'lesson/new', name: 'lessoncreate', component: () => import(/* webpackChunkName: "lessoncreate" */ "./views/admin/CreateLesson.vue") },
-        // { path: 'operator/new', name: 'operatorcreate', component: () => import(/* webpackChunkName: "operatorcreate" */ "./views/admin/CreateOperator.vue") },
-        // { path: 'quiz/new', name: 'quizcreate', component: () => import(/* webpackChunkName: "quizcreate" */ "./views/admin/CreateQuiz.vue") },
-      ]
+      component: () => import(/* webpackChunkName: "lesson" */ "./views/lesson/CreateLesson.vue")
+    },
+    {
+      path: "/lesson/:slug/edit",
+      name: "edit-lesson",
+      beforeEnter (to, from, next) {
+        if (store.getters['auth/isAuthenticated'] && store.getters['user/isAdmin']) {
+          next()
+        } else {
+          next('/login')
+        }
+      },
+      component: () => import(/* webpackChunkName: "lesson" */ "./views/lesson/EditLesson.vue")
+    },
+    {
+      path: "/lesson/:slug",
+      props: true,
+      name: "view-lesson",
+      component: () => import(/* webpackChunkName: "lesson" */ "./views/lesson/ViewLesson.vue")
+    },
+    {
+      path: "/admin",
+      name: 'admin',
+      beforeEnter (to, from, next) {
+        if (store.getters['auth/isAuthenticated'] && store.getters['user/isAdmin']) {
+          next()
+        } else {
+          next('/login')
+        }
+      },
+      component: () => import(/* webpackChunkName: "admin" */ "./views/Admin.vue"),
     },
     {
       path: "/design",
