@@ -10,7 +10,13 @@ import TrainingNav from "@/components/TrainingNav.vue";
 
 export default {
   components: {
-    TrainingNav
+  async beforeRouteEnter (to, from, next) {
+    const { data } = await Api.get('/lessons');
+    next(vm => {
+      // access to component instance via `vm`
+      vm.$data.lessons = data
+    })
+  },
   }
 };
 </script>
