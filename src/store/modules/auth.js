@@ -37,7 +37,7 @@ const actions = {
       commit("authUser", data);
       dispatch('alert/setAlert', {
         type: 'success',
-        text: 'You have created a new account and been logged in.'
+        text: 'Account created and logged in.'
       })
       const now = new Date();
       const expirationDate = new Date(now.getTime() + 7200000);
@@ -61,7 +61,7 @@ const actions = {
     } catch (err) {
       dispatch('alert/setAlert', {
         type: 'error',
-        text: 'There was an error logging in. Please try again.'
+        text: 'Error. Please try again.'
       })
     }
   },
@@ -88,7 +88,7 @@ const actions = {
       { root: true })
     dispatch('alert/setAlert', {
       type: 'success',
-      text: 'You have been automatically logged in. Make sure to Logout if this is a shared computer.'
+      text: 'Logged in.'
       }, 
       { root: true })
   },
@@ -99,7 +99,7 @@ const actions = {
     dispatch('user/clearCurrentUser', {}, { root: true })
     dispatch('alert/setAlert', {
       type: 'success',
-      text: 'You have been logged out.'
+      text: 'Logged out.'
     }, { root: true })
     router.replace("/");
   },  
