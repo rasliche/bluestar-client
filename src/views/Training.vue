@@ -1,15 +1,32 @@
 <template>
-  <div class="training">
-    <TrainingNav v-if="this.$route.name !== 'training'" />
-    <router-view></router-view>
+  <div class="flex flex-wrap">
+    <!-- TODO: Allow cards to be filtered -->
+    <BSLessonCard
+      v-for="lesson in lessons"
+      :key="lesson._id"
+      :title="lesson.title"
+      thumbnail="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/mangroves.jpg"
+      :description="lesson.description"
+      :programs="lesson.programs"
+      :slug="lesson.slug"
+    />
   </div>
 </template>
 
 <script>
-import TrainingNav from "@/components/TrainingNav.vue";
+import Api from '@/services/Api'
+import BSLessonCard from "@/components/lesson/BSLessonCard.vue";
+import { mapGetters, } from "vuex"
 
 export default {
   components: {
+    BSLessonCard
+  },
+  data() {
+    return {
+      lessons: []
+    }
+  },
   async beforeRouteEnter (to, from, next) {
     const { data } = await Api.get('/lessons');
     next(vm => {
@@ -17,6 +34,12 @@ export default {
       vm.$data.lessons = data
     })
   },
+  // async created() {
+    
+  //   this.lessons = data;
+  // },
+  computed: {
+    
   }
 };
 </script>
