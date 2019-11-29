@@ -1,21 +1,21 @@
 <template>
   <Modal :show="show" @close="cancel">
     <template v-slot:heading>
-      <h1 class="text-center pb-8">Create Operator</h1>
+      <h1 class="text-center pb-3">Create Operator</h1>
     </template>
     <template v-slot:default>
-      <form>
-        <section class="relative px-4 pb-8 flex">
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <section class="relative mb-6 pb-3">
           <label 
             for="fname"
-            class="text-blue-darker w-1/3 text-right pr-4"
+            class="block text-blue-darker font-bold text-sm mb-2"
           >Name</label>
           <input 
             type="text"
             name="fname" 
             id="fname" 
             v-model.lazy="$v.formResponses.name.$model"
-            class="border-blue-lighter border-b-2 pl-2 w-2/3"
+            class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
           />
           <p v-if="errors" class="absolute pin-b pin-x text-center">
             <span class="text-red text-sm" v-if="!$v.formResponses.name.required">this field is required</span>
