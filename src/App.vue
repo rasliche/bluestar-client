@@ -36,5 +36,6 @@ export default {
 };
 </script>
 
+<style src="./styles/accessibility.css"></style>
 <style src="./styles/styles.css"></style>
 <style src="./styles/transitions.css"></style>
