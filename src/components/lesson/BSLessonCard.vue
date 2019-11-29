@@ -4,7 +4,7 @@
       <img
         class="w-full object-cover"
         :src="thumbnail"
-        alt="Sunset in the mountains"
+        alt=""
       />
       <div class="font-bold text-xl mb-2">{{ title }}</div>
       <p class="text-grey-darker text-base">
@@ -15,9 +15,9 @@
       <span
         v-for="program in programs"
         :key="program"
-        class="inline-block bg-blue-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2"
-        >#{{ program }}</span
-      >
+        class="inline-block bg-blue-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2">
+          #{{ program }}
+        </span>
     </div>
   </div>
 </template>
