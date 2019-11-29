@@ -1,43 +1,59 @@
 <template>
-  <div class="border-2 rounded w-1/2 mx-auto">
-    <h1 class="text-center">Create Quiz</h1>
-    <form>
-      <div>
-        <label for="title" class="text-blue-darker pr-2">Title</label>
+  <!-- <div class="w-full max-w-xs"> -->
+    <form class="bg-white rounded px-8 pt-6 pb-8 mb-4">
+      <section class="relative mb-6 pb-3">
+        <label 
+          for="title" 
+          class="block text-blue-darker font-bold text-sm mb-2">
+          Quiz Title
+        </label>
         <input
           type="text"
           name="title"
           id="title"
-          v-model="quiz.title"
-          class="border-blue-lighter border-b-2 pl-2"
+          v-model="$v.quiz.title.$model"
+          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-      </div>
-      <div>
-        <label for="description" class="text-blue-darker pr-2"
-          >Description</label
-        >
+        <p v-if="errors" class="absolute pin-b pin-x">
+          <span class="error" v-if="!$v.quiz.title.required">This field is required.</span>
+        </p>
+      </section>
+
+      <section class="relative mb-6 pb-3">
+        <label 
+          for="title" 
+          class="block text-blue-darker font-bold text-sm mb-2">
+          Quiz Description
+        </label>
         <input
           type="text"
           name="description"
           id="description"
-          v-model="quiz.description"
-          class="pl-2 border-b-2 border-blue-lighter"
+          v-model="$v.quiz.description.$model"
+          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-      </div>
-      <div>
-        <label for="passingScorePercent" class="text-blue-darker pr-2"
-          >Required %</label
-        >
+        <p v-if="errors" class="absolute pin-b pin-x">
+          <span class="error" v-if="!$v.quiz.description.required">This field is required. </span>
+          <span class="error" v-if="!$v.quiz.description.minLength">Field must have at least {{ $v.quiz.description.$params.minLength.min }} characters.</span>
+        </p>
+      </section>
+      
+      <section>
+        <label 
+          for="passingScorePercent" 
+          class="block text-blue-darker font-bold text-sm mb-2">
+          Minimum %
+        </label>
         <input
           type="number"
           min="0"
           max="100"
           name="passingScorePercent"
           id="passingScorePercent"
-          v-model="quiz.passingScorePercent"
-          class="pl-2 border-b-2 border-blue-lighter"
+          v-model="$v.quiz.passingScorePercent.$model"
+          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-      </div>
+      </section>
       <div>
         <h3>Questions</h3>
         <div v-for="(question, index) in quiz.questions" :key="index">
@@ -47,7 +63,7 @@
             v-for="(answer, index) in question.answers"
             :key="index"
           >
-            {{ answer.isRight ? "x" : "" }} {{ answer.text }}
+            {{ answer.isRight ? "✅" : "❌" }} {{ answer.text }}
           </p>
         </div>
         <div>
@@ -61,7 +77,7 @@
           </div>
           <div v-for="(answer, index) in question.answers" :key="index">
             <p :class="{ 'bg-green-lightest': answer.isRight }">
-              {{ answer.isRight ? "V" : "" }} {{ answer.text }}
+              {{ answer.isRight ? "✅" : "❌" }} {{ answer.text }}
             </p>
           </div>
           <div>
@@ -102,19 +118,31 @@
         Create
       </button>
     </form>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
+import Api from '../../services/Api'
+import {
+  required,
+  minLength,
+  maxLength,
+  sameAs,
+  } from 'vuelidate/lib/validators/'
 export default {
+  name: "CreateQuiz",
   data() {
     return {
+      feedback: null,
+      uiState: 'submit not clicked',
+      errors: false,
+      formTouched: true,
       quiz: {
         title: "",
         description: "",
         passingScorePercent: 100,
         questions: [],
-        lessonId: 0
+        lessonSlug: ''
       },
       question: {
         text: "",
@@ -127,9 +155,23 @@ export default {
       }
     };
   },
+  validations: {
+    quiz: {
+      title: {
+        required,
+      },
+      description: {
+        required,
+        maxLength: maxLength(255),
+      },
+      passingScorePercent: {
+        required,
+      },
+    }
+  },
   methods: {
     addQuestion() {
-      if (this.question.answers.length >= 2) {
+      if (this.question.answers.length > 1) {
         this.quiz.questions.push({
           text: this.question.text,
           answers: this.question.answers,
