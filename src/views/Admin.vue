@@ -1,16 +1,9 @@
 <template>
   <main class="home">
     <h1>Admin Dashboard</h1>
-    <nav>
-      Do we need a nav here?
-      <!-- <router-link :to="{ name: 'operatorcreate' }">Create Operator</router-link>
-      <router-link :to="{ name: 'lessoncreate' }">Create Lesson</router-link>
-      <router-link :to="{ name: 'quizcreate' }">Create Quiz</router-link> -->
-    </nav>
-    <div>
-      <section >
-        <h3>Operators</h3>
+    <nav class="flex">
         <button 
+        class="pl-2 border"
           @click="createOperatorModalOpen = true"
           >
           Add a new operator
@@ -20,6 +13,18 @@
           >
           </CreateOperatorModal>
         </button>
+      <router-link
+        class="pl-2 border no-underline"
+        v-if="isAuthenticated && isAdmin" 
+        :to="{ name: 'create-lesson' }">
+          Create a Lesson
+      </router-link>
+      <!-- <router-link :to="{ name: 'operatorcreate' }">Create Operator</router-link>
+      <router-link :to="{ name: 'lessoncreate' }">Create Lesson</router-link>
+      <router-link :to="{ name: 'quizcreate' }">Create Quiz</router-link> -->
+    </nav>
+    <div>
+      <section >
         <div v-if="operators.length">
           <div v-for="operator in operators" :key="operator._id">
             <router-link
