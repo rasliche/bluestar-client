@@ -107,31 +107,31 @@
 import Api from '../../services/Api'
 import { mapActions } from 'vuex'
 import { 
-    required,
-    minLength,
-    maxLength,
-    sameAs
-    } from 'vuelidate/lib/validators'
+  required,
+  minLength,
+  maxLength,
+  sameAs
+  } from 'vuelidate/lib/validators'
 
 export default {
-    name: "Register",
-    data() {
-      return {
-        formFeedback: null,
-        uiState: 'submit not clicked',
-        errors: false,
-        formTouched: true,
-        formResponses: {
-          name: null,
-          email: null,
-          password1: null,
-          password2: null,
-          // shopChoice: null,
-          // shopPassword: null,
-          // operators: []
-        }
+  name: "Register",
+  data() {
+    return {
+      formFeedback: null,
+      uiState: 'submit not clicked',
+      errors: false,
+      formTouched: true,
+      formResponses: {
+        name: null,
+        email: null,
+        password1: null,
+        password2: null,
+        // shopChoice: null,
+        // shopPassword: null,
+        // operators: []
       }
-    },
+    }
+  },
     validations: {
         formResponses: {
             name: {
