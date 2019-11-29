@@ -2,15 +2,12 @@
 <div class="fixed pin-r pin-b m-4">
     <div 
         :class="[
-            `flex justify-between
+            `flex flex-row-reverse justify-between
             bg-${alertColor} text-${alertColor}-darkest 
             rounded-sm shadow-md 
             p-2
             opacity-75 hover:opacity-100`
             ]">
-        <div class="mr-2">
-            {{ text }}
-        </div>
         <button 
             :class="[
                 `cursor-pointer p-2 text-sm
@@ -19,6 +16,9 @@
             @click="clearAlert">
             x
         </button>
+        <div class="mr-2">
+            {{ text }}
+        </div>
     </div>
 </div>
 </template>
