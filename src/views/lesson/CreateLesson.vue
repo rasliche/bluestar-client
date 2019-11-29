@@ -236,7 +236,7 @@ export default {
                 published: this.published,
                 content: this.editor.getJSON(),
             });
-            this.$router.replace({ name: 'lesson', params: { slug: slug }})
+            this.$router.replace({ name: 'view-lesson', params: { slug: slug }})
         } catch (error) {
             console.log(error)
         }
