@@ -107,7 +107,8 @@
                 :preventBackgroundScrolling="false"
                 :show="quizModalOpen" 
                 @close="quizModalOpen = false">
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <CreateQuiz></CreateQuiz>
+                <!-- <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <section class="relative mb-6 pb-3">
                         <label 
                             for="title"
@@ -147,7 +148,7 @@
                             </label>
                         </div>
                     </section>
-                </form>
+                </form> -->
             </Modal>
         </button>
     </section>
@@ -156,7 +157,8 @@
 
 <script>
 import Api from "@/services/Api";
-import Modal from "@/components/Modal"
+import Modal from "@/components/Modal";
+import CreateQuiz from "@/components/quiz/CreateQuiz";
 import { Editor, EditorMenuBar, EditorContent } from "tiptap";
 import {
   Bold,
@@ -174,7 +176,7 @@ import {
   Link,
   Strike,
   History,
-} from 'tiptap-extensions'
+} from 'tiptap-extensions';
 
 
 export default {
@@ -182,7 +184,8 @@ export default {
   components: {
     EditorContent,
     EditorMenuBar,
-    Modal
+    Modal,
+    CreateQuiz,
   },
   data() {
     return {
