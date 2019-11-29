@@ -53,6 +53,7 @@
             @click="lessonDetailModalOpen = true">
             Details
             <Modal 
+                preventBackgroundScrolling="false" 
                 :show="lessonDetailModalOpen" 
                 @close="lessonDetailModalOpen = false">
                 <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -103,6 +104,7 @@
             @click="quizModalOpen = true">
             Quiz
             <Modal 
+                :preventBackgroundScrolling="false"
                 :show="quizModalOpen" 
                 @close="quizModalOpen = false">
                 <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
