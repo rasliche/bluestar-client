@@ -52,7 +52,7 @@
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
             @click="lessonDetailModalOpen = true">
             Details
-            <Modal 
+            <Modal
                 preventBackgroundScrolling="false" 
                 :show="lessonDetailModalOpen" 
                 @close="lessonDetailModalOpen = false">
@@ -219,8 +219,8 @@ export default {
     }
   },
   async created() {
-      const { data } = await Api.get("/programs");
-      this.programOptions = data;
+      const { data: programOptions } = await Api.get("/programs");
+      this.programOptions = programOptions;
   },
   beforeDestroy() {
       this.editor.destroy();
