@@ -2,17 +2,17 @@
   <main class="home">
     <h1>Admin Dashboard</h1>
     <nav class="flex">
-        <button 
+      <button 
         class="pl-2 border"
-          @click="createOperatorModalOpen = true"
-          >
-          Add a new operator
-          <CreateOperatorModal 
-            :show="createOperatorModalOpen" 
-            @close="createOperatorModalOpen = false"
-          >
-          </CreateOperatorModal>
-        </button>
+        @click="createOperatorModalOpen = true"
+        >
+        Add a new operator
+        <CreateOperatorModal 
+          :show="createOperatorModalOpen" 
+          @close="createOperatorModalOpen = false"
+        >
+        </CreateOperatorModal>
+      </button>
       <router-link
         class="pl-2 border no-underline"
         v-if="isAuthenticated && isAdmin" 
@@ -25,6 +25,7 @@
     </nav>
     <div>
       <section >
+        <h3>Operators</h3>
         <div v-if="operators.length">
           <div v-for="operator in operators" :key="operator._id">
             <router-link
@@ -45,22 +46,29 @@
         <!-- <UsersList :users="users" /> -->
       </section>
 
-      <section>
+      <section class="w-1/2">
         <h3>Lessons</h3>
-        <router-link v-if="isAuthenticated && isAdmin" :to="{ name: 'create-lesson' }">Create a Lesson</router-link>
         <div v-if="lessons.length">
           <div 
             v-for="lesson in lessons" 
             :key="lesson._id"
-            class="flex">
+            class="flex justify-between">
             <router-link
+              class=""
               :to="{
                 name: 'view-lesson',
                 params: { slug: lesson.slug }
               }">
               {{ lesson.title }}
             </router-link>
-            <router-link :to="{ name: 'edit-lesson', params: { slug: lesson.slug } }">Edit</router-link>
+            <router-link
+              class=""
+              :to="{ 
+                name: 'edit-lesson', 
+                params: { slug: lesson.slug } 
+                }">
+                Edit
+            </router-link>
           </div>
         </div>
         <p v-else>No lessons yet.</p>
