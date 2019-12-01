@@ -24,7 +24,9 @@ import {
   Link,
   Strike,
   History,
-} from 'tiptap-extensions'
+  Image,
+} from 'tiptap-extensions';
+import Iframe from "@/components/tiptap-extras/Iframe";
 
 export default {
   components: {
@@ -62,6 +64,9 @@ export default {
           new Link(),
           new Strike(),
           new History(),
+          new Image(),
+          // custom extensions tests
+          new Iframe(),
         ],
       editable: false,
       content: data.content
@@ -73,5 +78,15 @@ export default {
 };
 </script>
 
-<style>
+<style lang="postcss">
+.lesson-content > div {
+    @apply text-lg text-grey-darkest w-full leading-normal outline-none;
+    > * + *, li + li, li > p + p {
+        @apply mt-4;
+    }
+
+    iframe {
+      @apply mx-auto;
+    }
+}
 </style>
