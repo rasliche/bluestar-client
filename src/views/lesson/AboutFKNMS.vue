@@ -132,6 +132,8 @@
         divers.
       </p>
 
+      <p>How can you stay up to date with FKNMS? Follow us on twitter and facebook.</p>
+
       <BSImage imageSource="hermitcrab.jpg" />
       <BSImage imageSource="nassaugrouper.jpg" />
       <section class="flex items-center justify-between mx-auto pt-4 mt-4 border-t-2 border-blue">
