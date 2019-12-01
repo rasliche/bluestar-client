@@ -24,7 +24,7 @@
       <router-link :to="{ name: 'quizcreate' }">Create Quiz</router-link> -->
     </nav>
     <div>
-      <section >
+      <section class="w-1/2 pt-4">
         <h3>Operators</h3>
         <div v-if="operators.length">
           <div v-for="operator in operators" :key="operator._id">
@@ -41,20 +41,20 @@
         <p v-else>No operators yet.</p>
       </section>
 
-      <section>
+      <section class="w-1/2 pt-4">
         <h3>Users</h3>
         <!-- <UsersList :users="users" /> -->
       </section>
 
-      <section class="w-1/2">
+      <section class="w-1/2 pt-4">
         <h3>Lessons</h3>
         <div v-if="lessons.length">
-          <div 
+          <div
             v-for="lesson in lessons" 
             :key="lesson._id"
-            class="flex justify-between">
+            class="flex justify-between mt-1 px-2 py-1 hover:bg-blue-lighter rounded">
             <router-link
-              class=""
+              class="no-underline"
               :to="{
                 name: 'view-lesson',
                 params: { slug: lesson.slug }
@@ -62,7 +62,7 @@
               {{ lesson.title }}
             </router-link>
             <router-link
-              class=""
+              class="no-underline"
               :to="{ 
                 name: 'edit-lesson', 
                 params: { slug: lesson.slug } 
@@ -74,7 +74,7 @@
         <p v-else>No lessons yet.</p>
       </section>
 
-      <section>
+      <section class="w-1/2 pt-4">
         <h3>Quizzes</h3>
         <!-- <ul v-if="quizzes.length">
           <li v-for="quiz in quizzes" :key="quiz._id">{{ quiz.title }}</li>
@@ -82,11 +82,11 @@
         <p v-else>No quizzes yet.</p> -->
       </section>
 
-      <section>
+      <section class="w-1/2 pt-4">
         <h3>Posts</h3>
       </section>
 
-      <section>
+      <section class="w-1/2 pt-4">
         <h3>Events</h3>
       </section>
     </div>
