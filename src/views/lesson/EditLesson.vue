@@ -131,8 +131,9 @@ import {
   Link,
   Strike,
   History,
-} from 'tiptap-extensions'
-
+  Image,
+} from 'tiptap-extensions';
+import Iframe from "@/components/tiptap-extras/Iframe";
 
 export default {
   name: 'EditLesson',
@@ -183,6 +184,9 @@ export default {
           new Link(),
           new Strike(),
           new History(),
+          new Image(),
+          // custom extensions tests
+          new Iframe,
         ],
         content,
       });
