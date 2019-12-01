@@ -1,5 +1,10 @@
 <template>
   <article class="lesson">
+    <ScrollProgressBar 
+      @halfway.once="logThatStuff"
+      :useVerticalOffset="true"
+      offsetElement="app-nav">
+      </ScrollProgressBar>
     <h1 class="border-blue-lighter border-b-4 mb-4">{{ title }}</h1>
     <editor-content class="lesson-content" :editor="editor" />
   </article>
@@ -7,6 +12,7 @@
 
 <script>
 import Api from "@/services/Api";
+import ScrollProgressBar from "@/components/ScrollProgressBar/ScrollProgressBar"
 import { Editor, EditorContent } from "tiptap";
 import {
   Bold,
@@ -30,6 +36,7 @@ import Iframe from "@/components/tiptap-extras/Iframe";
 
 export default {
   components: {
+    ScrollProgressBar,
     EditorContent
   },
   props: {
@@ -43,6 +50,11 @@ export default {
       title: "",
       editor: null
     };
+  },
+  methods: {
+    logThatStuff() {
+      console.log('halfway')
+    }
   },
   async created() {
     const { data } = await Api.get(`/lessons/${this.slug}`);
