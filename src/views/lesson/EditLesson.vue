@@ -196,6 +196,18 @@ export default {
       this.editor.destroy();
   },
   methods: {
+    showImagePrompt(command) {
+      const src = prompt('Enter the url of your image here')
+      if (src !== null) {
+        command({ src })
+      }
+    },
+    showIframePrompt(command) {
+      const src = prompt('Enter the url of your embed here')
+      if (src !== null) {
+        command({ src })
+      }
+    },
       async editLesson() {
         console.log(this.editor.getJSON())
         try {
@@ -206,7 +218,7 @@ export default {
                 published: this.lesson.published,
                 content: this.editor.getJSON(),
             });
-            this.$router.replace({ name: 'view-lesson', params: { slug: slug }})
+            this.$router.push({ name: 'admin'})
         } catch (error) {
             console.log(error)
         }
@@ -239,7 +251,8 @@ export default {
 
 }
 
-.lesson-content {
+.lesson-content > div {
+    /* outline-none */
     @apply text-lg text-grey-darkest leading-normal;
     > * + *, li + li, li > p + p {
         @apply mt-4;
