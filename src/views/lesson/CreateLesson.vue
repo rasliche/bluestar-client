@@ -266,7 +266,6 @@ export default {
             @apply bg-grey-light text-grey-darkest;
         }
     }
-
 }
 
 .lesson-content {
