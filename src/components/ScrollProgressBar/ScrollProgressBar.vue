@@ -49,7 +49,14 @@ export default {
         }
       }
     },
+    // Extra props
+    useVerticalOffset: {
+        type: Boolean,
+        default: false,
   },
+    offsetElement: {
+        type: String,
+        default: '',
   },
   },
   data () {
@@ -69,6 +76,9 @@ export default {
       const eventWidth = Math.ceil(this.width)
       if (eventWidth === 0) {
         this.$emit('begin')
+      }
+      if (eventWidth === 50) {
+        this.$emit('halfway')
       }
       if (eventWidth === 100) {
         this.$emit('complete')
