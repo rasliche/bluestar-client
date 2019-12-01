@@ -53,11 +53,11 @@ export default {
     useVerticalOffset: {
         type: Boolean,
         default: false,
-  },
+    },
     offsetElement: {
         type: String,
         default: '',
-  },
+    },
   },
   data () {
     return {
@@ -73,6 +73,15 @@ export default {
   },
   methods: {
     handleScroll () {
+      // my changes
+      let offsetHeight = 0
+      if (this.useVerticalOffset) {
+        offsetHeight = document.getElementById(this.offsetElement).scrollHeight;
+      }
+      //add the - offsetHeight
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight - offsetHeight;
+      //add the - offsetHeight
+      this.width = ((window.scrollY - offsetHeight) / height) * 100
       const eventWidth = Math.ceil(this.width)
       if (eventWidth === 0) {
         this.$emit('begin')
