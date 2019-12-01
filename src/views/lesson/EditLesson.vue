@@ -19,6 +19,14 @@
             Underline
         </button>
         <button
+          @click="showImagePrompt(commands.image)">
+            Img
+        </button>
+        <button
+          @click="showIframePrompt(commands.iframe)">
+            Iframe
+        </button>
+        <button
           :class="{ 'is-active': isActive.heading({ level: 1 }) }"
           @click="commands.heading({ level: 1 })">
             H1
