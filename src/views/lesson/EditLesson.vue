@@ -45,7 +45,7 @@
     </editor-menu-bar>
 
     <editor-content class="lesson-content border border-black mt-4 min-h-full" :editor="editor" />
-    <section class="mt-4 border border-red flex items-center justify-between">
+    <section class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between">
         <button
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
             @click="editLesson">
@@ -81,9 +81,10 @@
                     <label 
                         for="description"
                         class="block text-blue-darker font-bold text-sm mb-2"
-                        >Description</label>
+                        >Short Description</label>
                     <input
                         type="text"
+                        spellcheck
                         name="description"
                         id="description"
                         v-model="lesson.description"
@@ -108,12 +109,14 @@
     </button>
 
     </section>
+    <CreateQuiz></CreateQuiz>
   </div>
 </template>
 
 <script>
 import Api from "@/services/Api";
 import Modal from "@/components/Modal"
+import CreateQuiz from "@/components/quiz/CreateQuiz"
 import { Editor, EditorMenuBar, EditorContent } from "tiptap";
 import {
   Bold,
@@ -140,7 +143,8 @@ export default {
   components: {
     EditorContent,
     EditorMenuBar,
-    Modal
+    Modal,
+    CreateQuiz,
   },
   data() {
     return {
@@ -251,7 +255,8 @@ export default {
 
 }
 
-.lesson-content > div {
+/* .lesson-content > div { */
+.ProseMirror {
     /* outline-none */
     @apply text-lg text-grey-darkest leading-normal;
     > * + *, li + li, li > p + p {
