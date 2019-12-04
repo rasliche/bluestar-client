@@ -6,7 +6,7 @@
 
                 <slot name="default"></slot>
 
-                <div class="text-center" v-if="!noCloseButton">
+                <div class="flex justify-between text-center" v-if="!noCloseButton">
                     <slot name="buttons"></slot>
                     <button @click="cancel" class="bg-gray-light px-4 py-2 border-gray border-2 rounded-lg">
                         Close
