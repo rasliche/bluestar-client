@@ -19,10 +19,24 @@
             Underline
         </button>
         <button
+          @click="showImagePrompt(commands.image)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 fill-current icon-photo">
+                <path class="primary text-white" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm9 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+                <path class="secondary text-grey-darker" d="M15.3 12.3a1 1 0 0 1 1.4 0l2 2a1 1 0 0 1 .3.7v3a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 .3-.7l4-4a1 1 0 0 1 1.4 0l3.3 3.29 1.3-1.3z"></path>
+            </svg>
+        </button>
+        <button
+          @click="showIframePrompt(commands.iframe)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 fill-current icon-film">
+                <path class="primary text-white" d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v2h2V5H4zm0 4v2h2V9H4zm0 4v2h2v-2H4zm0 4v2h2v-2H4zM18 5v2h2V5h-2zm0 4v2h2V9h-2zm0 4v2h2v-2h-2zm0 4v2h2v-2h-2z"></path>
+                <path class="secondary text-grey-darker" d="M9 5h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 8h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z"></path>
+            </svg>
+        </button>
+        <!-- <button
           :class="{ 'is-active': isActive.heading({ level: 1 }) }"
           @click="commands.heading({ level: 1 })">
             H1
-        </button>
+        </button> -->
         <button
           :class="{ 'is-active': isActive.heading({ level: 2 }) }"
           @click="commands.heading({ level: 2 })">
@@ -107,7 +121,6 @@
                 :preventBackgroundScrolling="false"
                 :show="quizModalOpen" 
                 @close="quizModalOpen = false">
-                <CreateQuiz></CreateQuiz>
                 <!-- <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <section class="relative mb-6 pb-3">
                         <label 
@@ -152,6 +165,7 @@
             </Modal>
         </button>
     </section>
+    <CreateQuiz></CreateQuiz>
   </div>
 </template>
 
@@ -226,6 +240,18 @@ export default {
       this.editor.destroy();
   },
   methods: {
+      showImagePrompt(command) {
+      const src = prompt('Enter the url of your image here')
+      if (src !== null) {
+        command({ src })
+      }
+    },
+    showIframePrompt(command) {
+      const src = prompt('Enter the url of your embed here')
+      if (src !== null) {
+        command({ src })
+      }
+    },
       async createLesson() {
         console.log(this.editor.getJSON())
         try {
