@@ -75,7 +75,7 @@ export default new Router({
     // this generates a separate chunk (operator.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
       component: () =>
-        import(/* webpackChunkName: "operator" */ "./views/Operator.vue")
+        import(/* webpackChunkName: "view-operator" */ "./views/Operator.vue")
     },
     {
       path: "/news",
@@ -105,7 +105,7 @@ export default new Router({
           next('/login')
         }
       },
-      component: () => import(/* webpackChunkName: "lesson" */ "./views/lesson/CreateLesson.vue")
+      component: () => import(/* webpackChunkName: "create-lesson" */ "./views/lesson/CreateLesson.vue")
     },
     {
       path: "/lesson/:slug/edit",
@@ -117,13 +117,13 @@ export default new Router({
           next('/login')
         }
       },
-      component: () => import(/* webpackChunkName: "lesson" */ "./views/lesson/EditLesson.vue")
+      component: () => import(/* webpackChunkName: "edit-lesson" */ "./views/lesson/EditLesson.vue")
     },
     {
       path: "/lesson/:slug",
       props: true,
       name: "view-lesson",
-      component: () => import(/* webpackChunkName: "lesson" */ "./views/lesson/ViewLesson.vue")
+      component: () => import(/* webpackChunkName: "view-lesson" */ "./views/lesson/ViewLesson.vue")
     },
     {
       path: "/admin",
