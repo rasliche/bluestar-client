@@ -1,6 +1,7 @@
 <template>
   <article class="lesson">
-    <ScrollProgressBar 
+    <!-- Set useVerticalOffset to "true" -->
+    <ScrollProgressBar
       @halfway.once="logThatStuff"
       :useVerticalOffset="true"
       offsetElement="app-nav">
