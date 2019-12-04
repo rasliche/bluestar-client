@@ -21,7 +21,7 @@
 
       <section class="relative mb-6 pb-3">
         <label 
-          for="title" 
+          for="description" 
           class="block text-blue-darker font-bold text-sm mb-2">
           Quiz Description
         </label>
@@ -38,7 +38,7 @@
         </p>
       </section>
       
-      <section>
+      <section class="relative mb-6 pb-3">
         <label 
           for="passingScorePercent" 
           class="block text-blue-darker font-bold text-sm mb-2">
@@ -54,54 +54,94 @@
           class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
       </section>
-      <div>
-        <h3>Questions</h3>
+
+      <section v-if="quiz.questions.length" class="relative mb-6 pb-3">
+        <!-- <label class="block text-blue-darker font-bold text-lg mb-2">
+          Questions
+        </label> -->
+        <!-- Accordion these questions -->
         <div v-for="(question, index) in quiz.questions" :key="index">
           <p>{{ question.text }}</p>
           <p
             :class="{ 'bg-green-lightest': answer.isRight }"
             v-for="(answer, index) in question.answers"
-            :key="index"
-          >
-            {{ answer.isRight ? "✅" : "❌" }} {{ answer.text }}
+            :key="index">
+            <svg v-if="answer.isRight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-check">
+              <circle cx="12" cy="12" r="10" class="text-green-light"></circle>
+              <path class="text-green-darker" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path>
+            </svg>
+            <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-close-circle">
+              <circle cx="12" cy="12" r="10" class="text-red-light"></circle>
+              <path class="text-red-darker" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
+            </svg>
+            {{ answer.text }}
           </p>
         </div>
-        <div>
-          <div>
-            <label for="text">Text</label>
+      </section>
+
+      <section class="relative mb-6 pb-3">
+          <section class="relative mb-6 pb-3">
+            <label 
+              for="questiontext"
+              class="block text-blue-darker font-bold text-sm mb-2">
+              Question Text
+            </label>
             <input
               type="text"
-              class="border-blue-lighter border-b-2 pl-2"
-              v-model="question.text"
-            />
-          </div>
+              name="questiontext"
+              class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              v-model="question.text"/>
+          </section>
           <div v-for="(answer, index) in question.answers" :key="index">
-            <p :class="{ 'bg-green-lightest': answer.isRight }">
-              {{ answer.isRight ? "✅" : "❌" }} {{ answer.text }}
+            <p
+              :class="{ 'bg-green-lightest': answer.isRight }"
+              v-for="(answer, index) in question.answers"
+              :key="index">
+              <svg v-if="answer.isRight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-check">
+                <circle cx="12" cy="12" r="10" class="text-green-light"></circle>
+                <path class="text-green-darker" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path>
+              </svg>
+              <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-close-circle">
+                <circle cx="12" cy="12" r="10" class="text-red-light"></circle>
+                <path class="text-red-darker" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
+              </svg>
+              {{ answer.text }}
             </p>
           </div>
-          <div>
-            <label for="answer">Answer</label>
+          <section class="relative mb-6 pb-3">
+            <label 
+              for="answertext"
+              class="block text-blue-darker font-bold text-sm mb-2">
+              Answer
+            </label>
             <input
               type="text"
-              class="border-blue-lighter border-b-2 pl-2"
-              v-model="answer.text"
-            />
-            <input
-              type="checkbox"
-              value="isRight"
-              v-model="answer.isRight"
-            />Correct?
-          </div>
-          <div>
-            <label for="text">The More You Know 🌈</label>
+              name="answertext"
+              class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              v-model="answer.text"/>
+            <label for="answerisright">
+              <input
+                type="checkbox"
+                name="answerisright"
+                value="isRight"
+                v-model="answer.isRight"/>
+                Correct?
+            </label>
+          </section>
+          <section class="relative mb-6 pb-3">
+            <label 
+              for="themoreyouknow"
+              class="block text-blue-darker font-bold text-sm mb-2">
+              The More You Know 🌈
+            </label>
             <input
               type="text"
-              class="border-blue-lighter border-b-2 pl-2"
+              name="themoreyouknow"
+              class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
               v-model="question.theMoreYouKnow"
             />
-          </div>
-        </div>
+          </section>
+        </section>
         <button @click.prevent="addAnswer" class="border-2 rounded border-blue">
           Add Answer
         </button>
@@ -112,7 +152,6 @@
         >
           Add Question
         </button>
-      </div>
 
       <button @click.prevent="submitQuiz" class="border-2 rounded border-blue">
         Create
@@ -129,6 +168,7 @@ import {
   maxLength,
   sameAs,
   } from 'vuelidate/lib/validators/'
+
 export default {
   name: "CreateQuiz",
   data() {
@@ -204,3 +244,9 @@ export default {
   }
 };
 </script>
+
+<style lang="postcss" scoped>
+.error {
+  @apply text-red text-sm italic;
+}
+</style>
