@@ -50,7 +50,12 @@
       </div>
     </editor-menu-bar>
 
-    <editor-content class="lesson-content border border-black mt-4 min-h-full" :editor="editor" />
+    <editor-content  
+        class="lesson-content 
+          shadow appearance-none rounded border-blue-lighter border 
+          w-full min-h-full m-3 py-2 px-3 
+          focus:outline-none focus:shadow-outline"
+        :editor="editor" />
     <section class="mt-4 border border-red flex items-center justify-between">
         <button
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
