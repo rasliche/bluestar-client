@@ -20,6 +20,7 @@ import AppFooter from "@/components/AppFooter.vue";
 import Alert from "@/components/Alert/Alert.vue";
 import { createNamespacedHelpers } from 'vuex'
 const { mapState } = createNamespacedHelpers('alert')
+const { mapActions } = createNamespacedHelpers('auth')
 
 export default {
   components: {
@@ -28,11 +29,19 @@ export default {
     Alert,
   },
   created() {
-    this.$store.dispatch("auth/tryAutoLogin");
+    this.tryAutoLogin()
+  },
+  methods: {
+    ...mapActions([
+      'tryAutoLogin',
+    ]),
   },
   computed: {
-    ...mapState(['alert', 'timer'])
-  }
+    ...mapState([
+      'alert', 
+      'timer',
+      ]),
+  },
 };
 </script>
 
