@@ -56,7 +56,7 @@ export default {
     },
     offsetElement: {
         type: String,
-        default: '',
+        default: null,
     },
   },
   data () {
