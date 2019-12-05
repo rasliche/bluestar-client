@@ -1,24 +1,70 @@
 <template>
-  <div>
-    <section class="relative mb-6 pb-3">
-        <label 
-            for="questiontext"
-            class="block text-blue-darker font-bold text-sm mb-2">
-            Question Text
-        </label>
-        <input
-            type="text"
-            name="questiontext"
-            class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            v-model="$v.question.text.$model"
-            />
-        <p v-if="errors.question" class="absolute pin-b pin-x">
-            <span class="error" v-if="!$v.question.text.required">This field is required.</span>
-        </p>
-    </section>
-    <div>
-        <!-- v-for="(answer, index) in question.answers" :key="index" -->
-        <ul>
+  <div class="flex flex-wrap">
+      <div class="flex flex-wrap w-full md:w-2/3">
+        <section class="relative w-full mb-6 pb-3">
+            <label 
+                for="questiontext"
+                class="block text-blue-darker font-bold text-sm mb-2">
+                Question Text
+            </label>
+            <input
+                type="text"
+                name="questiontext"
+                class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                v-model="$v.question.text.$model"
+                />
+            <p v-if="errors.question" class="absolute pin-b pin-x">
+                <span class="error" v-if="!$v.question.text.required">This field is required.</span>
+            </p>
+        </section>
+        <section class="relative w-5/6 mb-6 pb-3">
+            <label 
+                for="answertext"
+                class="block text-blue-darker font-bold text-sm mb-2">
+                Answer
+            </label>
+            <input
+                type="text"
+                name="answertext"
+                class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                v-model="$v.question.formAnswer.text.$model"
+                />
+            <p v-if="errors.formAnswer" class="absolute pin-b pin-x">
+                <span class="error" v-if="!$v.question.formAnswer.text.required">This field is required.</span>
+            </p>
+        </section>
+        <section class="relative w-1/6 mb-6 pb-3">
+            <input
+                type="checkbox"
+                name="answerisright"
+                value="isRight"
+                v-model="$v.question.formAnswer.isRight.$model"
+                >
+            <label 
+                for="answerisright"
+                class="text-blue-darker font-bold text-sm mb-2">
+                Correct?
+            </label>
+        </section>
+        <section class="relative w-full mb-6 pb-3">
+            <label 
+                for="themoreyouknow"
+                class="block text-blue-darker font-bold text-sm mb-2">
+                The More You Know 🌈
+            </label>
+            <input
+                type="text"
+                name="themoreyouknow"
+                class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                v-model="$v.question.theMoreYouKnow.$model"
+                />
+            <p v-if="errors.question" class="absolute pin-b pin-x">
+                <span class="error" v-if="!$v.question.theMoreYouKnow.required">This field is required.</span>
+            </p>
+        </section>
+    </div>
+    <div class="flex flex-wrap w-full md:w-1/3">
+        <ul class="w-full mb-6 list-reset">
             <li
                 :class="{ 'bg-green-lightest': answer.isRight }"
                 v-for="(answer, index) in question.answers"
@@ -35,55 +81,10 @@
             </li>
         </ul>
     </div>
-    <section class="relative mb-6 pb-3">
-    <label 
-        for="answertext"
-        class="block text-blue-darker font-bold text-sm mb-2">
-        Answer
-    </label>
-    <input
-        type="text"
-        name="answertext"
-        class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-        v-model="$v.question.formAnswer.text.$model"
-        />
-    <p v-if="errors.formAnswer" class="absolute pin-b pin-x">
-        <span class="error" v-if="!$v.question.formAnswer.text.required">This field is required.</span>
-    </p>
-    </section>
-    <section class="relative mb-6 pb-3">
-    <input
-        type="checkbox"
-        name="answerisright"
-        value="isRight"
-        v-model="$v.question.formAnswer.isRight.$model"
-        >
-    <label 
-        for="answerisright"
-        class="text-blue-darker font-bold text-sm mb-2">
-        Correct?
-    </label>
-    </section>
-    <section class="relative mb-6 pb-3">
-    <label 
-        for="themoreyouknow"
-        class="block text-blue-darker font-bold text-sm mb-2">
-        The More You Know 🌈
-    </label>
-    <input
-        type="text"
-        name="themoreyouknow"
-        class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-        v-model="$v.question.theMoreYouKnow.$model"
-        />
-        <p v-if="errors.question" class="absolute pin-b pin-x">
-            <span class="error" v-if="!$v.question.theMoreYouKnow.required">This field is required.</span>
-        </p>
-    </section>
     <section class="flex items-center justify-between">
         <button 
           @click.prevent="addAnswer" 
-          class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline">
+          class="p-2 mr-3 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline">
           Add Answer
         </button>
         <button
