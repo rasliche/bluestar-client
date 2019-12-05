@@ -62,11 +62,11 @@
 
     <div class="flex flex-wrap -mx-3">
       <CreateQuestion 
-        class="w-full md:w-3/5 mb-6 px-3 pb-3"
+        class="w-full md:w-2/3 mb-6 px-3 pb-3"
         @validQuestion="addQuestion"></CreateQuestion>
       <section 
         v-if="quiz.questions.length" 
-        class="w-full md:w-2/5 mb-6 px-3 pb-3">
+        class="w-full md:w-1/3 mb-6 px-3 pb-3">
         <!-- Accordion these questions -->
         <ol v-for="(question, index) in quiz.questions" :key="index">
           <li><p>{{ question.text }}</p></li>
