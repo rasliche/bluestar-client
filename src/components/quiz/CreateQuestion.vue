@@ -64,7 +64,8 @@
         </section>
     </div>
     <div class="flex flex-wrap w-full md:w-1/3">
-        <ul class="w-full mb-6 list-reset">
+      <p class="block text-blue-darker font-bold text-sm">Working Question</p>
+        <ul class="w-full list-reset">
             <li
                 :class="{ 'bg-green-lightest': answer.isRight }"
                 v-for="(answer, index) in question.answers"
@@ -156,25 +157,24 @@ export default {
   },
   methods: {
     addQuestion() {
-      this.formTouched.question = !this.$v.question.$dirty;
-      this.errors.question = 
-        this.$v.question.text.$error 
-        && this.$v.question.theMoreYouKnow.$error;
+      this.formTouched.question = !this.$v.question.text.$dirty || !this.$v.question.theMoreYouKnow.$dirty;
+      this.errors.question = this.$v.question.text.$error || this.$v.question.theMoreYouKnow.$error;
       if (
         this.formTouched.question === false
         && this.errors.question === false
         && this.hasEnoughAnswers
         && this.hasCorrectAnswer
         ) {
-        this.$emit('validQuestion', {
-          text: this.question.text,
-          answers: this.question.answers,
-          theMoreYouKnow: this.question.theMoreYouKnow
-        });
-        this.question.text = "";
-        this.question.answers = [];
-        this.question.theMoreYouKnow = "";
-        console.log("added a question");
+          this.$emit('validQuestion', {
+            text: this.question.text,
+            answers: this.question.answers,
+            theMoreYouKnow: this.question.theMoreYouKnow
+          });
+          this.question.text = "";
+          this.question.answers = [];
+          this.question.theMoreYouKnow = "";
+          console.log("added a question");
+          this.$v.question.$reset()
       }
     },
     addAnswer() {
