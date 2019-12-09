@@ -15,23 +15,29 @@
       </svg>
     </section>
     <!-- These two elements have the same tag name, so they need the 'key' attribute so Vue can tell them apart and transition -->
+    <transition name="fade" mode="out-in">
     <section class="sm:w-5/6 md:w-3/4 lg:w-1/2 w-full mx-auto px-2" key="forms" v-if="!isAuthenticated">
-      <!-- <transition name="fade" mode="out-in"> -->
+      <transition name="fade" mode="out-in">
         <Component :is="currentComponent" class="mx-auto"></Component>
-      <!-- </transition> -->
-      <p class="text-xs pt-4 text-center" v-if="currentComponent === 'Login'">Do you need to <span class="underline cursor-pointer" @click="currentComponent = 'Register'">register</span> first?</p>
-      <p class="text-xs pt-4 text-center" v-else>If you are registered, you can just <span class="underline cursor-pointer" @click="currentComponent = 'Login'">login</span>.</p>
+      </transition>
+      <transition name="fade" mode="out-in">
+        <p class="text-xs pt-4 text-center" v-if="currentComponent === 'Login'">Do you need to <span class="underline cursor-pointer" @click="currentComponent = 'Register'">register</span> first?</p>
+        <p class="text-xs pt-4 text-center" v-else>If you are registered, you can just <span class="underline cursor-pointer" @click="currentComponent = 'Login'">login</span>.</p>
+      </transition>
     </section>
     <section class="sm:w-5/6 md:w-3/4 lg:w-1/2 w-full mx-auto px-2" key="info" v-else>
       <p class="text-4xl pt-4 text-center">Welcome, {{ name }}.</p>
       <!-- links show based on user permissions and roles -->
-      <router-link :to="{ name: 'me' }">
-        Check your progress
-      </router-link>
-      <router-link to="#">
-        Manage your shop staff
-      </router-link>
+      <div class="flex">
+        <router-link class="w-1/2" :to="{ name: 'me' }">
+          Check your progress for {{ new Date().getFullYear() + 1 }}
+        </router-link>
+        <router-link class="w-1/2" to="#">
+          Manage your shop staff
+        </router-link>
+      </div>
     </section>
+    </transition>
   </main>
 </template>
 
