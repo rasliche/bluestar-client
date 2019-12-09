@@ -68,25 +68,27 @@
         v-if="quiz.questions.length" 
         class="w-full md:w-1/3 mb-6 px-3 pb-3">
         <!-- Accordion these questions -->
-        <ol v-for="(question, index) in quiz.questions" :key="index">
-          <li><p>{{ question.text }}</p></li>
-          <ul>
-            <p
-              :class="{ 'bg-green-lightest': answer.isRight }"
-              v-for="(answer, index) in question.answers"
-              :key="index">
-              <svg v-if="answer.isRight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-check">
-                <circle cx="12" cy="12" r="10" class="text-green-light"></circle>
-                <path class="text-green-darker" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path>
-              </svg>
-              <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-close-circle">
-                <circle cx="12" cy="12" r="10" class="text-red-light"></circle>
-                <path class="text-red-darker" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
-              </svg>
-              {{ answer.text }}
-            </p>
+        <ol>
+          <li v-for="(question, index) in quiz.questions" :key="index">
+            <p>{{ question.text }}</p>
+            <ul>
+              <p
+                :class="{ 'bg-green-lightest': answer.isRight }"
+                v-for="(answer, index) in question.answers"
+                :key="index">
+                <svg v-if="answer.isRight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-check">
+                  <circle cx="12" cy="12" r="10" class="text-green-light"></circle>
+                  <path class="text-green-darker" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path>
+                </svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-close-circle">
+                  <circle cx="12" cy="12" r="10" class="text-red-light"></circle>
+                  <path class="text-red-darker" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
+                </svg>
+                {{ answer.text }}
+              </p>
 
-          </ul>
+            </ul>
+          </li>
         </ol>
       </section>
     </div>
