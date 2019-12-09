@@ -10,55 +10,61 @@
           Blue Star
       </router-link>
     </div>
-    <!-- Responsive Menu -->
+
+    <!-- Responsive Menu Button -->
     <div class="block lg:hidden">
-      <button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white">
+      <button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white"
+        @click="showNavMenu = !showNavMenu"
+      >
         <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
       </button>
     </div>
     
-    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-      <div class="lg:flex-grow">
-        <router-link
-          v-if="isAuthenticated"
-          :to="{ name: 'training' }"
-          class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
-            Training
-        </router-link>
-        <router-link 
-          :to="{ name: 'news' }" 
-          class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
-            News
-        </router-link>
-        <router-link
-          v-if="isAdmin"
-          :to="{ name: 'admin' }"
-          class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
-            Admin
-        </router-link>
-      </div>
+    <transition name="tray" mode="out-in">
+      <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto"
+      >
+        <div class="lg:flex-grow">
+          <router-link
+            v-if="isAuthenticated"
+            :to="{ name: 'training' }"
+            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+              Training
+          </router-link>
+          <router-link 
+            :to="{ name: 'news' }" 
+            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+              News
+          </router-link>
+          <router-link
+            v-if="isAdmin"
+            :to="{ name: 'admin' }"
+            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+              Admin
+          </router-link>
+        </div>
 
-      <div class="w-full inline-block lg:items-center lg:w-auto">
-        <router-link 
-          v-if="!isAuthenticated" 
-          to="/login" 
-          class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
-            Login
-        </router-link>
-        <router-link
-          v-if="isAuthenticated"
-          :to="{ name: 'me' }"
-          class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
-            Me
-        </router-link>
-        <button 
-          v-if="isAuthenticated" 
-          @click="logout" 
-          class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
-            Logout
-        </button>
+        <div class="w-full inline-block lg:items-center lg:w-auto">
+          <router-link 
+            v-if="!isAuthenticated" 
+            to="/login" 
+            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+              Login
+          </router-link>
+          <router-link
+            v-if="isAuthenticated"
+            :to="{ name: 'me' }"
+            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+              Me
+          </router-link>
+          <button 
+            v-if="isAuthenticated" 
+            @click="logout" 
+            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+              Logout
+          </button>
+        </div>
       </div>
-    </div>
+    </transition>
 
   </nav>
 </template>
@@ -68,6 +74,11 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: 'AppNav',
+  data() {
+    return {
+      showNavMenu: false,
+    }
+  },
   computed: {
     ...mapGetters('auth', {
       isAuthenticated: "isAuthenticated",
