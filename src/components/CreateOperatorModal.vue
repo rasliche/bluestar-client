@@ -1,5 +1,5 @@
 <template>
-  <Modal :show="show" @close="cancel">
+  <Modal :show="show" @close="cancel" :preventBackgroundScrolling="false">
     <template v-slot:heading>
       <h1 class="text-center pb-3">Create Operator</h1>
     </template>
