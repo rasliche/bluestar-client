@@ -8,7 +8,7 @@
       thumbnail="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/mangroves.jpg"
       :description="lesson.description"
       :programs="lesson.programs"
-      :slug="lesson.slug"
+      :lessonId="lesson._id"
     />
   </div>
 </template>
