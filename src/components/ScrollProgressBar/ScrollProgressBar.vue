@@ -74,6 +74,7 @@ export default {
   methods: {
     handleScroll () {
       // my changes
+      // this.$el - can this be used to only scroll the item?
       let offsetHeight = 0
       if (this.useVerticalOffset) {
         offsetHeight = document.getElementById(this.offsetElement).scrollHeight;
