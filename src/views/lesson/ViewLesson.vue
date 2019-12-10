@@ -8,12 +8,14 @@
       </ScrollProgressBar>
     <h1 class="border-blue-lighter border-b-4 mb-4">{{ title }}</h1>
     <editor-content class="lesson-content" :editor="editor" />
+    <Quiz :questions="lesson.questions" />
   </article>
 </template>
 
 <script>
 import Api from "@/services/Api";
-import ScrollProgressBar from "@/components/ScrollProgressBar/ScrollProgressBar"
+import ScrollProgressBar from "@/components/ScrollProgressBar/ScrollProgressBar";
+import Quiz from "@/components/quiz/Quiz.vue";
 import { Editor, EditorContent } from "tiptap";
 import {
   Bold,
@@ -38,18 +40,21 @@ import Iframe from "@/components/tiptap-extras/Iframe";
 export default {
   components: {
     ScrollProgressBar,
-    EditorContent
+    EditorContent,
+    Quiz,
   },
   props: {
-    slug: {
+    lessonId: {
       type: String,
       required: true,
     },
   },
   data() {
     return {
-      title: "",
-      editor: null
+      lesson: null,
+      // title: '',
+      editor: null,
+      // quiz: null,
     };
   },
   methods: {
@@ -58,8 +63,9 @@ export default {
     }
   },
   async created() {
-    const { data } = await Api.get(`/lessons/${this.slug}`);
-    this.title = data.title;
+    const { data: { content, ...lesson } } = await Api.get(`/lessons/${this.lessonId}`);
+    
+    this.lesson = lesson;
     this.editor = new Editor({
       extensions: [
           new Bold(),
@@ -82,7 +88,7 @@ export default {
           new Iframe(),
         ],
       editable: false,
-      content: data.content
+      content: content
     });
   },
   beforeDestroy() {

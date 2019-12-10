@@ -1,10 +1,8 @@
 <template>
   <div class="lesson">
     <h1 class="border-blue-lighter border-b-4 mb-4">{{ lesson.title }}</h1>
-    <editor-menu-bar 
-      :editor="editor" 
-      v-slot="{ commands, isActive }">
-      <div class="menubar flex items-center">
+    <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
+      <div class="menubar flex">
         <button
           :class="{ 'is-active': isActive.bold() }"
           @click="commands.bold">
@@ -35,11 +33,6 @@
             </svg>
         </button>
         <button
-          :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-          @click="commands.heading({ level: 1 })">
-            H1
-        </button>
-        <button
           :class="{ 'is-active': isActive.heading({ level: 2 }) }"
           @click="commands.heading({ level: 2 })">
             H2
@@ -55,7 +48,7 @@
     <editor-content  
         class="lesson-content 
           shadow appearance-none rounded border-blue-lighter border 
-          w-full min-h-full mt-4 py-2 px-3 
+          w-full min-h-full mt-4 mb-2 mx-3 
           focus:outline-none focus:shadow-outline"
         :editor="editor" />
     <section class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between">
@@ -76,7 +69,8 @@
         <Modal 
             :show="lessonDetailModalOpen" 
             @close="lessonDetailModalOpen = false"
-            :preventBackgroundScrolling="false">
+            :preventBackgroundScrolling="false"
+        >
             <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <section class="relative mb-6 pb-3">
                     <label 
@@ -123,7 +117,7 @@
     </button>
 
     </section>
-    <CreateQuiz></CreateQuiz>
+    <CreateQuiz :lessonId="lesson._id"></CreateQuiz>
   </div>
 </template>
 
@@ -168,14 +162,15 @@ export default {
           description: '',
           published: false,
           programs: [],
-          slug: ''
+          slug: '',
+          _id: null,
        },
       programOptions: [],
       editor: null,
     }
   },
   async beforeRouteEnter (to, from, next) {
-    const { data: { content, ...lessonData } } = await Api.get(`/lessons/${to.params.slug}`);
+    const { data: { content, ...lessonData } } = await Api.get(`/lessons/${to.params.lessonId}`);
     const { data: programs } = await Api.get('/programs');
     next(vm => {
       // access to component instance via `vm`
@@ -184,6 +179,7 @@ export default {
       vm.$data.lesson.published = lessonData.published;
       vm.$data.lesson.programs = lessonData.programs;
       vm.$data.lesson.slug = lessonData.slug;
+      vm.$data.lesson._id = lessonData._id;
       vm.$data.programOptions = programs;
       vm.$data.editor = new Editor({
         extensions: [
@@ -193,7 +189,7 @@ export default {
           new Blockquote(),
           new BulletList(),
           new HardBreak(),
-          new Heading({ levels: [1, 2, 3] }),
+          new Heading({ levels: [2, 3] }),
           new HorizontalRule(),
           new ListItem(),
           new OrderedList(),
@@ -229,14 +225,14 @@ export default {
       async editLesson() {
         console.log(this.editor.getJSON())
         try {
-            const { data: { slug } } = await Api.put(`/lessons/${this.lesson.slug}`, {
+            const { data } = await Api.put(`/lessons/${this.lesson._id}`, {
                 title: this.lesson.title,
                 description: this.lesson.description,
                 programs: this.lesson.programs,
                 published: this.lesson.published,
                 content: this.editor.getJSON(),
             });
-            this.$router.push({ name: 'admin'})
+            // this.$router.push({ name: 'admin'})
         } catch (error) {
             console.log(error)
         }
@@ -272,7 +268,7 @@ export default {
 /* .lesson-content > div { */
 .ProseMirror {
     /* outline-none */
-    @apply text-lg text-grey-darkest leading-normal;
+    @apply px-2 text-lg text-grey-darkest leading-normal;
     > * + *, li + li, li > p + p {
         @apply mt-4;
     }

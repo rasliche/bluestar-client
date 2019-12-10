@@ -32,11 +32,6 @@
                 <path class="secondary text-grey-darker" d="M9 5h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 8h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z"></path>
             </svg>
         </button>
-        <!-- <button
-          :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-          @click="commands.heading({ level: 1 })">
-            H1
-        </button> -->
         <button
           :class="{ 'is-active': isActive.heading({ level: 2 }) }"
           @click="commands.heading({ level: 2 })">
@@ -53,10 +48,10 @@
     <editor-content  
         class="lesson-content 
           shadow appearance-none rounded border-blue-lighter border 
-          w-full min-h-full m-3 py-2 px-3 
+          w-full min-h-full mt-4 mb-2 mx-3 
           focus:outline-none focus:shadow-outline"
         :editor="editor" />
-    <section class="mt-4 border border-red flex items-center justify-between">
+    <section class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between">
         <button
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
             @click="createLesson">
@@ -72,9 +67,10 @@
             @click="lessonDetailModalOpen = true">
             Details
             <Modal
-                preventBackgroundScrolling="false" 
                 :show="lessonDetailModalOpen" 
-                @close="lessonDetailModalOpen = false">
+                @close="lessonDetailModalOpen = false"
+                :preventBackgroundScrolling="false"
+            >
                 <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <section class="relative mb-6 pb-3">
                         <label 
@@ -93,7 +89,7 @@
                         <label 
                             for="description"
                             class="block text-blue-darker font-bold text-sm mb-2"
-                            >Description</label>
+                            >Short Description</label>
                         <input
                             type="text"
                             name="description"
@@ -209,7 +205,7 @@ export default {
   data() {
     return {
       lessonDetailModalOpen: false,
-      quizModalOpen: false,
+    //   quizModalOpen: false,
       title: "New Lesson",
       description: '',
       programs: [],
@@ -299,8 +295,8 @@ export default {
     }
 }
 
-.lesson-content {
-    @apply text-lg text-grey-darkest leading-normal;
+.ProseMirror {
+    @apply px-2 text-lg text-grey-darkest leading-normal;
     > * + *, li + li, li > p + p {
         @apply mt-4;
     }
