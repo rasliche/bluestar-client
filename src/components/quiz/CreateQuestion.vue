@@ -17,6 +17,25 @@
                 <span class="error" v-if="!$v.question.text.required">This field is required.</span>
             </p>
         </section>
+        <section class="relative w-full mb-6 pb-3">
+          <!-- <p class="block text-blue-darker font-bold text-sm">Working Question</p> -->
+          <ul class="w-full list-reset">
+              <li
+                  :class="{ 'bg-green-lightest': answer.isRight }"
+                  v-for="(answer, index) in question.answers"
+                  :key="index">
+                  <svg v-if="answer.isRight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-check">
+                      <circle cx="12" cy="12" r="10" class="text-green-light"></circle>
+                      <path class="text-green-darker" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path>
+                  </svg>
+                  <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-close-circle">
+                      <circle cx="12" cy="12" r="10" class="text-red-light"></circle>
+                      <path class="text-red-darker" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
+                  </svg>
+                  {{ answer.text }}
+              </li>
+          </ul>
+        </section>
         <section class="relative w-5/6 mb-6 pb-3">
             <label 
                 for="answertext"
@@ -62,25 +81,8 @@
                 <span class="error" v-if="!$v.question.theMoreYouKnow.required">This field is required.</span>
             </p>
         </section>
-    </div>
-    <div class="flex flex-wrap w-full md:w-1/3">
-      <p class="block text-blue-darker font-bold text-sm">Working Question</p>
-        <ul class="w-full list-reset">
-            <li
-                :class="{ 'bg-green-lightest': answer.isRight }"
-                v-for="(answer, index) in question.answers"
-                :key="index">
-                <svg v-if="answer.isRight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-check">
-                    <circle cx="12" cy="12" r="10" class="text-green-light"></circle>
-                    <path class="text-green-darker" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path>
-                </svg>
-                <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-close-circle">
-                    <circle cx="12" cy="12" r="10" class="text-red-light"></circle>
-                    <path class="text-red-darker" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
-                </svg>
-                {{ answer.text }}
-            </li>
-        </ul>
+    <!-- </div>
+    <div class="flex flex-wrap w-full md:w-1/3"> -->
     </div>
     <section class="flex items-center justify-between">
         <button 
@@ -190,8 +192,8 @@ export default {
         console.log("added an answer");
       }
     },
-    removeAnswer(i) {
-      console.log("removed question", i);
+    removeAnswer(answer) {
+      console.log("removed answer", answer);
     },
   }
 };
