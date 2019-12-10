@@ -52,10 +52,10 @@ const actions = {
         let previousLessonRecord;
         if (getters['user/lessonScores']) {
           previousLessonRecord = getters['user/lessonScores'].find(
-            r => r.lessonSlug === record.lessonSlug
+            r => r.lessonId === record.lessonId
             );
           }
-          console.log("Previous Lesson: ", previousLessonRecord);
+        if (previousLessonRecord) console.log("Previous Lesson: ", previousLessonRecord);
         if (!previousLessonRecord || previousLessonRecord.score < record.score) {
           // asynchronously add score to user profile in database
           const { data } = await Api.put(
@@ -65,10 +65,11 @@ const actions = {
                 Authorization: `Bearer: ${rootGetters['auth/token']}`
               }
             });
-            dispatch('alert/setAlert', {
-              type: 'success',
-              text: `Updated ${record.lessonName} score to ${record.score}.`
-            });
+            // dispatch('alert/setAlert', {
+            //   type: 'success',
+            //   text: `Updated lesson score.`
+            //   // text: `Updated ${record.lessonName} score to ${record.score}.`
+            // });
             commit("setUser", data);
             router.push("/training");
           } else {
