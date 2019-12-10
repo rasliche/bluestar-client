@@ -62,7 +62,7 @@ export default new Router({
     //   component: () => import(/* webpackChunkName: "operators" */ "./views/Operators.vue")
     // },
     {
-      path: "/operators/:slug",
+      path: "/operators/:id",
       name: "operator",
     //   // beforeEnter (to, from, next) {
     //   //   if (store.state.token) {
@@ -108,7 +108,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "create-lesson" */ "./views/lesson/CreateLesson.vue")
     },
     {
-      path: "/lesson/:slug/edit",
+      path: "/lesson/:id/edit",
       name: "edit-lesson",
       beforeEnter (to, from, next) {
         if (store.getters['auth/isAuthenticated'] && store.getters['user/isAdmin']) {
@@ -120,7 +120,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "edit-lesson" */ "./views/lesson/EditLesson.vue")
     },
     {
-      path: "/lesson/:slug",
+      path: "/lesson/:id",
       props: true,
       name: "view-lesson",
       component: () => import(/* webpackChunkName: "view-lesson" */ "./views/lesson/ViewLesson.vue")
