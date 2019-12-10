@@ -14,7 +14,7 @@
     </div>
     <transition name="fade" mode="out-in">
       <div v-if="questionStage" key="questions" class="text-center mx-auto">
-        <div v-for="question in quiz.questions" :key="question">
+        <div v-for="(question, index) in quiz.questions" :key="index">
         <transition name="fade" mode="out-in">
           <Question
             :key="questionIndex"
@@ -73,6 +73,7 @@
             </template>
           </Question>
         </transition>
+        </div>
       </div>
 
       <div v-if="resultStage" key="results" class="text-center mx-auto">
@@ -121,7 +122,7 @@ export default {
     Question,
     // Modal
   },
-  props: ["quiz", "lessonName", "lessonSlug"],
+  props: ["quiz", "lessonName"],
   data() {
     return {
       // quizModalOpen: false,
@@ -171,8 +172,8 @@ export default {
     submitScoreAndContinue: function() {
       const score = (this.correct / this.quiz.questions.length) * 100;
       this.submitLessonScore({
-        lessonSlug: this.lessonSlug,
         lessonName: this.lessonName,
+        lessonId: this.quiz.lessonId,
         score: score
       });
     },
