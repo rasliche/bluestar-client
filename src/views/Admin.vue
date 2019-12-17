@@ -1,9 +1,9 @@
 <template>
   <main class="home">
     <h1>Admin Dashboard</h1>
-    <nav class="flex">
+    <nav class="flex items-center justify-between">
       <button 
-        class="pl-2 border"
+        class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
         @click="createOperatorModalOpen = true"
         >
         Add a new operator
@@ -14,7 +14,7 @@
         </CreateOperatorModal>
       </button>
       <router-link
-        class="pl-2 border no-underline"
+        class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline no-underline"
         v-if="isAuthenticated && isAdmin" 
         :to="{ name: 'create-lesson' }">
           Create a Lesson
