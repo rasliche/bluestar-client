@@ -187,17 +187,21 @@ export default {
               type: 'success', 
               text: 'You have been logged in.'
             })
-            console.log("send form data to register here")
-            console.log(formData)
+            // console.log("send form data to register here")
+            // console.log(formData)
           } catch (error) {
-            this.uiState = "there was an error"
-            console.log('got here due to an error: ', error)
+            console.log(error.response)
+            if (error.response.status === 400) {
+              this.uiState = 'submit not clicked'
+              this.formFeedback = error.response.data
+            }
+            console.log(error)
           }
         }
         // this.$store.dispatch('register', formData)
       }
     }
-  };
+  }
 </script>
 
 <style lang="postcss" scoped>
