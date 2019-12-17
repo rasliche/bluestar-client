@@ -38,25 +38,30 @@
         </p>
       </section>
 
-      <section class="flex items-center justify-between">
-        <button
-          type="button"
-          @click.prevent="submitLoginForm" 
-          class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
-          :disabled="uiState === 'formSubmitted'"
-          >
-          <div 
-            v-if="uiState==='form submitted'" 
-            class="simple-spinner">
-          </div>
-          Login
-        </button>
-        <a href="#" class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">Forgot password?</a>
+      <section class="relative mb-3 pb-6">
+        <div class="flex items-center justify-between">
+          <button
+            type="button"
+            @click.prevent="submitLoginForm" 
+            class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
+            :disabled="uiState === 'formSubmitted'"
+            >
+            <div 
+              v-if="uiState==='pending'"
+              class="inline-block simple-spinner">
+            </div>
+            Login
+          </button>
+          <a href="#" class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">Forgot password?</a>
+        </div>
+        <p v-if="formFeedback" class="absolute pin-b pin-x">
+          <span class="error">{{ formFeedback }}</span>
+        </p>
       </section>
     </form>
-    <!-- TODO: Style this feedback -->
+    <!-- TODO: Style this feedback
     {{ formFeedback }}
-    {{ uiState }}
+    {{ uiState }} -->
   </div>
 </template>
 
@@ -99,14 +104,17 @@ export default {
       this.formTouched = !this.$v.formResponses.$anyDirty
       this.errors = this.$v.formResponses.$anyError
       this.uiState = 'submit clicked'
-      if (this.errors === false && this.formTouched === false) {
+      if (this.errors === false && this.formTouched === false && this.uiState !== 'pending') {
         const authData = {
           email: this.formResponses.email,
           password: this.formResponses.password
         };
-        this.uiState = 'form submitted'
+        const spinnerTimer = setTimeout(function() {
+          this.uiState = 'pending'
+        }, 500)
         try {
           const { data: { token, _v, ...userData } } = await Api.post("/auth/login", authData);
+          clearTimeout(spinnerTimer)
           this.setCurrentUser(userData)
           this.authUser(token)
           this.setAlert({ 
@@ -114,6 +122,11 @@ export default {
             text: 'You have been logged in.'
           })
         } catch (error) {
+          console.log(error.response)
+          if (error.response.status === 400) {
+            this.uiState = 'submit not clicked'
+            this.formFeedback = error.response.data
+          }
           console.log(error)
         }
       }
