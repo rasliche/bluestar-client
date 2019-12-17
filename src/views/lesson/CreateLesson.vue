@@ -114,7 +114,7 @@
                 </form>
             </Modal>
         </button>
-        <button 
+        <!-- <button 
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
             @click="quizModalOpen = true">
             Quiz
@@ -122,7 +122,7 @@
                 :preventBackgroundScrolling="false"
                 :show="quizModalOpen" 
                 @close="quizModalOpen = false">
-                <!-- <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <section class="relative mb-6 pb-3">
                         <label 
                             for="title"
@@ -162,11 +162,11 @@
                             </label>
                         </div>
                     </section>
-                </form> -->
+                </form>
             </Modal>
-        </button>
+        </button> -->
     </section>
-    <CreateQuiz></CreateQuiz>
+    <!-- <CreateQuiz></CreateQuiz> -->
   </div>
 </template>
 
