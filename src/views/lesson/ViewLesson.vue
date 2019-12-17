@@ -5,10 +5,12 @@
       @halfway.once="logThatStuff"
       :useVerticalOffset="true"
       offsetElement="app-nav">
-      </ScrollProgressBar>
-    <h1 class="border-blue-lighter border-b-4 mb-4">{{ title }}</h1>
+    </ScrollProgressBar>
+    <h1 class="border-blue-lighter border-b-4 mb-4">
+      {{ lesson.title }}
+    </h1>
     <editor-content class="lesson-content" :editor="editor" />
-    <Quiz :questions="lesson.questions" />
+    <Quiz v-if="lesson.questions.length" :questions="lesson.questions" />
   </article>
 </template>
 
@@ -44,14 +46,14 @@ export default {
     Quiz,
   },
   props: {
-    lessonId: {
+    id: {
       type: String,
       required: true,
     },
   },
   data() {
     return {
-      lesson: null,
+      lesson: { },
       // title: '',
       editor: null,
       // quiz: null,
@@ -63,9 +65,9 @@ export default {
     }
   },
   async created() {
-    const { data: { content, ...lesson } } = await Api.get(`/lessons/${this.lessonId}`);
+    const { data: { content, ...lesson } } = await Api.get(`/lessons/${this.id}`);
     
-    this.lesson = lesson;
+    this.lesson = { ...lesson };
     this.editor = new Editor({
       extensions: [
           new Bold(),
@@ -74,7 +76,7 @@ export default {
           new Blockquote(),
           new BulletList(),
           new HardBreak(),
-          new Heading({ levels: [1, 2, 3] }),
+          new Heading({ levels: [2, 3] }),
           new HorizontalRule(),
           new ListItem(),
           new OrderedList(),

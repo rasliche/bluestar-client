@@ -57,7 +57,7 @@
                 class="no-underline"
                 :to="{
                   name: 'view-lesson',
-                  params: { lessonId: lesson._id }
+                  params: { id: lesson._id }
                 }">
                 {{ lesson.title }}
               </router-link>
@@ -66,7 +66,7 @@
                 class="no-underline"
                 :to="{ 
                   name: 'edit-lesson', 
-                  params: { lessonId: lesson._id } 
+                  params: { id: lesson._id } 
                   }">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 mr-2 fill-current text-yellow-dark icon-edit">
                     <path class="primary" d="M4 14a1 1 0 0 1 .3-.7l11-11a1 1 0 0 1 1.4 0l3 3a1 1 0 0 1 0 1.4l-11 11a1 1 0 0 1-.7.3H5a1 1 0 0 1-1-1v-3z"></path>

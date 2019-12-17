@@ -1,6 +1,50 @@
 <template>
   <div class="lesson">
     <h1 class="border-blue-lighter border-b-4 mb-4">{{ lesson.title }}</h1>
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <section class="relative mb-6 pb-3">
+            <label 
+                for="title"
+                class="block text-blue-darker font-bold text-sm mb-2"
+                >Lesson Title</label>
+            <input 
+                type="text" 
+                name="title" 
+                id="title" 
+                v-model="lesson.title"
+                class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                />
+        </section>
+        <section class="relative mb-6 pb-3">
+            <label 
+                for="description"
+                class="block text-blue-darker font-bold text-sm mb-2"
+                >Short Description</label>
+            <input
+                type="text"
+                spellcheck
+                name="description"
+                id="description"
+                v-model="lesson.description"
+                class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            />
+        </section>
+        <section class="relative mb-6 pb-3">
+            <div v-for="program in programOptions" :key="program._id">
+                <label
+                  class="block capitalize text-blue-darker font-bold text-sm mb-2"
+                >
+                    <input
+                        type="checkbox"
+                        :value="program.name"
+                        :id="program.name"
+                        v-model="lesson.programs"
+                    />
+                    {{ program.name }}
+                </label>
+            </div>
+        </section>
+    </form>
     <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
       <div class="menubar flex">
         <button
@@ -46,85 +90,70 @@
     </editor-menu-bar>
 
     <editor-content  
-        class="lesson-content 
-          shadow appearance-none rounded border-blue-lighter border 
-          w-full min-h-full mt-4 mb-2 mx-3 
-          focus:outline-none focus:shadow-outline"
-        :editor="editor" />
+      class="lesson-content 
+        shadow appearance-none rounded border-blue-lighter border 
+        w-full min-h-full mt-4 mb-2 mx-3 
+        focus:outline-none focus:shadow-outline"
+      :editor="editor" 
+    />
+
     <section class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between">
         <button
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
             @click="editLesson">
-            Save
+            Save the Lesson
         </button>
-        <button
+        <!-- <button
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
             @click="logLesson">
             Log
-        </button>
-        <button 
-        class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
-        @click="lessonDetailModalOpen = true">
-        Details
-        <Modal 
-            :show="lessonDetailModalOpen" 
-            @close="lessonDetailModalOpen = false"
-            :preventBackgroundScrolling="false"
-        >
-            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                <section class="relative mb-6 pb-3">
-                    <label 
-                        for="title"
-                        class="block text-blue-darker font-bold text-sm mb-2"
-                        >Lesson Title</label>
-                    <input 
-                        type="text" 
-                        name="title" 
-                        id="title" 
-                        v-model="lesson.title"
-                        class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                        />
-                </section>
-                <section class="relative mb-6 pb-3">
-                    <label 
-                        for="description"
-                        class="block text-blue-darker font-bold text-sm mb-2"
-                        >Short Description</label>
-                    <input
-                        type="text"
-                        spellcheck
-                        name="description"
-                        id="description"
-                        v-model="lesson.description"
-                        class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    />
-                </section>
-                <section class="relative mb-6 pb-3">
-                    <div v-for="program in programOptions" :key="program._id">
-                        <label>
-                            <input
-                                type="checkbox"
-                                :value="program.name"
-                                :id="program.name"
-                                v-model="lesson.programs"
-                            />
-                            {{ program.name }}
-                        </label>
-                    </div>
-                </section>
-            </form>
-        </Modal>
-    </button>
-
+        </button> -->
     </section>
-    <CreateQuiz :lessonId="lesson._id"></CreateQuiz>
+
+    <section class="flex flex-wrap w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto mt-4">
+      <h2 class="w-full">Add Questions</h2>
+      <CreateQuestion 
+        :lesson="lesson"
+        class="w-full md:w-1/2"
+        @newQuestion="onNewQuestion"
+      ></CreateQuestion>
+      <div 
+        v-if="lesson.questions && lesson.questions.length" 
+        class="w-full md:w-1/2 mb-6 px-3 pb-3">
+        <!-- Accordion these questions -->
+        <ol>
+          <li v-for="(question, index) in lesson.questions" :key="index">
+            <p>{{ question.text }}</p>
+            <ul>
+              <li
+                class="list-reset"                
+                :class="{ 'bg-green-lightest': answer.isRight }"
+                v-for="(answer, index) in question.answers"
+                :key="index">
+                <svg v-if="answer.isRight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-check">
+                  <circle cx="12" cy="12" r="10" class="text-green-light"></circle>
+                  <path class="text-green-darker" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path>
+                </svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-close-circle">
+                  <circle cx="12" cy="12" r="10" class="text-red-light"></circle>
+                  <path class="text-red-darker" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
+                </svg>
+                <p class="inline">{{ answer.text }}</p>
+              </li>
+              <p>{{ question.theMoreYouKnow }}</p>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
 import Api from "@/services/Api";
 import Modal from "@/components/Modal"
-import CreateQuiz from "@/components/quiz/CreateQuiz"
+import CreateQuestion from "@/components/quiz/CreateQuestion.vue"
+
 import { Editor, EditorMenuBar, EditorContent } from "tiptap";
 import {
   Bold,
@@ -152,34 +181,22 @@ export default {
     EditorContent,
     EditorMenuBar,
     Modal,
-    CreateQuiz,
+    CreateQuestion,
   },
   data() {
     return {
       lessonDetailModalOpen: false,
-      lesson: {
-          title: '',
-          description: '',
-          published: false,
-          programs: [],
-          slug: '',
-          _id: null,
-       },
+      lesson: { },
       programOptions: [],
       editor: null,
     }
   },
   async beforeRouteEnter (to, from, next) {
-    const { data: { content, ...lessonData } } = await Api.get(`/lessons/${to.params.lessonId}`);
+    const { data: { content, ...lessonData } } = await Api.get(`/lessons/${to.params.id}`);
     const { data: programs } = await Api.get('/programs');
     next(vm => {
       // access to component instance via `vm`
-      vm.$data.lesson.title = lessonData.title;
-      vm.$data.lesson.description = lessonData.description;
-      vm.$data.lesson.published = lessonData.published;
-      vm.$data.lesson.programs = lessonData.programs;
-      vm.$data.lesson.slug = lessonData.slug;
-      vm.$data.lesson._id = lessonData._id;
+      vm.$data.lesson = lessonData
       vm.$data.programOptions = programs;
       vm.$data.editor = new Editor({
         extensions: [
@@ -222,30 +239,32 @@ export default {
         command({ src })
       }
     },
-      async editLesson() {
-        console.log(this.editor.getJSON())
-        try {
-            const { data } = await Api.put(`/lessons/${this.lesson._id}`, {
-                title: this.lesson.title,
-                description: this.lesson.description,
-                programs: this.lesson.programs,
-                published: this.lesson.published,
-                content: this.editor.getJSON(),
-            });
-            // this.$router.push({ name: 'admin'})
-        } catch (error) {
-            console.log(error)
-        }
-      },
-      logLesson() {
-          console.log(this.editor.getJSON())
+    async editLesson() {
+      console.log(this.editor.getJSON())
+      try {
+          const { data } = await Api.put(`/lessons/${this.lesson._id}`, {
+              title: this.lesson.title,
+              description: this.lesson.description,
+              programs: this.lesson.programs,
+              published: this.lesson.published,
+              content: this.editor.getJSON(),
+          });
+          // this.$router.push({ name: 'admin'})
+      } catch (error) {
+          console.log(error)
       }
+    },
+    logLesson() {
+        console.log(this.editor.getJSON())
+    },
+    onNewQuestion(newQuestion) {
+      this.lesson.questions.push(newQuestion)
+    },
   }
 }
 </script>
 
 <style lang="postcss">
-/* Reference: https://github.com/tailwindcss/discuss/issues/243 */
 .menubar {
     button:first-child {
         @apply rounded-l
@@ -265,6 +284,7 @@ export default {
 
 }
 
+/* Reference: https://github.com/tailwindcss/discuss/issues/243 */
 /* .lesson-content > div { */
 .ProseMirror {
     /* outline-none */
