@@ -73,12 +73,12 @@
                     <rect width="20" height="2" x="2" y="20" class="secondary" rx="1"></rect>
                   </svg>
               </router-link>
-              <button @click="deleteLesson">
+              <!-- <button @click="deleteLesson">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 mr-2 fill-current text-red-dark icon-trash">
                   <path class="primary" d="M5 5h14l-.89 15.12a2 2 0 0 1-2 1.88H7.9a2 2 0 0 1-2-1.88L5 5zm5 5a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1zm4 0a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1z"></path>
                   <path class="secondary" d="M8.59 4l1.7-1.7A1 1 0 0 1 11 2h2a1 1 0 0 1 .7.3L15.42 4H19a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2h3.59z"></path>
                 </svg>
-              </button>
+              </button> -->
             </div>
           </div>
         </div>
@@ -138,9 +138,9 @@ export default {
     // ...mapGetters('operator', ['operators'])
   },
   methods: {
-    deleteLesson() {
-      console.log('fake deleted a lesson')
-    },
+    // deleteLesson() {
+    //   console.log('fake deleted a lesson')
+    // },
   //   ...mapActions('operator', ['getOperators'])
   },
 };
