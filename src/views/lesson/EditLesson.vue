@@ -1,6 +1,5 @@
 <template>
   <div class="lesson">
-    <h1 class="border-blue-lighter border-b-4 mb-4">{{ lesson.title }}</h1>
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <section class="relative mb-6 pb-3">
             <label 
@@ -89,6 +88,7 @@
       </div>
     </editor-menu-bar>
 
+    <h1 class="border-blue-lighter border-b-4 mb-4">{{ lesson.title }}</h1>
     <editor-content  
       class="lesson-content 
         shadow appearance-none rounded border-blue-lighter border 
