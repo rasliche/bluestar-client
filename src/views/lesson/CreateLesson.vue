@@ -1,8 +1,51 @@
 <template>
   <div class="lesson">
-    <h1 class="border-blue-lighter border-b-4 mb-4">{{ title }}</h1>
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <section class="relative mb-6 pb-3">
+            <label 
+                for="title"
+                class="block text-blue-darker font-bold text-sm mb-2"
+                >Lesson Title</label>
+            <input 
+                type="text" 
+                name="title" 
+                id="title" 
+                v-model="lesson.title"
+                class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                />
+        </section>
+        <section class="relative mb-6 pb-3">
+            <label 
+                for="description"
+                class="block text-blue-darker font-bold text-sm mb-2"
+                >Short Description</label>
+            <input
+                type="text"
+                spellcheck
+                name="description"
+                id="description"
+                v-model="lesson.description"
+                class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            />
+        </section>
+        <section class="relative mb-6 pb-3">
+            <div v-for="program in programOptions" :key="program._id">
+                <label
+                  class="block capitalize text-blue-darker font-bold text-sm mb-2"
+                >
+                    <input
+                        type="checkbox"
+                        :value="program.name"
+                        :id="program.name"
+                        v-model="lesson.programs"
+                    />
+                    {{ program.name }}
+                </label>
+            </div>
+        </section>
+    </form>
     <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
-      <div class="menubar flex">
+      <div class="menubar flex w-full">
         <button
           :class="{ 'is-active': isActive.bold() }"
           @click="commands.bold">
@@ -45,12 +88,15 @@
       </div>
     </editor-menu-bar>
 
+    <h1 class="border-blue-lighter border-b-4 mb-4">{{ lesson.title }}</h1>
     <editor-content  
-        class="lesson-content 
-          shadow appearance-none rounded border-blue-lighter border 
-          w-full min-h-full mt-4 mb-2 mx-3 
-          focus:outline-none focus:shadow-outline"
-        :editor="editor" />
+      class="lesson-content 
+        shadow appearance-none rounded border-blue-lighter border 
+        w-full min-h-full mt-4 mb-2 mx-3 
+        focus:outline-none focus:shadow-outline"
+      :editor="editor" 
+    />
+
     <section class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between">
         <button
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
@@ -62,7 +108,7 @@
             @click="logLesson">
             Log
         </button>
-        <button 
+        <!-- <button 
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
             @click="lessonDetailModalOpen = true">
             Details
@@ -113,7 +159,7 @@
                     </section>
                 </form>
             </Modal>
-        </button>
+        </button> -->
         <!-- <button 
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
             @click="quizModalOpen = true">
@@ -166,6 +212,11 @@
             </Modal>
         </button> -->
     </section>
+    <TextOnScroll 
+        class="min-w-full"
+        textToScroll="Hello from a new component that may not have a usecase!" 
+    />
+
     <!-- <CreateQuiz></CreateQuiz> -->
   </div>
 </template>
@@ -173,6 +224,7 @@
 <script>
 import Api from "@/services/Api";
 import Modal from "@/components/Modal";
+import TextOnScroll from "@/components/TextOnScroll/TextOnScroll.vue"
 import CreateQuiz from "@/components/quiz/CreateQuiz";
 import { Editor, EditorMenuBar, EditorContent } from "tiptap";
 import {
@@ -200,17 +252,15 @@ export default {
     EditorContent,
     EditorMenuBar,
     Modal,
-    CreateQuiz,
+    TextOnScroll,
+    // CreateQuiz,
   },
   data() {
     return {
       lessonDetailModalOpen: false,
     //   quizModalOpen: false,
-      title: "New Lesson",
-      description: '',
-      programs: [],
+      lesson: { title: 'New Lesson', programs: [], },
       programOptions: [],
-      published: false,
       editor: new Editor({
         extensions: [
           new Bold(),
@@ -219,7 +269,7 @@ export default {
           new Blockquote(),
           new BulletList(),
           new HardBreak(),
-          new Heading({ levels: [1, 2, 3] }),
+          new Heading({ levels: [2, 3] }),
           new HorizontalRule(),
           new ListItem(),
           new OrderedList(),
@@ -233,9 +283,12 @@ export default {
       })
     }
   },
-  async created() {
-      const { data: programOptions } = await Api.get("/programs");
-      this.programOptions = programOptions;
+  async beforeRouteEnter (to, from, next) {
+      const { data: programs } = await Api.get("/programs");
+      next(vm => {
+          vm.$data.programOptions = programs;
+
+      })
   },
   beforeDestroy() {
       this.editor.destroy();
@@ -257,13 +310,13 @@ export default {
         console.log(this.editor.getJSON())
         try {
             const { data: { slug } } = await Api.post("/lessons", {
-                title: this.title,
-                description: this.description,
-                programs: this.programs,
-                published: this.published,
+                title: this.lesson.title,
+                description: this.lesson.description,
+                programs: this.lesson.programs,
+                published: this.lesson.published,
                 content: this.editor.getJSON(),
             });
-            this.$router.replace({ name: 'view-lesson', params: { slug: slug }})
+            // this.$router.replace({ name: 'view-lesson', params: { slug: slug }})
         } catch (error) {
             console.log(error)
         }
