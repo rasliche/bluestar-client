@@ -43,27 +43,28 @@
                 Answer
             </label>
             <input
-                type="text"
-                name="answertext"
-                class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                v-model="$v.question.formAnswer.text.$model"
-                />
+              type="text"
+              name="answertext"
+              ref="answertext"
+              class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              v-model="$v.question.formAnswer.text.$model"
+            />
             <p v-if="errors.formAnswer" class="absolute pin-b pin-x">
-                <span class="error" v-if="!$v.question.formAnswer.text.required">This field is required.</span>
+              <span class="error" v-if="!$v.question.formAnswer.text.required">This field is required.</span>
             </p>
         </section>
         <section class="relative w-1/6 mb-6 pb-3">
-            <input
-                type="checkbox"
-                name="answerisright"
-                value="isRight"
-                v-model="$v.question.formAnswer.isRight.$model"
-                >
-            <label 
-                for="answerisright"
-                class="text-blue-darker font-bold text-sm mb-2">
-                Correct?
-            </label>
+          <input
+            type="checkbox"
+            name="answerisright"
+            value="isRight"
+            v-model="$v.question.formAnswer.isRight.$model"
+          >
+          <label 
+            for="answerisright"
+            class="text-blue-darker font-bold text-sm mb-2">
+            Correct?
+          </label>
         </section>
         <section class="relative w-full mb-6 pb-3">
             <label 
@@ -101,6 +102,7 @@
 </template>
 
 <script>
+import Api from "@/services/Api.js"
 import {
   required,
   minLength,
@@ -109,37 +111,38 @@ import {
 
 export default {
   name: "CreateQuestion",
+  props: ["lesson"],
   data() {
     return {
       feedback: null,
       uiState: 'submit not clicked',
       errors: {
-          question: false,
-          formAnswer: false,
+        question: false,
+        formAnswer: false,
       },
       formTouched: {
-          question: true,
-          formAnswer: true
+        question: true,
+        formAnswer: true
       },
       question: {
         text: "",
         answers: [],
         theMoreYouKnow: "",
         formAnswer: {
-            text: "",
-            isRight: false
+          text: "",
+          isRight: false
         },
       },
     };
   },
   computed: {
-      hasEnoughAnswers() {
-          return this.question.answers.length > 1
-      },
-      hasCorrectAnswer() {
-          const arrayOfAnswerResults = this.question.answers.map(x => x.isRight)
-          return arrayOfAnswerResults.includes(true)
-      }
+    hasEnoughAnswers() {
+      return this.question.answers.length > 1
+    },
+    hasCorrectAnswer() {
+      const arrayOfAnswerResults = this.question.answers.map(x => x.isRight)
+      return arrayOfAnswerResults.includes(true)
+    }
   },
   validations: {
     question: {
@@ -158,20 +161,27 @@ export default {
     },
   },
   methods: {
-    addQuestion() {
+    async addQuestion() {
       this.formTouched.question = !this.$v.question.text.$dirty || !this.$v.question.theMoreYouKnow.$dirty;
       this.errors.question = this.$v.question.text.$error || this.$v.question.theMoreYouKnow.$error;
+      let newQuestion
       if (
         this.formTouched.question === false
         && this.errors.question === false
         && this.hasEnoughAnswers
         && this.hasCorrectAnswer
         ) {
-          this.$emit('validQuestion', {
-            text: this.question.text,
-            answers: this.question.answers,
-            theMoreYouKnow: this.question.theMoreYouKnow
-          });
+          try {
+            newQuestion = await Api.post('/questions', {
+              lessonId: this.lesson._id,
+              text: this.question.text,
+              answers: this.question.answers,
+              theMoreYouKnow: this.question.theMoreYouKnow
+            });
+          } catch (error) {
+            console.log(error)
+          }
+          this.$emit('newQuestion', newQuestion)
           this.question.text = "";
           this.question.answers = [];
           this.question.theMoreYouKnow = "";
@@ -191,6 +201,8 @@ export default {
         this.question.formAnswer.isRight = false;
         console.log("added an answer");
       }
+
+      this.$refs.answertext.focus();
     },
     removeAnswer(answer) {
       console.log("removed answer", answer);

@@ -1,27 +1,28 @@
 <template>
   <div class="quiz h-auto">
-    <h3 class="text-center mx-auto mb-2">
+    <!-- <h3 class="text-center mx-auto mb-2">
       Take a quiz to pass this lesson: {{ quiz.title }}
-    </h3>
-    <div v-if="introStage" key="intro" class="text-center mx-auto">
-      <p>{{ quiz.description }}</p>
-      <button
-        @click="startQuiz"
-        class="border border-green bg-green-light p-2 m-2 rounded"
-      >
-        Start Quiz
-      </button>
-    </div>
-    <transition name="fade" mode="out-in">
-      <div v-if="questionStage" key="questions" class="text-center mx-auto">
-        <div v-for="(question, index) in quiz.questions" :key="index">
+    </h3> -->
+    <transition name="fade" mode="out-in" appear>
+      <div v-if="stage === 'intro'" key="intro" class="text-center mx-auto">
+        <!-- <p>{{ quiz.description }}</p> -->
+        <button
+          @click="startQuiz"
+          class="border border-green bg-green-light p-2 m-2 rounded"
+        >
+          Start Quiz
+        </button>
+      </div>
+
+      <div v-if="stage === 'questions'" key="questions" class="text-center mx-auto">
+        <!-- <div v-for="(question, index) in questions" :key="index"> -->
         <transition name="fade" mode="out-in">
           <Question
             :key="questionIndex"
             :showReviewText="showReviewText"
-            :question="quiz.questions[questionIndex].text"
-            :reviewText="quiz.questions[questionIndex].theMoreYouKnow"
-            :answers="quiz.questions[questionIndex].answers"
+            :question="questions[questionIndex].text"
+            :reviewText="questions[questionIndex].theMoreYouKnow"
+            :answers="questions[questionIndex].answers"
             v-on:correctAnswer="correctAnswer"
             v-on:wrongAnswer="wrongAnswer">
             <template
@@ -35,35 +36,33 @@
               }">
               <div class="question">
                 <p class="font-bold">{{ question }}</p>
-                <transition-group name="fade" mode="out-in">
+                <transition name="fade" mode="out-in">
                   <div
                     v-if="showReviewText"
                     :class="[
                       isRight ? 'bg-green-lightest' : 'bg-red-lightest',
-                      'text-center',
-                      'text-sm',
-                      'h-16',
-                      'p-2',
-                      'm-2',
-                      'rounded'
+                      'text-center text-sm h-16 p-2 m-2 rounded'
                     ]"
-                    key="feedback">
+                    key="feedback"
+                  >
                     <strong>{{ isRight ? "Nice!" : "Sorry!" }}</strong>
-                    {{ reviewText }}
+                    <p>{{ reviewText }}</p>
                   </div>
                   <div
                     v-if="!showReviewText"
                     class="answer-choices flex flex-wrap justify-center"
-                    key="answers">
+                    key="answers"
+                  >
                     <button
                       v-for="(answer, index) in answers"
                       :key="index"
                       @click="handleAnswer(index)"
-                      class="p-2 m-2 border rounded border-blue-darker">
+                      class="p-2 m-2 border rounded border-blue-darker"
+                    >
                       {{ answer.text }}
                     </button>
                   </div>
-                </transition-group>
+                </transition>
                 <div v-if="showReviewText">
                   <button @click="nextQuestion" class="border rounded p-2 m-2">
                     Next ->
@@ -73,10 +72,10 @@
             </template>
           </Question>
         </transition>
-        </div>
+        <!-- </div> -->
       </div>
 
-      <div v-if="resultStage" key="results" class="text-center mx-auto">
+      <div v-if="stage === 'results'" key="results" class="text-center mx-auto">
         <p>
           You finished the quiz. Your score was:
           <span class="text-3xl">{{ correct }}</span>
@@ -122,13 +121,11 @@ export default {
     Question,
     // Modal
   },
-  props: ["quiz", "lessonName"],
+  props: ["questions"],
   data() {
     return {
       // quizModalOpen: false,
-      introStage: true,
-      questionStage: false,
-      resultStage: false,
+      stage: 'intro', // 'questions', 'results'
       questionIndex: 0,
       correct: 0,
       showReviewText: false
@@ -145,21 +142,18 @@ export default {
   methods: {
     ...mapActions('user', ["submitLessonScore"]),
     startQuiz: function() {
-      this.quizModalOpen = true;
-      this.correct = 0;
+      // this.quizModalOpen = true;
+      this.stage = 'questions'
       this.questionIndex = 0;
-      this.introStage = false;
-      this.questionStage = true;
-      this.resultStage = false;
+      this.correct = 0;
       this.showReviewText = false;
     },
     nextQuestion: function() {
-      if (this.questionIndex < this.quiz.questions.length - 1) {
+      if (this.questionIndex < this.questions.length - 1) {
         this.questionIndex += 1;
         this.showReviewText = false;
       } else {
-        this.questionStage = false;
-        this.resultStage = true;
+        this.stage = 'results'
       }
     },
     correctAnswer: function() {
@@ -170,12 +164,13 @@ export default {
       this.showReviewText = true;
     },
     submitScoreAndContinue: function() {
-      const score = (this.correct / this.quiz.questions.length) * 100;
-      this.submitLessonScore({
-        lessonName: this.lessonName,
-        lessonId: this.quiz.lessonId,
-        score: score
-      });
+      const score = (this.correct / this.questions.length) * 100;
+      console.log("User score: ", score)
+      // this.submitLessonScore({
+      //   lessonName: this.title,
+      //   lessonId: this.quiz._id,
+      //   score: score
+      // });
     },
     quitQuiz: function() {
       this.introStage = true;

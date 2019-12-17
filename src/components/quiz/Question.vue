@@ -1,7 +1,30 @@
 <script>
 export default {
   name: "question",
-  props: ["question", "answers", "reviewText", "showReviewText"],
+  props: {
+    question: {
+      type: String,
+      required: true,
+    }, 
+    answers: {
+      text: {
+        type: String,
+        required: true
+      },
+      isRight: {
+        type: Boolean,
+        required: true
+      },
+      type: Array,
+      required: true,
+    }, 
+    reviewText: {
+      type: String
+    }, 
+    showReviewText: {
+      type: Boolean
+    },
+  },
   data() {
     return {
       isRight: false
@@ -14,7 +37,7 @@ export default {
       reviewText: this.reviewText,
       showReviewText: this.showReviewText,
       handleAnswer: this.handleAnswer,
-      isRight: this.isRight
+      isRight: this.isRight,
     });
   },
   methods: {
