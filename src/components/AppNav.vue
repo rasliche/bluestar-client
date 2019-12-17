@@ -20,9 +20,8 @@
       </button>
     </div>
     
-    <transition name="tray" mode="out-in">
-      <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto"
-      >
+    <transition name="tray" v-if="showNavMenu" mode="in-out" appear>
+      <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div class="lg:flex-grow">
           <router-link
             v-if="isAuthenticated"
@@ -65,7 +64,6 @@
         </div>
       </div>
     </transition>
-
   </nav>
 </template>
 

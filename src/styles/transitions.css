@@ -25,7 +25,7 @@
 
 .tray-enter,
 .tray-leave-to {
-  transform: translateY(-500px)
+  transform: translateY(-400px);
 }
 
 .tray-enter-to,
