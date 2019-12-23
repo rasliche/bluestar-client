@@ -29,14 +29,8 @@
             />
         </section>
         <section class="relative mb-6 pb-3">
-            <div 
-                v-for="program in programOptions" 
-                :key="program._id"
-                class="flex justify-between items-center"
-            >
-                <p class="mr-4">{{ program.name }}</p>
-                <toggle-input v-model="lesson.programs"></toggle-input>
-                <!-- <label
+            <div v-for="program in programOptions" :key="program._id">
+                <label
                   class="block capitalize text-blue-darker font-bold text-sm mb-2"
                 >
                     <input
@@ -46,7 +40,7 @@
                         v-model="lesson.programs"
                     />
                     {{ program.name }}
-                </label> -->
+                </label>
             </div>
         </section>
     </form>
