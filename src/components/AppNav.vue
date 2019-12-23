@@ -89,6 +89,11 @@ export default {
     ...mapActions('auth', {
       logout: "logoutUser"
     })
+  },
+  watch: {
+    $route(to, from) {
+        this.showNavMenu = false
+    },
   }
 };
 </script>
