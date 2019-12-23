@@ -29,8 +29,14 @@
             />
         </section>
         <section class="relative mb-6 pb-3">
-            <div v-for="program in programOptions" :key="program._id">
-                <label
+            <div 
+                v-for="program in programOptions" 
+                :key="program._id"
+                class="flex justify-between items-center"
+            >
+                <p class="mr-4">{{ program.name }}</p>
+                <toggle-input v-model="lesson.programs"></toggle-input>
+                <!-- <label
                   class="block capitalize text-blue-darker font-bold text-sm mb-2"
                 >
                     <input
@@ -40,7 +46,7 @@
                         v-model="lesson.programs"
                     />
                     {{ program.name }}
-                </label>
+                </label> -->
             </div>
         </section>
     </form>
@@ -212,10 +218,9 @@
             </Modal>
         </button> -->
     </section>
-    <TextOnScroll 
-        class="min-w-full"
-        textToScroll="Hello from a new component that may not have a usecase!" 
-    />
+    <TextOnScroll class="min-w-full"> 
+        Hello from a new component that may not have a use case!
+    </TextOnScroll>
 
     <!-- <CreateQuiz></CreateQuiz> -->
   </div>
@@ -223,7 +228,8 @@
 
 <script>
 import Api from "@/services/Api";
-import Modal from "@/components/Modal";
+import Modal from "@/components/Modal.vue";
+import ToggleInput from "@/components/ToggleInput/ToggleInput.vue"
 import TextOnScroll from "@/components/TextOnScroll/TextOnScroll.vue"
 import CreateQuiz from "@/components/quiz/CreateQuiz";
 import { Editor, EditorMenuBar, EditorContent } from "tiptap";
@@ -253,6 +259,7 @@ export default {
     EditorMenuBar,
     Modal,
     TextOnScroll,
+    ToggleInput,
     // CreateQuiz,
   },
   data() {
