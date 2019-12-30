@@ -12,15 +12,15 @@
     </div>
 
     <!-- Responsive Menu Button -->
-    <div class="block lg:hidden">
+    <!-- <div class="block lg:hidden">
       <button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white"
         @click="showNavMenu = !showNavMenu"
       >
         <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
       </button>
-    </div>
-    
-    <transition name="tray" v-if="showNavMenu" mode="in-out" appear>
+    </div> -->
+
+    <!-- <transition name="tray" v-if="showNavMenu" mode="in-out" appear> -->
       <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div class="lg:flex-grow">
           <router-link
@@ -55,7 +55,7 @@
             class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
               Me
           </router-link>
-          <button 
+          <button
             v-if="isAuthenticated" 
             @click="logout" 
             class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
@@ -63,7 +63,7 @@
           </button>
         </div>
       </div>
-    </transition>
+    <!-- </transition> -->
   </nav>
 </template>
 
@@ -91,9 +91,9 @@ export default {
     })
   },
   watch: {
-    $route(to, from) {
-        this.showNavMenu = false
-    },
+    // $route(to, from) {
+    //     this.showNavMenu = false
+    // },
   }
 };
 </script>

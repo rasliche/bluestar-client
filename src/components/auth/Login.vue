@@ -1,6 +1,6 @@
 <template>
   <div class="w-full max-w-xs">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST">
       <h1 class="text-center pb-3">Login</h1>
       <section class="relative mb-6 pb-3">
         <label 
