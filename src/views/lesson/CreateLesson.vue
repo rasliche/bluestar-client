@@ -260,7 +260,11 @@ export default {
     return {
       lessonDetailModalOpen: false,
     //   quizModalOpen: false,
-      lesson: { title: 'New Lesson', programs: [], },
+      lesson: { 
+        title: 'New Lesson', 
+        programs: [], 
+        questions: []
+      },
       programOptions: [],
       editor: new Editor({
         extensions: [
