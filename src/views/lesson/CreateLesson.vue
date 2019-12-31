@@ -35,7 +35,7 @@
                 >
                     <input
                         type="checkbox"
-                        :value="program.name"
+                        :value="program"
                         :id="program.name"
                         v-model="lesson.programs"
                     />
@@ -109,124 +109,60 @@
             @click="logLesson">
             Log
         </button>
-        <!-- <button 
-            class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
-            @click="lessonDetailModalOpen = true">
-            Details
-            <Modal
-                :show="lessonDetailModalOpen" 
-                @close="lessonDetailModalOpen = false"
-                :preventBackgroundScrolling="false"
-            >
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <section class="relative mb-6 pb-3">
-                        <label 
-                            for="title"
-                            class="block text-blue-darker font-bold text-sm mb-2"
-                            >Lesson Title</label>
-                        <input 
-                            type="text" 
-                            name="title" 
-                            id="title" 
-                            v-model="title"
-                            class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                            />
-                    </section>
-                    <section class="relative mb-6 pb-3">
-                        <label 
-                            for="description"
-                            class="block text-blue-darker font-bold text-sm mb-2"
-                            >Short Description</label>
-                        <input
-                            type="text"
-                            name="description"
-                            id="description"
-                            v-model="description"
-                            class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                        />
-                    </section>
-                    <section class="relative mb-6 pb-3">
-                        <div v-for="program in programOptions" :key="program._id">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    :value="program.name"
-                                    :id="program.name"
-                                    v-model="programs"
-                                />
-                                {{ program.name }}
-                            </label>
-                        </div>
-                    </section>
-                </form>
-            </Modal>
-        </button> -->
-        <!-- <button 
-            class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
-            @click="quizModalOpen = true">
-            Quiz
-            <Modal 
-                :preventBackgroundScrolling="false"
-                :show="quizModalOpen" 
-                @close="quizModalOpen = false">
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <section class="relative mb-6 pb-3">
-                        <label 
-                            for="title"
-                            class="block text-blue-darker font-bold text-sm mb-2"
-                            >Lesson Title</label>
-                        <input 
-                            type="text" 
-                            name="title" 
-                            id="title" 
-                            v-model="title"
-                            class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                            />
-                    </section>
-                    <section class="relative mb-6 pb-3">
-                        <label 
-                            for="description"
-                            class="block text-blue-darker font-bold text-sm mb-2"
-                            >Description</label>
-                        <input
-                            type="text"
-                            name="description"
-                            id="description"
-                            v-model="description"
-                            class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                        />
-                    </section>
-                    <section class="relative mb-6 pb-3">
-                        <div v-for="program in programOptions" :key="program._id">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    :value="program.name"
-                                    :id="program.name"
-                                    v-model="programs"
-                                />
-                                {{ program.name }}
-                            </label>
-                        </div>
-                    </section>
-                </form>
-            </Modal>
-        </button> -->
     </section>
-    <TextOnScroll class="min-w-full"> 
+    <section 
+        class="flex flex-wrap w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto mt-4"
+        v-if="status === 'readyForQuestions'">
+      <h2 class="w-full">Add Questions</h2>
+      <CreateQuestion 
+        :lesson="lesson"
+        class="w-full md:w-1/2"
+        @newQuestion="onNewQuestion"
+      ></CreateQuestion>
+      <div 
+        v-if="lesson.questions && lesson.questions.length" 
+        class="w-full md:w-1/2 mb-6 px-3 pb-3">
+        <!-- Accordion these questions -->
+        <ol>
+          <li v-for="(question, index) in lesson.questions" :key="index">
+            <p>{{ question.text }}</p>
+            <ul>
+              <li
+                class="list-reset"                
+                :class="{ 'bg-green-lightest': answer.isRight }"
+                v-for="(answer, index) in question.answers"
+                :key="index">
+                <svg v-if="answer.isRight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-check">
+                  <circle cx="12" cy="12" r="10" class="text-green-light"></circle>
+                  <path class="text-green-darker" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path>
+                </svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-close-circle">
+                  <circle cx="12" cy="12" r="10" class="text-red-light"></circle>
+                  <path class="text-red-darker" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
+                </svg>
+                <p class="inline">{{ answer.text }}</p>
+              </li>
+              <p>{{ question.theMoreYouKnow }}</p>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </section>
+    <!-- <TextOnScroll class="min-w-full"> 
         Hello from a new component that may not have a use case!
-    </TextOnScroll>
+    </TextOnScroll> -->
 
     <!-- <CreateQuiz></CreateQuiz> -->
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Api from "@/services/Api";
 import Modal from "@/components/Modal.vue";
-import ToggleInput from "@/components/ToggleInput/ToggleInput.vue"
-import TextOnScroll from "@/components/TextOnScroll/TextOnScroll.vue"
-import CreateQuiz from "@/components/quiz/CreateQuiz";
+// import ToggleInput from "@/components/ToggleInput/ToggleInput.vue"
+// import TextOnScroll from "@/components/TextOnScroll/TextOnScroll.vue"
+import CreateQuestion from "@/components/quiz/CreateQuestion.vue";
 import { Editor, EditorMenuBar, EditorContent } from "tiptap";
 import {
   Bold,
@@ -253,9 +189,9 @@ export default {
     EditorContent,
     EditorMenuBar,
     Modal,
-    TextOnScroll,
-    ToggleInput,
-    // CreateQuiz,
+    // TextOnScroll,
+    // ToggleInput,
+    CreateQuestion,
   },
   data() {
     return {
@@ -293,6 +229,7 @@ export default {
   async beforeRouteEnter (to, from, next) {
       const { data: programs } = await Api.get("/programs");
       next(vm => {
+          // console.log(programs)
           vm.$data.programOptions = programs;
 
       })
