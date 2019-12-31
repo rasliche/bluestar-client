@@ -100,6 +100,7 @@
     <section class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between">
         <button
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
+            :disabled="status === 'pending'"
             @click="createLesson">
             Create
         </button>
@@ -258,6 +259,7 @@ export default {
   },
   data() {
     return {
+      status: 'idle', // pending, readyForQuestions, error
       lessonDetailModalOpen: false,
     //   quizModalOpen: false,
       lesson: { 
