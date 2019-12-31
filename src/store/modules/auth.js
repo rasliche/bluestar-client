@@ -2,48 +2,43 @@ import Api from "@/services/Api";
 import router from "@/router";
 
 const state = {
-    token: null,
+  token: null,
 }
 
 const getters = {
-    isAuthenticated: state => state.token !== null,
-    token: state => state.token
+  isAuthenticated: state => state.token !== null,
+  token: state => state.token
 }
 
 const mutations = {
   setToken: (state, token) => {
-      state.token = token;
-    },
+    state.token = token;
+  },
   clearToken: state => {
-      state.token = null;
-    },
+    state.token = null;
+  },
 }
 
 const actions = {
-  setLogoutTimer: ({ commit }, expirationTime) => {
-      setTimeout(() => {
-        commit('user/clearUser', {}, { root: true })
-        commit("clearToken");
-      }, expirationTime * 1000);
-    },
+  // setLogoutTimer: ({ commit }, expirationTime) => {
+  //     setTimeout(() => {
+  //       commit('user/clearUser', {}, { root: true })
+  //       commit("clearToken");
+  //     }, expirationTime * 1000);
+  //   },
   register: async ({ commit, dispatch }, formData) => {
     try {
-      const { data } = await Api.post("/users", formData);
-      if (!data.user) {
-        console.log(data);
-        console.log("error'd out");
-        return;
-      }
+      const { data: { user } } = await Api.post("/users", formData);
       commit("authUser", data);
       dispatch('alert/setAlert', {
         type: 'success',
         text: 'Account created and logged in.'
       })
-      const now = new Date();
-      const expirationDate = new Date(now.getTime() + 7200000);
-      localStorage.setItem("bs-auth-time", expirationDate);
-      localStorage.setItem("bs-auth-token", data.token);
-      dispatch("setLogoutTimer", 7200);
+      // const now = new Date();
+      // const expirationDate = new Date(now.getTime() + 7200000);
+      // localStorage.setItem("bs-auth-time", expirationDate);
+      // localStorage.setItem("bs-auth-token", data.token);
+      // dispatch("setLogoutTimer", 7200);
       router.push("/");
     } catch (err) {
       console.log(err);
@@ -52,11 +47,11 @@ const actions = {
   authUser: async ({ commit, dispatch }, token) => {
     try {
       commit("setToken", token);
-      const now = new Date();
-      const expirationDate = new Date(now.getTime() + 7200000);
-      localStorage.setItem("bs-auth-time", expirationDate);
-      localStorage.setItem("bs-auth-token", token);
-      dispatch("setLogoutTimer", 7200);
+      // const now = new Date();
+      // const expirationDate = new Date(now.getTime() + 7200000);
+      // localStorage.setItem("bs-auth-time", expirationDate);
+      // localStorage.setItem("bs-auth-token", token);
+      // dispatch("setLogoutTimer", 7200);
       router.push("/");
     } catch (err) {
       dispatch('alert/setAlert', {
@@ -66,35 +61,36 @@ const actions = {
     }
   },
   tryAutoLogin: async ({ commit, dispatch, }) => {
-    const token = localStorage.getItem("bs-auth-token");
-    if (!token) {
-      return;
-    }
-    commit('setToken', token)
-    const expirationDate = new Date(localStorage.getItem("bs-auth-time"));
-    const now = new Date();
-    if (now >= expirationDate) {
-      dispatch('logoutUser')
-      return;
-    }
-    const { data: user } = await Api.get("/users/me", {
-      headers: {
-        Authorization: `Bearer: ${token}`
-      }
-    });
-    dispatch(
-      'user/setCurrentUser', 
-      user, 
-      { root: true })
-    dispatch('alert/setAlert', {
-      type: 'success',
-      text: 'Logged in.'
-      }, 
-      { root: true })
+    console.log("Tried to auto-login.")
+    // const token = localStorage.getItem("bs-auth-token");
+    // if (!token) {
+    //   return;
+    // }
+    // commit('setToken', token)
+    // const expirationDate = new Date(localStorage.getItem("bs-auth-time"));
+    // const now = new Date();
+    // if (now >= expirationDate) {
+    //   dispatch('logoutUser')
+    //   return;
+    // }
+    // const { data: user } = await Api.get("/users/me", {
+    //   headers: {
+    //     Authorization: `Bearer: ${token}`
+    //   }
+    // });
+    // dispatch(
+    //   'user/setCurrentUser', 
+    //   user, 
+    //   { root: true })
+    // dispatch('alert/setAlert', {
+    //   type: 'success',
+    //   text: 'Logged in.'
+    //   }, 
+    //   { root: true })
   },
   logoutUser: ({ commit, dispatch }) => {
-    localStorage.removeItem("bs-auth-token");
-    localStorage.removeItem("bs-auth-time");
+    // localStorage.removeItem("bs-auth-token");
+    // localStorage.removeItem("bs-auth-time");
     commit("clearToken");
     dispatch('user/clearCurrentUser', {}, { root: true })
     dispatch('alert/setAlert', {
