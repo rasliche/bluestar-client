@@ -44,7 +44,7 @@
             type="button"
             @click.prevent="submitLoginForm" 
             class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
-            :disabled="uiState === 'formSubmitted'"
+            :disabled="uiState !== 'idle'"
             >
             <div 
               v-if="uiState==='pending'"
@@ -77,7 +77,7 @@ export default {
   data() {
     return {
       formFeedback: null,
-      uiState: 'submit not clicked',
+      uiState: 'idle',
       errors: false,
       formTouched: true,
       formResponses: {
@@ -103,7 +103,6 @@ export default {
     async submitLoginForm() {
       this.formTouched = !this.$v.formResponses.$anyDirty
       this.errors = this.$v.formResponses.$anyError
-      this.uiState = 'submit clicked'
       if (this.errors === false && this.formTouched === false && this.uiState !== 'pending') {
         const authData = {
           email: this.formResponses.email,
@@ -124,7 +123,7 @@ export default {
         } catch (error) {
           console.log(error.response)
           if (error.response.status === 400) {
-            this.uiState = 'submit not clicked'
+            this.uiState = 'idle'
             this.formFeedback = error.response.data
           }
           console.log(error)

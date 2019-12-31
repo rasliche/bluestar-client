@@ -86,20 +86,31 @@
         <label for="shopPassword" class="w-1/2 text-right pr-2">Shop Password:</label>
         <input type="text" name="shopPassword" id="shopPassword" v-model="shopPassword" class="w-1/2">
     </section> -->
-    <section class="flex items-center justify-between">
-      <button
-        type="button"
-        @click.prevent="submitRegisterForm" 
-        class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
-        :disabled="uiState === 'form submitted'">
-        Register
-      </button>
+    <section class="relative mb-3 pb-6">
+      <div class="flex items-center justify-between">
+        <button
+          type="button"
+          @click.prevent="submitRegisterForm" 
+          class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
+          :disabled="uiState !== 'idle'"
+          >
+          <div 
+            v-if="uiState==='pending'"
+            class="inline-block simple-spinner">
+          </div>
+          Register
+        </button>
+        <a href="#" class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">Forgot password?</a>
+      </div>
+      <p v-if="formFeedback" class="absolute pin-b pin-x">
+        <span class="error">{{ formFeedback }}</span>
+      </p>
       <!-- <a href="#" class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">Forgot password?</a> -->
     </section>
   </form>
   <!-- TODO: Style this feedback -->
-  {{ formFeedback }}
-  {{ uiState }}
+  <!-- {{ formFeedback }}
+  {{ uiState }} -->
 </div>
 </template>
 
@@ -118,7 +129,7 @@ export default {
   data() {
     return {
       formFeedback: null,
-      uiState: 'submit not clicked',
+      uiState: 'idle',
       errors: false,
       formTouched: true,
       formResponses: {
@@ -161,7 +172,7 @@ export default {
       async submitRegisterForm() {
         this.formTouched = !this.$v.formResponses.$anyDirty
         this.errors = this.$v.formResponses.$anyError
-        this.uiState = 'submit clicked'
+        this.uiState = 'submitted'
         if (this.errors === false && this.formTouched === false) {
           const formData = {
             name: this.formResponses.name,
@@ -170,18 +181,24 @@ export default {
             // shopChoice: this.shopChoice,
             // shopPassword: this.shopPassword
           }
-          this.uiState = 'form submitted'
+          const spinnerTimer = setTimeout(function() {
+            this.uiState = 'pending'
+          }, 500)
           try {
             const { data: { token, _v, ...userData } } = await Api.post("/users", formData);
+            clearTimeout(spinnerTimer)
             this.setCurrentUser(userData)
             this.authUser(token)
             this.setAlert({ 
               type: 'success', 
               text: 'You have been logged in.'
             })
-            console.log(formData)
           } catch (error) {
-            console.log('got here due to an error: ', error)
+            console.log(error.response)
+            if (error.response.status === 400) {
+              this.uiState = 'idle',
+              this.formFeedback = error.response.data
+            }
           }
         }
         // this.$store.dispatch('register', formData)
@@ -190,8 +207,27 @@ export default {
   };
 </script>
 
+
 <style lang="postcss" scoped>
 .error {
   @apply text-red text-sm;
+}
+
+.error-border {
+  @apply border-red;
+}
+
+.simple-spinner {
+  height: 48px;
+  width: 48px;
+  border: 5px solid rgba(150, 150, 150, 0.2);
+  border-radius: 50%;
+  border-top-color: rgb(150, 150, 150);
+  animation: rotate 1s 0s infinite ease-in-out alternate;
+}
+
+@keyframes rotate {
+  0%   { transform: rotate(0);      }
+  100% { transform: rotate(360deg); }
 }
 </style>
