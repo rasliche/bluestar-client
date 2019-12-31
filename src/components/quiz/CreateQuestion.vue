@@ -164,7 +164,6 @@ export default {
     async addQuestion() {
       this.formTouched.question = !this.$v.question.text.$dirty || !this.$v.question.theMoreYouKnow.$dirty;
       this.errors.question = this.$v.question.text.$error || this.$v.question.theMoreYouKnow.$error;
-      let newQuestion
       if (
         this.formTouched.question === false
         && this.errors.question === false
@@ -172,21 +171,20 @@ export default {
         && this.hasCorrectAnswer
         ) {
           try {
-            newQuestion = await Api.post('/questions', {
-              lessonId: this.lesson._id,
+            const { data } = await Api.post('/questions', {
+              lesson: this.lesson._id,
               text: this.question.text,
               answers: this.question.answers,
               theMoreYouKnow: this.question.theMoreYouKnow
             });
+            this.$emit('newQuestion', data)
+            this.question.text = "";
+            this.question.answers = [];
+            this.question.theMoreYouKnow = "";
+            this.$v.question.$reset()
           } catch (error) {
             console.log(error)
           }
-          this.$emit('newQuestion', newQuestion)
-          this.question.text = "";
-          this.question.answers = [];
-          this.question.theMoreYouKnow = "";
-          console.log("added a question");
-          this.$v.question.$reset()
       }
     },
     addAnswer() {
