@@ -5,10 +5,9 @@
       v-for="lesson in lessons"
       :key="lesson._id"
       :title="lesson.title"
-      thumbnail="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/mangroves.jpg"
       :description="lesson.description"
       :programs="lesson.programs"
-      :lessonId="lesson._id"
+      :id="lesson._id"
     />
   </div>
 </template>
@@ -28,7 +27,7 @@ export default {
     }
   },
   async beforeRouteEnter (to, from, next) {
-    const { data } = await Api.get('/lessons');
+    const { data } = await Api.get('/lessons?programs=true');
     next(vm => {
       // access to component instance via `vm`
       vm.$data.lessons = data
