@@ -320,10 +320,9 @@ export default {
             // this.$router.replace({ name: 'view-lesson', params: { slug: slug }})
         } catch (error) {
             console.log(error)
-        }
-      },
-      logLesson() {
-          console.log(this.editor.getJSON())
+    logLesson() {
+      console.log(this.editor.getJSON())
+    },
     onNewQuestion(newQuestion) {
       this.lesson.questions.push(newQuestion)
     },
