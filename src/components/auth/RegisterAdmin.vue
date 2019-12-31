@@ -137,7 +137,7 @@ export default {
     data() {
       return {
         formFeedback: null,
-        uiState: 'submit not clicked',
+        uiState: 'idle',
         errors: false,
         formTouched: true,
         formResponses: {
@@ -201,6 +201,7 @@ export default {
               type: 'success', 
               text: 'You have been logged in.'
             })
+            this.uiState = 'idle'
           } catch (error) {
             console.log(error.response)
             if (error.response.status === 400) {
