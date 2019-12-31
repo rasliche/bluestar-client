@@ -64,6 +64,19 @@ export default {
       console.log('halfway')
     }
   },
+  computed: {
+    wordCount() {
+      return this.editor.getHTML().split(' ').length
+    },
+    readingTimeMinutes() { // 265 words per minute reading speed
+      return Math.ceil(this.wordCount / 265)
+    },
+    readingTimeString() {
+      const hours = Math.floor(this.readingTimeMinutes / 60)
+      const minutes = this.readingTimeMinutes % 60
+      return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`
+    }
+  },
   async beforeRouteEnter(to, from, next) {
     const { data: { content, ...lesson } } = await Api.get(`/lessons/${to.params.id}?questions=true&programs=true`);
     // const { data: questions } = await Api.get(`/questions`)
