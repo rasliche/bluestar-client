@@ -10,7 +10,7 @@
       {{ lesson.title }}
     </h1>
     <editor-content class="lesson-content" :editor="editor" />
-    <Quiz v-if="lesson.questions.length" :questions="lesson.questions" />
+    <Quiz v-if="lesson.questions.length > 0" :questions="lesson.questions" />
   </article>
 </template>
 
@@ -64,12 +64,13 @@ export default {
       console.log('halfway')
     }
   },
-  async created() {
-    const { data: { content, ...lesson } } = await Api.get(`/lessons/${this.id}`);
-    
-    this.lesson = { ...lesson };
-    this.editor = new Editor({
-      extensions: [
+  async beforeRouteEnter(to, from, next) {
+    const { data: { content, ...lesson } } = await Api.get(`/lessons/${to.params.id}?questions=true&programs=true`);
+    // const { data: questions } = await Api.get(`/questions`)
+    next(vm => {
+      vm.$data.lesson = lesson;
+      vm.$data.editor = new Editor({
+        extensions: [
           new Bold(),
           new Italic(),
           new Underline(),
@@ -89,9 +90,10 @@ export default {
           // custom extensions tests
           new Iframe(),
         ],
-      editable: false,
-      content: content
-    });
+        editable: false,
+        content: content
+      })
+    })
   },
   beforeDestroy() {
     this.editor.destroy();
