@@ -324,7 +324,9 @@ export default {
       },
       logLesson() {
           console.log(this.editor.getJSON())
-      }
+    onNewQuestion(newQuestion) {
+      this.lesson.questions.push(newQuestion)
+    },
   }
 }
 </script>
