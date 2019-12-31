@@ -295,7 +295,10 @@ export default {
       this.editor.destroy();
   },
   methods: {
-      showImagePrompt(command) {
+    ...mapActions('alert', [
+      'setAlert'
+    ]),
+    showImagePrompt(command) {
       const src = prompt('Enter the url of your image here')
       if (src !== null) {
         command({ src })
