@@ -15,7 +15,7 @@ export default {
     props: {
         curve: {
             type: String, 
-            required: true,
+            // required: true,
             default: "M0 100s269.931 86.612 520 0c250.069-86.612 480 0 480 0",
         },
     },
@@ -26,18 +26,18 @@ export default {
         //     }
         // }
         // document.addEventListener("keydown", escapeHandler)
-        function onScroll(){
-            requestAnimationFrame(function(){
-                var rect = textContainer.getBoundingClientRect();
-                var scrollPercent = rect.y / window.innerHeight;
-                console.log(scrollPercent);
-                updateTextPathOffset( scrollPercent * 2 * pathLength );
-            });
-        }
+        // function onScroll(){
+        //     requestAnimationFrame(function(){
+        //         var rect = textContainer.getBoundingClientRect();
+        //         var scrollPercent = rect.y / window.innerHeight;
+        //         console.log(scrollPercent);
+        //         updateTextPathOffset( scrollPercent * 2 * pathLength );
+        //     });
+        // }
 
-        this.$once("hook:destroyed", () => {
-            document.removeEventListener("keydown", escapeHandler)
-        })
+        // this.$once("hook:destroyed", () => {
+        //     document.removeEventListener("keydown", escapeHandler)
+        // })
     },
 }
 </script>
