@@ -307,19 +307,29 @@ export default {
         command({ src })
       }
     },
-      async createLesson() {
-        console.log(this.editor.getJSON())
-        try {
-            const { data: { slug } } = await Api.post("/lessons", {
-                title: this.lesson.title,
-                description: this.lesson.description,
-                programs: this.lesson.programs,
-                published: this.lesson.published,
-                content: this.editor.getJSON(),
-            });
-            // this.$router.replace({ name: 'view-lesson', params: { slug: slug }})
-        } catch (error) {
-            console.log(error)
+    async createLesson() {
+      // console.log(this.editor.getJSON())
+      try {
+        this.status = 'pending'
+        const { data: lesson } = await Api.post("/lessons", {
+          title: this.lesson.title,
+          description: this.lesson.description,
+          programs: this.lesson.programs,
+          published: this.lesson.published,
+          content: this.editor.getJSON(),
+        });
+        this.lesson._id = lesson._id
+        this.status = 'readyForQuestions'
+        this.setAlert({
+          type: 'success',
+          text: 'Lesson Created!',
+        })
+        // this.$router.replace({ name: 'view-lesson', params: { slug: slug }})
+      } catch (error) {
+        console.log(error)
+        this.status = 'idle'
+      }
+    },
     logLesson() {
       console.log(this.editor.getJSON())
     },
