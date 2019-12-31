@@ -226,6 +226,19 @@ export default {
   beforeDestroy() {
       this.editor.destroy();
   },
+  computed: {
+    wordCount() {
+      return this.editor.getHTML().split(' ').length
+    },
+    readingTimeMinutes() { // 265 words per minute reading speed
+      return Math.ceil(this.wordCount / 265)
+    },
+    readingTimeString() {
+      const hours = Math.floor(this.readingTimeMinutes / 60)
+      const minutes = this.readingTimeMinutes % 60
+      return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`
+    }
+  },
   methods: {
     showImagePrompt(command) {
       const src = prompt('Enter the url of your image here')
