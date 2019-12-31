@@ -35,7 +35,7 @@
                 >
                     <input
                         type="checkbox"
-                        :value="program.name"
+                        :value="program._id"
                         :id="program.name"
                         v-model="lesson.programs"
                     />
@@ -44,47 +44,59 @@
             </div>
         </section>
     </form>
-    <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
-      <div class="menubar flex">
-        <button
-          :class="{ 'is-active': isActive.bold() }"
-          @click="commands.bold">
-            Bold
-        </button>
-        <button
-          :class="{ 'is-active': isActive.italic() }"
-          @click="commands.italic">
-            Italic
-        </button>
-        <button
-          :class="{ 'is-active': isActive.underline() }"
-          @click="commands.underline">
-            Underline
-        </button>
-        <button
-          @click="showImagePrompt(commands.image)">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 fill-current icon-photo">
-                <path class="primary text-white" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm9 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
-                <path class="secondary text-grey-darker" d="M15.3 12.3a1 1 0 0 1 1.4 0l2 2a1 1 0 0 1 .3.7v3a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 .3-.7l4-4a1 1 0 0 1 1.4 0l3.3 3.29 1.3-1.3z"></path>
-            </svg>
-        </button>
-        <button
-          @click="showIframePrompt(commands.iframe)">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 fill-current icon-film">
-                <path class="primary text-white" d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v2h2V5H4zm0 4v2h2V9H4zm0 4v2h2v-2H4zm0 4v2h2v-2H4zM18 5v2h2V5h-2zm0 4v2h2V9h-2zm0 4v2h2v-2h-2zm0 4v2h2v-2h-2z"></path>
-                <path class="secondary text-grey-darker" d="M9 5h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 8h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z"></path>
-            </svg>
-        </button>
-        <button
-          :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-          @click="commands.heading({ level: 2 })">
-            H2
-        </button>
-        <button
-          :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-          @click="commands.heading({ level: 3 })">
-          H3
-        </button>
+    <editor-menu-bar 
+      :editor="editor" 
+      v-slot="{ commands, isActive }">
+      <div class="flex justify-between">
+        <div class="menubar flex justify-between">
+          <button
+            :class="{ 'is-active': isActive.bold() }"
+            @click="commands.bold">
+              Bold
+          </button>
+          <button
+            :class="{ 'is-active': isActive.italic() }"
+            @click="commands.italic">
+              Italic
+          </button>
+          <button
+            :class="{ 'is-active': isActive.underline() }"
+            @click="commands.underline">
+              Underline
+          </button>
+          <button
+            @click="showImagePrompt(commands.image)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 fill-current icon-photo">
+                  <path class="primary text-white" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm9 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+                  <path class="secondary text-grey-darker" d="M15.3 12.3a1 1 0 0 1 1.4 0l2 2a1 1 0 0 1 .3.7v3a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 .3-.7l4-4a1 1 0 0 1 1.4 0l3.3 3.29 1.3-1.3z"></path>
+              </svg>
+          </button>
+          <button
+            @click="showIframePrompt(commands.iframe)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 fill-current icon-film">
+                  <path class="primary text-white" d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v2h2V5H4zm0 4v2h2V9H4zm0 4v2h2v-2H4zm0 4v2h2v-2H4zM18 5v2h2V5h-2zm0 4v2h2V9h-2zm0 4v2h2v-2h-2zm0 4v2h2v-2h-2z"></path>
+                  <path class="secondary text-grey-darker" d="M9 5h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 8h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z"></path>
+              </svg>
+          </button>
+          <button
+            :class="{ 'is-active': isActive.heading({ level: 2 }) }"
+            @click="commands.heading({ level: 2 })">
+              H2
+          </button>
+          <button
+            :class="{ 'is-active': isActive.heading({ level: 3 }) }"
+            @click="commands.heading({ level: 3 })">
+            H3
+          </button>
+        </div>
+        <div class="flex justify-between text-sm">
+          <div class="mr-4">
+            {{ wordCount }} words
+          </div>
+          <div>
+            {{ readingTimeString }} Reading Time
+          </div>
+        </div>
       </div>
     </editor-menu-bar>
 
@@ -196,7 +208,7 @@ export default {
     const { data: programs } = await Api.get('/programs');
     next(vm => {
       // access to component instance via `vm`
-      vm.$data.lesson = lessonData
+      vm.$data.lesson = { ...lessonData }
       vm.$data.programOptions = programs;
       vm.$data.editor = new Editor({
         extensions: [
@@ -255,16 +267,17 @@ export default {
     async editLesson() {
       console.log(this.editor.getJSON())
       try {
-          const { data } = await Api.put(`/lessons/${this.lesson._id}`, {
-              title: this.lesson.title,
-              description: this.lesson.description,
-              programs: this.lesson.programs,
-              published: this.lesson.published,
-              content: this.editor.getJSON(),
-          });
-          // this.$router.push({ name: 'admin'})
+        const { data } = await Api.put(`/lessons/${this.lesson._id}`, {
+          title: this.lesson.title,
+          description: this.lesson.description,
+          programs: this.lesson.programs,
+          published: this.lesson.published,
+          content: this.editor.getJSON(),
+          questions: this.lesson.questions,
+        });
+        // this.$router.push({ name: 'admin'})
       } catch (error) {
-          console.log(error)
+        console.log(error)
       }
     },
     logLesson() {
@@ -279,32 +292,31 @@ export default {
 
 <style lang="postcss">
 .menubar {
-    button:first-child {
-        @apply rounded-l
+  button:first-child {
+    @apply rounded-l
+  }
+  button:last-child {
+    @apply rounded-r
+  }
+  button {
+    @apply p-2 text-white bg-grey-darker border border-grey-darkest;
+    &:hover {
+      @apply bg-grey-darkest;
     }
-    button:last-child {
-        @apply rounded-r
+    .is-active {
+      @apply bg-grey-light text-grey-darkest;
     }
-    button {
-        @apply p-2 text-white bg-grey-darker border border-grey-darkest;
-        &:hover {
-            @apply bg-grey-darkest;
-        }
-        .is-active {
-            @apply bg-grey-light text-grey-darkest;
-        }
-    }
-
+  }
 }
 
 /* Reference: https://github.com/tailwindcss/discuss/issues/243 */
 /* .lesson-content > div { */
 .ProseMirror {
-    /* outline-none */
-    @apply px-2 text-lg text-grey-darkest leading-normal;
-    > * + *, li + li, li > p + p {
-        @apply mt-4;
-    }
+  /* outline-none */
+  @apply px-2 text-lg text-grey-darkest leading-normal;
+  > * + *, li + li, li > p + p {
+    @apply mt-4;
+  }
 }
 /* .lesson-content {
   @apply text-lg text-grey-darkest leading-normal;
