@@ -2,7 +2,7 @@
   <div class="flex flex-wrap">
     <!-- TODO: Allow cards to be filtered -->
     <BSLessonCard
-      v-for="lesson in lessons"
+      v-for="lesson in publishedLessons"
       :key="lesson._id"
       :title="lesson.title"
       :description="lesson.description"
@@ -26,19 +26,15 @@ export default {
       lessons: []
     }
   },
-  async beforeRouteEnter (to, from, next) {
-    const { data } = await Api.get('/lessons?programs=true');
-    next(vm => {
-      // access to component instance via `vm`
-      vm.$data.lessons = data
-    })
+  async created() {
+    const { data } = await Api.get('/lessons');  
+    this.lessons = data;
   },
-  // async created() {
-    
-  //   this.lessons = data;
-  // },
   computed: {
-    
+    publishedLessons() {
+      const publishedLessons = this.lessons.filter(l => l.published === true)
+      return publishedLessons
+    }
   }
 };
 </script>
