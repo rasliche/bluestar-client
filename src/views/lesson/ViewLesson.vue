@@ -115,14 +115,49 @@ export default {
 </script>
 
 <style lang="postcss">
-.lesson-content > div {
-    @apply text-lg text-grey-darkest w-full leading-normal outline-none;
-    > * + *, li + li, li > p + p {
-        @apply mt-4;
-    }
-
-    iframe {
-      @apply mx-auto;
-    }
+/* Reference: https://github.com/tailwindcss/discuss/issues/243 */
+/* .lesson-content > div { */
+.ProseMirror {
+  /* outline-none */
+  @apply max-w-2xl px-2 text-lg text-grey-darkest leading-normal;
+  > * + *, li + li, li > p + p {
+    @apply mt-4;
+  }
 }
+/* .lesson-content {
+  @apply text-lg text-grey-darkest leading-normal;
+    > * + *, li + li, li > p + p {
+        @apply mt-6;
+    }
+        strong {
+        @apply text-black font-bold;
+    }
+        a {
+        @apply text-black font-semibold;
+    }
+        strong a {
+        @apply font-bold;
+    }
+        h2 {
+        @apply leading-tight text-xl font-bold text-black mb-2 mt-10;
+    }
+        h3 {
+        @apply leading-tight text-lg font-bold text-black mt-8 -mb-2;
+    }
+        code {
+        @apply font-mono text-sm inline bg-grey-lighter px-1;
+    }
+        pre code {
+        @apply block bg-black p-4 rounded;
+    }
+        blockquote {
+        @apply border-l-4 border-grey-light pl-4 italic;
+    }
+        ul, ol {
+        @apply pl-5;
+        @screen sm {
+        @apply pl-10;
+        }
+    }
+} */
 </style>
