@@ -137,7 +137,7 @@
     <section class="flex flex-wrap w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto mt-4">
       <h2 class="w-full">Add Questions</h2>
       <CreateQuestion 
-        :lesson="lesson"
+        :lessonId="lesson._id"
         class="w-full md:w-1/2"
         @newQuestion="onNewQuestion"
       ></CreateQuestion>
@@ -147,7 +147,13 @@
         <!-- Accordion these questions -->
         <ol>
           <li v-for="(question, index) in questions" :key="index">
-            <p>{{ question.text }}</p>
+            <div class="flex">
+              <p>{{ question.text }}</p>
+              <button
+                @click="deleteQuestion(question._id)">
+                X
+              </button>
+            </div>
             <ul>
               <li
                 class="list-reset"                
@@ -229,7 +235,7 @@ export default {
           // access to component instance via `vm`
           vm.$data.lesson = { ...lesson.data }
           vm.$data.programOptions = programs.data;
-          vm.$data.questions = questions.data;
+          vm.$data.questions = [...questions.data];
           vm.$data.editor = new Editor({
             extensions: [
               new Bold(),
@@ -321,14 +327,17 @@ export default {
     logLesson() {
         console.log(this.editor.getJSON())
     },
-    async onNewQuestion(newQuestion) {
+    onNewQuestion(newQuestion) {
+      this.questions.push(newQuestion)
+    },
+    async deleteQuestion(questionId) {
       try {
-        const { data } = await Api.post(`lesson/${this.lesson._id}/questions/`, newQuestion)
-        this.questions.push(data)
+        const { data: question } = await Api.delete(`/lesson/${this.lesson._id}/questions/${questionId}`)
+        this.questions = this.questions.filter(q => q._id !== question._id)
       } catch (error) {
         console.log(error)
       }
-    },
+    }
   }
 }
 </script>
