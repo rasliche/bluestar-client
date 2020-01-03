@@ -111,7 +111,7 @@ import {
 
 export default {
   name: "CreateQuestion",
-  props: ["lesson"],
+  props: ["lessonId"],
   data() {
     return {
       feedback: null,
@@ -171,8 +171,8 @@ export default {
         && this.hasCorrectAnswer
         ) {
           try {
-            const { data } = await Api.post('/questions', {
-              lesson: this.lesson._id,
+            const { data } = await Api.post(`/lesson/${this.lessonId}/questions`, {
+              lesson: this.lessonId,
               text: this.question.text,
               answers: this.question.answers,
               theMoreYouKnow: this.question.theMoreYouKnow
