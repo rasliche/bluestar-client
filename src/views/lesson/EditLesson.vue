@@ -8,13 +8,7 @@
                 >Lesson Title</label>
             <input 
               type="text" 
-                type="text" 
-              type="text" 
               name="title" 
-                name="title" 
-              name="title" 
-              id="title" 
-                id="title" 
               id="title" 
               v-model="lesson.title"
               class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -318,11 +312,8 @@ export default {
           title: this.lesson.title,
           description: this.lesson.description,
           programs: this.lesson.programs,
-          published: this.lesson.published,
           content: this.editor.getJSON(),
-          questions: this.lesson.questions,
         });
-        // this.$router.push({ name: 'admin'})
       } catch (error) {
         console.log(error)
       }
@@ -330,8 +321,13 @@ export default {
     logLesson() {
         console.log(this.editor.getJSON())
     },
-    onNewQuestion(newQuestion) {
-      this.lesson.questions.push(newQuestion)
+    async onNewQuestion(newQuestion) {
+      try {
+        const { data } = await Api.post(`lesson/${this.lesson._id}/questions/`, newQuestion)
+        this.questions.push(data)
+      } catch (error) {
+        console.log(error)
+      }
     },
   }
 }
