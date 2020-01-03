@@ -47,6 +47,7 @@ const actions = {
   authUser: async ({ commit, dispatch }, token) => {
     try {
       commit("setToken", token);
+      Api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       // const now = new Date();
       // const expirationDate = new Date(now.getTime() + 7200000);
       // localStorage.setItem("bs-auth-time", expirationDate);
@@ -92,6 +93,7 @@ const actions = {
     // localStorage.removeItem("bs-auth-token");
     // localStorage.removeItem("bs-auth-time");
     commit("clearToken");
+    Api.defaults.headers.common['Authorization'] = ''
     dispatch('user/clearCurrentUser', {}, { root: true })
     dispatch('alert/setAlert', {
       type: 'success',
