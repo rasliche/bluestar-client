@@ -222,36 +222,44 @@ export default {
       editor: null,
     }
   },
+  beforeRouteEnter (to, from, next) {
     const lesson = Api.get(`/lessons/${to.params.id}`);
     const programs = Api.get('/programs');
     const questions = Api.get(`/lesson/${to.params.id}/questions`)
 
-      vm.$data.lesson = { ...lessonData }
-      vm.$data.programOptions = programs;
-      vm.$data.editor = new Editor({
-        extensions: [
-          new Bold(),
-          new Italic(),
-          new Underline(),
-          new Blockquote(),
-          new BulletList(),
-          new HardBreak(),
-          new Heading({ levels: [2, 3] }),
-          new HorizontalRule(),
-          new ListItem(),
-          new OrderedList(),
-          new TodoItem(),
-          new TodoList(),
-          new Link(),
-          new Strike(),
-          new History(),
-          new Image(),
-          // custom extensions tests
-          new Iframe,
-        ],
-        content,
-      });
-    })
+    axios.all([lesson, programs, questions])
+      .then(axios.spread(function (lesson, programs, questions) {
+        // Both requests are now complete
+        next(vm => {
+          // access to component instance via `vm`
+          vm.$data.lesson = { ...lesson.data }
+          vm.$data.programOptions = programs.data;
+          vm.$data.questions = questions.data;
+          vm.$data.editor = new Editor({
+            extensions: [
+              new Bold(),
+              new Italic(),
+              new Underline(),
+              new Blockquote(),
+              new BulletList(),
+              new HardBreak(),
+              new Heading({ levels: [2, 3] }),
+              new HorizontalRule(),
+              new ListItem(),
+              new OrderedList(),
+              new TodoItem(),
+              new TodoList(),
+              new Link(),
+              new Strike(),
+              new History(),
+              new Image(),
+              // custom extensions tests
+              new Iframe,
+            ],
+            content: lesson.data.content,
+          });
+        })
+      }));
   },
   beforeDestroy() {
       this.editor.destroy();
