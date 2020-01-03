@@ -180,7 +180,8 @@
 </template>
 
 <script>
-import Api from "@/services/Api";
+import axios from 'axios'
+import Api from "@/services/Api"
 import Modal from "@/components/Modal"
 import CreateQuestion from "@/components/quiz/CreateQuestion.vue"
 
