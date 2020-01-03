@@ -7,12 +7,18 @@
                 class="block text-blue-darker font-bold text-sm mb-2"
                 >Lesson Title</label>
             <input 
+              type="text" 
                 type="text" 
+              type="text" 
+              name="title" 
                 name="title" 
+              name="title" 
+              id="title" 
                 id="title" 
-                v-model="lesson.title"
-                class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                />
+              id="title" 
+              v-model="lesson.title"
+              class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              />
         </section>
         <section class="relative mb-6 pb-3">
             <label 
@@ -111,9 +117,9 @@
 
     <section class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between">
         <button
-            class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
-            @click="editLesson">
-            Save the Lesson
+          class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
+          @click="editLesson">
+          Save
         </button>
         <button
           v-if="!lesson.published"
