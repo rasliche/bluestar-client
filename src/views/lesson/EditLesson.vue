@@ -148,11 +148,11 @@
         @newQuestion="onNewQuestion"
       ></CreateQuestion>
       <div 
-        v-if="lesson.questions && lesson.questions.length" 
+        v-if="questions && questions.length" 
         class="w-full md:w-1/2 mb-6 px-3 pb-3">
         <!-- Accordion these questions -->
         <ol>
-          <li v-for="(question, index) in lesson.questions" :key="index">
+          <li v-for="(question, index) in questions" :key="index">
             <p>{{ question.text }}</p>
             <ul>
               <li
@@ -217,15 +217,15 @@ export default {
     return {
       lessonDetailModalOpen: false,
       lesson: { },
+      questions: [],
       programOptions: [],
       editor: null,
     }
   },
-  async beforeRouteEnter (to, from, next) {
-    const { data: { content, ...lessonData } } = await Api.get(`/lessons/${to.params.id}`);
-    const { data: programs } = await Api.get('/programs');
-    next(vm => {
-      // access to component instance via `vm`
+    const lesson = Api.get(`/lessons/${to.params.id}`);
+    const programs = Api.get('/programs');
+    const questions = Api.get(`/lesson/${to.params.id}/questions`)
+
       vm.$data.lesson = { ...lessonData }
       vm.$data.programOptions = programs;
       vm.$data.editor = new Editor({
