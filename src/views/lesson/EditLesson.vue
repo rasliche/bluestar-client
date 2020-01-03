@@ -115,6 +115,18 @@
             @click="editLesson">
             Save the Lesson
         </button>
+        <button
+          v-if="!lesson.published"
+          class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
+          @click="publishLesson">
+          Publish
+        </button>
+        <button
+          v-else
+          class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
+          @click="unpublishLesson">
+          Unpublish
+        </button>
         <!-- <button
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
             @click="logLesson">
@@ -262,6 +274,26 @@ export default {
       const src = prompt('Enter the url of your embed here')
       if (src !== null) {
         command({ src })
+      }
+    },
+    async publishLesson() {
+      try {
+        const { data } = await Api.post('/published-lessons', {
+          lessonId: this.lesson._id
+        })
+        console.log(data)
+        this.lesson.published = data.published
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async unpublishLesson() {
+      try {
+        const { data } = await Api.delete(`/published-lessons/${this.lesson._id}`)
+        console.log(data)
+        this.lesson.published = data.published
+      } catch (error) {
+        console.log(error)
       }
     },
     async editLesson() {
