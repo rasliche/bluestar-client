@@ -1,48 +1,36 @@
 <template>
-  <div id="app">
+  <div id="app" class="bg-grey-lightest">
     <AppNav />
 
-    <router-view class="px-4 pt-2"></router-view>
+    <router-view class="max-w-xl mx-auto px-4 pt-2"></router-view>
 
     <AppFooter />
+
     <!-- Notifications and Portals -->
     <portal-target name="modals"></portal-target>
     <transition name="alert-slide">
       <Alert v-if="alert.type" :type="alert.type" :text="alert.text"></Alert>
     </transition>
-
   </div>
 </template>
 
 <script>
-import AppNav from "@/components/AppNav.vue";
-import AppFooter from "@/components/AppFooter.vue";
-import Alert from "@/components/Alert/Alert.vue";
+import AppNav from '@/components/AppNav.vue'
+import AppFooter from '@/components/AppFooter.vue'
+import Alert from '@/components/Alert/Alert.vue'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState } = createNamespacedHelpers('alert')
-const { mapActions } = createNamespacedHelpers('auth')
 
 export default {
   components: {
     AppNav,
     AppFooter,
-    Alert,
-  },
-  created() {
-    this.tryAutoLogin()
-  },
-  methods: {
-    ...mapActions([
-      'tryAutoLogin',
-    ]),
+    Alert
   },
   computed: {
-    ...mapState([
-      'alert', 
-      'timer',
-      ]),
-  },
-};
+    ...mapState(['alert', 'timer']),
+  }
+}
 </script>
 
 <style src="./styles/accessibility.css"></style>
