@@ -12,7 +12,7 @@
     </div>
 
     <!-- Responsive Menu Button -->
-    <!-- <div class="block lg:hidden">
+    <!-- <div class="block md:hidden">
       <button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white"
         @click="showNavMenu = !showNavMenu"
       >
@@ -21,44 +21,50 @@
     </div> -->
 
     <!-- <transition name="tray" v-if="showNavMenu" mode="in-out" appear> -->
-      <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div class="lg:flex-grow">
+      <div class="w-full block flex-grow md:flex md:items-center md:w-auto">
+        <div class="md:flex-grow">
           <router-link
             v-if="isAuthenticated"
             :to="{ name: 'training' }"
-            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
               Training
           </router-link>
           <router-link 
             :to="{ name: 'news' }" 
-            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
               News
           </router-link>
           <router-link
             v-if="isAdmin"
             :to="{ name: 'admin' }"
-            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
               Admin
+          </router-link>
+          <router-link
+            v-if="isAdmin"
+            :to="{ name: 'design' }"
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+              Design
           </router-link>
         </div>
 
-        <div class="w-full inline-block lg:items-center lg:w-auto">
+        <div class="w-full inline-block md:items-center md:w-auto">
           <router-link 
             v-if="!isAuthenticated" 
             to="/login" 
-            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
               Login
           </router-link>
           <router-link
             v-if="isAuthenticated"
             :to="{ name: 'me' }"
-            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
               Me
           </router-link>
           <button
             v-if="isAuthenticated" 
             @click="logout" 
-            class="block p-2 mt-3 mr-4 lg:inline-block lg:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest">
               Logout
           </button>
         </div>
