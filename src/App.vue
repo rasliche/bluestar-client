@@ -34,6 +34,13 @@ export default {
 }
 </script>
 
+<style lang="postcss">
+.page-heading {
+  @apply border-blue-lighter border-b-4 mb-4 pt-4;
+}
+
+</style>
+
 <style src="./styles/accessibility.css"></style>
 <style src="./styles/styles.css"></style>
 <style src="./styles/transitions.css"></style>
