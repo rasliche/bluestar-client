@@ -27,8 +27,8 @@
             class="text-blue-darker w-1/3 text-right pr-4"
           >Password</label>
           <input 
-            type="text" 
-            id="fpassword" 
+            type="text"
+            id="fpassword"
             name="fpassword"
             v-model.lazy="$v.formResponses.password.$model" 
             class="border-blue-lighter border-b-2 pl-2 w-2/3"
@@ -38,22 +38,19 @@
           </p>
         </section>
         <section class="relative px-4 pb-8 flex">
-          <label 
-            for="programs"
-            class="text-blue-darker w-1/3 text-right pr-4"
-          >Programs</label>
-          <input
-            type="checkbox"
-            value="diving"
-            id="diving"
-            v-model="formResponses.programs"
-          />Diving
-          <input
-            type="checkbox"
-            value="fishing"
-            id="fishing"
-            v-model="formResponses.programs"
-          />Fishing
+            <div v-for="program in programOptions" :key="program._id">
+                <label
+                  class="block capitalize text-blue-darker font-bold text-sm mb-2"
+                >
+                    <input
+                        type="checkbox"
+                        :value="program._id"
+                        :id="program.name"
+                        v-model="formResponses.programs"
+                    />
+                    {{ program.name }}
+                </label>
+            </div>
         </section>
       </form>
     </template>
@@ -68,6 +65,7 @@
 </template>
 
 <script>
+import Api from '@/services/Api'
 import { required } from 'vuelidate/lib/validators'
 import { mapActions, mapGetters } from 'vuex'
 import Modal from "@/components/Modal.vue"
@@ -85,6 +83,7 @@ export default {
         password: null,
         programs: []
       },
+      programOptions: [],
       formTouched: true,
       errors: false
     }
@@ -98,6 +97,10 @@ export default {
         required,
       }
     }
+  },
+  async mounted() {
+    const { data } = await Api.get('/programs')
+    this.programOptions = data
   },
   computed: {
     ...mapGetters('auth', ['token'])
