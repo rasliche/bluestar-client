@@ -1,8 +1,8 @@
 <template>
-  <div class="user-dashboard justify-center">
-    <div class="w-5/6">
-      <h1 class="border-blue-lighter border-b-4 mb-4">User Dashboard Page</h1>
-    </div>
+  <main class="user-dashboard">
+    <h1 class="page-heading">
+      Your Dashboard
+    </h1>
     <div class="w-5/6">
       <p>Name: {{ name }}</p>
       <p>Email: {{ email }}</p>
@@ -17,7 +17,7 @@
       </div>
       <p v-if="isAdmin">You are an admin.</p>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
