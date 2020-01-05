@@ -62,7 +62,8 @@ export default new Router({
     //   component: () => import(/* webpackChunkName: "operators" */ "./views/Operators.vue")
     // },
     {
-      path: "/operators/:id",
+      path: "/operators/:operatorId",
+      props: true,
       name: "operator",
     //   // beforeEnter (to, from, next) {
     //   //   if (store.state.token) {
@@ -108,8 +109,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "create-lesson" */ "./views/lesson/CreateLesson.vue")
     },
     {
-      path: "/lesson/:id/edit",
+      path: "/lesson/:lessonId/edit",
       name: "edit-lesson",
+      props: true, // receive lessonId route parameter as the prop to fetch lesson
       beforeEnter (to, from, next) {
         if (store.getters['auth/isAuthenticated'] && store.getters['user/isAdmin']) {
           next()
@@ -120,9 +122,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "edit-lesson" */ "./views/lesson/EditLesson.vue")
     },
     {
-      path: "/lesson/:id",
-      props: true,
+      path: "/lesson/:lessonId",
       name: "view-lesson",
+      props: true, // receive lessonId route parameter as the prop to fetch lesson
       component: () => import(/* webpackChunkName: "view-lesson" */ "./views/lesson/ViewLesson.vue")
     },
     {
