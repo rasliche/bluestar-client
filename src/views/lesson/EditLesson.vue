@@ -1,5 +1,8 @@
 <template>
-  <div class="lesson">
+  <main class="lesson">
+    <h1 class="page-heading">
+      Edit Lesson
+    </h1>
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <section class="relative mb-6 pb-3">
             <label 
@@ -42,6 +45,9 @@
                     {{ program.name }}
                 </label>
             </div>
+        </section>
+        <section class="relative mb-6 pb-3">
+          upload image here
         </section>
     </form>
     <editor-menu-bar 
@@ -176,7 +182,7 @@
         </ol>
       </div>
     </section>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -208,6 +214,7 @@ import Iframe from "@/components/tiptap-extras/Iframe";
 
 export default {
   name: 'EditLesson',
+  props: ['lessonId'],
   components: {
     EditorContent,
     EditorMenuBar,
@@ -223,44 +230,37 @@ export default {
       editor: null,
     }
   },
-  beforeRouteEnter (to, from, next) {
-    const lesson = Api.get(`/lessons/${to.params.id}`);
-    const programs = Api.get('/programs');
-    const questions = Api.get(`/lesson/${to.params.id}/questions`)
+  async created () {
+    const { data: programs } = await Api.get('/programs');
+    const { data: questions } = await Api.get(`/lesson/${this.lessonId}/questions`)
 
-    axios.all([lesson, programs, questions])
-      .then(axios.spread(function (lesson, programs, questions) {
-        // Both requests are now complete
-        next(vm => {
-          // access to component instance via `vm`
-          vm.$data.lesson = { ...lesson.data }
-          vm.$data.programOptions = programs.data;
-          vm.$data.questions = [...questions.data];
-          vm.$data.editor = new Editor({
-            extensions: [
-              new Bold(),
-              new Italic(),
-              new Underline(),
-              new Blockquote(),
-              new BulletList(),
-              new HardBreak(),
-              new Heading({ levels: [2, 3] }),
-              new HorizontalRule(),
-              new ListItem(),
-              new OrderedList(),
-              new TodoItem(),
-              new TodoList(),
-              new Link(),
-              new Strike(),
-              new History(),
-              new Image(),
-              // custom extensions tests
-              new Iframe,
-            ],
-            content: lesson.data.content,
-          });
-        })
-      }));
+    const { data: { content, ...lesson } } = await Api.get(`/lessons/${this.lessonId}`);
+    this.lesson = lesson
+    this.programOptions = programs
+    this.questions = questions
+    this.editor = new Editor({
+      extensions: [
+        new Bold(),
+        new Italic(),
+        new Underline(),
+        new Blockquote(),
+        new BulletList(),
+        new HardBreak(),
+        new Heading({ levels: [2, 3] }),
+        new HorizontalRule(),
+        new ListItem(),
+        new OrderedList(),
+        new TodoItem(),
+        new TodoList(),
+        new Link(),
+        new Strike(),
+        new History(),
+        new Image(),
+        // custom extensions tests
+        new Iframe,
+      ],
+      content: content,
+    });
   },
   beforeDestroy() {
       this.editor.destroy();

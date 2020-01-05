@@ -6,11 +6,11 @@
       :useVerticalOffset="true"
       offsetElement="app-nav">
     </ScrollProgressBar>
-    <h1 class="border-blue-lighter border-b-4 mb-4">
+    <h1 class="page-heading">
       {{ lesson.title }}
     </h1>
     <editor-content class="lesson-content" :editor="editor" />
-    <Quiz v-if="lesson.questions.length > 0" :questions="lesson.questions" />
+    <Quiz v-if="questions.length > 0" :questions="questions" />
   </article>
 </template>
 
@@ -45,15 +45,11 @@ export default {
     EditorContent,
     Quiz,
   },
-  props: {
-    id: {
-      type: String,
-      required: true,
-    },
-  },
+  props: ['lessonId'],
   data() {
     return {
       lesson: { },
+      questions: [],
       // title: '',
       editor: null,
       // quiz: null,
@@ -77,36 +73,36 @@ export default {
       return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`
     }
   },
-  async beforeRouteEnter(to, from, next) {
-    const { data: { content, ...lesson } } = await Api.get(`/lessons/${to.params.id}?questions=true&programs=true`);
-    // const { data: questions } = await Api.get(`/questions`)
-    next(vm => {
-      vm.$data.lesson = lesson;
-      vm.$data.editor = new Editor({
-        extensions: [
-          new Bold(),
-          new Italic(),
-          new Underline(),
-          new Blockquote(),
-          new BulletList(),
-          new HardBreak(),
-          new Heading({ levels: [2, 3] }),
-          new HorizontalRule(),
-          new ListItem(),
-          new OrderedList(),
-          new TodoItem(),
-          new TodoList(),
-          new Link(),
-          new Strike(),
-          new History(),
-          new Image(),
-          // custom extensions tests
-          new Iframe(),
-        ],
-        editable: false,
-        content: content
-      })
-    })
+  async created () {
+    const { data: { content, ...lesson } } = await Api.get(`/lessons/${this.lessonId}`);
+    const { data: questions } = await Api.get(`/lesson/${this.lessonId}/questions`)
+
+    this.lesson = lesson
+    this.questions = questions
+    this.editor = new Editor({
+      editable: false,
+      extensions: [
+        new Bold(),
+        new Italic(),
+        new Underline(),
+        new Blockquote(),
+        new BulletList(),
+        new HardBreak(),
+        new Heading({ levels: [2, 3] }),
+        new HorizontalRule(),
+        new ListItem(),
+        new OrderedList(),
+        new TodoItem(),
+        new TodoList(),
+        new Link(),
+        new Strike(),
+        new History(),
+        new Image(),
+        // custom extensions tests
+        new Iframe,
+      ],
+      content: content,
+    });
   },
   beforeDestroy() {
     this.editor.destroy();
@@ -118,8 +114,7 @@ export default {
 /* Reference: https://github.com/tailwindcss/discuss/issues/243 */
 /* .lesson-content > div { */
 .ProseMirror {
-  /* outline-none */
-  @apply max-w-2xl px-2 text-lg text-grey-darkest leading-normal;
+  @apply max-w-2xl px-2 text-lg leading-normal outline-none;
   > * + *, li + li, li > p + p {
     @apply mt-4;
   }
