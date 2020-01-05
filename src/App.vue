@@ -1,5 +1,6 @@
 <template>
-  <div id="app" class="bg-grey-lightest">
+  <div id="app" 
+    class="antialiased text-grey-darkest bg-grey-lightest">
     <AppNav />
 
     <router-view class="max-w-xl mx-auto px-4 pt-2"></router-view>
