@@ -1,7 +1,8 @@
 <template>
-  <main class="home flex flex-wrap justify-center">
-    <section class="sm:w-5/6 md:w-3/4 lg:w-1/2 w-full mx-auto px-2">
-      <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">Blue Star Training</h1>
+<!-- flex flex-wrap justify-center -->
+  <main class="home">
+    <section class="mx-auto">
+      <h1 class="page-heading">Blue Star Training</h1>
       <p class="pt-4">
         Welcome to the Blue Star training. This training is required for your
         dive/snorkel shop to be recognized as a Blue Star operator.
