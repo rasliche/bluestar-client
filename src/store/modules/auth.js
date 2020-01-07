@@ -44,15 +44,10 @@ const actions = {
       console.log(err);
     }
   },
-  authUser: async ({ commit, dispatch }, token) => {
+  authUser: async ({ commit, dispatch, }, token) => {
     try {
       commit("setToken", token);
       Api.defaults.headers.common['Authorization'] = `Bearer ${token}`
-      // const now = new Date();
-      // const expirationDate = new Date(now.getTime() + 7200000);
-      // localStorage.setItem("bs-auth-time", expirationDate);
-      // localStorage.setItem("bs-auth-token", token);
-      // dispatch("setLogoutTimer", 7200);
       router.push("/");
     } catch (err) {
       dispatch('alert/setAlert', {
@@ -94,7 +89,7 @@ const actions = {
     // localStorage.removeItem("bs-auth-time");
     commit("clearToken");
     Api.defaults.headers.common['Authorization'] = ''
-    dispatch('user/clearCurrentUser', {}, { root: true })
+    dispatch('user/clearUser', {}, { root: true })
     dispatch('alert/setAlert', {
       type: 'success',
       text: 'Logged out.'

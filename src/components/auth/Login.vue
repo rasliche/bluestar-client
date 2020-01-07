@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     ...mapActions('alert', ['setAlert']),
-    ...mapActions('user', ['setCurrentUser']),
+    ...mapActions('user', ['setUserData', 'getUserScores']),
     ...mapActions('auth', ['authUser']),
     async submitLoginForm() {
       this.formTouched = !this.$v.formResponses.$anyDirty
@@ -114,8 +114,9 @@ export default {
         try {
           const { data: { token, _v, ...userData } } = await Api.post("/auth/login", authData);
           clearTimeout(spinnerTimer)
-          this.setCurrentUser(userData)
           this.authUser(token)
+          this.setUserData(userData)
+          this.getUserScores()
           this.setAlert({ 
             type: 'success', 
             text: 'You have been logged in.'

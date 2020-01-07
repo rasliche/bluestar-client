@@ -20,30 +20,52 @@ const getters = {
 }
 
 const mutations = {
-  setUser: (state, user) => {
-    state.userId = user._id;
-    state.name = user.name;
-    state.email = user.email;
-    state.operators = user.operators;
-    state.lessonScores = user.lessonScores;
-    state.isAdmin = user.isAdmin;
+  setUserData: (state, user) => {
+    state.userId = user._id
+    state.name = user.name
+    state.email = user.email
+    state.isAdmin = user.isAdmin
+  },
+  setUserOperatorData: (state, userOperator) => {
+    return state.operators.push(userOperator)
+  },
+  setUserScoreData: (state, userScore) => {
+    return state.lessonScores.push(userScore)
   },
   clearUser: (state) => {
-    state.userId = null;
-    state.name = "";
-    state.email = "";
-    state.operators = [];
-    state.lessonScores = [];
-    state.isAdmin = false;
+    state.userId = null
+    state.name = null
+    state.email = null
+    state.operators = []
+    state.lessonScores = []
+    state.isAdmin = false
   },
 }
 
 const actions = {
-  setCurrentUser: ({ commit }, user) => {
-    commit('setUser', user)
+  setUserData: ({ commit }, userData) => {
+    commit('setUserData', userData)
   },
-  clearCurrentUser: ({ commit }) => {
+  setUserOperatorData: ({ commit }, operator) => {
+    commit('setUserOperatorData', operator)
+  },
+  setUserScoreData: ({ commit }, score) => {
+    commit('setUserScoreData', score)
+  },
+  clearUser: ({ commit }) => {
     commit('clearUser')
+  },
+  getUserScores: async ({ dispatch, commit, getters }) => {
+    try {
+      const { data } = await Api.get(`/user/${getters.userId}/scores/`)
+      data.forEach(l => {
+        commit('setUserScoreData', l)
+      });
+    } catch (error) {
+      console.log('is this the error?')
+      console.log(error)
+    }
+
   },
   // users
   submitLessonScore: async ({ dispatch, commit, getters, rootGetters }, record) => {
@@ -52,7 +74,7 @@ const actions = {
     let previousLessonRecord;
     if (getters['user/lessonScores']) {
       previousLessonRecord = getters['user/lessonScores'].find(
-        r => r.lessonId === record.lessonId
+        r => r.lesson._id === record.lesson._id
         );
       }
     if (previousLessonRecord) console.log("Previous Lesson: ", previousLessonRecord);
@@ -70,7 +92,7 @@ const actions = {
         //   text: `Updated lesson score.`
         //   // text: `Updated ${record.lessonName} score to ${record.score}.`
         // });
-        commit("setUser", data);
+        commit("setCurrentUserData", data);
         router.push("/training");
       } else {
         // do logic to update a score if previous score was worse

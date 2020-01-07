@@ -9,12 +9,19 @@
     <h1 class="page-heading">
       {{ lesson.title }}
     </h1>
+    <div class="flex justify-center">
+      <span>Reading Time: {{ readingTimeString }}</span>
+    </div>
     <editor-content class="lesson-content" :editor="editor" />
-    <Quiz v-if="questions.length > 0" :questions="questions" />
+    <Quiz 
+      v-if="questions.length > 0" 
+      :questions="questions"
+      @quiz-finished="handleFinishedQuiz($event)" />
   </article>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import Api from "@/services/Api";
 import ScrollProgressBar from "@/components/ScrollProgressBar/ScrollProgressBar";
 import Quiz from "@/components/quiz/Quiz.vue";
@@ -56,12 +63,22 @@ export default {
     };
   },
   methods: {
+    ...mapActions('user', ['setUserScoreData']),
     logThatStuff() {
       console.log('halfway')
+    },
+    async handleFinishedQuiz(score) {
+      const { data } = await Api.post(`/user/${this.userId}/scores`, { 
+        lessonId: this.lesson._id,
+        score: score
+      })
+      this.setUserScoreData(data)
     }
   },
   computed: {
+    ...mapGetters('user', ['userId']),
     wordCount() {
+      if (!this.editor) return 0
       return this.editor.getHTML().split(' ').length
     },
     readingTimeMinutes() { // 265 words per minute reading speed
@@ -114,7 +131,7 @@ export default {
 /* Reference: https://github.com/tailwindcss/discuss/issues/243 */
 /* .lesson-content > div { */
 .ProseMirror {
-  @apply max-w-2xl px-2 text-lg leading-normal outline-none;
+  @apply max-w-lg px-2 text-lg leading-normal outline-none mx-auto;
   > * + *, li + li, li > p + p {
     @apply mt-4;
   }

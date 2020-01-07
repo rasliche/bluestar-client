@@ -3,7 +3,7 @@
     class="antialiased text-grey-darkest bg-grey-lightest">
     <AppNav />
 
-    <router-view class="max-w-xl mx-auto px-4 pt-2"></router-view>
+    <router-view class="max-w-lg mx-auto px-4 pt-2"></router-view>
 
     <AppFooter />
 

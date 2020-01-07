@@ -111,9 +111,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import Question from "./Question.vue";
-// import Modal from "../Modal.vue";
+import Question from "./Question.vue"
+// import Modal from "../Modal.vue"
 
 export default {
   name: "quiz",
@@ -133,22 +132,20 @@ export default {
   },
   computed: {
     passingScore: function() {
-      return (this.correct / this.quiz.questions.length) * 100 >=
-        this.quiz.passingScorePercent
+      return (this.correct / this.questions.length) * 100 >= 90
         ? true
         : false;
     }
   },
   methods: {
-    ...mapActions('user', ["submitLessonScore"]),
-    startQuiz: function() {
+    startQuiz() {
       // this.quizModalOpen = true;
       this.stage = 'questions'
       this.questionIndex = 0;
       this.correct = 0;
       this.showReviewText = false;
     },
-    nextQuestion: function() {
+    nextQuestion() {
       if (this.questionIndex < this.questions.length - 1) {
         this.questionIndex += 1;
         this.showReviewText = false;
@@ -156,26 +153,20 @@ export default {
         this.stage = 'results'
       }
     },
-    correctAnswer: function() {
+    correctAnswer() {
       this.correct += 1;
       this.showReviewText = true;
     },
-    wrongAnswer: function() {
+    wrongAnswer() {
       this.showReviewText = true;
     },
-    submitScoreAndContinue: function() {
+    submitScoreAndContinue() {
       const score = (this.correct / this.questions.length) * 100;
-      console.log("User score: ", score)
-      // this.submitLessonScore({
-      //   lessonName: this.title,
-      //   lessonId: this.quiz._id,
-      //   score: score
-      // });
+      this.$emit('quiz-finished', score)
+      console.log('end of score submit')
     },
-    quitQuiz: function() {
-      this.introStage = true;
-      this.questionStage = false;
-      this.resultStage = false;
+    quitQuiz() {
+      this.stage = 'intro'
       this.questionIndex = 0;
       this.correct = 0;
       this.showReviewText = false;
