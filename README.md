@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/11b187de-82cb-4fa4-9760-d5704940d28c/deploy-status)](https://app.netlify.com/sites/quirky-haibt-b6e37d/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/11b187de-82cb-4fa4-9760-d5704940d28c/deploy-status)](https://quirky-haibt-b6e37d.netlify.com/)
 
 # bluestar-client
 This project is meant to serve as the staff training and reporting portal for the Blue Star recognition program run by Florida Keys National Marine Sanctuary. Reaches out to the [Blue Star server](https://github.com/rasliche/bluestar-server).
