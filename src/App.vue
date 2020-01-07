@@ -1,32 +1,46 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/news">News</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+  <div id="app" 
+    class="antialiased text-grey-darkest bg-grey-lightest">
+    <AppNav />
+
+    <router-view class="max-w-lg mx-auto px-4 pt-2"></router-view>
+
+    <AppFooter />
+
+    <!-- Notifications and Portals -->
+    <portal-target name="modals"></portal-target>
+    <transition name="alert-slide">
+      <Alert v-if="alert.type" :type="alert.type" :text="alert.text"></Alert>
+    </transition>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import AppNav from '@/components/AppNav.vue'
+import AppFooter from '@/components/AppFooter.vue'
+import Alert from '@/components/Alert/Alert.vue'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('alert')
+
+export default {
+  components: {
+    AppNav,
+    AppFooter,
+    Alert
+  },
+  computed: {
+    ...mapState(['alert', 'timer']),
+  }
 }
-#nav {
-  padding: 30px;
+</script>
+
+<style lang="postcss">
+.page-heading {
+  @apply border-blue-lighter border-b-4 mb-4 pt-4;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
+
+<style src="./styles/accessibility.css"></style>
+<style src="./styles/styles.css"></style>
+<style src="./styles/transitions.css"></style>

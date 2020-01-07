@@ -1,0 +1,51 @@
+/* Slides */
+/* Used by: Alert */
+.alert-slide-enter-active,
+.alert-slide-leave-active {
+  transition: all 1s;
+}
+
+.alert-slide-enter,
+.alert-slide-leave-to {
+  opacity: 0;
+  transform: translatex(500px)
+}
+
+.alert-slide-enter-to,
+.alert-slide-leave {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+/* Used by: AppNav */
+.tray-enter-active,
+.tray-leave-active {
+  transition: all .75s;
+}
+
+.tray-enter,
+.tray-leave-to {
+  transform: translateY(-400px);
+}
+
+.tray-enter-to,
+.tray-leave {
+  transform: translateY(0px);
+}
+
+/* Fades */
+/* Used by: Quiz and Questions, Login and Register */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
+}

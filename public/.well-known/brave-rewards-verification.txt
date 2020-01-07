@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: quirky-haibt-b6e37d.netlify.com
+Token: ff382e0503ba7a0cff1d633b9661f97e97f26b8bd95d514172dd5cc77f70fb14
