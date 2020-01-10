@@ -16,7 +16,7 @@
 
 <script>
 import Api from '@/services/Api'
-import BSLessonCard from '@/components/lesson/BSLessonCard.vue'
+import BSLessonCard from '@/components/lesson/BSLessonCard'
 import { mapGetters } from 'vuex'
 
 export default {
