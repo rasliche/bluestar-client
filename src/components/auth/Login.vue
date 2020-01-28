@@ -138,12 +138,9 @@ export default {
             text: 'You have been logged in.'
           })
         } catch (error) {
-          console.log(error.response)
-          if (error.response.status === 400) {
-            this.uiState = 'idle'
-            this.formFeedback = error.response.data
-          }
           console.log(error)
+          this.uiState = 'idle'
+          this.formFeedback = error.response.data
         }
       }
     }
