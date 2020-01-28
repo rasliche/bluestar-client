@@ -14,27 +14,27 @@
 
 <script>
 // import { mapGetters } from "vuex";
-import axios from "axios";
+import axios from 'axios'
 
 export default {
   data() {
     return {
       operators: []
-    };
+    }
   },
   async mounted() {
     try {
-      const { data } = await axios.get("http://localhost:3000/api/operators", {
+      const { data } = await axios.get('http://localhost:3000/api/operators', {
         headers: {
           Authorization: `Bearer: ${this.$store.state.user.token}`
         }
-      });
-      this.operators = data;
+      })
+      this.operators = data
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
   }
-};
+}
 </script>
 
 <style></style>

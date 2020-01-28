@@ -9,9 +9,9 @@
 
 <script>
 export default {
-  name: "BSImage",
-  props: ["imageSource"]
-};
+  name: 'BSImage',
+  props: ['imageSource']
+}
 </script>
 
 <style></style>

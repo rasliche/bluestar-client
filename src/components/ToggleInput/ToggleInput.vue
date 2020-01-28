@@ -1,17 +1,20 @@
 <template>
-  <span class="toggle" role="checkbox" tabindex="0"
+  <span
+    class="toggle"
+    role="checkbox"
+    tabindex="0"
+    :aria-checked="value.toString()"
     @click="toggle"
     @keydown.space.prevent="toggle"
-    :aria-checked="value.toString()"
   ></span>
 </template>
 
 <script>
 export default {
-  props: ["value"],
+  props: ['value'],
   methods: {
     toggle() {
-      this.$emit("input", !this.value)
+      this.$emit('input', !this.value)
     }
   }
 }

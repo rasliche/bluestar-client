@@ -1,7 +1,9 @@
 <template>
   <div class="login flex flex-wrap justify-center">
     <section class="w-5/6">
-      <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">Register Administrator</h1>
+      <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">
+        Register Administrator
+      </h1>
     </section>
     <section class="w-5/6 pt-4 mx-auto">
       <RegisterAdmin class="mx-auto"></RegisterAdmin>
@@ -12,18 +14,18 @@
 </template>
 
 <script>
-import RegisterAdmin from "@/components/auth/RegisterAdmin";
+import RegisterAdmin from '@/components/auth/RegisterAdmin'
 export default {
   components: {
-    RegisterAdmin,
+    RegisterAdmin
   },
   data() {
     return {
       // showModal: false,
       // currentComponent: 'Login'
     }
-  },
-};
+  }
+}
 </script>
 
 <style></style>

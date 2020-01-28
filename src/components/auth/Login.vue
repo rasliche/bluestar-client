@@ -3,38 +3,44 @@
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST">
       <h1 class="text-center pb-3">Login</h1>
       <section class="relative mb-6 pb-3">
-        <label 
-          for="femail" 
+        <label
+          for="femail"
           class="block text-blue-darker font-bold text-sm mb-2"
-        >Email</label>
-        <input 
-          type="text" 
-          name="femail" 
-          id="femail" 
-          v-model="$v.formResponses.email.$model" 
-          autocomplete="section-login email" 
+          >Email</label
+        >
+        <input
+          id="femail"
+          v-model="$v.formResponses.email.$model"
+          type="text"
+          name="femail"
+          autocomplete="section-login email"
           class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
         <p v-if="errors" class="absolute pin-b pin-x">
-          <span class="error" v-if="!$v.formResponses.email.required">This field is required.</span>
+          <span v-if="!$v.formResponses.email.required" class="error"
+            >This field is required.</span
+          >
         </p>
       </section>
 
       <section class="relative mb-6 pb-3">
-        <label 
-          for="fpassword" 
+        <label
+          for="fpassword"
           class="block text-blue-darker font-bold text-sm mb-2"
-          >Password</label>
+          >Password</label
+        >
         <input
-          type="password"
-          name="fpassword"
           id="fpassword"
           v-model="$v.formResponses.password.$model"
+          type="password"
+          name="fpassword"
           autocomplete="section-login current-password"
           class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
         <p v-if="errors" class="absolute pin-b pin-x">
-          <span class="error" v-if="!$v.formResponses.password.required">This field is required.</span>
+          <span v-if="!$v.formResponses.password.required" class="error"
+            >This field is required.</span
+          >
         </p>
       </section>
 
@@ -42,17 +48,21 @@
         <div class="flex items-center justify-between">
           <button
             type="button"
-            @click.prevent="submitLoginForm" 
             class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
             :disabled="uiState !== 'idle'"
-            >
-            <div 
-              v-if="uiState==='pending'"
-              class="inline-block simple-spinner">
-            </div>
+            @click.prevent="submitLoginForm"
+          >
+            <div
+              v-if="uiState === 'pending'"
+              class="inline-block simple-spinner"
+            ></div>
             Login
           </button>
-          <a href="#" class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">Forgot password?</a>
+          <a
+            href="#"
+            class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
+            >Forgot password?</a
+          >
         </div>
         <p v-if="formFeedback" class="absolute pin-b pin-x">
           <span class="error">{{ formFeedback }}</span>
@@ -66,7 +76,7 @@
 </template>
 
 <script>
-import { required, } from 'vuelidate/lib/validators'
+import { required } from 'vuelidate/lib/validators'
 import Api from '@/services/Api'
 import { mapActions } from 'vuex'
 
@@ -84,17 +94,17 @@ export default {
         email: null,
         password: null
       }
-    };
+    }
   },
   validations: {
-      formResponses: {
-          email: {
-              required,
-          },
-          password: {
-              required,
-          }
+    formResponses: {
+      email: {
+        required
+      },
+      password: {
+        required
       }
+    }
   },
   methods: {
     ...mapActions('alert', ['setAlert']),
@@ -103,22 +113,28 @@ export default {
     async submitLoginForm() {
       this.formTouched = !this.$v.formResponses.$anyDirty
       this.errors = this.$v.formResponses.$anyError
-      if (this.errors === false && this.formTouched === false && this.uiState !== 'pending') {
+      if (
+        this.errors === false &&
+        this.formTouched === false &&
+        this.uiState !== 'pending'
+      ) {
         const authData = {
           email: this.formResponses.email,
           password: this.formResponses.password
-        };
+        }
         const spinnerTimer = setTimeout(function() {
           this.uiState = 'pending'
         }, 500)
         try {
-          const { data: { token, _v, ...userData } } = await Api.post("/auth/login", authData);
+          const {
+            data: { token, _v, ...userData }
+          } = await Api.post('/auth/login', authData)
           clearTimeout(spinnerTimer)
           this.authUser(token)
           this.setUserData(userData)
           this.getUserScores()
-          this.setAlert({ 
-            type: 'success', 
+          this.setAlert({
+            type: 'success',
             text: 'You have been logged in.'
           })
         } catch (error) {
@@ -132,7 +148,7 @@ export default {
       }
     }
   }
-};
+}
 </script>
 
 <style lang="postcss" scoped>
@@ -154,7 +170,11 @@ export default {
 }
 
 @keyframes rotate {
-  0%   { transform: rotate(0);      }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

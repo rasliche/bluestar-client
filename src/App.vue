@@ -1,6 +1,5 @@
 <template>
-  <div id="app" 
-    class="antialiased text-grey-darkest bg-grey-lightest">
+  <div id="app" class="antialiased text-grey-darkest bg-grey-lightest">
     <AppNav />
 
     <router-view class="max-w-lg mx-auto px-4 pt-2"></router-view>
@@ -29,7 +28,7 @@ export default {
     Alert
   },
   computed: {
-    ...mapState(['alert', 'timer']),
+    ...mapState(['alert', 'timer'])
   }
 }
 </script>
@@ -38,7 +37,6 @@ export default {
 .page-heading {
   @apply border-blue-lighter border-b-4 mb-4 pt-4;
 }
-
 </style>
 
 <style src="./styles/accessibility.css"></style>

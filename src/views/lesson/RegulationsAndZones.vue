@@ -11,7 +11,7 @@
         that are not harmful to sanctuary resources.
       </p>
 
-      <BSImage imageSource="intro.jpg" />
+      <BSImage image-source="intro.jpg" />
 
       <p class="w-5/6 pt-4">
         Florida Keys National Marine Sanctuary uses a strategy called “marine
@@ -33,55 +33,55 @@
         that apply for the sanctuary as a whole.
       </p>
 
-      <BSImage imageSource="0_title.jpg" />
+      <BSImage image-source="0_title.jpg" />
       <BSImageWithBigCaption
-        imageSource="1_coral.jpg"
-        captionSize="small"
+        image-source="1_coral.jpg"
+        caption-size="small"
         caption="Removing, injuring, or possessing coral or live rock."
       />
       <BSImageWithBigCaption
-        imageSource="2_discharge.jpg"
-        captionSize="small"
+        image-source="2_discharge.jpg"
+        caption-size="small"
         caption="Discharging or depositing trash or other pollutants."
       />
       <BSImageWithBigCaption
-        imageSource="3_seabed.jpg"
-        captionSize="small"
+        image-source="3_seabed.jpg"
+        caption-size="small"
         caption="Operating a vessel so it strikes or injures coral, seagrass, or other organisms attached to the seabead."
       />
       <BSImageWithBigCaption
-        imageSource="4_anchor.jpg"
-        captionSize="small"
+        image-source="4_anchor.jpg"
+        caption-size="small"
         caption="Anchoring on living coral."
       />
       <BSImageWithBigCaption
-        imageSource="5_speed.jpg"
-        captionSize="small"
+        image-source="5_speed.jpg"
+        caption-size="small"
         caption="Operating a vessel at more than four knots/no wake within 100 yards of residential shorelines, stationary vessels, dive flags, or navigational aids marking reefs."
       />
       <BSImageWithBigCaption
-        imageSource="6_diveflag.jpg"
-        captionSize="small"
+        image-source="6_diveflag.jpg"
+        caption-size="small"
         caption="Diving or snorkeling without a dive flag"
       />
       <BSImageWithBigCaption
-        imageSource="7_exotic.jpg"
-        captionSize="small"
+        image-source="7_exotic.jpg"
+        caption-size="small"
         caption="Releasing exotic species."
       />
       <BSImageWithBigCaption
-        imageSource="8_markers.jpg"
-        captionSize="small"
+        image-source="8_markers.jpg"
+        caption-size="small"
         caption="Damaging or removing markers, mooring buoys, scientific equipment, boundary buoys, or trap buoys."
       />
       <BSImageWithBigCaption
-        imageSource="9_historical.jpg"
-        captionSize="small"
+        image-source="9_historical.jpg"
+        caption-size="small"
         caption="Moving, removing, injuring, or possessing historical resources."
       />
       <BSImageWithBigCaption
-        imageSource="10_wildlife.jpg"
-        captionSize="small"
+        image-source="10_wildlife.jpg"
+        caption-size="small"
         caption="Taking or possessing protected wildlife or any marine species not allowed by the Florida Fish and Wildlife Conservation Commission Rule."
       />
 
@@ -120,72 +120,72 @@
     <Quiz
       class="w-5/6 pt-4 mt-4 border-t-2 border-blue"
       :quiz="quiz"
-      :lessonName="lessonName"
-      :lessonSlug="lessonSlug"
+      :lesson-name="lessonName"
+      :lesson-slug="lessonSlug"
     />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Quiz from "@/components/quiz/Quiz.vue";
+import Quiz from '@/components/quiz/Quiz.vue'
 
 export default {
-  name: "regulations-and-zones",
+  name: 'RegulationsAndZones',
   components: {
     Quiz
   },
   data() {
     return {
-      lessonName: "Regulations and Zones",
-      lessonSlug: "regulations-and-zones",
-      programs: ["diving", "fishing"],
+      lessonName: 'Regulations and Zones',
+      lessonSlug: 'regulations-and-zones',
+      programs: ['diving', 'fishing'],
       quiz: {
-        title: "Regulations and Zones",
-        description: "FKNMS is a large marine protected area.",
+        title: 'Regulations and Zones',
+        description: 'FKNMS is a large marine protected area.',
         passingScorePercent: 50,
         questions: [
           {
             text:
-              "The Florida Keys National Marine Sanctuary is part of a _________ system of marine protected areas, managed by the _________.",
+              'The Florida Keys National Marine Sanctuary is part of a _________ system of marine protected areas, managed by the _________.',
             answers: [
               {
                 text:
-                  "statewide, Florida Fish and Wildlife Conservation Commission",
+                  'statewide, Florida Fish and Wildlife Conservation Commission',
                 isRight: false
               },
-              { text: "regional, National Park Service", isRight: false },
-              { text: "national, National Park Service", isRight: false },
+              { text: 'regional, National Park Service', isRight: false },
+              { text: 'national, National Park Service', isRight: false },
               {
                 text:
-                  "regional, National Oceanic and Atmospheric Administration",
+                  'regional, National Oceanic and Atmospheric Administration',
                 isRight: false
               },
               {
                 text:
-                  "national, National Oceanic and Atmospheric Administration",
+                  'national, National Oceanic and Atmospheric Administration',
                 isRight: true
               }
             ],
             theMoreYouKnow:
-              "The Florida Keys National Marine Sanctuary is one of 13 sanctuaries located across the nation and managed by the National Oceanic and Atmospheric Administration, or NOAA. NOAA is a federal agency housed under the U.S. Department of Commerce. NOAA programs and services assist citizens across the entire nation."
+              'The Florida Keys National Marine Sanctuary is one of 13 sanctuaries located across the nation and managed by the National Oceanic and Atmospheric Administration, or NOAA. NOAA is a federal agency housed under the U.S. Department of Commerce. NOAA programs and services assist citizens across the entire nation.'
           },
           {
             text:
-              "The Florida Keys National Marine Sanctuary was designated in: ",
+              'The Florida Keys National Marine Sanctuary was designated in: ',
             answers: [
-              { text: "1985", isRight: false },
-              { text: "1990", isRight: true },
-              { text: "2001", isRight: false },
-              { text: "1970", isRight: false },
-              { text: "1995", isRight: false }
+              { text: '1985', isRight: false },
+              { text: '1990', isRight: true },
+              { text: '2001', isRight: false },
+              { text: '1970', isRight: false },
+              { text: '1995', isRight: false }
             ],
             theMoreYouKnow:
-              "Congress designated the Florida Keys National Marine Sanctuary in 1990, amidst concerns over declining water quality, oil exploration threats, and vessel groundings."
+              'Congress designated the Florida Keys National Marine Sanctuary in 1990, amidst concerns over declining water quality, oil exploration threats, and vessel groundings.'
           }
         ]
       }
-    };
+    }
   }
-};
+}
 </script>

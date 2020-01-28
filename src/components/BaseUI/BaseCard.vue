@@ -6,10 +6,8 @@
 
 <script>
 export default {
-    name: 'BaseCard',
+  name: 'BaseCard'
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

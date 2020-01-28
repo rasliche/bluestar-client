@@ -1,9 +1,10 @@
 <template>
   <BaseCard class="w-64 mt-4 mx-2 rounded shadow">
-    <router-link 
-      tag="div" 
-      :to="{ name: 'view-lesson', params: { lessonId: lesson._id } }" 
-      class="cursor-pointer">
+    <router-link
+      tag="div"
+      :to="{ name: 'view-lesson', params: { lessonId: lesson._id } }"
+      class="cursor-pointer"
+    >
       <img
         class="h-48 w-auto"
         :src="lesson.coverPhoto.location"
@@ -18,9 +19,10 @@
       <span
         v-for="program in lesson.programs"
         :key="program._id"
-        class="inline-block bg-blue-lighter rounded-full px-3 py-1 text-xs font-semibold tracking-wide text-grey-darker">
-          {{ program.name }}
-        </span>
+        class="inline-block bg-blue-lighter rounded-full px-3 py-1 text-xs font-semibold tracking-wide text-grey-darker"
+      >
+        {{ program.name }}
+      </span>
     </div>
   </BaseCard>
 </template>
@@ -29,24 +31,24 @@
 import BaseCard from '@/components/BaseUI/BaseCard'
 
 export default {
-    name: 'BSLessonCard',
-    components: {
-      BaseCard,
-    },
-    props: {
-      lesson: {
-        _id: String,
-        title: String,
-        programs: Array, 
-        description: String,
-        coverPhoto: {
-          location: {
-            type: String,
-            default: 'https://floridakeys.noaa.gov/onthewater/bs_logomed.jpg'
-          },
-          altDescription: String,
+  name: 'BSLessonCard',
+  components: {
+    BaseCard
+  },
+  props: {
+    lesson: {
+      _id: String,
+      title: String,
+      programs: Array,
+      description: String,
+      coverPhoto: {
+        location: {
+          type: String,
+          default: 'https://floridakeys.noaa.gov/onthewater/bs_logomed.jpg'
         },
-      },
+        altDescription: String
+      }
     }
+  }
 }
 </script>

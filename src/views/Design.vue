@@ -46,17 +46,24 @@
         <BaseCard>Primary</BaseCard>
       </div>
     </section>
+    <section class="mt-4">
+      <h2>Test Editor</h2>
+      <BSEditor />
+
+    </section>
   </main>
 </template>
 
 <script>
 import BaseButton from '@/components/BaseUI/BaseButton.vue'
 import BaseCard from '@/components/BaseUI/BaseCard.vue'
+import BSEditor from '@/components/BSEditor.vue'
 
 export default {
   components: { 
     BaseButton,
-    BaseCard
-  }
+    BaseCard,
+    BSEditor,
+  },
 }
 </script>

@@ -1,11 +1,11 @@
 <script>
 export default {
-  name: "question",
+  name: 'Question',
   props: {
     question: {
       type: String,
-      required: true,
-    }, 
+      required: true
+    },
     answers: {
       text: {
         type: String,
@@ -16,19 +16,31 @@ export default {
         required: true
       },
       type: Array,
-      required: true,
-    }, 
+      required: true
+    },
     reviewText: {
-      type: String
-    }, 
+      type: String,
+      default: ''
+    },
     showReviewText: {
       type: Boolean
-    },
+    }
   },
   data() {
     return {
       isRight: false
-    };
+    }
+  },
+  methods: {
+    handleAnswer(i) {
+      if (this.answers[i].isRight) {
+        this.isRight = true
+        this.$emit('correctAnswer')
+      } else {
+        this.isRight = false
+        this.$emit('wrongAnswer')
+      }
+    }
   },
   render() {
     return this.$scopedSlots.default({
@@ -37,19 +49,8 @@ export default {
       reviewText: this.reviewText,
       showReviewText: this.showReviewText,
       handleAnswer: this.handleAnswer,
-      isRight: this.isRight,
-    });
-  },
-  methods: {
-    handleAnswer(i) {
-      if (this.answers[i].isRight) {
-        this.isRight = true;
-        this.$emit("correctAnswer");
-      } else {
-        this.isRight = false;
-        this.$emit("wrongAnswer");
-      }
-    }
+      isRight: this.isRight
+    })
   }
-};
+}
 </script>

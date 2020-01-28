@@ -28,9 +28,9 @@
 
 <script>
 export default {
-  name: "BSImageWithCaption",
-  props: ["imageSide", "captionSize", "imageSource"]
-};
+  name: 'BSImageWithCaption',
+  props: ['imageSide', 'captionSize', 'imageSource']
+}
 </script>
 
 <style></style>

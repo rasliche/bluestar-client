@@ -93,32 +93,32 @@
       </p>
 
       <BSImageWithBigCaption
-        imageSide="right"
-        imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/mangroves.jpg"
+        image-side="right"
+        image-source="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/mangroves.jpg"
       >
         Vast mangrove forests.
       </BSImageWithBigCaption>
       <BSImageWithBigCaption
-        imageSide="left"
-        imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164244/fknms-bluestar/about-fknms/apal-coral.jpg"
+        image-side="left"
+        image-source="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164244/fknms-bluestar/about-fknms/apal-coral.jpg"
       >
         Famous stands of elkhorn coral.
       </BSImageWithBigCaption>
       <BSImageWithBigCaption
-        imageSide="right"
-        imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164240/fknms-bluestar/about-fknms/shipwreck.jpg"
+        image-side="right"
+        image-source="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164240/fknms-bluestar/about-fknms/shipwreck.jpg"
       >
         Historic shipwrecks.
       </BSImageWithBigCaption>
       <BSImageWithBigCaption
-        imageSide="left"
-        imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164249/fknms-bluestar/about-fknms/seagrass.jpg"
+        image-side="left"
+        image-source="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164249/fknms-bluestar/about-fknms/seagrass.jpg"
       >
         Lush seagrass beds.
       </BSImageWithBigCaption>
       <BSImageWithBigCaption
-        imageSide="right"
-        imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164246/fknms-bluestar/about-fknms/aerial-reef.jpg"
+        image-side="right"
+        image-source="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164246/fknms-bluestar/about-fknms/aerial-reef.jpg"
       >
         Extensive coral reefs.
       </BSImageWithBigCaption>
@@ -132,29 +132,34 @@
         divers.
       </p>
 
-      <p>How can you stay up to date with FKNMS? Follow us on twitter and facebook.</p>
+      <p>
+        How can you stay up to date with FKNMS? Follow us on twitter and
+        facebook.
+      </p>
 
-      <BSImage imageSource="hermitcrab.jpg" />
-      <BSImage imageSource="nassaugrouper.jpg" />
-      <section class="flex items-center justify-between mx-auto pt-4 mt-4 border-t-2 border-blue">
+      <BSImage image-source="hermitcrab.jpg" />
+      <BSImage image-source="nassaugrouper.jpg" />
+      <section
+        class="flex items-center justify-between mx-auto pt-4 mt-4 border-t-2 border-blue"
+      >
         <button
-          @click="quizMode = true"
           class="border border-green bg-green-light p-2 m-2 rounded"
+          @click="quizMode = true"
         >
           Start Quiz
-          <Modal 
-          :show="quizMode"
-          :noCloseButton="true"
-          >
+          <Modal :show="quizMode" :no-close-button="true">
             <Quiz
               :quiz="quiz"
-              :lessonName="lessonName"
-              :lessonSlug="lessonSlug"
+              :lesson-name="lessonName"
+              :lesson-slug="lessonSlug"
               @close="quizMode = false"
             />
           </Modal>
         </button>
-        <p>if previousScore && not qualified for current year, show score and suggest retaking the quiz.</p>
+        <p>
+          if previousScore && not qualified for current year, show score and
+          suggest retaking the quiz.
+        </p>
         <p>if previous score is good, show score, let them retake quiz.</p>
       </section>
     </article>
@@ -163,11 +168,11 @@
 
 <script>
 // @ is an alias to /src
-import Modal from "@/components/Modal.vue"
-import Quiz from "@/components/quiz/Quiz.vue";
+import Modal from '@/components/Modal.vue'
+import Quiz from '@/components/quiz/Quiz.vue'
 
 export default {
-  name: "about-fknms",
+  name: 'AboutFknms',
   components: {
     Quiz,
     Modal
@@ -175,55 +180,55 @@ export default {
   data() {
     return {
       quizMode: false,
-      lessonName: "About FKNMS",
-      lessonSlug: "about-fknms",
-      programs: ["diving", "fishing"],
+      lessonName: 'About FKNMS',
+      lessonSlug: 'about-fknms',
+      programs: ['diving', 'fishing'],
       quiz: {
-        title: "About FKNMS",
-        description: "FKNMS is a large marine protected area.",
+        title: 'About FKNMS',
+        description: 'FKNMS is a large marine protected area.',
         passingScorePercent: 100,
         questions: [
           {
             text:
-              "The Florida Keys National Marine Sanctuary is part of a _________ system of marine protected areas, managed by the _________.",
+              'The Florida Keys National Marine Sanctuary is part of a _________ system of marine protected areas, managed by the _________.',
             answers: [
               {
                 text:
-                  "statewide, Florida Fish and Wildlife Conservation Commission",
+                  'statewide, Florida Fish and Wildlife Conservation Commission',
                 isRight: false
               },
-              { text: "regional, National Park Service", isRight: false },
-              { text: "national, National Park Service", isRight: false },
+              { text: 'regional, National Park Service', isRight: false },
+              { text: 'national, National Park Service', isRight: false },
               {
                 text:
-                  "regional, National Oceanic and Atmospheric Administration",
+                  'regional, National Oceanic and Atmospheric Administration',
                 isRight: false
               },
               {
                 text:
-                  "national, National Oceanic and Atmospheric Administration",
+                  'national, National Oceanic and Atmospheric Administration',
                 isRight: true
               }
             ],
             theMoreYouKnow:
-              "The Florida Keys National Marine Sanctuary is one of 13 sanctuaries located across the nation and managed by the National Oceanic and Atmospheric Administration, or NOAA. NOAA is a federal agency housed under the U.S. Department of Commerce. NOAA programs and services assist citizens across the entire nation."
+              'The Florida Keys National Marine Sanctuary is one of 13 sanctuaries located across the nation and managed by the National Oceanic and Atmospheric Administration, or NOAA. NOAA is a federal agency housed under the U.S. Department of Commerce. NOAA programs and services assist citizens across the entire nation.'
           },
           {
             text:
-              "The Florida Keys National Marine Sanctuary was designated in: ",
+              'The Florida Keys National Marine Sanctuary was designated in: ',
             answers: [
-              { text: "1985", isRight: false },
-              { text: "1990", isRight: true },
-              { text: "2001", isRight: false },
-              { text: "1970", isRight: false },
-              { text: "1995", isRight: false }
+              { text: '1985', isRight: false },
+              { text: '1990', isRight: true },
+              { text: '2001', isRight: false },
+              { text: '1970', isRight: false },
+              { text: '1995', isRight: false }
             ],
             theMoreYouKnow:
-              "Congress designated the Florida Keys National Marine Sanctuary in 1990, amidst concerns over declining water quality, oil exploration threats, and vessel groundings."
+              'Congress designated the Florida Keys National Marine Sanctuary in 1990, amidst concerns over declining water quality, oil exploration threats, and vessel groundings.'
           }
         ]
       }
-    };
+    }
   }
-};
+}
 </script>

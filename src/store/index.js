@@ -1,12 +1,12 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 
 import auth from './modules/auth'
 import user from './modules/user'
 import alert from './modules/alert'
 import operator from './modules/operator'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
@@ -16,17 +16,8 @@ export default new Vuex.Store({
     alert,
     operator
   },
-  state: {
-    
-  },
-  getters: {
-    
-  },
-  mutations: {
-    
-  },
-  actions: {
-    
-  },
+  state: {},
+  getters: {},
+  mutations: {},
+  actions: {}
 })
-  

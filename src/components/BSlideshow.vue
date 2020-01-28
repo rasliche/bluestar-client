@@ -28,9 +28,9 @@
 
 <script>
 export default {
-  name: "BSlideshow",
-  props: ["imageSide", "captionSize", "imageSource"]
-};
+  name: 'BSlideshow',
+  props: ['imageSide', 'captionSize', 'imageSource']
+}
 </script>
 
 <style></style>

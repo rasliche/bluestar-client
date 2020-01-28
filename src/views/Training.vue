@@ -28,15 +28,15 @@ export default {
       lessons: []
     }
   },
+  computed: {
+    publishedLessons() {
+      const publishedLessons = this.lessons.filter((l) => l.published === true)
+      return publishedLessons
+    }
+  },
   async created() {
     const { data } = await Api.get('/lessons')
     this.lessons = data
-  },
-  computed: {
-    publishedLessons() {
-      const publishedLessons = this.lessons.filter(l => l.published === true)
-      return publishedLessons
-    }
   }
 }
 </script>

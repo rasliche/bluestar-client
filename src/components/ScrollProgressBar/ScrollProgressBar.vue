@@ -51,36 +51,39 @@ export default {
     },
     // Extra props
     useVerticalOffset: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false
     },
     offsetElement: {
-        type: String,
-        default: null,
-    },
+      type: String,
+      default: null
+    }
   },
-  data () {
+  data() {
     return {
       width: 0
     }
   },
-  mounted () {
+  mounted() {
     window.addEventListener('scroll', this.handleScroll)
     window.dispatchEvent(new Event('scroll'))
   },
-  destroyed () {
+  destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
-    handleScroll () {
+    handleScroll() {
       // my changes
       // this.$el - can this be used to only scroll the item?
       let offsetHeight = 0
       if (this.useVerticalOffset) {
-        offsetHeight = document.getElementById(this.offsetElement).scrollHeight;
+        offsetHeight = document.getElementById(this.offsetElement).scrollHeight
       }
       //add the - offsetHeight
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight - offsetHeight;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight -
+        offsetHeight
       //add the - offsetHeight
       this.width = ((window.scrollY - offsetHeight) / height) * 100
       const eventWidth = Math.ceil(this.width)

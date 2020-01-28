@@ -2,9 +2,10 @@
   <article class="lesson">
     <!-- Set useVerticalOffset to "true" -->
     <ScrollProgressBar
+      :use-vertical-offset="true"
+      offset-element="app-nav"
       @halfway.once="logThatStuff"
-      :useVerticalOffset="true"
-      offsetElement="app-nav">
+    >
     </ScrollProgressBar>
     <h1 class="page-heading">
       {{ lesson.title }}
@@ -13,19 +14,20 @@
       <span>Reading Time: {{ readingTimeString }}</span>
     </div>
     <editor-content class="lesson-content" :editor="editor" />
-    <Quiz 
-      v-if="questions.length > 0" 
+    <Quiz
+      v-if="questions.length > 0"
       :questions="questions"
-      @quiz-finished="handleFinishedQuiz($event)" />
+      @quiz-finished="handleFinishedQuiz($event)"
+    />
   </article>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import Api from "@/services/Api";
-import ScrollProgressBar from "@/components/ScrollProgressBar/ScrollProgressBar";
-import Quiz from "@/components/quiz/Quiz.vue";
-import { Editor, EditorContent } from "tiptap";
+import { mapActions, mapGetters } from 'vuex'
+import Api from '@/services/Api'
+import ScrollProgressBar from '@/components/ScrollProgressBar/ScrollProgressBar'
+import Quiz from '@/components/quiz/Quiz.vue'
+import { Editor, EditorContent } from 'tiptap'
 import {
   Bold,
   Italic,
@@ -42,57 +44,56 @@ import {
   Link,
   Strike,
   History,
-  Image,
-} from 'tiptap-extensions';
-import Iframe from "@/components/tiptap-extras/Iframe";
+  Image
+} from 'tiptap-extensions'
+import Iframe from '@/components/tiptap-extras/Iframe'
 
 export default {
   components: {
     ScrollProgressBar,
     EditorContent,
-    Quiz,
+    Quiz
   },
-  props: ['lessonId'],
+  props: {
+    lessonId: {
+      required: true,
+      type: String,
+    }
+  },
   data() {
     return {
-      lesson: { },
+      lesson: {},
       questions: [],
       // title: '',
-      editor: null,
+      editor: null
       // quiz: null,
-    };
-  },
-  methods: {
-    ...mapActions('user', ['setUserScoreData']),
-    logThatStuff() {
-      console.log('halfway')
-    },
-    async handleFinishedQuiz(score) {
-      const { data } = await Api.post(`/user/${this.userId}/scores`, { 
-        lessonId: this.lesson._id,
-        score: score
-      })
-      this.setUserScoreData(data)
     }
   },
   computed: {
-    ...mapGetters('user', ['userId']),
+    ...mapGetters('user', ['userId', 'lessonScores']),
     wordCount() {
-      if (!this.editor) return 0
+      if (!this.editor) {
+        return 0
+      }
       return this.editor.getHTML().split(' ').length
     },
-    readingTimeMinutes() { // 265 words per minute reading speed
+    readingTimeMinutes() {
+      // 265 words per minute reading speed
       return Math.ceil(this.wordCount / 265)
     },
     readingTimeString() {
       const hours = Math.floor(this.readingTimeMinutes / 60)
       const minutes = this.readingTimeMinutes % 60
-      return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`
+      return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
     }
   },
-  async created () {
-    const { data: { content, ...lesson } } = await Api.get(`/lessons/${this.lessonId}`);
-    const { data: questions } = await Api.get(`/lesson/${this.lessonId}/questions`)
+  async created() {
+    const {
+      data: { content, ...lesson }
+    } = await Api.get(`/lessons/${this.lessonId}`)
+    const { data: questions } = await Api.get(
+      `/lesson/${this.lessonId}/questions`
+    )
 
     this.lesson = lesson
     this.questions = questions
@@ -116,15 +117,56 @@ export default {
         new History(),
         new Image(),
         // custom extensions tests
-        new Iframe,
+        new Iframe()
       ],
-      content: content,
-    });
+      content: content
+    })
   },
   beforeDestroy() {
-    this.editor.destroy();
+    this.editor.destroy()
+  },
+  methods: {
+    ...mapActions('user', ['setUserScoreData']),
+    logThatStuff() {
+      console.log('halfway')
+    },
+    async handleFinishedQuiz(score) {
+      try {
+        // check if lesson has been done
+        const lessonHasBeenDone = this.lessonScores.find(r => r.lesson._id === this.lessonId)
+        // Check if lesson has been doneCheck if current score is greater than finished score
+        if (lessonHasBeenDone && lessonHasBeenDone.score < score) {
+          const response = await Api.put(`/user/${this.userId}/scores/${this.lessonId}`, {
+            score: score
+          })
+        } else {
+          const response = await Api.post(`/user/${this.userId}/scores`, {
+            lessonId: this.lessonId,
+            score: score
+          })
+        }
+        // handle response
+        if (response.status === 201 || response.status === 200) {
+          console.log(response)
+          this.setUserScoreData(response.data)
+          // navigate away
+          this.$router.push({ name: 'me' })
+        }
+      } catch (error) {
+        // handle errors
+        if (error.status === 404) {
+          console.log(error)
+        }
+        if (error.status === 500) {
+          console.log(error)
+        }
+        if (error.status === 400) {
+          console.log(error)
+        }
+      }
+    }
   }
-};
+}
 </script>
 
 <style lang="postcss">
@@ -132,7 +174,9 @@ export default {
 /* .lesson-content > div { */
 .ProseMirror {
   @apply max-w-lg px-2 text-lg leading-normal outline-none mx-auto;
-  > * + *, li + li, li > p + p {
+  > * + *,
+  li + li,
+  li > p + p {
     @apply mt-4;
   }
 }

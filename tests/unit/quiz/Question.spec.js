@@ -1,46 +1,47 @@
-import { shallowMount } from "@vue/test-utils";
-import Question from "@/components/quiz/Question.vue";
+import { shallowMount } from '@vue/test-utils'
+import Question from '@/components/quiz/Question.vue'
 
-describe("Question.vue", () => {
-    let wrapper
+describe('Question.vue', () => {
+  let wrapper
 
-    beforeEach(() => {
-        wrapper = shallowMount(Question, {
-            propsData: {
-                question: "question text",
-                answers: [
-                    {
-                        text: "wrong answer",
-                        isRight: false
-                    },
-                    {
-                        text: "correct answer",
-                        isRight: true
-                    }
-                ],
-                reviewText: 'text',
-                showReviewText: false
-            },
-            scopedSlots: { // Not sure why we need this. Need to figure it out.
-                default: '<p>{{props.index}},{{props.text}}</p>'
-            }
-        });
+  beforeEach(() => {
+    wrapper = shallowMount(Question, {
+      propsData: {
+        question: 'question text',
+        answers: [
+          {
+            text: 'wrong answer',
+            isRight: false
+          },
+          {
+            text: 'correct answer',
+            isRight: true
+          }
+        ],
+        reviewText: 'text',
+        showReviewText: false
+      },
+      scopedSlots: {
+        // Not sure why we need this. Need to figure it out.
+        default: '<p>{{props.index}},{{props.text}}</p>'
+      }
     })
-    
-    it("emits 'correctAnswer' when given index of correct answer", () => {
-        wrapper.vm.handleAnswer(1)
-        expect(wrapper.emitted().correctAnswer.length).toBe(1)
-        expect(wrapper.emitted().correctAnswer).toBeTruthy()
-        expect(wrapper.vm.isRight).toBe(true)
-    });
-    
-    it("emits 'wrongAnswer' when given index of a wrong answer", () => {
-        wrapper.vm.handleAnswer(0)
-        expect(wrapper.emitted().wrongAnswer.length).toBe(1)
-        expect(wrapper.emitted().wrongAnswer).toBeTruthy()
-        expect(wrapper.vm.isRight).toBe(false)
-    });
-});
+  })
+
+  it("emits 'correctAnswer' when given index of correct answer", () => {
+    wrapper.vm.handleAnswer(1)
+    expect(wrapper.emitted().correctAnswer.length).toBe(1)
+    expect(wrapper.emitted().correctAnswer).toBeTruthy()
+    expect(wrapper.vm.isRight).toBe(true)
+  })
+
+  it("emits 'wrongAnswer' when given index of a wrong answer", () => {
+    wrapper.vm.handleAnswer(0)
+    expect(wrapper.emitted().wrongAnswer.length).toBe(1)
+    expect(wrapper.emitted().wrongAnswer).toBeTruthy()
+    expect(wrapper.vm.isRight).toBe(false)
+  })
+})
 
 // EXAMPLE QUIZ.questions
 // questions: [

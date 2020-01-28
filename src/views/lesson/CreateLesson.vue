@@ -1,144 +1,200 @@
 <template>
   <div class="lesson">
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <section class="relative mb-6 pb-3">
-            <label 
-                for="title"
-                class="block text-blue-darker font-bold text-sm mb-2"
-                >Lesson Title</label>
-            <input 
-                type="text" 
-                name="title" 
-                id="title" 
-                v-model="lesson.title"
-                class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                />
-        </section>
-        <section class="relative mb-6 pb-3">
-            <label 
-                for="description"
-                class="block text-blue-darker font-bold text-sm mb-2"
-                >Short Description</label>
+      <section class="relative mb-6 pb-3">
+        <label for="title" class="block text-blue-darker font-bold text-sm mb-2"
+          >Lesson Title</label
+        >
+        <input
+          id="title"
+          v-model="lesson.title"
+          type="text"
+          name="title"
+          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </section>
+      <section class="relative mb-6 pb-3">
+        <label
+          for="description"
+          class="block text-blue-darker font-bold text-sm mb-2"
+          >Short Description</label
+        >
+        <input
+          id="description"
+          v-model="lesson.description"
+          type="text"
+          spellcheck
+          name="description"
+          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </section>
+      <section class="relative mb-6 pb-3">
+        <div v-for="program in programOptions" :key="program._id">
+          <label
+            class="block capitalize text-blue-darker font-bold text-sm mb-2"
+          >
             <input
-                type="text"
-                spellcheck
-                name="description"
-                id="description"
-                v-model="lesson.description"
-                class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              :id="program.name"
+              v-model="lesson.programs"
+              type="checkbox"
+              :value="program"
             />
-        </section>
-        <section class="relative mb-6 pb-3">
-            <div v-for="program in programOptions" :key="program._id">
-                <label
-                  class="block capitalize text-blue-darker font-bold text-sm mb-2"
-                >
-                    <input
-                        type="checkbox"
-                        :value="program"
-                        :id="program.name"
-                        v-model="lesson.programs"
-                    />
-                    {{ program.name }}
-                </label>
-            </div>
-        </section>
+            {{ program.name }}
+          </label>
+        </div>
+      </section>
     </form>
-    <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
+    <editor-menu-bar v-slot="{ commands, isActive }" :editor="editor">
       <div class="menubar flex w-full">
         <button
           :class="{ 'is-active': isActive.bold() }"
-          @click="commands.bold">
-            Bold
+          @click="commands.bold"
+        >
+          Bold
         </button>
         <button
           :class="{ 'is-active': isActive.italic() }"
-          @click="commands.italic">
-            Italic
+          @click="commands.italic"
+        >
+          Italic
         </button>
         <button
           :class="{ 'is-active': isActive.underline() }"
-          @click="commands.underline">
-            Underline
+          @click="commands.underline"
+        >
+          Underline
         </button>
-        <button
-          @click="showImagePrompt(commands.image)">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 fill-current icon-photo">
-                <path class="primary text-white" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm9 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
-                <path class="secondary text-grey-darker" d="M15.3 12.3a1 1 0 0 1 1.4 0l2 2a1 1 0 0 1 .3.7v3a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 .3-.7l4-4a1 1 0 0 1 1.4 0l3.3 3.29 1.3-1.3z"></path>
-            </svg>
+        <button @click="showImagePrompt(commands.image)">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            class="w-4 h-4 fill-current icon-photo"
+          >
+            <path
+              class="primary text-white"
+              d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm9 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+            ></path>
+            <path
+              class="secondary text-grey-darker"
+              d="M15.3 12.3a1 1 0 0 1 1.4 0l2 2a1 1 0 0 1 .3.7v3a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 .3-.7l4-4a1 1 0 0 1 1.4 0l3.3 3.29 1.3-1.3z"
+            ></path>
+          </svg>
         </button>
-        <button
-          @click="showIframePrompt(commands.iframe)">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 fill-current icon-film">
-                <path class="primary text-white" d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v2h2V5H4zm0 4v2h2V9H4zm0 4v2h2v-2H4zm0 4v2h2v-2H4zM18 5v2h2V5h-2zm0 4v2h2V9h-2zm0 4v2h2v-2h-2zm0 4v2h2v-2h-2z"></path>
-                <path class="secondary text-grey-darker" d="M9 5h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 8h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z"></path>
-            </svg>
+        <button @click="showIframePrompt(commands.iframe)">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            class="w-4 h-4 fill-current icon-film"
+          >
+            <path
+              class="primary text-white"
+              d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v2h2V5H4zm0 4v2h2V9H4zm0 4v2h2v-2H4zm0 4v2h2v-2H4zM18 5v2h2V5h-2zm0 4v2h2V9h-2zm0 4v2h2v-2h-2zm0 4v2h2v-2h-2z"
+            ></path>
+            <path
+              class="secondary text-grey-darker"
+              d="M9 5h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 8h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z"
+            ></path>
+          </svg>
         </button>
         <button
           :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-          @click="commands.heading({ level: 2 })">
-            H2
+          @click="commands.heading({ level: 2 })"
+        >
+          H2
         </button>
         <button
           :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-          @click="commands.heading({ level: 3 })">
+          @click="commands.heading({ level: 3 })"
+        >
           H3
         </button>
       </div>
     </editor-menu-bar>
 
     <h1 class="border-blue-lighter border-b-4 mb-4">{{ lesson.title }}</h1>
-    <editor-content  
+    <editor-content
       class="lesson-content 
         shadow appearance-none rounded border-blue-lighter border 
         w-full min-h-full mt-4 mb-2 mx-3 
         focus:outline-none focus:shadow-outline"
-      :editor="editor" 
+      :editor="editor"
     />
 
-    <section class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between">
-        <button
-            class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
-            :disabled="status === 'pending'"
-            @click="createLesson">
-            Create
-        </button>
-        <button
-            class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
-            @click="logLesson">
-            Log
-        </button>
+    <section
+      class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between"
+    >
+      <button
+        class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
+        :disabled="status === 'pending'"
+        @click="createLesson"
+      >
+        Create
+      </button>
+      <button
+        class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
+        @click="logLesson"
+      >
+        Log
+      </button>
     </section>
-    <section 
-        class="flex flex-wrap w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto mt-4"
-        v-if="status === 'readyForQuestions'">
+    <section
+      v-if="status === 'readyForQuestions'"
+      class="flex flex-wrap w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto mt-4"
+    >
       <h2 class="w-full">Add Questions</h2>
-      <CreateQuestion 
+      <CreateQuestion
         :lesson="lesson"
         class="w-full md:w-1/2"
         @newQuestion="onNewQuestion"
       ></CreateQuestion>
-      <div 
-        v-if="lesson.questions && lesson.questions.length" 
-        class="w-full md:w-1/2 mb-6 px-3 pb-3">
+      <div
+        v-if="lesson.questions && lesson.questions.length"
+        class="w-full md:w-1/2 mb-6 px-3 pb-3"
+      >
         <!-- Accordion these questions -->
         <ol>
           <li v-for="(question, index) in lesson.questions" :key="index">
             <p>{{ question.text }}</p>
             <ul>
               <li
-                class="list-reset"                
-                :class="{ 'bg-green-lightest': answer.isRight }"
                 v-for="(answer, index) in question.answers"
-                :key="index">
-                <svg v-if="answer.isRight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-check">
-                  <circle cx="12" cy="12" r="10" class="text-green-light"></circle>
-                  <path class="text-green-darker" d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path>
+                :key="index"
+                class="list-reset"
+                :class="{ 'bg-green-lightest': answer.isRight }"
+              >
+                <svg
+                  v-if="answer.isRight"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="w-8 mr-4 fill-current icon-check"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    class="text-green-light"
+                  ></circle>
+                  <path
+                    class="text-green-darker"
+                    d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"
+                  ></path>
                 </svg>
-                <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 mr-4 fill-current icon-close-circle">
-                  <circle cx="12" cy="12" r="10" class="text-red-light"></circle>
-                  <path class="text-red-darker" d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
+                <svg
+                  v-else
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="w-8 mr-4 fill-current icon-close-circle"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    class="text-red-light"
+                  ></circle>
+                  <path
+                    class="text-red-darker"
+                    d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"
+                  ></path>
                 </svg>
                 <p class="inline">{{ answer.text }}</p>
               </li>
@@ -158,12 +214,12 @@
 
 <script>
 import { mapActions } from 'vuex'
-import Api from "@/services/Api";
-import Modal from "@/components/Modal.vue";
+import Api from '@/services/Api'
+import Modal from '@/components/Modal.vue'
 // import ToggleInput from "@/components/ToggleInput/ToggleInput.vue"
 // import TextOnScroll from "@/components/TextOnScroll/TextOnScroll.vue"
-import CreateQuestion from "@/components/quiz/CreateQuestion.vue";
-import { Editor, EditorMenuBar, EditorContent } from "tiptap";
+import CreateQuestion from '@/components/quiz/CreateQuestion.vue'
+import { Editor, EditorMenuBar, EditorContent } from 'tiptap'
 import {
   Bold,
   Italic,
@@ -179,9 +235,8 @@ import {
   TodoList,
   Link,
   Strike,
-  History,
-} from 'tiptap-extensions';
-
+  History
+} from 'tiptap-extensions'
 
 export default {
   name: 'CreateLesson',
@@ -191,16 +246,16 @@ export default {
     Modal,
     // TextOnScroll,
     // ToggleInput,
-    CreateQuestion,
+    CreateQuestion
   },
   data() {
     return {
       status: 'idle', // pending, readyForQuestions, error
       lessonDetailModalOpen: false,
-    //   quizModalOpen: false,
-      lesson: { 
-        title: 'New Lesson', 
-        programs: [], 
+      //   quizModalOpen: false,
+      lesson: {
+        title: 'New Lesson',
+        programs: [],
         questions: []
       },
       programOptions: [],
@@ -220,27 +275,24 @@ export default {
           new TodoList(),
           new Link(),
           new Strike(),
-          new History(),
+          new History()
         ],
         content: `Stick some smart stuff in here`
       })
     }
   },
-  async beforeRouteEnter (to, from, next) {
-      const { data: programs } = await Api.get("/programs");
-      next(vm => {
-          // console.log(programs)
-          vm.$data.programOptions = programs;
-
-      })
+  async beforeRouteEnter(to, from, next) {
+    const { data: programs } = await Api.get('/programs')
+    next((vm) => {
+      // console.log(programs)
+      vm.$data.programOptions = programs
+    })
   },
   beforeDestroy() {
-      this.editor.destroy();
+    this.editor.destroy()
   },
   methods: {
-    ...mapActions('alert', [
-      'setAlert'
-    ]),
+    ...mapActions('alert', ['setAlert']),
     showImagePrompt(command) {
       const src = prompt('Enter the url of your image here')
       if (src !== null) {
@@ -257,18 +309,18 @@ export default {
       // console.log(this.editor.getJSON())
       try {
         this.status = 'pending'
-        const { data: lesson } = await Api.post("/lessons", {
+        const { data: lesson } = await Api.post('/lessons', {
           title: this.lesson.title,
           description: this.lesson.description,
           programs: this.lesson.programs,
           published: this.lesson.published,
-          content: this.editor.getJSON(),
-        });
+          content: this.editor.getJSON()
+        })
         this.lesson._id = lesson._id
         this.status = 'readyForQuestions'
         this.setAlert({
           type: 'success',
-          text: 'Lesson Created!',
+          text: 'Lesson Created!'
         })
         // this.$router.replace({ name: 'view-lesson', params: { slug: slug }})
       } catch (error) {
@@ -281,7 +333,7 @@ export default {
     },
     onNewQuestion(newQuestion) {
       this.lesson.questions.push(newQuestion)
-    },
+    }
   }
 }
 </script>
@@ -289,28 +341,30 @@ export default {
 <style lang="postcss">
 /* Reference: https://github.com/tailwindcss/discuss/issues/243 */
 .menubar {
-    button:first-child {
-        @apply rounded-l
+  button:first-child {
+    @apply rounded-l;
+  }
+  button:last-child {
+    @apply rounded-r;
+  }
+  button {
+    @apply p-2 text-white bg-grey-darker border border-grey-darkest;
+    &:hover {
+      @apply bg-grey-darkest;
     }
-    button:last-child {
-        @apply rounded-r
+    .is-active {
+      @apply bg-grey-light text-grey-darkest;
     }
-    button {
-        @apply p-2 text-white bg-grey-darker border border-grey-darkest;
-        &:hover {
-            @apply bg-grey-darkest;
-        }
-        .is-active {
-            @apply bg-grey-light text-grey-darkest;
-        }
-    }
+  }
 }
 
 .ProseMirror {
-    @apply px-2 text-lg text-grey-darkest leading-normal;
-    > * + *, li + li, li > p + p {
-        @apply mt-4;
-    }
+  @apply px-2 text-lg text-grey-darkest leading-normal;
+  > * + *,
+  li + li,
+  li > p + p {
+    @apply mt-4;
+  }
 }
 /* .lesson-content {
   @apply text-lg text-grey-darkest leading-normal;

@@ -117,32 +117,32 @@
       </p>
 
       <BSImageWithBigCaption
-        imageSide="right"
-        imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/mangroves.jpg"
+        image-side="right"
+        image-source="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164243/fknms-bluestar/about-fknms/mangroves.jpg"
       >
         Vast mangrove forests.
       </BSImageWithBigCaption>
       <BSImageWithBigCaption
-        imageSide="left"
-        imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164244/fknms-bluestar/about-fknms/apal-coral.jpg"
+        image-side="left"
+        image-source="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164244/fknms-bluestar/about-fknms/apal-coral.jpg"
       >
         Famous stands of elkhorn coral.
       </BSImageWithBigCaption>
       <BSImageWithBigCaption
-        imageSide="right"
-        imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164240/fknms-bluestar/about-fknms/shipwreck.jpg"
+        image-side="right"
+        image-source="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164240/fknms-bluestar/about-fknms/shipwreck.jpg"
       >
         Historic shipwrecks.
       </BSImageWithBigCaption>
       <BSImageWithBigCaption
-        imageSide="left"
-        imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164249/fknms-bluestar/about-fknms/seagrass.jpg"
+        image-side="left"
+        image-source="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164249/fknms-bluestar/about-fknms/seagrass.jpg"
       >
         Lush seagrass beds.
       </BSImageWithBigCaption>
       <BSImageWithBigCaption
-        imageSide="right"
-        imageSource="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164246/fknms-bluestar/about-fknms/aerial-reef.jpg"
+        image-side="right"
+        image-source="https://res.cloudinary.com/duzmgsio4/image/upload/v1554164246/fknms-bluestar/about-fknms/aerial-reef.jpg"
       >
         Extensive coral reefs.
       </BSImageWithBigCaption>
@@ -156,22 +156,22 @@
         divers.
       </p>
 
-      <BSImage imageSource="hermitcrab.jpg" />
-      <BSImage imageSource="nassaugrouper.jpg" />
+      <BSImage image-source="hermitcrab.jpg" />
+      <BSImage image-source="nassaugrouper.jpg" />
       <div class="mx-auto pt-4 mt-4 border-t-2 border-blue">
         <button
-          @click="quizMode = true"
           class="border border-green bg-green-light p-2 m-2 rounded"
+          @click="quizMode = true"
         >
           Start Quiz
           <Modal 
           :show="quizMode"
-          :noCloseButton="true"
+          :no-close-button="true"
           >
             <Quiz
               :quiz="quiz"
-              :lessonName="lessonName"
-              :lessonSlug="lessonSlug"
+              :lesson-name="lessonName"
+              :lesson-slug="lessonSlug"
               @close="quizMode = false"
             />
           </Modal>
@@ -188,7 +188,7 @@ import Quiz from "@/components/quiz/Quiz.vue";
 import BSlideshow from "@/components/BSlideshow.vue";
 
 export default {
-  name: "about-fknms",
+  name: "AboutFknms",
   components: {
     Quiz,
     Modal,
