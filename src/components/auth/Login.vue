@@ -1,6 +1,6 @@
 <template>
   <div class="w-full max-w-xs">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" @submit.prevent="submitLoginForm">
       <h1 class="text-center pb-3">Login</h1>
       <section class="relative mb-6 pb-3">
         <label
@@ -47,7 +47,7 @@
       <section class="relative mb-3 pb-6">
         <div class="flex items-center justify-between">
           <button
-            type="button"
+            type="submit"
             class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
             :disabled="uiState !== 'idle'"
             @click.prevent="submitLoginForm"
