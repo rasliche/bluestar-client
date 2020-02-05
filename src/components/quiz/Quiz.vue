@@ -164,7 +164,7 @@ export default {
     },
     submitScoreAndContinue() {
       const score = (this.correct / this.questions.length) * 100
-      this.status = 'pending'
+      this.status = 'intro'
       this.$emit('quiz-finished', score)
     },
     quitQuiz() {
