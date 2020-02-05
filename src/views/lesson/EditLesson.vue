@@ -239,7 +239,7 @@
 <script>
 import axios from 'axios'
 import Api from '@/services/Api'
-import Modal from '@/components/Modal'
+import Modal from '@/components/BaseUI/Modals/Modal'
 import CreateQuestion from '@/components/quiz/CreateQuestion.vue'
 
 import { Editor, EditorMenuBar, EditorContent } from 'tiptap'

@@ -215,7 +215,7 @@
 <script>
 import { mapActions } from 'vuex'
 import Api from '@/services/Api'
-import Modal from '@/components/Modal.vue'
+import Modal from '@/components/BaseUI/Modals/Modal.vue'
 // import ToggleInput from "@/components/ToggleInput/ToggleInput.vue"
 // import TextOnScroll from "@/components/TextOnScroll/TextOnScroll.vue"
 import CreateQuestion from '@/components/quiz/CreateQuestion.vue'
