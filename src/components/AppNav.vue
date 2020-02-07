@@ -38,12 +38,12 @@
         >
           <title>Menu</title>
           <path
-            v-if="showNavMenu"
+            v-if="!showNavMenu"
             fill-rule="evenodd"
             d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
           ></path>
           <path
-            v-if="!showNavMenu"
+            v-else
             fill-rule="evenodd"
             d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"
           ></path>
@@ -51,7 +51,7 @@
       </button>
     </div>
 
-    <!-- <transition name="tray" v-if="showNavMenu" mode="in-out" appear> -->
+    <transition name="tray" v-if="showNavMenu" mode="in-out" appear>
     <div class="w-full block flex-grow md:flex md:items-center md:w-auto">
       <div class="md:flex-grow">
         <router-link
@@ -107,7 +107,7 @@
         </button>
       </div>
     </div>
-    <!-- </transition> -->
+    </transition>
   </nav>
 </template>
 
@@ -129,9 +129,9 @@ export default {
     ...mapActions('auth', ['logoutUser'])
   },
   watch: {
-    // $route(to, from) {
-    //     this.showNavMenu = false
-    // },
+    $route(to, from) {
+        this.showNavMenu = false
+    },
   }
 }
 </script>

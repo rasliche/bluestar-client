@@ -2,12 +2,9 @@
   <div class="quiz h-auto">
     <div v-if="status === 'intro'" key="intro" class="text-center mx-auto">
       <!-- <p>{{ quiz.description }}</p> -->
-      <button
-        class="border border-green bg-green-light p-2 m-2 rounded"
-        @click="startQuiz"
-      >
+      <ButtonPrimary @click="startQuiz">
         Start Quiz
-      </button>
+      </ButtonPrimary>
     </div>
 
     <div
@@ -52,19 +49,19 @@
                 key="answers"
                 class="answer-choices flex flex-wrap justify-center"
               >
-              <button
+              <ButtonBase
                 v-for="(answer, index) in answers"
                 :key="index"
                 class="p-2 m-2 border rounded border-blue-darker"
                 @click="handleAnswer(index)"
               >
                 {{ answer.text }}
-              </button>
+              </ButtonBase>
             </div>
             <div v-if="showReviewText">
-              <button class="border rounded p-2 m-2" @click="nextQuestion">
+              <ButtonInfo class="border rounded p-2 m-2" @click="nextQuestion">
                 Next ->
-              </button>
+              </ButtonInfo>
             </div>
           </div>
         </template>
@@ -82,41 +79,47 @@
           better score.
         </p>
         <!-- <router-link tag="button" to="/training" class="border border-green bg-green-light p-2 m-2 rounded">Training Home</router-link> -->
-        <button
+        <ButtonPrimary
           class="border border-green bg-green-light p-2 m-2 rounded"
           :disabled="status === 'pending'"
           @click="submitScoreAndContinue"
         >
           Submit Score and Continue
-        </button>
+        </ButtonPrimary>
       </div>
       <div v-else>
         <p>Sorry, but you did not achieve a passing score this time.</p>
       </div>
-      <button
+      <ButtonSecondary
         class="border border-yellow bg-yellow-light p-2 m-2 rounded"
         @click="startQuiz"
       >
         Retake the quiz.
-      </button>
-      <button
+      </ButtonSecondary>
+      <ButtonSecondary
         class="border border-yellow bg-yellow-light p-2 m-2 rounded"
         @click="quitQuiz"
       >
         Review the content.
-      </button>
+      </ButtonSecondary>
     </div>
   </div>
 </template>
 
 <script>
 import Question from './Question.vue'
+import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
+import ButtonSecondary from '@/components/BaseUI/ButtonSecondary'
+import ButtonDanger from '@/components/BaseUI/ButtonDanger'
 // import Modal from "../Modal.vue"
 
 export default {
   name: 'Quiz',
   components: {
-    Question
+    Question,
+    ButtonPrimary,
+    ButtonSecondary,
+    ButtonDanger,
     // Modal
   },
   props: {

@@ -26,6 +26,7 @@
 
 <script>
 export default {
+  name: 'Modal',
   props: {
     show: { required: true },
     preventBackgroundScrolling: { default: true },

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Modal from '@/components/BaseUI/Modals/Modal.vue'
+import Modal from '@/components/BaseUI/Modal.vue'
 import Api from '@/services/Api.js'
 import { mapGetters } from 'vuex'
 

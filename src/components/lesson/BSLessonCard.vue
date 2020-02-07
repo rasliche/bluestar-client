@@ -1,5 +1,5 @@
 <template>
-  <BaseCard class="w-64 mt-4 mx-2 rounded shadow">
+  <CardBase class="w-64 mt-4 mx-2 rounded shadow">
     <router-link
       tag="div"
       :to="{ name: 'view-lesson', params: { lessonId: lesson._id } }"
@@ -10,30 +10,32 @@
         :src="lesson.coverPhoto.location"
         :alt="lesson.coverPhoto.altDescription"
       />
-      <div class="text-center font-bold text-lg">{{ lesson.title }}</div>
     </router-link>
-    <p class="text-grey-darker text-sm">
-      {{ lesson.description }}
-    </p>
-    <div v-if="lesson.programs.length" class="px-6 py-4">
-      <span
-        v-for="program in lesson.programs"
-        :key="program._id"
-        class="inline-block bg-blue-lighter rounded-full px-3 py-1 text-xs font-semibold tracking-wide text-grey-darker"
-      >
-        {{ program.name }}
-      </span>
+    <div class="p-2">
+      <div class="text-center font-bold text-lg">{{ lesson.title }}</div>
+      <p class="text-grey-darker text-sm">
+        {{ lesson.description }}
+      </p>
+      <div v-if="lesson.programs.length" class="px-6 py-4">
+        <span
+          v-for="program in lesson.programs"
+          :key="program._id"
+          class="inline-block bg-blue-lighter rounded-full px-3 py-1 text-xs font-semibold tracking-wide text-grey-darker"
+        >
+          {{ program.name }}
+        </span>
+      </div>
     </div>
-  </BaseCard>
+  </CardBase>
 </template>
 
 <script>
-import BaseCard from '@/components/BaseUI/BaseCard'
+import CardBase from '@/components/BaseUI/CardBase'
 
 export default {
   name: 'BSLessonCard',
   components: {
-    BaseCard
+    CardBase
   },
   props: {
     lesson: {

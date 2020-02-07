@@ -63,12 +63,12 @@
       </form>
     </template>
     <template v-slot:buttons>
-      <button
+      <ButtonPrimary
         class="border-2 p-1 rounded border-blue mx-auto"
         @click.prevent="submitOperator"
       >
         Create
-      </button>
+      </ButtonPrimary>
     </template>
   </Modal>
 </template>
@@ -77,7 +77,8 @@
 import Api from '@/services/Api'
 import { required } from 'vuelidate/lib/validators'
 import { mapActions, mapGetters } from 'vuex'
-import Modal from '@/components/BaseUI/Modals/Modal.vue'
+import Modal from '@/components/BaseUI/Modal.vue'
+import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
 
 export default {
   name: 'CreateOperatorModal',

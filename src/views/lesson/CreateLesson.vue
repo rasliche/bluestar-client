@@ -123,19 +123,19 @@
     <section
       class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between"
     >
-      <button
+      <ButtonPrimary
         class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
         :disabled="status === 'pending'"
         @click="createLesson"
       >
         Create
-      </button>
-      <button
+      </ButtonPrimary>
+      <ButtonSecondary
         class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
         @click="logLesson"
       >
         Log
-      </button>
+      </ButtonSecondary>
     </section>
     <section
       v-if="status === 'readyForQuestions'"
@@ -215,7 +215,9 @@
 <script>
 import { mapActions } from 'vuex'
 import Api from '@/services/Api'
-import Modal from '@/components/BaseUI/Modals/Modal.vue'
+import Modal from '@/components/BaseUI/Modal.vue'
+import ButtonPrimary from '@/components/BaseUI/ButtonPrimary.vue'
+import ButtonSecondary from '@/components/BaseUI/ButtonSecondary.vue'
 // import ToggleInput from "@/components/ToggleInput/ToggleInput.vue"
 // import TextOnScroll from "@/components/TextOnScroll/TextOnScroll.vue"
 import CreateQuestion from '@/components/quiz/CreateQuestion.vue'
@@ -244,6 +246,8 @@ export default {
     EditorContent,
     EditorMenuBar,
     Modal,
+    ButtonPrimary,
+    ButtonSecondary,
     // TextOnScroll,
     // ToggleInput,
     CreateQuestion

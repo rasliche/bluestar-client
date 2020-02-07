@@ -1,5 +1,6 @@
 <template>
   <button
+    v-on="$listeners"
     type="button"
     class="p-2 rounded mx-auto focus:outline-none focus:shadow-outline"
   >
@@ -9,8 +10,6 @@
 
 <script>
 export default {
-  name: 'BaseButton'
+  name: 'BaseButton',
 }
 </script>
-
-<style></style>

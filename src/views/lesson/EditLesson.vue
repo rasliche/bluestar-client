@@ -135,26 +135,26 @@
     <section
       class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between"
     >
-      <button
+      <ButtonPrimary
         class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
         @click="editLesson"
       >
         Save
-      </button>
-      <button
+      </ButtonPrimary>
+      <ButtonSecondary
         v-if="!lesson.published"
         class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
         @click="publishLesson"
       >
         Publish
-      </button>
-      <button
+      </ButtonSecondary>
+      <ButtonSecondary
         v-else
         class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
         @click="unpublishLesson"
       >
         Unpublish
-      </button>
+      </ButtonSecondary>
       <!-- <button
             class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
             @click="logLesson">
@@ -239,7 +239,9 @@
 <script>
 import axios from 'axios'
 import Api from '@/services/Api'
-import Modal from '@/components/BaseUI/Modals/Modal'
+import Modal from '@/components/BaseUI/Modal'
+import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
+import ButtonSecondary from '@/components/BaseUI/ButtonSecondary'
 import CreateQuestion from '@/components/quiz/CreateQuestion.vue'
 
 import { Editor, EditorMenuBar, EditorContent } from 'tiptap'
@@ -269,6 +271,8 @@ export default {
     EditorContent,
     EditorMenuBar,
     Modal,
+    ButtonPrimary,
+    ButtonSecondary,
     CreateQuestion
   },
   props: ['lessonId'],

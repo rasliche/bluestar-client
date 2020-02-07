@@ -10,7 +10,7 @@
 
     <h2>Danger Zone</h2>
     <section class="border border-red flex items-center justify-between">
-      <button
+      <ButtonDanger
         class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
         @click="confirmDeleteModalOpen = true"
       >
@@ -24,7 +24,7 @@
           @close="confirmDeleteModalOpen = false"
         >
         </ConfirmDeleteShopModal>
-      </button>
+      </ButtonDanger>
     </section>
   </div>
 </template>
@@ -32,11 +32,13 @@
 <script>
 import Api from '@/services/Api'
 import ConfirmDeleteShopModal from '@/components/ConfirmDeleteShopModal'
+import ButtonDanger from '@/components/BaseUI/ButtonDanger'
 
 export default {
   name: 'Operator',
   components: {
-    ConfirmDeleteShopModal
+    ConfirmDeleteShopModal,
+    ButtonDanger
   },
   props: {
     operatorId: { type: String }

@@ -27,23 +27,24 @@
     <section class="mt-4">
       <h2>Buttons</h2>
       <p class="leading-normal">
-        Buttons can come in several different flavors. Primary, Secondary, Danger, are the main ones.
+        Buttons can come in several different flavors. Primary, Secondary, Info, and Danger are the main ones.
       </p>
       <div class="flex justify-around">
-        <BaseButton>Base Button</BaseButton>
-        <BaseButton class="bg-blue hover:bg-blue-dark text-white">Primary</BaseButton>
-        <BaseButton class="border bg-grey-lightest hover:bg-grey-light">Secondary</BaseButton>
-        <BaseButton class="bg-red hover:bg-red-dark text-white">Danger</BaseButton>
+        <ButtonBase>Base Button</ButtonBase>
+        <ButtonPrimary>Primary</ButtonPrimary>
+        <ButtonInfo>Info</ButtonInfo>
+        <ButtonDanger>Danger</ButtonDanger>
+        <ButtonSecondary>Secondary</ButtonSecondary>
       </div>
     </section>
     <section class="mt-4">
       <h2>Cards</h2>
       <p class="leading-normal">
-        The <pre class="inline-block">BaseCard</pre> component is a very unopinionated wrapper that simply gives a white 
+        The <pre class="inline-block">CardBase</pre> component is a very unopinionated wrapper that simply gives a white 
         background, 1px border, large rounded corners, and hides overflow to keep content within.
       </p>
       <div class="flex justify-around">
-        <BaseCard>Primary</BaseCard>
+        <CardBase>Primary</CardBase>
       </div>
     </section>
     <section class="mt-4">
@@ -55,14 +56,22 @@
 </template>
 
 <script>
-import BaseButton from '@/components/BaseUI/BaseButton.vue'
-import BaseCard from '@/components/BaseUI/BaseCard.vue'
+import ButtonBase from '@/components/BaseUI/ButtonBase.vue'
+import ButtonPrimary from '@/components/BaseUI/ButtonPrimary.vue'
+import ButtonSecondary from '@/components/BaseUI/ButtonSecondary.vue'
+import ButtonInfo from '@/components/BaseUI/ButtonInfo.vue'
+import ButtonDanger from '@/components/BaseUI/ButtonDanger.vue'
+import CardBase from '@/components/BaseUI/CardBase.vue'
 import BSEditor from '@/components/BSEditor.vue'
 
 export default {
   components: { 
-    BaseButton,
-    BaseCard,
+    ButtonBase,
+    ButtonPrimary,
+    ButtonSecondary,
+    ButtonInfo,
+    ButtonDanger,
+    CardBase,
     BSEditor,
   },
 }
