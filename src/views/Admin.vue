@@ -4,7 +4,7 @@
       Admin Dashboard
     </h1>
     <nav class="flex items-center justify-between">
-      <button
+      <ButtonPrimary
         class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
         @click="createOperatorModalOpen = true"
       >
@@ -14,7 +14,7 @@
           @close="createOperatorModalOpen = false"
         >
         </CreateOperatorModal>
-      </button>
+      </ButtonPrimary>
       <router-link
         v-if="isAuthenticated && isAdmin"
         class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline no-underline"
@@ -134,6 +134,7 @@
 <script>
 // @ is an alias to /src
 import Api from '@/services/Api'
+import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
 // import UsersList from "@/components/UsersList.vue";
 import CreateOperatorModal from '@/components/CreateOperatorModal.vue'
 import ConfirmDeleteShopModal from '@/components/ConfirmDeleteShopModal.vue'
@@ -142,7 +143,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Admin',
   components: {
-    CreateOperatorModal
+    CreateOperatorModal,
+    ButtonPrimary
   },
   data() {
     return {

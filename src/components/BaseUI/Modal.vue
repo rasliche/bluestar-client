@@ -12,12 +12,11 @@
 
         <div v-if="!noCloseButton" class="flex justify-between text-center">
           <slot name="buttons"></slot>
-          <button
-            class="bg-gray-light px-4 py-2 border-gray border-2 rounded-lg"
+          <ButtonSecondary
             @click="cancel"
           >
             Close
-          </button>
+          </ButtonSecondary>
         </div>
       </div>
     </div>
@@ -25,8 +24,12 @@
 </template>
 
 <script>
+import ButtonSecondary from '@/components/BaseUI/ButtonSecondary'
 export default {
   name: 'Modal',
+  components: {
+    ButtonSecondary
+  },
   props: {
     show: { required: true },
     preventBackgroundScrolling: { default: true },

@@ -63,10 +63,7 @@
       </form>
     </template>
     <template v-slot:buttons>
-      <ButtonPrimary
-        class="border-2 p-1 rounded border-blue mx-auto"
-        @click.prevent="submitOperator"
-      >
+      <ButtonPrimary @click.prevent="submitOperator">
         Create
       </ButtonPrimary>
     </template>
@@ -83,7 +80,8 @@ import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
 export default {
   name: 'CreateOperatorModal',
   components: {
-    Modal
+    Modal,
+    ButtonPrimary
   },
   props: ['show'],
   data() {
