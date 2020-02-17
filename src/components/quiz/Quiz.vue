@@ -80,7 +80,6 @@
         </p>
         <!-- <router-link tag="button" to="/training" class="border border-green bg-green-light p-2 m-2 rounded">Training Home</router-link> -->
         <ButtonPrimary
-          class="border border-green bg-green-light p-2 m-2 rounded"
           :disabled="status === 'pending'"
           @click="submitScoreAndContinue"
         >
@@ -90,16 +89,10 @@
       <div v-else>
         <p>Sorry, but you did not achieve a passing score this time.</p>
       </div>
-      <ButtonSecondary
-        class="border border-yellow bg-yellow-light p-2 m-2 rounded"
-        @click="startQuiz"
-      >
+      <ButtonSecondary @click="startQuiz">
         Retake the quiz.
       </ButtonSecondary>
-      <ButtonSecondary
-        class="border border-yellow bg-yellow-light p-2 m-2 rounded"
-        @click="quitQuiz"
-      >
+      <ButtonSecondary @click="quitQuiz">
         Review the content.
       </ButtonSecondary>
     </div>
@@ -109,6 +102,8 @@
 <script>
 import Question from './Question.vue'
 import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
+import ButtonBase from '@/components/BaseUI/ButtonBase'
+import ButtonInfo from '@/components/BaseUI/ButtonInfo'
 import ButtonSecondary from '@/components/BaseUI/ButtonSecondary'
 import ButtonDanger from '@/components/BaseUI/ButtonDanger'
 // import Modal from "../Modal.vue"
@@ -120,6 +115,8 @@ export default {
     ButtonPrimary,
     ButtonSecondary,
     ButtonDanger,
+    ButtonBase,
+    ButtonInfo,
     // Modal
   },
   props: {

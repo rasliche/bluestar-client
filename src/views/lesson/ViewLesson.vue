@@ -47,7 +47,7 @@ import {
   History,
   Image
 } from 'tiptap-extensions'
-import Iframe from '@/components/tiptap-extras/Iframe'
+import Iframe from '@/tiptap-extras/Iframe'
 
 export default {
   components: {

@@ -49,6 +49,9 @@
       <section class="relative mb-6 pb-3">
         upload image here
       </section>
+      <ButtonPrimary @click="saveLessonDetails">
+        Save Details
+      </ButtonPrimary>
     </form>
     <editor-menu-bar v-slot="{ commands, isActive }" :editor="editor">
       <div class="flex justify-between">
@@ -137,7 +140,7 @@
     >
       <ButtonPrimary
         class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
-        @click="editLesson"
+        @click="saveLessonContent"
       >
         Save
       </ButtonPrimary>
@@ -237,9 +240,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapGetters } from 'vuex'
 import Api from '@/services/Api'
-import Modal from '@/components/BaseUI/Modal'
 import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
 import ButtonSecondary from '@/components/BaseUI/ButtonSecondary'
 import CreateQuestion from '@/components/quiz/CreateQuestion.vue'
@@ -263,22 +265,25 @@ import {
   History,
   Image
 } from 'tiptap-extensions'
-import Iframe from '@/components/tiptap-extras/Iframe'
+import Iframe from '@/tiptap-extras/Iframe'
 
 export default {
   name: 'EditLesson',
   components: {
     EditorContent,
     EditorMenuBar,
-    Modal,
     ButtonPrimary,
     ButtonSecondary,
     CreateQuestion
   },
-  props: ['lessonId'],
+  props: {
+    lessonId: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-      lessonDetailModalOpen: false,
       lesson: {},
       questions: [],
       programOptions: [],
@@ -286,6 +291,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('auth', ['token']),
     // wordCountTipTap() {
     //   return this.editor.isNode()
     // },
@@ -299,10 +305,7 @@ export default {
     readingTimeString() {
       const hours = Math.floor(this.readingTimeMinutes / 60)
       const minutes = this.readingTimeMinutes % 60
-      return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
-        2,
-        '0'
-      )}`
+      return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`
     }
   },
   async created() {
@@ -379,15 +382,35 @@ export default {
         console.log(error)
       }
     },
-    async editLesson() {
+    async saveLessonDetails() {
+      try {
+        const { data } = await Api.put(`/lessons/${this.lessonId}`, {
+            title: this.lesson.title,
+            description: this.lesson.description,
+            programs: this.lesson.programs,
+          }, {
+            headers: {
+              Authorization: `Bearer: ${this.token}`
+    
+            }
+          })
+        console.log(data)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async saveLessonContent() {
       console.log(this.editor.getJSON())
       try {
-        const { data } = await Api.put(`/lessons/${this.lesson._id}`, {
-          title: this.lesson.title,
-          description: this.lesson.description,
-          programs: this.lesson.programs,
-          content: this.editor.getJSON()
-        })
+        const { data } = await Api.put(`/lesson/${this.lessonId}/content`, {
+            content: this.editor.getJSON()
+          }, {
+            headers: {
+              Authorization: `Bearer: ${this.token}`
+
+            }
+          })
+        console.log(data)
       } catch (error) {
         console.log(error)
       }
@@ -434,8 +457,7 @@ export default {
 /* Reference: https://github.com/tailwindcss/discuss/issues/243 */
 /* .lesson-content > div { */
 .ProseMirror {
-  /* outline-none */
-  @apply px-2 text-lg text-grey-darkest leading-normal;
+  @apply px-2 text-lg text-grey-darkest leading-normal outline-none;
   > * + *,
   li + li,
   li > p + p {

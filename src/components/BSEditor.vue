@@ -110,8 +110,8 @@ import {
   History,
   Image
 } from 'tiptap-extensions'
-import Iframe from '@/components/tiptap-extras/Iframe'
-import WavyText from '@/components/tiptap-extras/WavyText'
+import Iframe from '@/tiptap-extras/Iframe'
+import WavyText from '@/tiptap-extras/WavyText'
 
 export default {
   components: {

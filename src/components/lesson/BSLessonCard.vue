@@ -11,20 +11,11 @@
         :alt="lesson.coverPhoto.altDescription"
       />
     </router-link>
-    <div class="p-2">
-      <div class="text-center font-bold text-lg">{{ lesson.title }}</div>
-      <p class="text-grey-darker text-sm">
+    <div class="h-24 p-2">
+      <div class="h-12 text-center font-bold text-lg">{{ lesson.title }}</div>
+      <p class="h-10 text-grey-darker text-sm">
         {{ lesson.description }}
       </p>
-      <div v-if="lesson.programs.length" class="px-6 py-4">
-        <span
-          v-for="program in lesson.programs"
-          :key="program._id"
-          class="inline-block bg-blue-lighter rounded-full px-3 py-1 text-xs font-semibold tracking-wide text-grey-darker"
-        >
-          {{ program.name }}
-        </span>
-      </div>
     </div>
   </CardBase>
 </template>

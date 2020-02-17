@@ -51,7 +51,7 @@
       </button>
     </div>
 
-    <transition name="tray" v-if="showNavMenu" mode="in-out" appear>
+    <!-- <transition name="tray" v-if="showNavMenu" mode="in-out" appear> -->
     <div class="w-full block flex-grow md:flex md:items-center md:w-auto">
       <div class="md:flex-grow">
         <router-link
@@ -107,7 +107,7 @@
         </button>
       </div>
     </div>
-    </transition>
+    <!-- </transition> -->
   </nav>
 </template>
 

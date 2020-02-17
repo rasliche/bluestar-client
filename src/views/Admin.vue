@@ -4,27 +4,25 @@
       Admin Dashboard
     </h1>
     <nav class="flex items-center justify-between">
-      <ButtonPrimary
-        class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
-        @click="createOperatorModalOpen = true"
-      >
-        Add a new operator
-        <CreateOperatorModal
-          :show="createOperatorModalOpen"
-          @close="createOperatorModalOpen = false"
-        >
+      <ButtonPrimary @click="createOperatorModalOpen = true">
+        New Operator
+        <CreateOperatorModal @close="createOperatorModalOpen = false" :show="createOperatorModalOpen">
         </CreateOperatorModal>
       </ButtonPrimary>
-      <router-link
-        v-if="isAuthenticated && isAdmin"
-        class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline no-underline"
-        :to="{ name: 'create-lesson' }"
-      >
-        Create a Lesson
-      </router-link>
-      <!-- <router-link :to="{ name: 'operatorcreate' }">Create Operator</router-link>
-      <router-link :to="{ name: 'lessoncreate' }">Create Lesson</router-link>
-      <router-link :to="{ name: 'quizcreate' }">Create Quiz</router-link> -->
+      <ButtonPrimary>
+        <router-link
+          v-if="isAuthenticated && isAdmin"
+          :to="{ name: 'create-lesson' }"
+          class="no-underline text-white"
+        >
+          New Lesson
+        </router-link>
+      </ButtonPrimary>
+      <ButtonPrimary @click="createProgramModalOpen = true">
+        New Program
+        <CreateProgramModal @close="createProgramModalOpen = false" :show="createProgramModalOpen">
+        </CreateProgramModal>
+      </ButtonPrimary>
     </nav>
     <div>
       <section class="w-1/2 pt-4">
@@ -135,8 +133,8 @@
 // @ is an alias to /src
 import Api from '@/services/Api'
 import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
-// import UsersList from "@/components/UsersList.vue";
 import CreateOperatorModal from '@/components/CreateOperatorModal.vue'
+import CreateProgramModal from '@/components/CreateProgramModal.vue'
 import ConfirmDeleteShopModal from '@/components/ConfirmDeleteShopModal.vue'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -144,11 +142,13 @@ export default {
   name: 'Admin',
   components: {
     CreateOperatorModal,
+    CreateProgramModal,
     ButtonPrimary
   },
   data() {
     return {
       createOperatorModalOpen: false,
+      createProgramModalOpen: false,
       users: [],
       lessons: [],
       posts: [],

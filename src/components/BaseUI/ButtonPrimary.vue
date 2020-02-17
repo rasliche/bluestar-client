@@ -1,7 +1,7 @@
 <template>
   <ButtonBase 
     v-on="$listeners"
-    class="bg-green hover:bg-green-dark text-white"
+    class="bg-blue hover:bg-blue-dark text-white"
   >
     <slot></slot>
   </ButtonBase>

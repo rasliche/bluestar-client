@@ -6,7 +6,9 @@
       style="background-color: rgba(0, 0, 0, 0.6);"
     >
       <div class="mx-auto mt-8 p-2 rounded-lg bg-white max-w-xl shadow-lg">
-        <slot name="heading"></slot>
+        <div class="pb-3 bg-blue-lightest text-center">
+          <slot name="heading"></slot>
+        </div>
 
         <slot name="default"></slot>
 
@@ -31,9 +33,18 @@ export default {
     ButtonSecondary
   },
   props: {
-    show: { required: true },
-    preventBackgroundScrolling: { default: true },
-    noCloseButton: { default: false }
+    show: { 
+      type: Boolean,
+      default: false
+    },
+    preventBackgroundScrolling: {
+      type: Boolean,
+      default: true
+    },
+    noCloseButton: {
+      type: Boolean,
+      default: false
+    }
   },
   watch: {
     show: {
