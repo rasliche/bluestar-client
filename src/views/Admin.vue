@@ -20,7 +20,10 @@
       </ButtonPrimary>
       <ButtonPrimary @click="createProgramModalOpen = true">
         New Program
-        <CreateProgramModal @close="createProgramModalOpen = false" :show="createProgramModalOpen">
+        <CreateProgramModal
+          @program-created="addProgram"
+          @close="createProgramModalOpen = false" 
+          :show="createProgramModalOpen">
         </CreateProgramModal>
       </ButtonPrimary>
     </nav>
@@ -118,6 +121,42 @@
         <p v-else>No lessons yet.</p>
       </section>
 
+      <section class="md:w-1/2 pt-4">
+        <h3>Programs</h3>
+        <div v-if="programs.length">
+          <div
+            v-for="program in programs"
+            :key="program._id"
+            class="flex justify-between mt-1 px-2 py-1 hover:bg-blue-lighter rounded"
+          >
+            {{ program.name }}
+            <div class="actions flex justify-between">
+              <button @click="removeProgram(program._id)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="w-6 mr-2 fill-current text-yellow-dark icon-edit"
+                >
+                  <path
+                    class="primary"
+                    d="M4 14a1 1 0 0 1 .3-.7l11-11a1 1 0 0 1 1.4 0l3 3a1 1 0 0 1 0 1.4l-11 11a1 1 0 0 1-.7.3H5a1 1 0 0 1-1-1v-3z"
+                  ></path>
+                  <rect
+                    width="20"
+                    height="2"
+                    x="2"
+                    y="20"
+                    class="secondary"
+                    rx="1"
+                  ></rect>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <p v-else>No programs yet.</p>
+      </section>
+
       <section class="w-1/2 pt-4">
         <h3>Posts</h3>
       </section>
@@ -152,34 +191,44 @@ export default {
       users: [],
       lessons: [],
       posts: [],
-      operators: []
+      operators: [],
+      programs: []
     }
   },
-  async beforeRouteEnter(to, from, next) {
+  async created() {
     const { data: lessons } = await Api.get('/lessons')
     const { data: operators } = await Api.get('/operators')
     const { data: users } = await Api.get('/users')
-    next((vm) => {
-      // access to component instance via `vm`
-      vm.$data.lessons = lessons
-      vm.$data.operators = operators
-      vm.$data.users = users
-    })
+    const { data: programs } = await Api.get('/programs')
+      this.lessons = lessons
+      this.operators = operators
+      this.users = users
+      this.programs = programs
   },
   computed: {
-    ...mapGetters('auth', {
-      isAuthenticated: 'isAuthenticated'
-    }),
-    ...mapGetters('user', {
-      isAdmin: 'isAdmin'
-    })
+    ...mapGetters('auth', ['isAuthenticated', 'token']),
+    ...mapGetters('user', ['isAdmin'])
     // ...mapGetters('operator', ['operators'])
   },
   methods: {
-    // deleteLesson() {
-    //   console.log('fake deleted a lesson')
-    // },
-    // ...mapActions('operator', ['getOperators'])
+    addProgram(e) {
+      this.programs.push(e)
+    },
+    async removeProgram(programId) {
+      console.log(programId)
+      console.log(this.token)
+      const { data } = await Api.delete(`/programs/${programId}`, {
+        headers: {
+            Authorization: `Bearer: ${this.token}`
+        }
+      })
+      console.log(data)
+      const newProgramsArray = this.programs.filter(program => {
+        return program._id !== data._id
+      })
+      console.log(newProgramsArray)
+      this.programs = newProgramsArray
+    }
   }
 }
 </script>
