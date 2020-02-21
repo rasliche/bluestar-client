@@ -4,7 +4,7 @@
       <h1 class="text-center pb-3">Create Program</h1>
     </template>
     <template v-slot:default>
-      <form class="px-8 pt-6 pb-8 mb-4">
+      <form @submit.prevent="submitProgram" class="px-8 pt-6 pb-8 mb-4">
         <section class="relative mb-6 pb-3">
           <label
             for="fname"
@@ -91,6 +91,7 @@ export default {
             type: 'success',
             text: `Created new program: ${data.name}`
           })
+          this.$emit('program-created', data)
           this.$emit('close')
         } catch (error) {
           console.log(error)
