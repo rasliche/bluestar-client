@@ -1,14 +1,16 @@
 <template>
   <main>
-    <h1 class="page-heading">
-      Training Modules
-    </h1>
+    <PageHeading>Training Modules</PageHeading>
     <!-- TODO: Allow cards to be filtered -->
     <div class="flex flex-wrap justify-center">
-      <ButtonPrimary @click="selectedProgramId = null">
+      <ButtonPrimary 
+        class="mx-2 w-32"
+        @click="selectedProgramId = null"
+      >
         All
       </ButtonPrimary>
       <ButtonPrimary 
+        class="mx-2 w-32"
         @click="selectedProgramId = program._id"
         v-for="program in programs" :key="program._id"
       >
@@ -27,14 +29,15 @@
 
 <script>
 import Api from '@/services/Api'
+import { PageHeading, ButtonPrimary } from '@/components/BaseUI'
 import BSLessonCard from '@/components/lesson/BSLessonCard'
-import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
 
 export default {
   name: 'Training',
   components: {
     BSLessonCard,
-    ButtonPrimary
+    ButtonPrimary,
+    PageHeading
   },
   data() {
     return {

@@ -1,7 +1,7 @@
 <template>
   <div class="login flex flex-wrap justify-center">
     <section class="w-5/6">
-      <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">Login</h1>
+      <PageHeading>Login</PageHeading>
     </section>
     <section class="w-5/6 pt-4 mx-auto">
       <Component :is="currentComponent" class="mx-auto"></Component>
@@ -27,10 +27,12 @@
 </template>
 
 <script>
+import { PageHeading } from '@/components/BaseUI'
 import Login from '@/components/auth/Login'
 import Register from '@/components/auth/Register'
 export default {
   components: {
+    PageHeading,
     Login,
     Register
   },
