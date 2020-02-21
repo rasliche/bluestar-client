@@ -1,8 +1,6 @@
 <template>
   <main class="user-dashboard">
-    <h1 class="page-heading">
-      Dashboard
-    </h1>
+    <PageHeading>Dashboard</PageHeading>
     <section>
       <p class="text-2xl">{{ name }}</p>
       <p>{{ email }}</p>
@@ -37,10 +35,14 @@
 </template>
 
 <script>
+import { PageHeading } from '@/components/BaseUI'
 import { mapGetters } from 'vuex'
 import Api from '@/services/Api'
 
 export default {
+  components: {
+    PageHeading
+  },
   data() {
     return {
       status: 'loading', // success, failure
