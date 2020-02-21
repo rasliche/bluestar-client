@@ -80,6 +80,12 @@ export default new Router({
         import(/* webpackChunkName: "view-operator" */ './views/Operator.vue')
     },
     {
+      path: '/programs',
+      props: false,
+      name: 'programs',
+      component: () => import(/* webpackChunkName: "programs" */ './views/Programs.vue')
+    },
+    {
       path: '/users/:userId',
       props: true,
       name: 'view-user',
