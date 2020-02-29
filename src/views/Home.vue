@@ -2,7 +2,7 @@
   <!-- flex flex-wrap justify-center -->
   <main class="home">
     <section class="mx-auto">
-      <h1 class="page-heading">Blue Star Training</h1>
+      <PageHeading>Blue Star Training</PageHeading>
       <p class="pt-4">
         Welcome to the Blue Star training. This training is required for your
         dive/snorkel shop to be recognized as a Blue Star operator.
@@ -62,6 +62,7 @@
 
 <script>
 // @ is an alias to /src
+import { PageHeading } from '@/components/BaseUI'
 import Login from '@/components/auth/Login.vue'
 import Register from '@/components/auth/Register.vue'
 import { mapGetters } from 'vuex'
@@ -70,7 +71,8 @@ export default {
   name: 'Home',
   components: {
     Login,
-    Register
+    Register,
+    PageHeading
   },
   data() {
     return {
