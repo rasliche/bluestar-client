@@ -13,3 +13,6 @@ export { default as Modal } from './Modal.vue'
 
 // Typography
 export { default as PageHeading } from './PageHeading.vue'
+
+// Loaders
+export { default as SimpleSpinner } from './loaders/SimpleSpinner.vue'
