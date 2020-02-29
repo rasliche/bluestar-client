@@ -46,18 +46,18 @@
 
       <section class="relative mb-3 pb-6">
         <div class="flex items-center justify-between">
-          <button
+          <ButtonPrimary
             type="submit"
-            class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
             :disabled="uiState !== 'idle'"
             @click.prevent="submitLoginForm"
           >
-            <div
+            <SimpleSpinner
               v-if="uiState === 'pending'"
-              class="inline-block simple-spinner"
-            ></div>
-            Login
-          </button>
+            ></SimpleSpinner>
+            <template v-else>
+              Login
+            </template>
+          </ButtonPrimary>
           <a
             href="#"
             class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
@@ -69,20 +69,19 @@
         </p>
       </section>
     </form>
-    <!-- TODO: Style this feedback
-    {{ formFeedback }}
-    {{ uiState }} -->
   </div>
 </template>
 
 <script>
+import { ButtonPrimary, SimpleSpinner } from '@/components/BaseUI'
 import { required } from 'vuelidate/lib/validators'
 import Api from '@/services/Api'
 import { mapActions } from 'vuex'
 
 export default {
   components: {
-    // Alert
+    ButtonPrimary,
+    SimpleSpinner
   },
   data() {
     return {
@@ -122,9 +121,9 @@ export default {
           email: this.formResponses.email,
           password: this.formResponses.password
         }
-        const spinnerTimer = setTimeout(function() {
+        const spinnerTimer = setTimeout(() => {
           this.uiState = 'pending'
-        }, 500)
+        }, 750)
         try {
           const {
             data: { token, _v, ...userData }
@@ -155,23 +154,5 @@ export default {
 
 .error-border {
   @apply border-red;
-}
-
-.simple-spinner {
-  height: 48px;
-  width: 48px;
-  border: 5px solid rgba(150, 150, 150, 0.2);
-  border-radius: 50%;
-  border-top-color: rgb(150, 150, 150);
-  animation: rotate 1s 0s infinite ease-in-out alternate;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 </style>

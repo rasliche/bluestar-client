@@ -1,8 +1,8 @@
 <template>
   <main>
-    <h1 class="page-heading">
+    <PageHeading>
       Design
-    </h1>
+    </PageHeading>
     <section class="mt-4">
       <h2>Tokens</h2>
       <p class="leading-normal">
@@ -12,7 +12,7 @@
     <section class="mt-4">
       <h2>Page Headings</h2>
       <p class="leading-normal">
-        The top-level heading above uses a <pre class="inline-block">.page-heading</pre> class that combines
+        The top-level heading above uses a <pre class="inline-block">PageHeading</pre> Vue component that combines
         tailwind css classes in the <pre class="inline-block">App.vue</pre> style section. This is
         used as the main heading for a view, that is, a top level route component.
       </p>
@@ -48,24 +48,41 @@
       </div>
     </section>
     <section class="mt-4">
+      <h2>Loaders</h2>
+      <p class="leading-normal">
+        There are several loader components available.
+      </p>
+      <div class="flex justify-around">
+        <div class="text-center">
+          <p>SimpleSpinner</p>
+          <SimpleSpinner></SimpleSpinner>
+        </div>
+      </div>
+    </section>
+    <section class="mt-4">
       <h2>Test Editor</h2>
       <BSEditor />
-
     </section>
   </main>
 </template>
 
 <script>
-import ButtonBase from '@/components/BaseUI/ButtonBase.vue'
-import ButtonPrimary from '@/components/BaseUI/ButtonPrimary.vue'
-import ButtonSecondary from '@/components/BaseUI/ButtonSecondary.vue'
-import ButtonInfo from '@/components/BaseUI/ButtonInfo.vue'
-import ButtonDanger from '@/components/BaseUI/ButtonDanger.vue'
-import CardBase from '@/components/BaseUI/CardBase.vue'
+import { 
+  ButtonBase, 
+  ButtonPrimary, 
+  ButtonSecondary, 
+  ButtonInfo, 
+  ButtonDanger, 
+  CardBase, 
+  PageHeading,
+  SimpleSpinner
+  } from '@/components/BaseUI'
 import BSEditor from '@/components/BSEditor.vue'
 
 export default {
-  components: { 
+  name: 'Design',
+  components: {
+    PageHeading,
     ButtonBase,
     ButtonPrimary,
     ButtonSecondary,
@@ -73,6 +90,7 @@ export default {
     ButtonDanger,
     CardBase,
     BSEditor,
+    SimpleSpinner
   },
 }
 </script>
