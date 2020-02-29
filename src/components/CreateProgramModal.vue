@@ -83,9 +83,9 @@ export default {
         }
         try {
           const { data } = await Api.post('/programs', programData, {
-            headers: {
-              Authorization: `Bearer: ${this.token}`
-            }
+            // headers: {
+            //   Authorization: `Bearer: ${this.token}`
+            // }
           })
           this.setAlert({
             type: 'success',

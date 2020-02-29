@@ -218,9 +218,9 @@ export default {
       console.log(programId)
       console.log(this.token)
       const { data } = await Api.delete(`/programs/${programId}`, {
-        headers: {
-            Authorization: `Bearer: ${this.token}`
-        }
+        // headers: {
+        //     Authorization: `Bearer: ${this.token}`
+        // }
       })
       console.log(data)
       const newProgramsArray = this.programs.filter(program => {
