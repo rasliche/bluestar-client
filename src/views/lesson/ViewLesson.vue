@@ -9,6 +9,12 @@
     </ScrollProgressBar>
     <PageHeading>{{ lesson.title }}</PageHeading>
     <!-- <div class="h-48 w-auto overflow-hidden"> -->
+      <img
+        class="h-48 w-full overflow-hidden object-cover object-center"
+        :src="lesson.coverPhoto.location"
+        :alt="lesson.coverPhoto.altDescription"
+      />
+    <!-- </div> -->
     <div class="flex justify-center">
       <span>Reading Time: {{ readingTimeString }}</span>
     </div>
