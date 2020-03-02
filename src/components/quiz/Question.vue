@@ -3,7 +3,7 @@ export default {
   name: 'Question',
   props: {
     question: {
-      type: String,
+      type: Object,
       required: true
     },
     answers: {
