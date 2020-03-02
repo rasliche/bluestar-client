@@ -171,28 +171,62 @@
       <h2 class="w-full">Add Questions</h2>
       <CreateQuestion
         :lesson-id="lessonId"
-        class="w-full md:w-1/2"
+        class="w-full"
         @newQuestion="onNewQuestion"
       ></CreateQuestion>
       <div
         v-if="questions && questions.length"
-        class="w-full md:w-1/2 mb-6 px-3 pb-3"
+        class="w-full mb-6 px-3 pb-3"
       >
         <!-- Accordion these questions -->
-        <ol>
+          <Question
+            v-for="(question, index) in questions"
+            :key="index"
+            :question="question"
+            :answers="question.answers"
+            :review-text="question.theMoreYouKnow"
+          >
+            <template
+              v-slot="{
+                question,
+                answers,
+                reviewText,
+              }"
+            >
+              <div class="question">
+                <div class="flex justify-between">
+                  <p class="font-bold">{{ question.text }}</p>
+                  <button @click="deleteQuestion(question._id)">
+                    X
+                  </button>
+                </div>
+                  <div class="text-center text-sm h-16 p-2 m-2 rounded">
+                    <p>{{ reviewText }}</p>
+                  </div>
+                  <div class="answer-choices flex flex-wrap justify-center">
+                  <ButtonBase
+                    v-for="(answer, index) in answers"
+                    :key="index"
+                    :class="{ 'bg-green-lighter': answer.isRight, 'bg-red-lighter': !answer.isRight }"
+                    class="p-2 m-2 border rounded border-blue-darker focus:outline-none cursor-default"
+                  >
+                    {{ answer.text }}
+                  </ButtonBase>
+                </div>
+              </div>
+            </template>
+          </Question>
+        </div>
+        <!-- <ol>
           <li v-for="(question, index) in questions" :key="index">
             <div class="flex">
               <p>{{ question.text }}</p>
-              <button @click="deleteQuestion(question._id)">
-                X
-              </button>
             </div>
             <ul>
               <li
                 v-for="answer in question.answers"
                 :key="answer._id"
                 class="list-reset"
-                :class="{ 'bg-green-lightest': answer.isRight }"
               >
                 <svg
                   v-if="answer.isRight"
@@ -234,7 +268,7 @@
             </ul>
           </li>
         </ol>
-      </div>
+      </div> -->
     </section>
   </main>
 </template>
@@ -242,9 +276,9 @@
 <script>
 import { mapGetters } from 'vuex'
 import Api from '@/services/Api'
-import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
-import ButtonSecondary from '@/components/BaseUI/ButtonSecondary'
-import CreateQuestion from '@/components/quiz/CreateQuestion.vue'
+import { ButtonBase, ButtonPrimary, ButtonSecondary } from '@/components/BaseUI/'
+import CreateQuestion from '@/components/quiz/CreateQuestion'
+import Question from '@/components/quiz/Question'
 
 import { Editor, EditorMenuBar, EditorContent } from 'tiptap'
 import {
@@ -272,9 +306,11 @@ export default {
   components: {
     EditorContent,
     EditorMenuBar,
+    ButtonBase,
     ButtonPrimary,
     ButtonSecondary,
-    CreateQuestion
+    CreateQuestion,
+    Question
   },
   props: {
     lessonId: {

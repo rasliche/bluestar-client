@@ -1,5 +1,5 @@
 <template>
-  <div class="lesson">
+  <main class="lesson">
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <section class="relative mb-6 pb-3">
         <label for="title" class="block text-blue-darker font-bold text-sm mb-2"
@@ -144,23 +144,62 @@
       <h2 class="w-full">Add Questions</h2>
       <CreateQuestion
         :lesson-id="lesson._id"
-        class="w-full md:w-1/2"
+        class="w-full"
         @newQuestion="onNewQuestion"
       ></CreateQuestion>
       <div
-        v-if="lesson.questions && lesson.questions.length"
-        class="w-full md:w-1/2 mb-6 px-3 pb-3"
+        v-if="questions && questions.length"
+        class="w-full mb-6 px-3 pb-3"
       >
         <!-- Accordion these questions -->
-        <ol>
-          <li v-for="(question, index) in lesson.questions" :key="index">
-            <p>{{ question.text }}</p>
+          <Question
+            v-for="(question, index) in questions"
+            :key="index"
+            :question="question"
+            :answers="question.answers"
+            :review-text="question.theMoreYouKnow"
+          >
+            <template
+              v-slot="{
+                question,
+                answers,
+                reviewText,
+              }"
+            >
+              <div class="question">
+                <div class="flex justify-between">
+                  <p class="font-bold">{{ question.text }}</p>
+                  <button @click="deleteQuestion(question._id)">
+                    X
+                  </button>
+                </div>
+                  <div class="text-center text-sm h-16 p-2 m-2 rounded">
+                    <p>{{ reviewText }}</p>
+                  </div>
+                  <div class="answer-choices flex flex-wrap justify-center">
+                  <ButtonBase
+                    v-for="(answer, index) in answers"
+                    :key="index"
+                    :class="{ 'bg-green-lighter': answer.isRight, 'bg-red-lighter': !answer.isRight }"
+                    class="p-2 m-2 border rounded border-blue-darker focus:outline-none cursor-default"
+                  >
+                    {{ answer.text }}
+                  </ButtonBase>
+                </div>
+              </div>
+            </template>
+          </Question>
+        </div>
+        <!-- <ol>
+          <li v-for="(question, index) in questions" :key="index">
+            <div class="flex">
+              <p>{{ question.text }}</p>
+            </div>
             <ul>
               <li
                 v-for="answer in question.answers"
                 :key="answer._id"
                 class="list-reset"
-                :class="{ 'bg-green-lightest': answer.isRight }"
               >
                 <svg
                   v-if="answer.isRight"
@@ -202,25 +241,25 @@
             </ul>
           </li>
         </ol>
-      </div>
+      </div> -->
     </section>
     <!-- <TextOnScroll class="min-w-full"> 
         Hello from a new component that may not have a use case!
     </TextOnScroll> -->
-
+    {{ questions }}
     <!-- <CreateQuiz></CreateQuiz> -->
-  </div>
+  </main>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import Api from '@/services/Api'
 // import Modal from '@/components/BaseUI/Modal.vue'
-import ButtonPrimary from '@/components/BaseUI/ButtonPrimary.vue'
-import ButtonSecondary from '@/components/BaseUI/ButtonSecondary.vue'
+import { ButtonBase, ButtonPrimary, ButtonSecondary} from '@/components/BaseUI'
 // import ToggleInput from "@/components/ToggleInput/ToggleInput.vue"
 // import TextOnScroll from "@/components/TextOnScroll/TextOnScroll.vue"
-import CreateQuestion from '@/components/quiz/CreateQuestion.vue'
+import CreateQuestion from '@/components/quiz/CreateQuestion'
+import Question from '@/components/quiz/Question'
 import { Editor, EditorMenuBar, EditorContent } from 'tiptap'
 import {
   Bold,
@@ -246,11 +285,13 @@ export default {
     EditorContent,
     EditorMenuBar,
     // Modal,
+    ButtonBase,
     ButtonPrimary,
     ButtonSecondary,
     // TextOnScroll,
     // ToggleInput,
-    CreateQuestion
+    CreateQuestion,
+    Question
   },
   data() {
     return {
@@ -260,8 +301,8 @@ export default {
       lesson: {
         title: 'New Lesson',
         programs: [],
-        questions: []
       },
+      questions: [],
       programOptions: [],
       editor: new Editor({
         extensions: [
@@ -336,7 +377,17 @@ export default {
       console.log(this.editor.getJSON())
     },
     onNewQuestion(newQuestion) {
-      this.lesson.questions.push(newQuestion)
+      this.questions.push(newQuestion)
+    },
+    async deleteQuestion(questionId) {
+      try {
+        const { data: question } = await Api.delete(
+          `/lesson/${this.lesson._id}/questions/${questionId}`
+        )
+        this.questions = this.questions.filter((q) => q._id !== question._id)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }
