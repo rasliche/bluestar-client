@@ -165,8 +165,9 @@ export default {
       return this.question.answers.length > 1
     },
     hasCorrectAnswer() {
-      const arrayOfAnswerResults = this.question.answers.map((x) => x.isRight)
-      return arrayOfAnswerResults.includes(true)
+      return this.question.answers.some((x) => x.isRight)
+      // const arrayOfAnswerResults = this.question.answers.map((x) => x.isRight)
+      // return arrayOfAnswerResults.includes(true)
     }
   },
   validations: {
