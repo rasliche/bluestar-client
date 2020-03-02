@@ -132,11 +132,16 @@
 
 <script>
 import Api from '@/services/Api.js'
-import { required, minLength, maxLength } from 'vuelidate/lib/validators/'
+import { required } from 'vuelidate/lib/validators/'
 
 export default {
   name: 'CreateQuestion',
-  props: ['lessonId'],
+  props: {
+    lessonId: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       feedback: null,
@@ -202,7 +207,6 @@ export default {
           const { data } = await Api.post(
             `/lesson/${this.lessonId}/questions`,
             {
-              lesson: this.lessonId,
               text: this.question.text,
               answers: this.question.answers,
               theMoreYouKnow: this.question.theMoreYouKnow
