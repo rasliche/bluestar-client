@@ -143,7 +143,7 @@
     >
       <h2 class="w-full">Add Questions</h2>
       <CreateQuestion
-        :lesson="lesson"
+        :lesson-id="lesson._id"
         class="w-full md:w-1/2"
         @newQuestion="onNewQuestion"
       ></CreateQuestion>
@@ -157,8 +157,8 @@
             <p>{{ question.text }}</p>
             <ul>
               <li
-                v-for="(answer, index) in question.answers"
-                :key="index"
+                v-for="answer in question.answers"
+                :key="answer._id"
                 class="list-reset"
                 :class="{ 'bg-green-lightest': answer.isRight }"
               >
@@ -215,7 +215,7 @@
 <script>
 import { mapActions } from 'vuex'
 import Api from '@/services/Api'
-import Modal from '@/components/BaseUI/Modal.vue'
+// import Modal from '@/components/BaseUI/Modal.vue'
 import ButtonPrimary from '@/components/BaseUI/ButtonPrimary.vue'
 import ButtonSecondary from '@/components/BaseUI/ButtonSecondary.vue'
 // import ToggleInput from "@/components/ToggleInput/ToggleInput.vue"
@@ -245,7 +245,7 @@ export default {
   components: {
     EditorContent,
     EditorMenuBar,
-    Modal,
+    // Modal,
     ButtonPrimary,
     ButtonSecondary,
     // TextOnScroll,
