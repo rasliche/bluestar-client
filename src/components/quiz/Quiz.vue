@@ -15,8 +15,7 @@
       <Question
         :key="questionIndex"
         :show-review-text="showReviewText"
-        :question="questions[questionIndex].text"
-        :review-text="questions[questionIndex].theMoreYouKnow"
+        :question="questions[questionIndex]"
         :answers="questions[questionIndex].answers"
         @correctAnswer="correctAnswer"
         @wrongAnswer="wrongAnswer"
@@ -27,12 +26,11 @@
             answers,
             handleAnswer,
             showReviewText,
-            reviewText,
             isRight
           }"
         >
           <div class="question">
-            <p class="font-bold">{{ question }}</p>
+            <p class="font-bold">{{ question.text }}</p>
               <div
                 v-if="showReviewText"
                 key="feedback"
@@ -42,7 +40,7 @@
                 ]"
               >
                 <strong>{{ isRight ? 'Nice!' : 'Sorry!' }}</strong>
-                <p>{{ reviewText }}</p>
+                <p>{{ question.reviewText }}</p>
               </div>
               <div
                 v-else
