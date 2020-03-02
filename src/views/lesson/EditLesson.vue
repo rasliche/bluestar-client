@@ -170,7 +170,7 @@
     >
       <h2 class="w-full">Add Questions</h2>
       <CreateQuestion
-        :lesson-id="lesson._id"
+        :lesson-id="lessonId"
         class="w-full md:w-1/2"
         @newQuestion="onNewQuestion"
       ></CreateQuestion>
@@ -189,8 +189,8 @@
             </div>
             <ul>
               <li
-                v-for="(answer, index) in question.answers"
-                :key="index"
+                v-for="answer in question.answers"
+                :key="answer._id"
                 class="list-reset"
                 :class="{ 'bg-green-lightest': answer.isRight }"
               >
@@ -424,7 +424,7 @@ export default {
     async deleteQuestion(questionId) {
       try {
         const { data: question } = await Api.delete(
-          `/lesson/${this.lesson._id}/questions/${questionId}`
+          `/lesson/${this.lessonId}/questions/${questionId}`
         )
         this.questions = this.questions.filter((q) => q._id !== question._id)
       } catch (error) {
