@@ -7,9 +7,8 @@
       @halfway.once="logThatStuff"
     >
     </ScrollProgressBar>
-    <h1 class="page-heading">
-      {{ lesson.title }}
-    </h1>
+    <PageHeading>{{ lesson.title }}</PageHeading>
+    <!-- <div class="h-48 w-auto overflow-hidden"> -->
     <div class="flex justify-center">
       <span>Reading Time: {{ readingTimeString }}</span>
     </div>
@@ -27,6 +26,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import Api from '@/services/Api'
 import ScrollProgressBar from '@/components/ScrollProgressBar/ScrollProgressBar'
+import { PageHeading } from '@/components/BaseUI'
 import Quiz from '@/components/quiz/Quiz.vue'
 import { Editor, EditorContent } from 'tiptap'
 import {
@@ -53,7 +53,8 @@ export default {
   components: {
     ScrollProgressBar,
     EditorContent,
-    Quiz
+    Quiz,
+    PageHeading
   },
   props: {
     lessonId: {
