@@ -7,17 +7,23 @@
       @halfway.once="logThatStuff"
     >
     </ScrollProgressBar>
-    <PageHeading>{{ lesson.title }}</PageHeading>
-    <!-- <div class="h-48 w-auto overflow-hidden"> -->
+    <header>
+      <!-- Add Parallax here eventually -->
       <img
-        class="h-48 w-full overflow-hidden object-cover object-center"
+        class="h-48 w-full rounded overflow-hidden object-cover object-center opacity-75"
         :src="lesson.coverPhoto.location"
         :alt="lesson.coverPhoto.altDescription"
       />
-    <!-- </div> -->
-    <div class="flex justify-center">
-      <span>Reading Time: {{ readingTimeString }}</span>
-    </div>
+      <PageHeading>
+        {{ lesson.title }}
+      </PageHeading>
+      <span 
+        v-if="wordCount" 
+        class="w-full"
+      >
+        Reading Time: {{ readingTimeString }}
+      </span>
+    </header>
     <editor-content class="lesson-content" :editor="editor" />
     <Quiz
       v-if="questions.length > 0"
@@ -56,6 +62,7 @@ import {
 import Iframe from '@/tiptap-extras/Iframe'
 
 export default {
+  name: 'ViewLesson',
   components: {
     ScrollProgressBar,
     EditorContent,
@@ -96,12 +103,8 @@ export default {
     }
   },
   async created() {
-    const {
-      data: { content, ...lesson }
-    } = await Api.get(`/lessons/${this.lessonId}`)
-    const { data: questions } = await Api.get(
-      `/lesson/${this.lessonId}/questions`
-    )
+    const { data: { content, ...lesson } } = await Api.get(`/lessons/${this.lessonId}`)
+    const { data: questions } = await Api.get(`/lesson/${this.lessonId}/questions`)
 
     this.lesson = lesson
     this.questions = questions
