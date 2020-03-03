@@ -143,12 +143,13 @@ export default {
     },
     async handleFinishedQuiz(score) {
       try {
+        let response
         // check if lesson has been done
         const lessonHasBeenDone = this.lessonScores.find(r => r.lesson._id === this.lessonId)
         // Check if lesson has been doneCheck if current score is greater than finished score
         if (lessonHasBeenDone && score > lessonHasBeenDone.score) {
           console.log("In IF")
-          const response = await Api.put(`/user/${this.userId}/scores/${this.lessonId}`, {
+          response = await Api.put(`/user/${this.userId}/scores/${this.lessonId}`, {
             score: score
           })
         } 
@@ -156,7 +157,7 @@ export default {
           console.log("In ELSE")
           console.log(lessonHasBeenDone)
           console.log(score)
-          const response = await Api.post(`/user/${this.userId}/scores`, {
+          response = await Api.post(`/user/${this.userId}/scores`, {
             lessonId: this.lessonId,
             score: score
           })
