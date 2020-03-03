@@ -45,7 +45,7 @@
               <div
                 v-else
                 key="answers"
-                class="answer-choices flex flex-wrap justify-center"
+                class="answer-choices w-full mt-4 flex flex-wrap justify-center"
               >
               <ButtonBase
                 v-for="(answer, index) in answers"
@@ -84,15 +84,17 @@
           Submit Score and Continue
         </ButtonPrimary>
       </div>
-      <div v-else>
-        <p>Sorry, but you did not achieve a passing score this time.</p>
+      <div v-else class="flex flex-wrap">
+        <p class="w-full mt-4">Sorry, but you did not achieve a passing score this time.</p>
+        <div class="w-full mt-4 flex justify-around">
+          <ButtonSecondary @click="startQuiz">
+            Retake the quiz.
+          </ButtonSecondary>
+          <ButtonSecondary @click="quitQuiz">
+            Review the content.
+          </ButtonSecondary>
+        </div>
       </div>
-      <ButtonSecondary @click="startQuiz">
-        Retake the quiz.
-      </ButtonSecondary>
-      <ButtonSecondary @click="quitQuiz">
-        Review the content.
-      </ButtonSecondary>
     </div>
   </div>
 </template>
