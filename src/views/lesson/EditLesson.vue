@@ -45,10 +45,24 @@
         </div>
       </section>
       <section class="relative mb-6 pb-3">
-        upload image here
+        <label
+          for="cover-photo"
+          class="block text-blue-800 font-bold text-sm mb-2"
+          >Cover Photo</label
+        >
+        <input
+          id="cover-photo"
+          v-model="lesson.coverPhoto.location"
+          type="text"
+          name="cover-photo"
+          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+        />
       </section>
       <ButtonPrimary @click="saveLessonDetails">
         Save Details
+      </ButtonPrimary>
+      <ButtonPrimary @click="saveCoverPhoto">
+        Save Cover Photo
       </ButtonPrimary>
     </form>
     <editor-menu-bar v-slot="{ commands, isActive }" :editor="editor">
@@ -426,7 +440,20 @@ export default {
           }, {
             headers: {
               Authorization: `Bearer: ${this.token}`
-    
+            }
+          })
+        console.log(data)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async saveCoverPhoto() {
+      try {
+        const { data } = await Api.put(`/lesson/${this.lessonId}/cover-photo`, {
+            coverPhoto: this.lesson.coverPhoto.location,
+          }, {
+            headers: {
+              Authorization: `Bearer: ${this.token}`
             }
           })
         console.log(data)
