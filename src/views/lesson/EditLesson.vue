@@ -450,7 +450,9 @@ export default {
     async saveCoverPhoto() {
       try {
         const { data } = await Api.put(`/lesson/${this.lessonId}/cover-photo`, {
-            coverPhoto: this.lesson.coverPhoto.location,
+            coverPhoto: {
+              location: this.lesson.coverPhoto.location,
+            }
           }, {
             headers: {
               Authorization: `Bearer: ${this.token}`
