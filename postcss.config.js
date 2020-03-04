@@ -1,6 +1,6 @@
 module.exports = {
   plugins: [
-    require('tailwindcss')('./tailwind.js'),
+    require('tailwindcss'),
     require('autoprefixer'),
     require('postcss-nested')({ bubble: ['apply'] })
   ]

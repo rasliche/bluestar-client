@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-red">
+  <div class="border border-red-500">
     A temporary image placeholder for:
     <b
       ><i>{{ imageSource }}</i></b

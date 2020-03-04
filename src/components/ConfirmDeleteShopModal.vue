@@ -5,7 +5,7 @@
     >
     <template v-slot:buttons>
       <button
-        class="bg-red-light px-4 py-2 border-red border-2 rounded-lg mr-2"
+        class="bg-red-400 px-4 py-2 borderred-500 border-2 rounded-lg mr-2"
         @click="deleteOperator"
       >
         Delete {{ operator.name }}

@@ -1,10 +1,10 @@
 <template>
   <nav
     id="app-nav"
-    class="flex items-center justify-between flex-wrap p-4 bg-blue-darker"
+    class="flex items-center justify-between flex-wrap p-4 bg-blue-800"
   >
     <!-- Desktop Logo -->
-    <div class="flex items-center flex-no-shrink mr-6 text-blue-lighter">
+    <div class="flex items-center flex-shrink-0 mr-6 text-blue-200">
       <svg
         class="fill-current h-8 w-8 mr-2"
         width="54"
@@ -18,7 +18,7 @@
       </svg>
       <router-link
         to="/"
-        class="text-3xl text-blue-lightest no-underline"
+        class="text-3xl text-blue-100"
         active-class=""
       >
         Blue Star
@@ -28,7 +28,7 @@
     <!-- Responsive Menu Button -->
     <div class="block md:hidden">
       <button
-        class="flex items-center px-2 py-2 border rounded text-blue-light"
+        class="flex items-center px-2 py-2 border rounded text-blue-400"
         @click="showNavMenu = !showNavMenu"
       >
         <svg
@@ -57,27 +57,27 @@
         <router-link
           v-if="isAuthenticated"
           :to="{ name: 'training' }"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest"
+          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
         >
           Training
         </router-link>
         <router-link
           :to="{ name: 'news' }"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest"
+          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
         >
           News
         </router-link>
         <router-link
           v-if="isAdmin"
           :to="{ name: 'admin' }"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest"
+          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
         >
           Admin
         </router-link>
         <router-link
           v-if="isAdmin"
           :to="{ name: 'design' }"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest"
+          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
         >
           Design
         </router-link>
@@ -87,20 +87,20 @@
         <router-link
           v-if="!isAuthenticated"
           to="/login"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest"
+          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
         >
           Login
         </router-link>
         <router-link
           v-if="isAuthenticated"
           :to="{ name: 'me' }"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest"
+          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
         >
           Me
         </router-link>
         <button
           v-if="isAuthenticated"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 no-underline text-blue-light rounded hover:bg-blue-lightest"
+          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
           @click="logoutUser"
         >
           Logout
@@ -138,6 +138,6 @@ export default {
 
 <style lang="postcss" scoped>
 a.router-link-active {
-  @apply text-blue-lightest bg-blue-dark rounded;
+  @apply text-blue-100 bg-blue-600 rounded;
 }
 </style>

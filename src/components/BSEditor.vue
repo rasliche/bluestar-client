@@ -32,7 +32,7 @@
                 d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm9 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
               ></path>
               <path
-                class="secondary text-grey-darker"
+                class="secondary text-gray-700"
                 d="M15.3 12.3a1 1 0 0 1 1.4 0l2 2a1 1 0 0 1 .3.7v3a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 .3-.7l4-4a1 1 0 0 1 1.4 0l3.3 3.29 1.3-1.3z"
               ></path>
             </svg>
@@ -48,7 +48,7 @@
                 d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v2h2V5H4zm0 4v2h2V9H4zm0 4v2h2v-2H4zm0 4v2h2v-2H4zM18 5v2h2V5h-2zm0 4v2h2V9h-2zm0 4v2h2v-2h-2zm0 4v2h2v-2h-2z"
               ></path>
               <path
-                class="secondary text-grey-darker"
+                class="secondary text-gray-700"
                 d="M9 5h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 8h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z"
               ></path>
             </svg>
@@ -82,7 +82,7 @@
 
     <editor-content
       class="lesson-content 
-      shadow appearance-none rounded border-blue-lighter border 
+      shadow appearance-none rounded border-blue-200 border 
       w-full min-h-full mt-4 mb-2 mx-3 
       focus:outline-none focus:shadow-outline"
       :editor="editor"
@@ -246,12 +246,12 @@ export default {
     @apply rounded-r;
   }
   button {
-    @apply p-2 text-white bg-grey-darker border border-grey-darkest;
+    @apply p-2 text-white bg-gray-700 border border-gray-800;
     &:hover {
-      @apply bg-grey-darkest;
+      @apply bg-gray-800;
     }
     .is-active {
-      @apply bg-grey-light text-grey-darkest;
+      @apply bg-gray-400 text-gray-800;
     }
   }
 }
@@ -260,7 +260,7 @@ export default {
 /* .lesson-content > div { */
 .ProseMirror {
   /* outline-none */
-  @apply px-2 text-lg text-grey-darkest leading-normal;
+  @apply px-2 text-lg text-gray-800 leading-normal;
   > * + *,
   li + li,
   li > p + p {
@@ -268,33 +268,33 @@ export default {
   }
 }
 /* .lesson-content {
-  @apply text-lg text-grey-darkest leading-normal;
+  @apply text-lg text-gray-800 leading-normal;
     > * + *, li + li, li > p + p {
         @apply mt-6;
     }
         strong {
-        @apply text-black font-bold;
+        @apply text-gray-900 font-bold;
     }
         a {
-        @apply text-black font-semibold;
+        @apply text-gray-900 font-semibold;
     }
         strong a {
         @apply font-bold;
     }
         h2 {
-        @apply leading-tight text-xl font-bold text-black mb-2 mt-10;
+        @apply leading-tight text-xl font-bold text-gray-900 mb-2 mt-10;
     }
         h3 {
-        @apply leading-tight text-lg font-bold text-black mt-8 -mb-2;
+        @apply leading-tight text-lg font-bold text-gray-900 mt-8 -mb-2;
     }
         code {
-        @apply font-mono text-sm inline bg-grey-lighter px-1;
+        @apply font-mono text-sm inline bg-gray-200 px-1;
     }
         pre code {
-        @apply block bg-black p-4 rounded;
+        @apply block bg-gray-900 p-4 rounded;
     }
         blockquote {
-        @apply border-l-4 border-grey-light pl-4 italic;
+        @apply border-l-4 border-gray-400 pl-4 italic;
     }
         ul, ol {
         @apply pl-5;

@@ -1,7 +1,7 @@
 <template>
   <div class="about-fknms flex flex-wrap justify-center">
     <article class="w-5/6">
-      <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">
+      <h1 class="border-blue-200 border-b-4 mb-4 pt-4">
         About Florida Keys National Marine Sanctuary
       </h1>
       <p class="w-5/6 pt-4 italic mx-auto">
@@ -143,7 +143,7 @@
         class="flex items-center justify-between mx-auto pt-4 mt-4 border-t-2 border-blue"
       >
         <button
-          class="border border-green bg-green-light p-2 m-2 rounded"
+          class="border border-green-500 bg-green-400 p-2 m-2 rounded"
           @click="quizMode = true"
         >
           Start Quiz

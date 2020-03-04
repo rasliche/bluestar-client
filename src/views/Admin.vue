@@ -13,7 +13,7 @@
         <router-link
           v-if="isAuthenticated && isAdmin"
           :to="{ name: 'create-lesson' }"
-          class="no-underline text-white"
+          class="text-white"
         >
           New Lesson
         </router-link>
@@ -72,10 +72,9 @@
           <div
             v-for="lesson in lessons"
             :key="lesson._id"
-            class="flex justify-between mt-1 px-2 py-1 hover:bg-blue-lighter rounded"
+            class="flex justify-between mt-1 px-2 py-1 hover:bg-blue-200 rounded"
           >
             <router-link
-              class="no-underline"
               :to="{
                 name: 'view-lesson',
                 params: { lessonId: lesson._id }
@@ -85,7 +84,6 @@
             </router-link>
             <div class="actions flex justify-between">
               <router-link
-                class="no-underline"
                 :to="{
                   name: 'edit-lesson',
                   params: { lessonId: lesson._id }
@@ -94,7 +92,7 @@
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  class="w-6 mr-2 fill-current text-yellow-dark icon-edit"
+                  class="w-6 mr-2 fill-current text-yellow-600 icon-edit"
                 >
                   <path
                     class="primary"
@@ -111,7 +109,7 @@
                 </svg>
               </router-link>
               <!-- <button @click="deleteLesson">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 mr-2 fill-current text-red-dark icon-trash">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 mr-2 fill-current text-red-600 icon-trash">
                   <path class="primary" d="M5 5h14l-.89 15.12a2 2 0 0 1-2 1.88H7.9a2 2 0 0 1-2-1.88L5 5zm5 5a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1zm4 0a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1z"></path>
                   <path class="secondary" d="M8.59 4l1.7-1.7A1 1 0 0 1 11 2h2a1 1 0 0 1 .7.3L15.42 4H19a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2h3.59z"></path>
                 </svg>
@@ -128,7 +126,7 @@
           <div
             v-for="program in programs"
             :key="program._id"
-            class="flex justify-between mt-1 px-2 py-1 hover:bg-blue-lighter rounded"
+            class="flex justify-between mt-1 px-2 py-1 hover:bg-blue-200 rounded"
           >
             {{ program.name }}
             <div class="actions flex justify-between">
@@ -136,7 +134,7 @@
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  class="w-6 mr-2 fill-current text-yellow-dark icon-edit"
+                  class="w-6 mr-2 fill-current text-yellow-600 icon-edit"
                 >
                   <path class="primary" d="M5 5h14l-.89 15.12a2 2 0 0 1-2 1.88H7.9a2 2 0 0 1-2-1.88L5 5zm5 5a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1zm4 0a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1z"></path>
                   <path class="secondary" d="M8.59 4l1.7-1.7A1 1 0 0 1 11 2h2a1 1 0 0 1 .7.3L15.42 4H19a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2h3.59z"></path>

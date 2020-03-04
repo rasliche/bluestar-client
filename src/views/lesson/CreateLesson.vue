@@ -2,7 +2,7 @@
   <main class="lesson">
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <section class="relative mb-6 pb-3">
-        <label for="title" class="block text-blue-darker font-bold text-sm mb-2"
+        <label for="title" class="block text-blue-800 font-bold text-sm mb-2"
           >Lesson Title</label
         >
         <input
@@ -10,13 +10,13 @@
           v-model="lesson.title"
           type="text"
           name="title"
-          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
       </section>
       <section class="relative mb-6 pb-3">
         <label
           for="description"
-          class="block text-blue-darker font-bold text-sm mb-2"
+          class="block text-blue-800 font-bold text-sm mb-2"
           >Short Description</label
         >
         <input
@@ -25,13 +25,13 @@
           type="text"
           spellcheck
           name="description"
-          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
       </section>
       <section class="relative mb-6 pb-3">
         <div v-for="program in programOptions" :key="program._id">
           <label
-            class="block capitalize text-blue-darker font-bold text-sm mb-2"
+            class="block capitalize text-blue-800 font-bold text-sm mb-2"
           >
             <input
               :id="program.name"
@@ -75,7 +75,7 @@
               d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm9 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
             ></path>
             <path
-              class="secondary text-grey-darker"
+              class="secondary text-gray-700"
               d="M15.3 12.3a1 1 0 0 1 1.4 0l2 2a1 1 0 0 1 .3.7v3a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 .3-.7l4-4a1 1 0 0 1 1.4 0l3.3 3.29 1.3-1.3z"
             ></path>
           </svg>
@@ -91,7 +91,7 @@
               d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v2h2V5H4zm0 4v2h2V9H4zm0 4v2h2v-2H4zm0 4v2h2v-2H4zM18 5v2h2V5h-2zm0 4v2h2V9h-2zm0 4v2h2v-2h-2zm0 4v2h2v-2h-2z"
             ></path>
             <path
-              class="secondary text-grey-darker"
+              class="secondary text-gray-700"
               d="M9 5h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 8h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z"
             ></path>
           </svg>
@@ -111,27 +111,27 @@
       </div>
     </editor-menu-bar>
 
-    <h1 class="border-blue-lighter border-b-4 mb-4">{{ lesson.title }}</h1>
+    <h1 class="border-blue-200 border-b-4 mb-4">{{ lesson.title }}</h1>
     <editor-content
       class="lesson-content 
-        shadow appearance-none rounded border-blue-lighter border 
+        shadow appearance-none rounded border-blue-200 border 
         w-full min-h-full mt-4 mb-2 mx-3 
         focus:outline-none focus:shadow-outline"
       :editor="editor"
     />
 
     <section
-      class="sm:w-1/2 mx-auto mt-4 border border-red flex items-center justify-between"
+      class="sm:w-1/2 mx-auto mt-4 border border-red-500 flex items-center justify-between"
     >
       <ButtonPrimary
-        class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
+        class="p-2 rounded mx-auto bg-red-500 hover:bg-red-600 text-white focus:outline-none focus:shadow-outline"
         :disabled="status === 'pending'"
         @click="createLesson"
       >
         Create
       </ButtonPrimary>
       <ButtonSecondary
-        class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
+        class="p-2 rounded mx-auto bg-red-500 hover:bg-red-600 text-white focus:outline-none focus:shadow-outline"
         @click="logLesson"
       >
         Log
@@ -180,8 +180,8 @@
                   <ButtonBase
                     v-for="(answer, index) in answers"
                     :key="index"
-                    :class="{ 'bg-green-lighter': answer.isRight, 'bg-red-lighter': !answer.isRight }"
-                    class="p-2 m-2 border rounded border-blue-darker focus:outline-none cursor-default"
+                    :class="{ 'bg-green-200': answer.isRight, 'bg-red-200': !answer.isRight }"
+                    class="p-2 m-2 border rounded border-blue-800 focus:outline-none cursor-default"
                   >
                     {{ answer.text }}
                   </ButtonBase>
@@ -199,7 +199,7 @@
               <li
                 v-for="answer in question.answers"
                 :key="answer._id"
-                class="list-reset"
+                
               >
                 <svg
                   v-if="answer.isRight"
@@ -211,10 +211,10 @@
                     cx="12"
                     cy="12"
                     r="10"
-                    class="text-green-light"
+                    class="text-green-400"
                   ></circle>
                   <path
-                    class="text-green-darker"
+                    class="text-green-800"
                     d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"
                   ></path>
                 </svg>
@@ -228,10 +228,10 @@
                     cx="12"
                     cy="12"
                     r="10"
-                    class="text-red-light"
+                    class="text-red-400"
                   ></circle>
                   <path
-                    class="text-red-darker"
+                    class="text-red-800"
                     d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"
                   ></path>
                 </svg>
@@ -403,18 +403,18 @@ export default {
     @apply rounded-r;
   }
   button {
-    @apply p-2 text-white bg-grey-darker border border-grey-darkest;
+    @apply p-2 text-white bg-gray-700 border border-gray-800;
     &:hover {
-      @apply bg-grey-darkest;
+      @apply bg-gray-800;
     }
     .is-active {
-      @apply bg-grey-light text-grey-darkest;
+      @apply bg-gray-400 text-gray-800;
     }
   }
 }
 
 .ProseMirror {
-  @apply px-2 text-lg text-grey-darkest leading-normal;
+  @apply px-2 text-lg text-gray-800 leading-normal;
   > * + *,
   li + li,
   li > p + p {
@@ -422,33 +422,33 @@ export default {
   }
 }
 /* .lesson-content {
-  @apply text-lg text-grey-darkest leading-normal;
+  @apply text-lg text-gray-800 leading-normal;
     > * + *, li + li, li > p + p {
         @apply mt-6;
     }
         strong {
-        @apply text-black font-bold;
+        @apply text-gray-900 font-bold;
     }
         a {
-        @apply text-black font-semibold;
+        @apply text-gray-900 font-semibold;
     }
         strong a {
         @apply font-bold;
     }
         h2 {
-        @apply leading-tight text-xl font-bold text-black mb-2 mt-10;
+        @apply leading-tight text-xl font-bold text-gray-900 mb-2 mt-10;
     }
         h3 {
-        @apply leading-tight text-lg font-bold text-black mt-8 -mb-2;
+        @apply leading-tight text-lg font-bold text-gray-900 mt-8 -mb-2;
     }
         code {
-        @apply font-mono text-sm inline bg-grey-lighter px-1;
+        @apply font-mono text-sm inline bg-gray-200 px-1;
     }
         pre code {
-        @apply block bg-black p-4 rounded;
+        @apply block bg-gray-900 p-4 rounded;
     }
         blockquote {
-        @apply border-l-4 border-grey-light pl-4 italic;
+        @apply border-l-4 border-gray-400 pl-4 italic;
     }
         ul, ol {
         @apply pl-5;

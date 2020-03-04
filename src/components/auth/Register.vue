@@ -1,9 +1,9 @@
 <template>
-  <div class="w-full max-w-xs">
+  <div class="w-full max-w-md">
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" @submit.prevent="submitRegisterForm">
       <h1 class="text-center pb-3">Register</h1>
       <section class="relative mb-6 pb-3">
-        <label for="fname" class="block text-blue-darker font-bold text-sm mb-2"
+        <label for="fname" class="block text-blue-800 font-bold text-sm mb-2"
           >Name</label
         >
         <input
@@ -12,9 +12,9 @@
           type="text"
           name="fname"
           autocomplete="section-register name"
-          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-        <p v-if="errors" class="absolute pin-b pin-x">
+        <p v-if="errors" class="absolute bottom-0 inset-x-0">
           <span v-if="!$v.formResponses.name.required" class="error"
             >This field is required.</span
           >
@@ -24,7 +24,7 @@
       <section class="relative mb-6 pb-3">
         <label
           for="femail"
-          class="block text-blue-darker font-bold text-sm mb-2"
+          class="block text-blue-800 font-bold text-sm mb-2"
           >Email</label
         >
         <input
@@ -33,9 +33,9 @@
           type="text"
           name="femail"
           autocomplete="section-register email"
-          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-        <p v-if="errors" class="absolute pin-b pin-x">
+        <p v-if="errors" class="absolute bottom-0 inset-x-0">
           <span v-if="!$v.formResponses.email.required" class="error"
             >This field is required.
           </span>
@@ -49,7 +49,7 @@
       <section class="relative mb-6 pb-3">
         <label
           for="fpassword1"
-          class="block text-blue-darker font-bold text-sm mb-2"
+          class="block text-blue-800 font-bold text-sm mb-2"
           >Password</label
         >
         <input
@@ -58,9 +58,9 @@
           type="password"
           name="fpassword1"
           autocomplete="section-register new-password"
-          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-        <p v-if="errors" class="absolute pin-b pin-x">
+        <p v-if="errors" class="absolute bottom-0 inset-x-0">
           <span v-if="!$v.formResponses.password1.required" class="error"
             >This field is required.
           </span>
@@ -75,7 +75,7 @@
       <section class="relative mb-6 pb-3">
         <label
           for="fpassword2"
-          class="block text-blue-darker font-bold text-sm mb-2"
+          class="block text-blue-800 font-bold text-sm mb-2"
           >Re-type Password</label
         >
         <input
@@ -84,9 +84,9 @@
           type="password"
           name="fpassword2"
           autocomplete="section-register new-password"
-          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-        <p v-if="errors" class="absolute pin-b pin-x">
+        <p v-if="errors" class="absolute bottom-0 inset-x-0">
           <span v-if="!$v.formResponses.password2.required" class="error"
             >This field is required.
           </span>
@@ -109,7 +109,7 @@
         <div class="flex items-center justify-between">
           <button
             type="submit"
-            class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
+            class="p-2 rounded mx-auto bg-blue-500 hover:bg-blue-600 text-white focus:outline-none focus:shadow-outline"
             :disabled="uiState !== 'idle'"
             @click.prevent="submitRegisterForm"
           >
@@ -121,14 +121,14 @@
           </button>
           <a
             href="#"
-            class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
+            class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 underline"
             >Forgot password?</a
           >
         </div>
-        <p v-if="formFeedback" class="absolute pin-b pin-x">
+        <p v-if="formFeedback" class="absolute bottom-0 inset-x-0">
           <span class="error">{{ formFeedback }}</span>
         </p>
-        <!-- <a href="#" class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">Forgot password?</a> -->
+        <!-- <a href="#" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Forgot password?</a> -->
       </section>
     </form>
     <!-- TODO: Style this feedback -->
@@ -233,11 +233,11 @@ export default {
 
 <style lang="postcss" scoped>
 .error {
-  @apply text-red text-sm;
+  @apply text-red-500 text-sm;
 }
 
 .error-border {
-  @apply border-red;
+  @apply border-red-500;
 }
 
 .simple-spinner {

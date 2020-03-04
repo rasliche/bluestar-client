@@ -2,7 +2,7 @@
   <button
     v-on="$listeners"
     type="button"
-    class="p-2 rounded-lg focus:outline-none focus:shadow-outline no-underline"
+    class="p-2 rounded-lg focus:outline-none focus:shadow-outline"
   >
     <slot>Click Me!</slot>
   </button>

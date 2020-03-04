@@ -1,7 +1,7 @@
 <template>
   <div class="about-fknms flex flex-wrap justify-center">
     <section class="w-5/6">
-      <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">
+      <h1 class="border-blue-200 border-b-4 mb-4 pt-4">
         Regulations and Zones
       </h1>
       <p class="pt-4 italic">

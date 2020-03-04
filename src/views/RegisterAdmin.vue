@@ -1,7 +1,7 @@
 <template>
   <div class="login flex flex-wrap justify-center">
     <section class="w-5/6">
-      <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">
+      <h1 class="border-blue-200 border-b-4 mb-4 pt-4">
         Register Administrator
       </h1>
     </section>

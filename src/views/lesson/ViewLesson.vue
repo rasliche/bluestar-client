@@ -190,41 +190,44 @@ export default {
 /* Reference: https://github.com/tailwindcss/discuss/issues/243 */
 /* .lesson-content > div { */
 .ProseMirror {
-  @apply max-w-lg px-2 text-lg leading-normal outline-none mx-auto;
+  @apply px-2 text-lg leading-normal outline-none mx-auto;
   > * + *,
   li + li,
   li > p + p {
     @apply mt-4;
   }
+  h2 {
+    @apply text-xl font-semibold;
+  }
 }
 /* .lesson-content {
-  @apply text-lg text-grey-darkest leading-normal;
+  @apply text-lg text-gray-800 leading-normal;
     > * + *, li + li, li > p + p {
         @apply mt-6;
     }
         strong {
-        @apply text-black font-bold;
+        @apply text-gray-900 font-bold;
     }
         a {
-        @apply text-black font-semibold;
+        @apply text-gray-900 font-semibold;
     }
         strong a {
         @apply font-bold;
     }
         h2 {
-        @apply leading-tight text-xl font-bold text-black mb-2 mt-10;
+        @apply leading-tight text-xl font-bold text-gray-900 mb-2 mt-10;
     }
         h3 {
-        @apply leading-tight text-lg font-bold text-black mt-8 -mb-2;
+        @apply leading-tight text-lg font-bold text-gray-900 mt-8 -mb-2;
     }
         code {
-        @apply font-mono text-sm inline bg-grey-lighter px-1;
+        @apply font-mono text-sm inline bg-gray-200 px-1;
     }
         pre code {
-        @apply block bg-black p-4 rounded;
+        @apply block bg-gray-900 p-4 rounded;
     }
         blockquote {
-        @apply border-l-4 border-grey-light pl-4 italic;
+        @apply border-l-4 border-gray-400 pl-4 italic;
     }
         ul, ol {
         @apply pl-5;

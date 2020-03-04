@@ -8,7 +8,7 @@
         <section class="relative mb-6 pb-3">
           <label
             for="fname"
-            class="block text-blue-darker font-bold text-sm mb-2"
+            class="block text-blue-800 font-bold text-sm mb-2"
             >Program Name</label
           >
           <input
@@ -16,12 +16,12 @@
             v-model.lazy="$v.formResponses.name.$model"
             type="text"
             name="fname"
-            class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
           />
-          <p v-if="errors" class="absolute pin-b pin-x text-center">
+          <p v-if="errors" class="absolute bottom-0 inset-x-0 text-center">
             <span
               v-if="!$v.formResponses.name.required"
-              class="text-red text-sm"
+              class="text-red-500 text-sm"
               >This field is required</span
             >
           </p>

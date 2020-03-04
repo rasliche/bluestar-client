@@ -9,9 +9,9 @@
     </section>
 
     <h2>Danger Zone</h2>
-    <section class="border border-red flex items-center justify-between">
+    <section class="border borderred-500 flex items-center justify-between">
       <ButtonDanger
-        class="p-2 rounded mx-auto bg-red hover:bg-red-dark text-white focus:outline-none focus:shadow-outline"
+        class="p-2 rounded mx-auto bgred-500 hover:bg-red-600 text-white focus:outline-none focus:shadow-outline"
         @click="confirmDeleteModalOpen = true"
       >
         Delete Shop

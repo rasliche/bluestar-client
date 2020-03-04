@@ -1,6 +1,6 @@
 <template>
   <div class="about-fknms flex flex-wrap justify-center">
-    <h1 class="border-blue-lighter border-b-4 mb-4 w-5/6">
+    <h1 class="border-blue-200 border-b-4 mb-4 w-5/6">
       Mangroves and Seagrasses
     </h1>
     <p class="lg:w-5/6 pt-4 italic">

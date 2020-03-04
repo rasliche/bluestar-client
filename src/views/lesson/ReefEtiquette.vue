@@ -1,7 +1,7 @@
 <template>
   <div class="about-fknms flex flex-wrap justify-center">
     <article class="w-5/6">
-      <h1 class="border-blue-lighter border-b-4 mb-4 pt-4">
+      <h1 class="border-blue-200 border-b-4 mb-4 pt-4">
         Reef Etiquette
       </h1>
       <p class="w-5/6 pt-4 italic mx-auto">
@@ -57,7 +57,7 @@
 
         <section class="citations">
           <p>Citations</p>
-          <ul class="list-reset">
+          <ul >
             <li><cite><a href="/pdfs/Camp-and-Fraser-2012.pdf">Emma Camp, Douglas Fraser. 2012.</a></cite></li>
             <li><cite><a href="/pdfs/Krieger-and-Chadwick-2012.pdf">Krieger and Chadwick 2012</a></cite></li>
           </ul>
@@ -160,7 +160,7 @@
       <BSImage image-source="nassaugrouper.jpg" />
       <div class="mx-auto pt-4 mt-4 border-t-2 border-blue">
         <button
-          class="border border-green bg-green-light p-2 m-2 rounded"
+          class="border border-green-500 bg-green-400 p-2 m-2 rounded"
           @click="quizMode = true"
         >
           Start Quiz

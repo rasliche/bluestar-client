@@ -35,7 +35,7 @@
                 v-if="showReviewText"
                 key="feedback"
                 :class="[
-                  isRight ? 'bg-green-lightest' : 'bg-red-lightest',
+                  isRight ? 'bg-green-100' : 'bg-red-100',
                   'text-center text-sm h-16 p-2 m-2 rounded'
                 ]"
               >
@@ -50,7 +50,7 @@
               <ButtonBase
                 v-for="(answer, index) in answers"
                 :key="index"
-                class="p-2 m-2 border rounded border-blue-darker"
+                class="p-2 m-2 border rounded border-blue-800"
                 @click="handleAnswer(index)"
               >
                 {{ answer.text }}
@@ -76,7 +76,7 @@
           Nice Job. You can move on to the next lesson or retake the quiz for a
           better score.
         </p>
-        <!-- <router-link tag="button" to="/training" class="border border-green bg-green-light p-2 m-2 rounded">Training Home</router-link> -->
+        <!-- <router-link tag="button" to="/training" class="border border-green-500 bg-green-400 p-2 m-2 rounded">Training Home</router-link> -->
         <ButtonPrimary
           :disabled="status === 'pending'"
           @click="submitScoreAndContinue"

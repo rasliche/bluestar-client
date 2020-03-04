@@ -13,7 +13,7 @@
     </router-link>
     <div class="h-24 p-2">
       <div class="h-12 text-center font-bold text-lg">{{ lesson.title }}</div>
-      <p class="h-10 text-grey-darker text-sm">
+      <p class="h-10 text-gray-700 text-sm">
         {{ lesson.description }}
       </p>
     </div>

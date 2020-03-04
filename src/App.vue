@@ -1,8 +1,8 @@
 <template>
-  <div id="app" class="antialiased text-grey-darkest bg-grey-lightest">
+  <div id="app" class="antialiased text-gray-800 bg-gray-100">
     <AppNav />
 
-    <router-view class="max-w-lg mx-auto px-4 pt-2"></router-view>
+    <router-view class="max-w-4xl mx-auto px-4 pt-2"></router-view>
 
     <AppFooter />
 

@@ -6,7 +6,7 @@
   border-4
   border-t-0
   border-b-0
-  border-blue-light
+  border-blue-400
   rounded-full
   simple-spinner
   "></div>
@@ -24,7 +24,7 @@ export default {
   /* width: 48px; */
   /* border: 5px solid rgba(150, 150, 150, 0.2); */
   /* border-radius: 50%; */
-  /* border-top-color: rgba(239, 245, 255); border-blue-lightest */
+  /* border-top-color: rgba(239, 245, 255); border-blue-100 */
   animation: rotate 1s 0s infinite ease-in-out alternate;
 }
 

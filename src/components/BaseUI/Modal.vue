@@ -2,11 +2,11 @@
   <portal v-if="show" to="modals">
     <div
       v-show="show"
-      class="fixed pin p-8"
+      class="fixed inset-0 p-8"
       style="background-color: rgba(0, 0, 0, 0.6);"
     >
-      <div class="mx-auto mt-8 p-2 rounded-lg bg-white max-w-xl shadow-lg">
-        <div class="pb-3 bg-blue-lightest text-center">
+      <div class="mx-auto mt-8 p-2 rounded-lg bg-white max-w-xl shadow-2xl">
+        <div class="pb-3 bg-blue-100 text-center">
           <slot name="heading"></slot>
         </div>
 

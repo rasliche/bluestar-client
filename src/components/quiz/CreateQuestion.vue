@@ -4,7 +4,7 @@
       <section class="relative w-full mb-6 pb-3">
         <label
           for="questiontext"
-          class="block text-blue-darker font-bold text-sm mb-2"
+          class="block text-blue-800 font-bold text-sm mb-2"
         >
           Question Text
         </label>
@@ -12,21 +12,21 @@
           v-model="$v.question.text.$model"
           type="text"
           name="questiontext"
-          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-        <p v-if="errors.question" class="absolute pin-b pin-x">
+        <p v-if="errors.question" class="absolute bottom-0 inset-x-0">
           <span v-if="!$v.question.text.required" class="error"
             >This field is required.</span
           >
         </p>
       </section>
       <section class="relative w-full mb-6 pb-3">
-        <!-- <p class="block text-blue-darker font-bold text-sm">Working Question</p> -->
-        <ul class="w-full list-reset">
+        <!-- <p class="block text-blue-800 font-bold text-sm">Working Question</p> -->
+        <ul class="w-full">
           <li
             v-for="(answer, index) in question.answers"
             :key="index"
-            :class="{ 'bg-green-lightest': answer.isRight }"
+            :class="{ 'bg-green-100': answer.isRight }"
           >
             <svg
               v-if="answer.isRight"
@@ -34,9 +34,9 @@
               viewBox="0 0 24 24"
               class="w-8 mr-4 fill-current icon-check"
             >
-              <circle cx="12" cy="12" r="10" class="text-green-light"></circle>
+              <circle cx="12" cy="12" r="10" class="text-green-400"></circle>
               <path
-                class="text-green-darker"
+                class="text-green-800"
                 d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"
               ></path>
             </svg>
@@ -46,9 +46,9 @@
               viewBox="0 0 24 24"
               class="w-8 mr-4 fill-current icon-close-circle"
             >
-              <circle cx="12" cy="12" r="10" class="text-red-light"></circle>
+              <circle cx="12" cy="12" r="10" class="text-red-400"></circle>
               <path
-                class="text-red-darker"
+                class="text-red-800"
                 d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"
               ></path>
             </svg>
@@ -59,7 +59,7 @@
       <section class="relative w-5/6 mb-6 pb-3">
         <label
           for="answertext"
-          class="block text-blue-darker font-bold text-sm mb-2"
+          class="block text-blue-800 font-bold text-sm mb-2"
         >
           Answer
         </label>
@@ -68,9 +68,9 @@
           v-model="$v.question.formAnswer.text.$model"
           type="text"
           name="answertext"
-          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-        <p v-if="errors.formAnswer" class="absolute pin-b pin-x">
+        <p v-if="errors.formAnswer" class="absolute bottom-0 inset-x-0">
           <span v-if="!$v.question.formAnswer.text.required" class="error"
             >This field is required.</span
           >
@@ -85,7 +85,7 @@
         />
         <label
           for="answerisright"
-          class="text-blue-darker font-bold text-sm mb-2"
+          class="text-blue-800 font-bold text-sm mb-2"
         >
           Correct?
         </label>
@@ -93,7 +93,7 @@
       <section class="relative w-full mb-6 pb-3">
         <label
           for="themoreyouknow"
-          class="block text-blue-darker font-bold text-sm mb-2"
+          class="block text-blue-800 font-bold text-sm mb-2"
         >
           The More You Know 🌈
         </label>
@@ -101,9 +101,9 @@
           v-model="$v.question.theMoreYouKnow.$model"
           type="text"
           name="themoreyouknow"
-          class="shadow appearance-none rounded border-blue-lighter border w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
-        <p v-if="errors.question" class="absolute pin-b pin-x">
+        <p v-if="errors.question" class="absolute bottom-0 inset-x-0">
           <span v-if="!$v.question.theMoreYouKnow.required" class="error"
             >This field is required.</span
           >
@@ -114,14 +114,14 @@
     </div>
     <section class="flex items-center justify-between">
       <button
-        class="p-2 mr-3 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
+        class="p-2 mr-3 rounded mx-auto bg-blue-500 hover:bg-blue-600 text-white focus:outline-none focus:shadow-outline"
         @click.prevent="addAnswer"
       >
         Add Answer
       </button>
       <button
         :disabled="question.answers.length < 2"
-        class="p-2 rounded mx-auto bg-blue hover:bg-blue-dark text-white focus:outline-none focus:shadow-outline"
+        class="p-2 rounded mx-auto bg-blue-500 hover:bg-blue-600 text-white focus:outline-none focus:shadow-outline"
         @click.prevent="addQuestion"
       >
         Add Question
@@ -249,6 +249,6 @@ export default {
 
 <style lang="postcss" scoped>
 .error {
-  @apply text-red text-sm italic;
+  @apply text-red-500 text-sm italic;
 }
 </style>
