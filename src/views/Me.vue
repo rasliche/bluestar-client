@@ -61,9 +61,13 @@ export default {
     ])
   },
   async created() {
-    const response = await Api.get(`user/${this.userId}/scores`)
-    this.status = 'success'
-    this.userScores = response.data
+    try {
+      const response = await Api.get(`user/${this.userId}/scores`)
+      this.status = 'success'
+      this.userScores = response.data
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 </script>
