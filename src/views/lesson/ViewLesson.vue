@@ -14,15 +14,12 @@
         :src="lesson.coverPhoto.location"
         :alt="lesson.coverPhoto.altDescription"
       />
-      <PageHeading>
-        {{ lesson.title }}
-      </PageHeading>
-      <span 
-        v-if="wordCount" 
-        class="w-full"
-      >
-        Reading Time: {{ readingTimeString }}
-      </span>
+      <div>
+        <PageHeading>
+          {{ lesson.title }}
+        </PageHeading>
+        <p v-if="wordCount" class="w-full text-center text-gray-600">Reading Time: {{ readingTimeString }}</p>
+      </div>
     </header>
     <editor-content class="lesson-content" :editor="editor" />
     <Quiz

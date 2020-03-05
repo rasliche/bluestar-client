@@ -113,12 +113,12 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters('auth', ['token'])
+  },
   async mounted() {
     const { data } = await Api.get('/programs')
     this.programOptions = data
-  },
-  computed: {
-    ...mapGetters('auth', ['token'])
   },
   methods: {
     ...mapActions('alert', ['setAlert']),
