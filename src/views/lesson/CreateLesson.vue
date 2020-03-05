@@ -2,9 +2,12 @@
   <main class="lesson">
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <section class="relative mb-6 pb-3">
-        <label for="title" class="block text-blue-800 font-bold text-sm mb-2"
-          >Lesson Title</label
+        <label 
+          for="title" 
+          class="block text-blue-800 font-bold text-sm mb-2"
         >
+          Lesson Title
+        </label>
         <input
           id="title"
           v-model="lesson.title"
@@ -17,8 +20,9 @@
         <label
           for="description"
           class="block text-blue-800 font-bold text-sm mb-2"
-          >Short Description</label
         >
+          Short Description
+        </label>
         <input
           id="description"
           v-model="lesson.description"
@@ -28,7 +32,10 @@
           class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
         />
       </section>
-      <section class="relative mb-6 pb-3">
+      <section 
+        v-if="lesson._id"
+        class="relative mb-6 pb-3"
+      >
         <div v-for="program in programOptions" :key="program._id">
           <label
             class="block capitalize text-blue-800 font-bold text-sm mb-2"
@@ -111,7 +118,7 @@
       </div>
     </editor-menu-bar>
 
-    <h1 class="border-blue-200 border-b-4 mb-4">{{ lesson.title }}</h1>
+    <PageHeading>{{ lesson.title }}</PageHeading>
     <editor-content
       class="lesson-content 
         shadow appearance-none rounded border-blue-200 border 
@@ -120,22 +127,30 @@
       :editor="editor"
     />
 
-    <section
-      class="sm:w-1/2 mx-auto mt-4 border border-red-500 flex items-center justify-between"
-    >
+    <section class="w-full mx-auto mt-4 border border-red-500 flex justify-around">
       <ButtonPrimary
-        class="p-2 rounded mx-auto bg-red-500 hover:bg-red-600 text-white focus:outline-none focus:shadow-outline"
         :disabled="status === 'pending'"
         @click="createLesson"
       >
         Create
       </ButtonPrimary>
       <ButtonSecondary
-        class="p-2 rounded mx-auto bg-red-500 hover:bg-red-600 text-white focus:outline-none focus:shadow-outline"
         @click="logLesson"
       >
         Log
       </ButtonSecondary>
+      <ButtonSecondary
+        v-if="lesson._id && !lesson.published"
+        @click="publishLesson"
+      >
+        Publish
+      </ButtonSecondary>
+      <ButtonDanger
+        v-if="lesson._id && lesson.published"
+        @click="unpublishLesson"
+      >
+        Unpublish
+      </ButtonDanger>
     </section>
     <section
       v-if="status === 'readyForQuestions'"
@@ -255,7 +270,7 @@
 import { mapActions } from 'vuex'
 import Api from '@/services/Api'
 // import Modal from '@/components/BaseUI/Modal.vue'
-import { ButtonBase, ButtonPrimary, ButtonSecondary} from '@/components/BaseUI'
+import { PageHeading, ButtonBase, ButtonPrimary, ButtonSecondary, ButtonDanger } from '@/components/BaseUI'
 // import ToggleInput from "@/components/ToggleInput/ToggleInput.vue"
 // import TextOnScroll from "@/components/TextOnScroll/TextOnScroll.vue"
 import CreateQuestion from '@/components/quiz/CreateQuestion'
@@ -282,12 +297,14 @@ import {
 export default {
   name: 'CreateLesson',
   components: {
+    PageHeading,
     EditorContent,
     EditorMenuBar,
     // Modal,
     ButtonBase,
     ButtonPrimary,
     ButtonSecondary,
+    ButtonDanger,
     // TextOnScroll,
     // ToggleInput,
     CreateQuestion,
@@ -375,6 +392,28 @@ export default {
     },
     logLesson() {
       console.log(this.editor.getJSON())
+    },
+    async publishLesson() {
+      try {
+        const { data } = await Api.post('/published-lessons', {
+          lessonId: this.lesson._id
+        })
+        console.log(data)
+        this.lesson.published = data.published
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async unpublishLesson() {
+      try {
+        const { data } = await Api.delete(
+          `/published-lessons/${this.lesson._id}`
+        )
+        console.log(data)
+        this.lesson.published = data.published
+      } catch (error) {
+        console.log(error)
+      }
     },
     onNewQuestion(newQuestion) {
       this.questions.push(newQuestion)
