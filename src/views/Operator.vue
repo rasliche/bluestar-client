@@ -8,12 +8,9 @@
       </p>
     </section>
 
-    <h2>Danger Zone</h2>
-    <section class="border borderred-500 flex items-center justify-between">
-      <ButtonDanger
-        class="p-2 rounded mx-auto bgred-500 hover:bg-red-600 text-white focus:outline-none focus:shadow-outline"
-        @click="confirmDeleteModalOpen = true"
-      >
+    <section class="flex flex-wrap w-full mx-auto mt-4 p-2 border border-red-500 justify-around">
+      <h2 class="w-full text-center text-lg font-semibold text-red-800">Danger Zone</h2>
+      <ButtonDanger class="mt-2" @click="confirmDeleteModalOpen = true">
         Delete Shop
         <!-- This modal should send a request to archive a shop to the API
           If successful, remove from the displayed list.
