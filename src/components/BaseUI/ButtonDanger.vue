@@ -1,7 +1,7 @@
 <template>
   <ButtonBase 
     v-on="$listeners"
-    class="bgred-500 hover:bg-red-600 text-white"
+    class="bg-red-500 hover:bg-red-600 text-white"
   >
     <slot></slot>
   </ButtonBase>
@@ -11,7 +11,7 @@
 import ButtonBase from '@/components/BaseUI/ButtonBase'
 
 export default {
-  name: 'PrimaryButton',
+  name: 'ButtonDanger',
   components: {
       ButtonBase
   },

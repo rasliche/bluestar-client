@@ -28,7 +28,7 @@
 <script>
 import ButtonSecondary from '@/components/BaseUI/ButtonSecondary'
 export default {
-  name: 'Modal',
+  name: 'ModalBase',
   components: {
     ButtonSecondary
   },

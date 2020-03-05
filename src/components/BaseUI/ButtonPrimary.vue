@@ -11,7 +11,7 @@
 import ButtonBase from '@/components/BaseUI/ButtonBase'
 
 export default {
-  name: 'PrimaryButton',
+  name: 'ButtonPrimary',
   components: {
       ButtonBase
   },
