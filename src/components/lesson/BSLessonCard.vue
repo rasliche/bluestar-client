@@ -6,7 +6,7 @@
       class="cursor-pointer"
     >
       <img
-        class="h-48 w-auto"
+        class="h-48 w-auto object-cover"
         :src="lesson.coverPhoto.location"
         :alt="lesson.coverPhoto.altDescription"
       />
