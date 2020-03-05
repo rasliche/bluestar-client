@@ -46,14 +46,15 @@ export default {
       default: 'warn'
     },
     text: {
-      type: String
+      type: String,
+      default: 'Alert'
     }
   },
   methods: {
     ...mapActions(['clearAlert'])
   },
   computed: {
-    alertColor: function() {
+    alertColor() {
       if (this.type === 'error') return 'red'
       if (this.type === 'warn') return 'yellow'
       if (this.type === 'success') return 'green'
