@@ -147,29 +147,24 @@
       :editor="editor"
     />
 
-    <section
-      class="sm:w-1/2 mx-auto mt-4 border borderred-500 flex items-center justify-between"
-    >
+    <section class="w-full mx-auto mt-4 border border-red-500 flex justify-around">
       <ButtonPrimary
-        class="p-2 rounded mx-auto bgred-500 hover:bg-red-600 text-white focus:outline-none focus:shadow-outline"
         @click="saveLessonContent"
       >
         Save
       </ButtonPrimary>
       <ButtonSecondary
         v-if="!lesson.published"
-        class="p-2 rounded mx-auto bgred-500 hover:bg-red-600 text-white focus:outline-none focus:shadow-outline"
         @click="publishLesson"
       >
         Publish
       </ButtonSecondary>
-      <ButtonSecondary
+      <ButtonDanger
         v-else
-        class="p-2 rounded mx-auto bgred-500 hover:bg-red-600 text-white focus:outline-none focus:shadow-outline"
         @click="unpublishLesson"
       >
         Unpublish
-      </ButtonSecondary>
+      </ButtonDanger>
       <!-- <button
             class="p-2 rounded mx-auto bgred-500 hover:bg-red-600 text-white focus:outline-none focus:shadow-outline"
             @click="logLesson">
@@ -288,7 +283,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import Api from '@/services/Api'
-import { PageHeading, ButtonBase, ButtonPrimary, ButtonSecondary } from '@/components/BaseUI/'
+import { PageHeading, ButtonBase, ButtonPrimary, ButtonSecondary, ButtonDanger } from '@/components/BaseUI/'
 import CreateQuestion from '@/components/quiz/CreateQuestion'
 import Question from '@/components/quiz/Question'
 
@@ -322,6 +317,7 @@ export default {
     ButtonBase,
     ButtonPrimary,
     ButtonSecondary,
+    ButtonDanger,
     CreateQuestion,
     Question
   },
