@@ -41,21 +41,21 @@
           </p>
         </transition>
       </section>
-      <section
+      <!-- <section
         v-else
         key="loggedInActions"
         class="sm:w-5/6 md:w-3/4 lg:w-1/2 w-full mx-auto px-2"
       >
-        <!-- links show based on user permissions and roles -->
+        links show based on user permissions and roles
         <div class="flex">
           <router-link class="w-1/2" :to="{ name: 'me' }">
-            Check your progress for {{ new Date().getFullYear() + 1 }}
+            Check Your Progress
           </router-link>
           <router-link class="w-1/2" to="#">
-            Manage your shop staff
+            Manage Your Shops
           </router-link>
         </div>
-      </section>
+      </section> -->
     </transition>
   </main>
 </template>
