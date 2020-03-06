@@ -10,7 +10,7 @@
     <header>
       <!-- Add Parallax here eventually -->
       <img
-        class="h-48 w-full rounded overflow-hidden object-cover object-center opacity-75"
+        class="h-48 w-full rounded overflow-hidden object-cover object-center"
         :src="lesson.coverPhoto.location"
         :alt="lesson.coverPhoto.altDescription"
       />
