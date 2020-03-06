@@ -30,44 +30,55 @@
     
     <div>
       <section class="w-1/2 pt-4">
-        <h3>Operators</h3>
-        <div v-if="operators.length">
-          <div v-for="operator in operators" :key="operator._id">
-            <router-link
-              :to="{
-                name: 'view-operator',
-                params: { operatorId: operator._id }
-              }"
-            >
-              {{ operator.name }}
-            </router-link>
+        <h3 class="text-xl font-semibold">Operators</h3>
+        <Paginate v-if="operators.length" :list="operators">
+          <div slot-scope="{ page, pages, paginatedItems, nextPage, prevPage }">
+            {{ page }}
+            {{ pages }}
+            <ButtonSecondary @click="prevPage">Previous Page</ButtonSecondary>
+            <ButtonSecondary @click="nextPage">Next Page</ButtonSecondary>
+            <div v-for="operator in paginatedItems" :key="operator._id">
+              <router-link
+                :to="{
+                  name: 'view-operator',
+                  params: { operatorId: operator._id }
+                }"
+              >
+                {{ operator.name }}
+              </router-link>
+            </div>
+            <!-- TODO: Stats on operator (date contacted, staffers done) -->
           </div>
-          <!-- TODO: Stats on operator (date contacted, staffers done) -->
-        </div>
+        </Paginate>
         <p v-else>No operators yet.</p>
       </section>
 
       <section class="w-1/2 pt-4">
-        <h3>Users</h3>
-        <div v-if="users.length">
-          <div v-for="user in users" :key="user._id">
-            <router-link
-              :to="{
-                name: 'view-user',
-                params: { userId: user._id }
-              }"
-            >
-              {{ user.name }}
-            </router-link>
+        <h3 class="text-xl font-semibold">Users</h3>
+        <Paginate v-if="users.length" :list="users">
+          <div slot-scope="{ page, pages, paginatedItems, nextPage, prevPage }">
+            {{ page }}
+            {{ pages }}
+            <ButtonSecondary @click="prevPage">Previous Page</ButtonSecondary>
+            <ButtonSecondary @click="nextPage">Next Page</ButtonSecondary>
+            <div v-for="user in paginatedItems" :key="user._id">
+              <router-link
+                :to="{
+                  name: 'view-user',
+                  params: { userId: user._id }
+                }"
+              >
+                {{ user.name }}
+              </router-link>
+            </div>
           </div>
-          <!-- TODO: Stats on operator (date contacted, staffers done) -->
-        </div>
-        <p v-else>No operators yet.</p>
+        </Paginate>
+        <p v-else>No users yet.</p>
         <!-- <UsersList :users="users" /> -->
       </section>
 
       <section class="md:w-1/2 pt-4">
-        <h3>Lessons</h3>
+        <h3 class="text-xl font-semibold">Lessons</h3>
         <div v-if="lessons.length">
           <div
             v-for="lesson in lessons"
@@ -98,14 +109,7 @@
                     class="primary"
                     d="M4 14a1 1 0 0 1 .3-.7l11-11a1 1 0 0 1 1.4 0l3 3a1 1 0 0 1 0 1.4l-11 11a1 1 0 0 1-.7.3H5a1 1 0 0 1-1-1v-3z"
                   ></path>
-                  <rect
-                    width="20"
-                    height="2"
-                    x="2"
-                    y="20"
-                    class="secondary"
-                    rx="1"
-                  ></rect>
+                  <rect class="secondary" width="20" height="2" x="2" y="20" rx="1"></rect>
                 </svg>
               </router-link>
               <!-- <button @click="deleteLesson">
@@ -121,7 +125,7 @@
       </section>
 
       <section class="md:w-1/2 pt-4">
-        <h3>Programs</h3>
+        <h3 class="text-xl font-semibold">Programs</h3>
         <div v-if="programs.length">
           <div
             v-for="program in programs"
@@ -147,11 +151,11 @@
       </section>
 
       <section class="w-1/2 pt-4">
-        <h3>Posts</h3>
+        <h3 class="text-xl font-semibold">Posts</h3>
       </section>
 
       <section class="w-1/2 pt-4">
-        <h3>Events</h3>
+        <h3 class="text-xl font-semibold">Events</h3>
       </section>
     </div>
   </main>
@@ -160,7 +164,8 @@
 <script>
 // @ is an alias to /src
 import Api from '@/services/Api'
-import { ButtonPrimary, PageHeading, SimpleSpinner } from '@/components/BaseUI'
+import { ButtonPrimary, ButtonSecondary, PageHeading, SimpleSpinner } from '@/components/BaseUI'
+import { Paginate } from '@/components/BaseComponents'
 import CreateOperatorModal from '@/components/CreateOperatorModal.vue'
 import CreateProgramModal from '@/components/CreateProgramModal.vue'
 import ConfirmDeleteShopModal from '@/components/ConfirmDeleteShopModal.vue'
@@ -172,8 +177,10 @@ export default {
     CreateOperatorModal,
     CreateProgramModal,
     ButtonPrimary,
+    ButtonSecondary,
     PageHeading,
-    SimpleSpinner
+    SimpleSpinner,
+    Paginate
   },
   data() {
     return {
