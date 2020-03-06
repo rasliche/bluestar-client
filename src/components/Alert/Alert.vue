@@ -1,7 +1,7 @@
 <template>
   <div class="fixed right-0 bottom-0 m-4" role="alert">
     <div
-      class="flex justify-between rounded-sm shadow-md p-2 opacity-75 hover:opacity-100"
+      class="flex justify-between rounded-sm shadow-md p-2 opacity-75 transition-opacity ease-in-out duration-300 hover:opacity-100"
       :class="[
         { 'bg-green-200 text-green-900': type === 'success' },
         { 'bg-yellow-200 text-yellow-900': type === 'warn' },
