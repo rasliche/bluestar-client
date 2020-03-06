@@ -37,8 +37,8 @@ export default {
   },
   computed: {
       paginatedItems() {
-        let from = (this.page * this.perPage) - this.perPage;
-        let to = (this.page * this.perPage);
+        const from = (this.page * this.perPage) - this.perPage;
+        const to = (this.page * this.perPage);
         return  this.list.slice(from, to);
       },
   },
