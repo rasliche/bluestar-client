@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ButtonBase from '@/components/BaseUI/ButtonBase'
+import ButtonBase from '@/components/BaseUI/buttons/ButtonBase'
 
 export default {
   name: 'ButtonInfo',

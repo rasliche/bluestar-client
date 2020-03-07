@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import ButtonSecondary from '@/components/BaseUI/ButtonSecondary'
+import { ButtonSecondary } from '@/components/BaseUI'
 export default {
   name: 'ModalBase',
   components: {

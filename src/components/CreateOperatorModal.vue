@@ -77,7 +77,7 @@ import Api from '@/services/Api'
 import { required } from 'vuelidate/lib/validators'
 import { mapActions, mapGetters } from 'vuex'
 import Modal from '@/components/BaseUI/Modal.vue'
-import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
+import { ButtonPrimary } from '@/components/BaseUI'
 
 export default {
   name: 'CreateOperatorModal',

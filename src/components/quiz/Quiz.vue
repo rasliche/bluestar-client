@@ -101,12 +101,7 @@
 
 <script>
 import Question from './Question.vue'
-import ButtonPrimary from '@/components/BaseUI/ButtonPrimary'
-import ButtonBase from '@/components/BaseUI/ButtonBase'
-import ButtonInfo from '@/components/BaseUI/ButtonInfo'
-import ButtonSecondary from '@/components/BaseUI/ButtonSecondary'
-import ButtonDanger from '@/components/BaseUI/ButtonDanger'
-// import Modal from "../Modal.vue"
+import { ButtonPrimary, ButtonBase, ButtonInfo, ButtonSecondary, ButtonDanger } from '@/components/BaseUI/'
 
 export default {
   name: 'Quiz',

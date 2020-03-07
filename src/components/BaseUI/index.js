@@ -1,9 +1,9 @@
 // Buttons
-export { default as ButtonBase } from './ButtonBase.vue'
-export { default as ButtonDanger } from './ButtonDanger.vue'
-export { default as ButtonInfo } from './ButtonInfo.vue'
-export { default as ButtonPrimary } from './ButtonPrimary.vue'
-export { default as ButtonSecondary } from './ButtonSecondary.vue'
+export { default as ButtonBase } from './buttons/ButtonBase.vue'
+export { default as ButtonDanger } from './buttons/ButtonDanger.vue'
+export { default as ButtonInfo } from './buttons/ButtonInfo.vue'
+export { default as ButtonPrimary } from './buttons/ButtonPrimary.vue'
+export { default as ButtonSecondary } from './buttons/ButtonSecondary.vue'
 
 // Cards
 export { default as CardBase } from './CardBase.vue'

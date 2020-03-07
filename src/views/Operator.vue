@@ -29,7 +29,7 @@
 <script>
 import Api from '@/services/Api'
 import ConfirmDeleteShopModal from '@/components/ConfirmDeleteShopModal'
-import ButtonDanger from '@/components/BaseUI/ButtonDanger'
+import { ButtonDanger } from '@/components/BaseUI'
 
 export default {
   name: 'Operator',
