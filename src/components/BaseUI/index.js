@@ -19,3 +19,5 @@ export { default as SimpleSpinner } from './loaders/SimpleSpinner.vue'
 
 // Goofy UI
 export { default as Parallax } from './Parallax.vue'
+export { default as ParallaxGroup } from './ParallaxGroup.vue'
+export { default as ParallaxLayer } from './ParallaxLayer.vue'

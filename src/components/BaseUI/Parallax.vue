@@ -1,13 +1,16 @@
 <template>
+  <!-- Must give an explicit height on this component where it's used in a template -->
   <div class="prlx">
-    <div class="prlx-back bg-green-600 opacity-50 text-center">
-      <!-- This scrolls slower -->
-      <slot name="back">Background</slot>
-    </div>
-    <div class="prlx-base bg-green-200 opacity-50 text-center">
-      <!-- This scrolls normally -->
-      <slot name="base">Base</slot>
-    </div>
+    <slot>
+      <div class="prlx-layer prlx-back prlx-offset-50 bg-transparent opacity-50 text-center">
+        <!-- This scrolls slower -->
+        Background
+      </div>
+      <div class="prlx-layer prlx-base prlx-offset-50 bg-transparent opacity-50 text-center">
+        <!-- This scrolls normally -->
+        Base
+      </div>
+    </slot>
   </div>
 </template>
 
