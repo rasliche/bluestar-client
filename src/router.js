@@ -105,6 +105,16 @@ export default new Router({
     {
       path: '/news',
       name: 'news',
+      beforeEnter(to, from, next) {
+        if (
+          store.getters['auth/isAuthenticated'] &&
+          store.getters['user/isAdmin']
+        ) {
+          next()
+        } else {
+          next('/login')
+        }
+      },
       component: () => import(/* webpackChunkName: "news" */ './views/News.vue')
     },
     {
@@ -179,6 +189,16 @@ export default new Router({
     {
       path: '/design',
       name: 'design',
+      beforeEnter(to, from, next) {
+        if (
+          store.getters['auth/isAuthenticated'] &&
+          store.getters['user/isAdmin']
+        ) {
+          next()
+        } else {
+          next('/login')
+        }
+      },
       component: () =>
         import(/* webpackChunkName: "design" */ './views/Design.vue')
     },
