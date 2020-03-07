@@ -1,16 +1,18 @@
 <template>
   <main class="news">
     <PageHeading>News</PageHeading>
+    <Parallax></Parallax>
   </main>
 </template>
 
 <script>
-import { PageHeading } from '@/components/BaseUI'
+import { PageHeading, Parallax } from '@/components/BaseUI'
 
 export default {
   name: 'News',
   components: {
-    PageHeading
+    PageHeading,
+    Parallax
   }
 }
 </script>

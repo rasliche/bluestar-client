@@ -16,3 +16,6 @@ export { default as PageHeading } from './PageHeading.vue'
 
 // Loaders
 export { default as SimpleSpinner } from './loaders/SimpleSpinner.vue'
+
+// Goofy UI
+export { default as Parallax } from './Parallax.vue'
