@@ -1,35 +1,36 @@
 <template>
-  <portal v-if="show" to="modals">
-    <div
-      v-show="show"
-      class="fixed inset-0 p-8"
-      style="background-color: rgba(0, 0, 0, 0.6);"
-    >
-      <div class="mx-auto mt-8 p-2 rounded-lg bg-white max-w-xl shadow-2xl">
-        <div class="pb-3 bg-blue-100 text-center">
-          <slot name="heading"></slot>
-        </div>
+    <portal v-if="show" to="modals">
+      <div
+        v-show="show"
+        class="fixed inset-0 p-8"
+        style="background-color: rgba(0, 0, 0, 0.6);"
+      >
+        <div class="mx-auto mt-8 p-2 rounded-lg bg-white max-w-xl shadow-2xl">
+          <div class="pb-3 bg-blue-100 text-center">
+            <slot name="heading"></slot>
+          </div>
 
-        <slot name="default"></slot>
+          <slot name="default"></slot>
 
-        <div v-if="!noCloseButton" class="flex justify-between text-center">
-          <slot name="buttons"></slot>
-          <ButtonSecondary
-            @click="cancel"
-          >
-            Close
-          </ButtonSecondary>
+          <div v-if="closeButton" class="flex justify-between text-center">
+            <slot name="buttons"></slot>
+            <ButtonSecondary @click="cancel">
+              Close
+            </ButtonSecondary>
+          </div>
         </div>
       </div>
-    </div>
-  </portal>
+    </portal>
 </template>
 
 <script>
+import { OnClickOutside } from '@/components/BaseComponents'
 import { ButtonSecondary } from '@/components/BaseUI'
+
 export default {
   name: 'ModalBase',
   components: {
+    OnClickOutside,
     ButtonSecondary
   },
   props: {
@@ -41,9 +42,9 @@ export default {
       type: Boolean,
       default: true
     },
-    noCloseButton: {
+    closeButton: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   watch: {

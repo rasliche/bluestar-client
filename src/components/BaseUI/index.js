@@ -11,6 +11,9 @@ export { default as CardBase } from './CardBase.vue'
 // Modals
 export { default as Modal } from './Modal.vue'
 
+// Controlled Components
+export { default as SearchSelect } from './SearchSelect.vue'
+
 // Typography
 export { default as PageHeading } from './PageHeading.vue'
 

@@ -6,7 +6,10 @@
     <nav class="flex items-center justify-between">
       <ButtonPrimary @click="createOperatorModalOpen = true">
         New Operator
-        <CreateOperatorModal @close="createOperatorModalOpen = false" :show="createOperatorModalOpen">
+        <CreateOperatorModal 
+          :show="createOperatorModalOpen"
+          @close="createOperatorModalOpen = false" 
+        >
         </CreateOperatorModal>
       </ButtonPrimary>
       <ButtonPrimary>
@@ -21,9 +24,10 @@
       <ButtonPrimary @click="createProgramModalOpen = true">
         New Program
         <CreateProgramModal
-          @program-created="addProgram"
+          :show="createProgramModalOpen"
           @close="createProgramModalOpen = false" 
-          :show="createProgramModalOpen">
+          @program-created="addProgram"
+        >
         </CreateProgramModal>
       </ButtonPrimary>
     </nav>

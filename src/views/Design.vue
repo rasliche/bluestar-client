@@ -63,7 +63,11 @@
       <h2 class="text-xl font-semibold">Search Select</h2>
       <div class="max-w-lg border rounded-md">
         <label>Choose a Program</label>
-        <SearchSelect :options="programNames"></SearchSelect>
+        <SearchSelect 
+          v-model="selectedProgram"
+          :filter-function="applySearchFilter"
+          :options="programNames"
+          ></SearchSelect>
       </div>
     </section>
     <section class="mt-4">
@@ -86,9 +90,9 @@ import {
   ButtonDanger, 
   CardBase, 
   PageHeading,
-  SimpleSpinner
+  SimpleSpinner,
+  SearchSelect
   } from '@/components/BaseUI'
-import { SearchSelect } from '@/components/BaseComponents'
 import BSEditor from '@/components/BSEditor.vue'
 
 export default {
@@ -107,12 +111,20 @@ export default {
   },
   data() {
     return {
+      selectedProgram: null,
       programs: []
     }
   },
   computed: {
     programNames() {
       return this.programs.map(p => p.name)
+    }
+  },
+  methods: {
+    applySearchFilter(search, options) {
+      return options.filter(option => {
+        return option.toLowerCase().startsWith(search.toLowerCase())
+      })
     }
   },
   async created() {
