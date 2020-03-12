@@ -26,7 +26,7 @@
       v-if="questions.length > 0"
       :questions="questions"
       @quiz-finished="handleFinishedQuiz($event)"
-      class="m-4"
+      class="min-h-screen m-4"
     />
   </article>
 </template>

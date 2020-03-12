@@ -106,19 +106,19 @@
         <input type="text" name="shopPassword" id="shopPassword" v-model="shopPassword" class="w-1/2">
     </section> -->
       <section class="relative mb-3 pb-6">
-        <div class="flex items-center justify-between">
-          <button
+        <div class="flex items-center justify-around">
+          <ButtonPrimary
             type="submit"
-            class="p-2 rounded mx-auto bg-blue-500 hover:bg-blue-600 text-white focus:outline-none focus:shadow-outline"
             :disabled="uiState !== 'idle'"
             @click.prevent="submitRegisterForm"
           >
-            <div
+            <SimpleSpinner
               v-if="uiState === 'pending'"
-              class="inline-block simple-spinner"
-            ></div>
-            Register
-          </button>
+            ></SimpleSpinner>
+            <template v-else>
+              Register
+            </template>
+          </ButtonPrimary>
           <a
             href="#"
             class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 underline"
@@ -139,6 +139,7 @@
 
 <script>
 import Api from '../../services/Api'
+import { ButtonPrimary, SimpleSpinner } from '@/components/BaseUI'
 import { mapActions } from 'vuex'
 import {
   required,
@@ -149,6 +150,10 @@ import {
 
 export default {
   name: 'Register',
+  components: {
+    ButtonPrimary,
+    SimpleSpinner
+  },
   data() {
     return {
       formFeedback: null,

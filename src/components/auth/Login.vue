@@ -45,7 +45,7 @@
       </section>
 
       <section class="relative mb-3 pb-6">
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-around">
           <ButtonPrimary
             type="submit"
             :disabled="uiState !== 'idle'"
