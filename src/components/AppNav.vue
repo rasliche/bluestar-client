@@ -51,63 +51,63 @@
       </button>
     </div>
 
-    <!-- <transition name="tray" v-if="showNavMenu" mode="in-out" appear> -->
-    <div class="w-full block flex-grow md:flex md:items-center md:w-auto">
-      <div class="md:flex-grow">
-        <router-link
-          v-if="isAuthenticated"
-          :to="{ name: 'training' }"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
-        >
-          Training
-        </router-link>
-        <router-link
-          :to="{ name: 'news' }"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
-        >
-          News
-        </router-link>
-        <router-link
-          v-if="isAdmin"
-          :to="{ name: 'admin' }"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
-        >
-          Admin
-        </router-link>
-        <router-link
-          v-if="isAdmin"
-          :to="{ name: 'design' }"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
-        >
-          Design
-        </router-link>
-      </div>
+    <transition name="tray" v-if="showNavMenu" mode="in-out" appear>
+      <div class="w-full block flex-grow md:flex md:items-center md:w-auto">
+        <div class="md:flex-grow">
+          <router-link
+            v-if="isAuthenticated"
+            :to="{ name: 'training' }"
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
+          >
+            Training
+          </router-link>
+          <router-link
+            :to="{ name: 'news' }"
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
+          >
+            News
+          </router-link>
+          <router-link
+            v-if="isAdmin"
+            :to="{ name: 'admin' }"
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
+          >
+            Admin
+          </router-link>
+          <router-link
+            v-if="isAdmin"
+            :to="{ name: 'design' }"
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
+          >
+            Design
+          </router-link>
+        </div>
 
-      <div class="w-full inline-block md:items-center md:w-auto">
-        <router-link
-          v-if="!isAuthenticated"
-          to="/login"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
-        >
-          Login
-        </router-link>
-        <router-link
-          v-if="isAuthenticated"
-          :to="{ name: 'me' }"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
-        >
-          Me
-        </router-link>
-        <button
-          v-if="isAuthenticated"
-          class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
-          @click="logoutUser"
-        >
-          Logout
-        </button>
+        <div class="w-full inline-block md:items-center md:w-auto">
+          <router-link
+            v-if="!isAuthenticated"
+            to="/login"
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
+          >
+            Login
+          </router-link>
+          <router-link
+            v-if="isAuthenticated"
+            :to="{ name: 'me' }"
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
+          >
+            Me
+          </router-link>
+          <button
+            v-if="isAuthenticated"
+            class="block p-2 mt-3 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100"
+            @click="logoutUser"
+          >
+            Logout
+          </button>
+        </div>
       </div>
-    </div>
-    <!-- </transition> -->
+    </transition>
   </nav>
 </template>
 
