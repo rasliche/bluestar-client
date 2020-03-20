@@ -1,9 +1,10 @@
 <template>
   <div
-    :class="containerClass"
+    class="fixed top-0 left-0 w-full"
+    :class="display"
     :style="{
       background: containerColor,
-      zIndex: zIndex
+      zIndex
     }"
   >
     <div
@@ -43,11 +44,7 @@ export default {
     },
     containerClass: {
       type: Object,
-      default: () => {
-        return {
-          'progress-bar-container--container': true
-        }
-      }
+      default: () => {}
     },
     // Extra props
     useVerticalOffset: {
@@ -70,6 +67,11 @@ export default {
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
+  },
+  computed: {
+    display() {
+      return this.width > 0 ? 'block' : 'hidden'
+    }
   },
   methods: {
     handleScroll() {
@@ -100,12 +102,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.progress-bar-container--container {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-}
-</style>
