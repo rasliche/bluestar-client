@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 import auth from './modules/auth'
 import user from './modules/user'
-import alert from './modules/alert'
+import * as notification from './modules/notification'
 import operator from './modules/operator'
 
 Vue.use(Vuex)
@@ -13,7 +13,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     user,
-    alert,
+    notification,
     operator
   },
   state: {},
