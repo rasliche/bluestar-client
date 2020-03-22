@@ -32,7 +32,7 @@ const actions = {
         data: { user }
       } = await Api.post('/users', formData)
       commit('authUser', data)
-      dispatch('alert/setAlert', {
+      dispatch('notification/add', {
         type: 'success',
         text: 'Account created and logged in.'
       })
@@ -52,7 +52,7 @@ const actions = {
       Api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       router.push('/')
     } catch (err) {
-      dispatch('alert/setAlert', {
+      dispatch('notification/add', {
         type: 'error',
         text: 'Error. Please try again.'
       })
@@ -93,7 +93,7 @@ const actions = {
     Api.defaults.headers.common['Authorization'] = ''
     dispatch('user/clearUser', {}, { root: true })
     dispatch(
-      'alert/setAlert',
+      'notification/add',
       {
         type: 'success',
         text: 'Logged out.'
