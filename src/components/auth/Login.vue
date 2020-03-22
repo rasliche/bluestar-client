@@ -106,7 +106,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('alert', ['setAlert']),
+    ...mapActions('notification', ['add']),
     ...mapActions('user', ['setUserData', 'getUserScores']),
     ...mapActions('auth', ['authUser']),
     async submitLoginForm() {
@@ -132,7 +132,7 @@ export default {
           this.authUser(token)
           this.setUserData(userData)
           this.getUserScores()
-          this.setAlert({
+          this.add({
             type: 'success',
             text: 'You have been logged in.'
           })

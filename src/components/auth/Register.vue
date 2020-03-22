@@ -196,7 +196,7 @@ export default {
   methods: {
     ...mapActions('alert', ['setAlert']),
     ...mapActions('user', ['setCurrentUser']),
-    ...mapActions('auth', ['authUser']),
+    ...mapActions('notification', ['add']),
     async submitRegisterForm() {
       this.formTouched = !this.$v.formResponses.$anyDirty
       this.errors = this.$v.formResponses.$anyError
@@ -219,7 +219,7 @@ export default {
           clearTimeout(spinnerTimer)
           this.setCurrentUser(userData)
           this.authUser(token)
-          this.setAlert({
+          this.add({
             type: 'success',
             text: 'You have been logged in.'
           })
