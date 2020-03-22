@@ -8,20 +8,24 @@
     >
     </ScrollProgressBar>
     <header>
-      <!-- Add Parallax here eventually -->
+      <!-- TODO: Add Parallax here eventually -->
       <img
         class="h-48 w-full rounded overflow-hidden object-cover object-center"
-        :src="lesson.coverPhoto.location"
+        :src="lesson.coverPhoto.location ? lesson.coverPhoto.location : ''"
         :alt="lesson.coverPhoto.altDescription"
       />
       <div>
         <PageHeading>
           {{ lesson.title }}
         </PageHeading>
-        <p v-if="wordCount" class="w-full text-center text-gray-600">Reading Time: {{ readingTimeString }}</p>
+        <div class="flex justify-around mb-3 text-center text-gray-600">
+          <p v-if="wordCount">Reading Time: {{ readingTimeString }}</p>
+          <router-link v-if="isAdmin" :to="{ name: 'edit-lesson' }">Edit</router-link>
+        </div>
       </div>
     </header>
     <editor-content class="lesson-content" :editor="editor" />
+    <!-- TODO: Auto-scroll this quiz to the top and grow height to h-screen -->
     <Quiz
       v-if="questions.length > 0"
       :questions="questions"
@@ -35,7 +39,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import Api from '@/services/Api'
 import ScrollProgressBar from '@/components/ScrollProgressBar/ScrollProgressBar'
-import { PageHeading } from '@/components/BaseUI'
+import { PageHeading, } from '@/components/BaseUI'
 import Quiz from '@/components/quiz/Quiz.vue'
 import { Editor, EditorContent } from 'tiptap'
 import {
@@ -64,7 +68,7 @@ export default {
     ScrollProgressBar,
     EditorContent,
     Quiz,
-    PageHeading
+    PageHeading,
   },
   props: {
     lessonId: {
@@ -82,7 +86,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', ['userId', 'lessonScores']),
+    ...mapGetters('user', ['userId', 'lessonScores', 'isAdmin']),
     wordCount() {
       if (!this.editor) {
         return 0
