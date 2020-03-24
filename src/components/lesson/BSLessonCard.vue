@@ -1,5 +1,5 @@
 <template>
-  <CardBase class="w-64 mt-4 mx-2 rounded shadow">
+  <CardBase class="w-64 mt-4 mx-2 rounded shadow transform duration-100 ease-linear hover:scale-105 hover:shadow-md">
     <router-link
       tag="div"
       :to="{ name: 'view-lesson', params: { lessonId: lesson._id } }"

@@ -1,7 +1,8 @@
 <template>
-  <Parallax class="h-screen text-center">
+  <!-- <Parallax class="h-screen text-center"> -->
     <main class="news">
-      <ParallaxGroup class="z-10 h-screen bg-green-300">
+      <BaseToggle v-model="checked" />
+      <!-- <ParallaxGroup class="z-10 h-screen bg-green-300">
         <ParallaxLayer class="prlx-base">
           <PageHeading>News</PageHeading>
         </ParallaxLayer>
@@ -26,21 +27,33 @@
         <ParallaxLayer class="prlx-base prlx-offset-100">
           Bottom prlx-base prlx-offset-100
         </ParallaxLayer>
-      </ParallaxGroup>
+      </ParallaxGroup> -->
     </main>
-  </Parallax>
+  <!-- </Parallax> -->
 </template>
 
 <script>
-import { PageHeading, Parallax, ParallaxGroup, ParallaxLayer } from '@/components/BaseUI'
+import { 
+  PageHeading, 
+  BaseToggle,
+  Parallax, 
+  ParallaxGroup, 
+  ParallaxLayer 
+  } from '@/components/BaseUI'
 
 export default {
   name: 'News',
   components: {
     PageHeading,
+    BaseToggle,
     Parallax,
     ParallaxGroup,
     ParallaxLayer,
+  },
+  data() {
+    return {
+      checked: false
+    }
   }
 }
 </script>

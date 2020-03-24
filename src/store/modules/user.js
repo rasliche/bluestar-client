@@ -1,7 +1,10 @@
 import Api from '@/services/Api'
 import router from '@/router'
 
-const state = {
+export const namespaced = true
+
+export const state = {
+  user: {},
   userId: null,
   name: null,
   email: null,
@@ -10,7 +13,7 @@ const state = {
   isAdmin: false
 }
 
-const getters = {
+export const getters = {
   userId: (state) => state.userId,
   name: (state) => state.name,
   email: (state) => state.email,
@@ -19,7 +22,7 @@ const getters = {
   isAdmin: (state) => state.isAdmin
 }
 
-const mutations = {
+export const mutations = {
   setUserData: (state, user) => {
     state.userId = user._id
     state.name = user.name
@@ -42,7 +45,7 @@ const mutations = {
   }
 }
 
-const actions = {
+export const actions = {
   setUserData: ({ commit }, userData) => {
     commit('setUserData', userData)
   },
@@ -106,12 +109,4 @@ const actions = {
       router.push('/me')
     }
   }
-}
-
-export default {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
 }

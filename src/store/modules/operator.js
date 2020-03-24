@@ -1,14 +1,16 @@
 import Api from '@/services/Api'
 
-const state = {
+export const namespaced = true
+
+export const state = {
   operators: []
 }
 
-const getters = {
+export const getters = {
   operators: (state) => state.operators
 }
 
-const mutations = {
+export const mutations = {
   setOperators: (state, operators) => {
     state.operators = operators
   },
@@ -17,7 +19,7 @@ const mutations = {
   }
 }
 
-const actions = {
+export const actions = {
   getOperators: async ({ commit, rootGetters }) => {
     const { data: operators } = await Api.get('/operators', {
       headers: {
@@ -40,12 +42,4 @@ const actions = {
     )
     commit('addOperator', operator)
   }
-}
-
-export default {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
 }

@@ -2,9 +2,11 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import auth from './modules/auth'
-import user from './modules/user'
+import * as user from './modules/user'
 import * as notification from './modules/notification'
-import operator from './modules/operator'
+import * as operator from './modules/operator'
+import * as program from './modules/program'
+import * as lesson from './modules/lesson'
 
 Vue.use(Vuex)
 
@@ -14,7 +16,9 @@ export default new Vuex.Store({
     auth,
     user,
     notification,
-    operator
+    operator,
+    program,
+    lesson
   },
   state: {},
   getters: {},

@@ -31,6 +31,7 @@
 import Api from '@/services/Api'
 import { PageHeading, ButtonPrimary } from '@/components/BaseUI'
 import BSLessonCard from '@/components/lesson/BSLessonCard'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Training',
@@ -41,22 +42,20 @@ export default {
   },
   data() {
     return {
-      lessons: [],
-      programs: [],
       selectedProgramId: null
     }
   },
   computed: {
+    ...mapState('program', ['programs']),
+    ...mapGetters('lesson', ['publishedLessons']),
     filteredLessons() {
-      if (this.selectedProgramId === null) { return this.lessons }
-      return this.lessons.filter(lesson => lesson.programs.includes(this.selectedProgramId))
+      if (this.selectedProgramId === null) { return this.publishedLessons }
+      return this.publishedLessons.filter(lesson => lesson.programs.includes(this.selectedProgramId))
     }
   },
   async created() {
-    const { data: lessons } = await Api.get('/published-lessons')
-    this.lessons = lessons
-    const { data: programs } = await Api.get('/programs')
-    this.programs = programs
+    this.$store.dispatch('lesson/getLessons')
+    this.$store.dispatch('program/getPrograms')
   }
 }
 </script>
