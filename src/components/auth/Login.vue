@@ -57,9 +57,9 @@
 </template>
 
 <script>
+import Api from '@/services/Api'
 import { ButtonPrimary, BaseInput, SimpleSpinner } from '@/components/BaseUI'
 import { required } from 'vuelidate/lib/validators'
-import Api from '@/services/Api'
 import { mapActions } from 'vuex'
 
 export default {

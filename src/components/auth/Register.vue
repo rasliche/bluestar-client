@@ -97,17 +97,13 @@
         <p v-if="formFeedback" class="absolute bottom-0 inset-x-0">
           <span class="error">{{ formFeedback }}</span>
         </p>
-        <!-- <a href="#" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Forgot password?</a> -->
       </section>
     </form>
-    <!-- TODO: Style this feedback -->
-    <!-- {{ formFeedback }}
-  {{ uiState }} -->
   </div>
 </template>
 
 <script>
-import Api from '../../services/Api'
+import Api from '@/services/Api'
 import { ButtonPrimary, BaseInput, SimpleSpinner } from '@/components/BaseUI'
 import { mapActions } from 'vuex'
 import {
@@ -164,9 +160,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions('alert', ['setAlert']),
-    ...mapActions('user', ['setCurrentUser']),
     ...mapActions('notification', ['add']),
+    ...mapActions('user', ['setUserData']),
+    ...mapActions('auth', ['authUser']),
     async submit() {
       this.formTouched = !this.$v.formResponses.$anyDirty
       this.errors = this.$v.formResponses.$anyError
@@ -186,7 +182,7 @@ export default {
             data: { token, ...userData }
           } = await Api.post('/users', formData)
           clearTimeout(spinnerTimer)
-          this.setCurrentUser(userData)
+          this.setUserData(userData)
           this.authUser(token)
           this.add({
             type: 'success',
