@@ -354,7 +354,7 @@ export default {
     this.editor.destroy()
   },
   methods: {
-    ...mapActions('alert', ['setAlert']),
+    ...mapActions('notification', ['add']),
     showImagePrompt(command) {
       const src = prompt('Enter the url of your image here')
       if (src !== null) {
@@ -380,13 +380,17 @@ export default {
         })
         this.lesson._id = lesson._id
         this.status = 'readyForQuestions'
-        this.setAlert({
+        this.add({
           type: 'success',
           text: 'Lesson Created!'
         })
         // this.$router.replace({ name: 'view-lesson', params: { slug: slug }})
       } catch (error) {
-        console.log(error)
+        const notification = {
+          type: 'error',
+          text: `Error creating lesson: ${error.message}`
+        }
+        this.add(notification)
         this.status = 'idle'
       }
     },

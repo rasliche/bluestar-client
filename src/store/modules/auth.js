@@ -50,6 +50,12 @@ const actions = {
     try {
       commit('setToken', token)
       Api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      Api.interceptors.response.use(response => {
+        if (response.status === 401 || response.status === 403) {
+          dispatch('logOutUser')
+        }
+        return response
+      })
       router.push('/')
     } catch (err) {
       dispatch('notification/add', {

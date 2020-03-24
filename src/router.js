@@ -203,9 +203,18 @@ export default new Router({
         import(/* webpackChunkName: "design" */ './views/Design.vue')
     },
     {
-      path: '/*',
-      name: 'not-found',
+      path: '/404',
+      name: '404',
       component: () => import(/* webpackChunkName: "NotFound" */ './views/NotFound.vue')
+    },
+    {
+      path: '/network-issue',
+      name: 'network-issue',
+      component: () => import(/* webpackChunkName: "NetworkIssue" */ './views/NetworkIssue.vue')
+    },
+    {
+      path: '/*',
+      redirect: { name: '404'}
     }
   ]
 })

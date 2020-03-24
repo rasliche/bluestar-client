@@ -1,55 +1,39 @@
 <template>
   <div class="w-full max-w-md">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" @submit.prevent="submitLoginForm">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" @submit.prevent="submit">
       <h1 class="text-lg font-semibold text-blue-900 text-center pb-3">Login</h1>
-      <section class="relative mb-6 pb-3">
-        <label
-          for="femail"
-          class="block text-blue-800 font-bold text-sm mb-2"
-          >Email</label
-        >
-        <input
-          id="femail"
-          v-model="$v.formResponses.email.$model"
-          type="text"
-          name="femail"
-          autocomplete="section-login email"
-          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-        />
-        <p v-if="errors" class="absolute bottom-0 inset-x-0">
-          <span v-if="!$v.formResponses.email.required" class="error"
-            >This field is required.</span
-          >
+      <BaseInput 
+        label="Email"
+        v-model="$v.formResponses.email.$model"
+        type="text"
+        autocomplete="section-login email"
+      >
+        <!-- :class="{ 'error-border': !$v.formResponses.email.required }" -->
+        <p v-if="errors" class="absolute ml-2 bottom-0 inset-x-0">
+          <span v-if="!$v.formResponses.email.required" class="error">
+            This field is required.
+          </span>
         </p>
-      </section>
+      </BaseInput>
 
-      <section class="relative mb-6 pb-3">
-        <label
-          for="fpassword"
-          class="block text-blue-800 font-bold text-sm mb-2"
-          >Password</label
-        >
-        <input
-          id="fpassword"
-          v-model="$v.formResponses.password.$model"
-          type="password"
-          name="fpassword"
-          autocomplete="section-login current-password"
-          class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-        />
+      <BaseInput
+        label="Password"
+        v-model="$v.formResponses.password.$model"
+        type="password"
+        autocomplete="section-login password"
+      >
         <p v-if="errors" class="absolute bottom-0 inset-x-0">
           <span v-if="!$v.formResponses.password.required" class="error"
             >This field is required.</span
           >
         </p>
-      </section>
+      </BaseInput>
 
       <section class="relative mb-3 pb-6">
         <div class="flex items-center justify-around">
           <ButtonPrimary
             type="submit"
             :disabled="uiState !== 'idle'"
-            @click.prevent="submitLoginForm"
           >
             <SimpleSpinner
               v-if="uiState === 'pending'"
@@ -73,7 +57,7 @@
 </template>
 
 <script>
-import { ButtonPrimary, SimpleSpinner } from '@/components/BaseUI'
+import { ButtonPrimary, BaseInput, SimpleSpinner } from '@/components/BaseUI'
 import { required } from 'vuelidate/lib/validators'
 import Api from '@/services/Api'
 import { mapActions } from 'vuex'
@@ -81,6 +65,7 @@ import { mapActions } from 'vuex'
 export default {
   components: {
     ButtonPrimary,
+    BaseInput,
     SimpleSpinner
   },
   data() {
@@ -109,7 +94,7 @@ export default {
     ...mapActions('notification', ['add']),
     ...mapActions('user', ['setUserData', 'getUserScores']),
     ...mapActions('auth', ['authUser']),
-    async submitLoginForm() {
+    async submit() {
       this.formTouched = !this.$v.formResponses.$anyDirty
       this.errors = this.$v.formResponses.$anyError
       if (
@@ -126,7 +111,7 @@ export default {
         }, 750)
         try {
           const {
-            data: { token, _v, ...userData }
+            data: { token, ...userData }
           } = await Api.post('/auth/login', authData)
           clearTimeout(spinnerTimer)
           this.authUser(token)
@@ -136,10 +121,15 @@ export default {
             type: 'success',
             text: 'You have been logged in.'
           })
-        } catch (error) {
-          console.log(error)
+        } catch (e) {
+          // const notification = {
+          //   type: 'error',
+          //   text: `There was an error logging in: ${e.message}`
+          // }
+          // this.add(notification)
+          clearTimeout(spinnerTimer)
           this.uiState = 'idle'
-          this.formFeedback = error.response.data
+          this.formFeedback = e.response.data
         }
       }
     }
@@ -153,6 +143,6 @@ export default {
 }
 
 .error-border {
-  @apply border-red-500;
+  @apply px-2 border border-red-500 rounded;
 }
 </style>

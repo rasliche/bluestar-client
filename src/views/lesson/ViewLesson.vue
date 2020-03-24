@@ -104,35 +104,39 @@ export default {
     }
   },
   async created() {
-    const { data: { content, ...lesson } } = await Api.get(`/lessons/${this.lessonId}`)
-    const { data: questions } = await Api.get(`/lesson/${this.lessonId}/questions`)
+    try {
+      const { data: { content, ...lesson } } = await Api.get(`/lessons/${this.lessonId}`)
+      const { data: questions } = await Api.get(`/lesson/${this.lessonId}/questions`)
 
-    this.lesson = lesson
-    this.questions = questions
-    this.editor = new Editor({
-      editable: false,
-      extensions: [
-        new Bold(),
-        new Italic(),
-        new Underline(),
-        new Blockquote(),
-        new BulletList(),
-        new HardBreak(),
-        new Heading({ levels: [2, 3] }),
-        new HorizontalRule(),
-        new ListItem(),
-        new OrderedList(),
-        new TodoItem(),
-        new TodoList(),
-        new Link(),
-        new Strike(),
-        new History(),
-        new Image(),
-        // custom extensions tests
-        new Iframe()
-      ],
-      content: content
-    })
+      this.lesson = lesson
+      this.questions = questions
+      this.editor = new Editor({
+        editable: false,
+        extensions: [
+          new Bold(),
+          new Italic(),
+          new Underline(),
+          new Blockquote(),
+          new BulletList(),
+          new HardBreak(),
+          new Heading({ levels: [2, 3] }),
+          new HorizontalRule(),
+          new ListItem(),
+          new OrderedList(),
+          new TodoItem(),
+          new TodoList(),
+          new Link(),
+          new Strike(),
+          new History(),
+          new Image(),
+          // custom extensions tests
+          new Iframe()
+        ],
+        content: content
+      })
+    } catch (e) {
+      this.$router.push({ name: '404' })
+    }
   },
   beforeDestroy() {
     this.editor.destroy()

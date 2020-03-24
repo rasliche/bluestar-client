@@ -2,6 +2,7 @@
   <div>
     <PageHeading>Error - 404</PageHeading>
     <p>Page not found</p>
+    <router-link :to="{ name: 'home' }">Back to Home</router-link>
   </div>
 </template>
 
