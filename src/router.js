@@ -106,14 +106,8 @@ export default new Router({
       path: '/news',
       name: 'news',
       beforeEnter(to, from, next) {
-        if (
-          store.getters['auth/isAuthenticated'] &&
-          store.getters['user/isAdmin']
-        ) {
-          next()
-        } else {
-          next('/login')
-        }
+        console.log('Entered the news zone...')
+        next()
       },
       component: () => import(/* webpackChunkName: "news" */ './views/News.vue')
     },
@@ -201,6 +195,15 @@ export default new Router({
       },
       component: () =>
         import(/* webpackChunkName: "design" */ './views/Design.vue')
+    },
+    {
+      path: '/buoys',
+      name: 'buoys',
+      beforeEnter(to, from, next) {
+        console.log('Entered the Buoy Zone...')
+        next()
+      },
+      component: () => import(/* webpackChunkName: "BuoyReport" */ './views/BuoyReport.vue')
     },
     {
       path: '/404',

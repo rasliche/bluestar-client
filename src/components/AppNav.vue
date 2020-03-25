@@ -31,6 +31,9 @@
         <router-link :to="{ name: 'news' }" class="block p-2 mt-2 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100">
           News
         </router-link>
+        <router-link :to="{ name: 'buoys' }" class="block p-2 mt-2 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100">
+          Buoy Report
+        </router-link>
         <router-link v-if="isAdmin" :to="{ name: 'admin' }" class="block p-2 mt-2 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100">
           Admin
         </router-link>
