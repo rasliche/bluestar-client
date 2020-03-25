@@ -1,16 +1,18 @@
 import Api from '@/services/Api'
 import router from '@/router'
 
-const state = {
+export const namespaced = true
+
+export const state = {
   token: null
 }
 
-const getters = {
+export const getters = {
   isAuthenticated: (state) => state.token !== null,
   token: (state) => state.token
 }
 
-const mutations = {
+export const mutations = {
   setToken: (state, token) => {
     state.token = token
   },
@@ -19,7 +21,7 @@ const mutations = {
   }
 }
 
-const actions = {
+export const actions = {
   // setLogoutTimer: ({ commit }, expirationTime) => {
   //     setTimeout(() => {
   //       commit('user/clearUser', {}, { root: true })
@@ -108,12 +110,4 @@ const actions = {
     )
     router.replace('/')
   }
-}
-
-export default {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
 }

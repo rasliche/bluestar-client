@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import auth from './modules/auth'
-import * as user from './modules/user'
+import * as auth from './modules/auth'
+import * as lesson from './modules/lesson'
 import * as notification from './modules/notification'
 import * as operator from './modules/operator'
 import * as program from './modules/program'
-import * as lesson from './modules/lesson'
+import * as user from './modules/user'
 
 Vue.use(Vuex)
 
@@ -14,11 +14,11 @@ export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   modules: {
     auth,
-    user,
+    lesson,
     notification,
     operator,
     program,
-    lesson
+    user,
   },
   state: {},
   getters: {},
