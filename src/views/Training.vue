@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import Api from '@/services/Api'
 import { PageHeading, ButtonPrimary } from '@/components/BaseUI'
 import BSLessonCard from '@/components/lesson/BSLessonCard'
 import { mapState, mapGetters } from 'vuex'
@@ -45,6 +44,13 @@ export default {
       selectedProgramId: null
     }
   },
+  created() {
+    this.$store.dispatch('lesson/getLessons')
+      .catch(e => {
+        console.log(e)
+      })
+    this.$store.dispatch('program/getPrograms')
+  },
   computed: {
     ...mapState('program', ['programs']),
     ...mapGetters('lesson', ['publishedLessons']),
@@ -53,9 +59,5 @@ export default {
       return this.publishedLessons.filter(lesson => lesson.programs.includes(this.selectedProgramId))
     }
   },
-  async created() {
-    this.$store.dispatch('lesson/getLessons')
-    this.$store.dispatch('program/getPrograms')
-  }
 }
 </script>
