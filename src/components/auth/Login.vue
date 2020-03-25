@@ -122,14 +122,18 @@ export default {
             text: 'You have been logged in.'
           })
         } catch (e) {
-          // const notification = {
-          //   type: 'error',
-          //   text: `There was an error logging in: ${e.message}`
-          // }
-          // this.add(notification)
+          const notification = {
+            type: 'error'
+          }
+          if (e.message === 'Network Error') {
+            notification.text = `There was an error logging in. Are you online?`
+          } else {
+            notification.text = `There was an error logging in: ${e.message}`
+          }
+          this.add(notification)
           clearTimeout(spinnerTimer)
           this.uiState = 'idle'
-          this.formFeedback = e.response.data
+          if (e.response) { this.formFeedback = e.response.data }
         }
       }
     }
