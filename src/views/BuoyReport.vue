@@ -1,10 +1,11 @@
 <template>
 <main>
     <PageHeading>Buoy Reports</PageHeading>
-    <canvas id="buoy-map" class="w-full"></canvas>
-    <div>{{ buoys }}</div>
-    <div>{{ line }}</div>
-    <div>{{ diver }}</div>
+    <canvas ref="buoy-map" class="w-full bg-blue-200"></canvas>
+    <div>{{ resources.funds }}</div>
+    <div>{{ resources.buoys }}</div>
+    <div>{{ resources.line }}</div>
+    <div>{{ resources.diver }}</div>
 </main>
 </template>
 
@@ -18,19 +19,25 @@ export default {
     },
     data() {
         return {
-            buoys: {
-                stock: 0,
-                cost: 175,
-            },
-            line: {
-                stock: 5280,
-                cost: 1
-            },
-            diver: {
-                stock: 6,
-                cost: 45000
+            resources: {
+                funds: 450000,
+                buoys: {
+                    stock: 0,
+                    cost: 175,
+                },
+                line: {
+                    stock: 0,
+                    cost: 1
+                },
+                diver: {
+                    stock: 6,
+                    cost: 45000
+                }
             }
         }
+    },
+    created() {
+        
     }
 }
 </script>
