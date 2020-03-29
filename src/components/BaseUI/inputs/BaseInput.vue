@@ -11,7 +11,9 @@
       class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" />
     <slot></slot>
     <!-- <p v-if="errors" class="absolute bottom-0 inset-x-0">
-      TODO: How do I show errors here?
+      <span v-if="!$v.formResponses.password.required" class="error">
+        This field is required.
+      </span>
     </p> -->
   </div>
 </template>
@@ -48,3 +50,13 @@ export default {
   }
 }
 </script>
+
+<style lang="postcss" scoped>
+.error {
+  @apply text-red-500 text-sm;
+}
+
+.error-border {
+  @apply px-2 border border-red-500 rounded;
+}
+</style>
