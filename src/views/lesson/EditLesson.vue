@@ -22,12 +22,14 @@
       </section>
       
       <BaseInput label="Cover Photo" type="text" v-model="lesson.coverPhoto.location"></BaseInput>
-      <ButtonPrimary @click="saveLessonDetails">
-        Save Details
-      </ButtonPrimary>
-      <ButtonPrimary @click="saveCoverPhoto">
-        Save Cover Photo
-      </ButtonPrimary>
+      <section class="w-full mx-auto mt-4 flex justify-around">
+        <ButtonPrimary @click="saveLessonDetails">
+          Save Details
+        </ButtonPrimary>
+        <ButtonPrimary @click="saveCoverPhoto">
+          Save Cover Photo
+        </ButtonPrimary>
+      </section>
     </form>
     <editor-menu-bar v-slot="{ commands, isActive }" :editor="editor">
       <div class="flex justify-between">
