@@ -5,19 +5,15 @@
         <ButtonPrimary @click="shuffleSquares">Shuffle</ButtonPrimary>
         Click shuffle and then click the free square.
       </div>
-      <div class="grid grid-cols-5 gap-2 w-auto text-center">
+      <div class="grid grid-cols-5 grid-rows-5 gap-2 text-center">
           <div
             @click="markSquare(index)"
             class="border border-2 border-gray-600" 
             :class="{ 'bg-green-400': square.marked }" 
             v-for="(square, index) in squares" :key="index"
-            >
-              <p v-if="index === 12">
-                FREE!
-            </p>
-            <p v-else>
-                {{ square.text }}
-            </p>
+          >
+            <p v-if="index === 12">FREE!</p>
+            <p v-else>{{ square.text }}</p>
           </div>
       </div>
   </main>
@@ -48,10 +44,10 @@ export default {
                     text: '"I forgot I was on mute"',
                     marked: false },
                 {
-                    text: 5,
+                    text: '"Who just Joined?"',
                     marked: false },
                 {
-                    text: 6,
+                    text: '',
                     marked: false },
                 {
                     text: 7,
