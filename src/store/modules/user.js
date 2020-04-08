@@ -1,3 +1,4 @@
+import UserService from '@/services/UserService'
 import Api from '@/services/Api'
 import router from '@/router'
 
@@ -5,49 +6,46 @@ export const namespaced = true
 
 export const state = {
   user: {},
-  userId: null,
-  name: null,
-  email: null,
-  operators: [],
-  lessonScores: [],
-  isAdmin: false
-}
-
-export const getters = {
-  userId: (state) => state.userId,
-  name: (state) => state.name,
-  email: (state) => state.email,
-  operators: (state) => state.operators,
-  lessonScores: (state) => state.lessonScores,
-  isAdmin: (state) => state.isAdmin
+  users: [],
 }
 
 export const mutations = {
-  setUserData: (state, user) => {
-    state.userId = user._id
-    state.name = user.name
-    state.email = user.email
-    state.isAdmin = user.isAdmin
+  SET_USER: (state, userData) => {
+    state.user = userData
   },
-  setUserOperatorData: (state, userOperator) => {
-    return state.operators.push(userOperator)
+  SET_USER_OPERATORS: (state, operators) => {
+    state.user.operators = operators
   },
   setUserScoreData: (state, userScore) => {
     return state.lessonScores.push(userScore)
   },
   clearUser: (state) => {
-    state.userId = null
-    state.name = null
-    state.email = null
-    state.operators = []
-    state.lessonScores = []
-    state.isAdmin = false
+    state.user = null
+  },
+  ADD_USERS: (state, users) => {
+    state.users = [...users]
+  },
+  ADD_SHOP_TO_USER: (state, shop) => {
+    state.user.operators.push(shop)
+    state.users.find(u => u._id === state.user._id).operators.push(shop)
   }
 }
 
 export const actions = {
-  setUserData: ({ commit }, userData) => {
-    commit('setUserData', userData)
+  joinShop: ({ commit, state }, payload) => {
+    return UserService.joinShop(state.user._id, payload)
+      .then(response => { // receive a shop back in { data }
+        console.log(response.data)
+        commit('ADD_SHOP_TO_USER', response.data)
+      })
+  },
+  getUsers: ({ commit }) => {
+    return UserService.getUsers().then(response => {
+      commit('ADD_USERS', response.data)
+    })
+  },
+  setUser: ({ commit }, userData) => {
+    commit('SET_USER', userData)
   },
   setUserOperatorData: ({ commit }, operator) => {
     commit('setUserOperatorData', operator)
@@ -108,5 +106,12 @@ export const actions = {
       console.log('No new lesson score added.')
       router.push('/me')
     }
+  },
+  getUserOperators: ({ commit, state }) => {
+    return UserService.getUserOperators(state.user._id)
+      .then(response => {
+        console.log(response.data)
+        commit('SET_USER_OPERATORS', response.data)
+      })
   }
 }

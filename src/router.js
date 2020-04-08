@@ -6,7 +6,7 @@ import store from './store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -23,25 +23,19 @@ export default new Router({
     {
       path: '/register-admin',
       name: 'register-admin',
-      // route level code-splitting
-      // this generates a separate chunk (login.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () =>
         import(/* webpackChunkName: "register-admin" */ './views/RegisterAdmin.vue')
     },
     {
       path: '/me',
       name: 'me',
+      meta: {
+        requiresAuth: true,
+      },
       beforeEnter(to, from, next) {
-        if (store.getters['auth/isAuthenticated']) {
-          next()
-        } else {
-          // store.dispatch('alert/setAlert', {
-          //   type: "error",
-          //   text: "You must be logged in to visit that page!"
-          // })
-          next('login')
-        }
+        store.dispatch('user/getUserOperators')
+        store.dispatch('operator/getOperators')
+        next()
       },
       component: () => import(/* webpackChunkName: 'me' */ './views/Me.vue')
     },
@@ -66,16 +60,9 @@ export default new Router({
       path: '/operators/:operatorId',
       props: true,
       name: 'view-operator',
-      //   // beforeEnter (to, from, next) {
-      //   //   if (store.state.token) {
-      //   //     next()
-      //   //   } else {
-      //   //     next('/login')
-      //   //   }
-      //   // },
-      // route level code-splitting
-      // this generates a separate chunk (operator.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      meta: {
+        requiresAuth: true,
+      },
       component: () =>
         import(/* webpackChunkName: "view-operator" */ './views/Operator.vue')
     },
@@ -89,43 +76,22 @@ export default new Router({
       path: '/users/:userId',
       props: true,
       name: 'view-user',
-      beforeEnter(to, from, next) {
-        if (store.getters['auth/token'] && store.getters['user/isAdmin']) {
-          next()
-        } else {
-          next('/login')
-        }
+      meta: {
+        requiresAdmin: true,
       },
-      // route level code-splitting
-      // this generates a separate chunk (user.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () =>
         import(/* webpackChunkName: "view-user" */ './views/user/User.vue')
     },
     {
       path: '/news',
       name: 'news',
-      beforeEnter(to, from, next) {
-        if (
-          store.getters['auth/isAuthenticated'] &&
-          store.getters['user/isAdmin']
-        ) {
-          next()
-        } else {
-          next('/login')
-        }
-      },
       component: () => import(/* webpackChunkName: "news" */ './views/News.vue')
     },
     {
       path: '/training',
       name: 'training',
-      beforeEnter(to, from, next) {
-        if (store.getters['auth/isAuthenticated']) {
-          next()
-        } else {
-          next('/login')
-        }
+      meta: {
+        requiresAuth: true,
       },
       component: () =>
         import(/* webpackChunkName: "training" */ './views/Training.vue')
@@ -133,15 +99,8 @@ export default new Router({
     {
       path: '/lesson/create',
       name: 'create-lesson',
-      beforeEnter(to, from, next) {
-        if (
-          store.getters['auth/isAuthenticated'] &&
-          store.getters['user/isAdmin']
-        ) {
-          next()
-        } else {
-          next('/login')
-        }
+      meta: {
+        requiresAdmin: true,
       },
       component: () =>
         import(/* webpackChunkName: "create-lesson" */ './views/lesson/CreateLesson.vue')
@@ -150,15 +109,8 @@ export default new Router({
       path: '/lesson/:lessonId/edit',
       name: 'edit-lesson',
       props: true, // receive lessonId route parameter as the prop to fetch lesson
-      beforeEnter(to, from, next) {
-        if (
-          store.getters['auth/isAuthenticated'] &&
-          store.getters['user/isAdmin']
-        ) {
-          next()
-        } else {
-          next('/login')
-        }
+      meta: {
+        requiresAdmin: true,
       },
       component: () =>
         import(/* webpackChunkName: "edit-lesson" */ './views/lesson/EditLesson.vue')
@@ -173,15 +125,15 @@ export default new Router({
     {
       path: '/admin',
       name: 'admin',
+      meta: {
+        requiresAdmin: true
+      },
       beforeEnter(to, from, next) {
-        if (
-          store.getters['auth/isAuthenticated'] &&
-          store.getters['user/isAdmin']
-        ) {
-          next()
-        } else {
-          next('/login')
-        }
+        store.dispatch('program/getPrograms')
+        store.dispatch('user/getUsers')
+        store.dispatch('lesson/getLessons')
+        store.dispatch('operator/getOperators')
+        next()
       },
       component: () =>
         import(/* webpackChunkName: "admin" */ './views/Admin.vue')
@@ -189,18 +141,17 @@ export default new Router({
     {
       path: '/design',
       name: 'design',
-      beforeEnter(to, from, next) {
-        if (
-          store.getters['auth/isAuthenticated'] &&
-          store.getters['user/isAdmin']
-        ) {
-          next()
-        } else {
-          next('/login')
-        }
+      meta: {
+        requiresAdmin: true
       },
       component: () =>
         import(/* webpackChunkName: "design" */ './views/Design.vue')
+    },
+    {
+      path: '/bluestarbingo',
+      name: 'bluestar-bingo',
+      component: () => 
+        import(/* webpackChunkName: "bluestar-bingo" */ './views/extras/BlueStarBingo.vue')
     },
     {
       path: '/404',
@@ -218,3 +169,38 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    console.log("Auth Required!")
+    if (!store.getters['auth/isAuthenticated']) {
+      next({
+        name: 'login'
+      })
+    } else {
+      next()
+    }
+  } else {
+    console.log("No Auth Required!")
+    next()
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAdmin)) {
+    console.log("Admin Required!")
+    if (!store.getters['auth/isAuthenticated'] || !store.state.user.user.isAdmin) {
+      next({
+        name: 'login'
+      })
+    } else {
+      next()
+    }
+  } else {
+    console.log("No Admin Required!")
+    next()
+  }
+})
+
+
+export default router

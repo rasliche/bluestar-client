@@ -11,9 +11,6 @@ export { default as CardBase } from './CardBase.vue'
 // Modals
 export { default as Modal } from './Modal.vue'
 
-// Controlled Components
-export { default as SearchSelect } from './SearchSelect.vue'
-
 // Typography
 export { default as PageHeading } from './PageHeading.vue'
 
@@ -23,6 +20,7 @@ export { default as SimpleSpinner } from './loaders/SimpleSpinner.vue'
 // Inputs
 export { default as BaseInput } from './inputs/BaseInput.vue'
 export { default as BaseToggle } from './inputs/BaseToggle.vue'
+export { default as SearchSelect } from './inputs/SearchSelect.vue'
 
 // Goofy UI
 export { default as Parallax } from './Parallax.vue'

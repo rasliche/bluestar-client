@@ -31,17 +31,17 @@
         <router-link :to="{ name: 'news' }" class="block p-2 mt-2 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100">
           News
         </router-link>
-        <router-link v-if="isAdmin" :to="{ name: 'admin' }" class="block p-2 mt-2 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100">
+        <router-link v-if="user && user.isAdmin" :to="{ name: 'admin' }" class="block p-2 mt-2 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100">
           Admin
         </router-link>
-        <router-link v-if="isAdmin" :to="{ name: 'design' }" class="block p-2 mt-2 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100">
+        <router-link v-if="user && user.isAdmin" :to="{ name: 'design' }" class="block p-2 mt-2 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100">
           Design
         </router-link>
       </div>
 
       <div class="w-full inline-block md:items-center md:w-auto">
         <router-link v-if="isAuthenticated" :to="{ name: 'me' }" class="block p-2 mt-2 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100">
-          Me
+          {{ user ? user.name : '' }}
         </router-link>
         <router-link v-if="!isAuthenticated" :to="{ name: 'login' }" class="block p-2 mt-2 mr-4 md:inline-block md:mt-0 text-blue-400 rounded hover:bg-blue-100">
           Login
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'AppNav',
@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
-    ...mapGetters('user', ['isAdmin'])
+    ...mapState('user', ['user'])
   },
   methods: {
     ...mapActions('auth', ['logoutUser'])

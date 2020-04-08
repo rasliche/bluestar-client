@@ -81,7 +81,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', ['name']),
     ...mapGetters('auth', ['isAuthenticated'])
   }
 }

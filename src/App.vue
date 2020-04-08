@@ -16,8 +16,6 @@
 import AppNav from '@/components/AppNav.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import { NotificationContainer } from '@/components/BaseComponents'
-import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('alert')
 
 export default {
   components: {
@@ -25,9 +23,6 @@ export default {
     AppFooter,
     NotificationContainer
   },
-  computed: {
-    ...mapState(['alert', 'timer'])
-  }
 }
 </script>
 

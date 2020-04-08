@@ -9,7 +9,6 @@ export const state = {
 
 export const getters = {
   isAuthenticated: (state) => state.token !== null,
-  token: (state) => state.token
 }
 
 export const mutations = {

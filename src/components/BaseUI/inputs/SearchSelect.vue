@@ -1,19 +1,25 @@
 <template>
     <OnClickOutside :do="close">
-        <div class="relative py-1 shadow-md">
+        <div class="relative mb-6 pb-3">
+            <label v-if="label" class="block text-blue-800 font-bold text-sm mb-2">
+                {{ label }}
+            </label>
             <button 
                 ref="button"
                 @click="open" 
                 type="button" 
-                class="w-full rounded shadow-inner focus:border-blue-300"
+                class="flex w-full rounded shadow appearance-none border-blue-200 border py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             >
-                <span v-if="value !== null">{{ value }}</span>
-                <span v-else>Select an option...</span>
+                <span class="flex-auto" v-if="value !== null">{{ value }}</span>
+                <span class="flex-auto" v-else>Select an option...</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 flex-none icon-cheveron-selection fill-current">
+                    <path class="secondary" fill-rule="evenodd" d="M8.7 9.7a1 1 0 1 1-1.4-1.4l4-4a1 1 0 0 1 1.4 0l4 4a1 1 0 1 1-1.4 1.4L12 6.42l-3.3 3.3zm6.6 4.6a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"></path>
+                </svg>
             </button>
             <div 
                 ref="dropdown" 
                 v-show="isOpen" 
-                class="absolute w-full px-2 py-1 rounded-md bg-gray-800 text-gray-200"
+                class="absolute w-full px-2 py-1 rounded-md bg-gray-800 text-gray-200 z-10"
             >
                 <input 
                     ref="search" 
@@ -59,6 +65,10 @@ export default {
         OnClickOutside
     },
     props: {
+        label: {
+            type: String,
+            default: '',
+        },
       value: { },
       options: {
           type: Array,

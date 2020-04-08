@@ -2,47 +2,57 @@
   <main class="user-dashboard">
     <PageHeading>Dashboard</PageHeading>
     <section>
-      <p class="text-2xl">{{ name }}</p>
-      <p>{{ email }}</p>
-      <p v-if="isAdmin">You are an admin.</p>
+      <p class="text-2xl">{{ user.name }}</p>
+      <p>{{ user.email }}</p>
+      <p v-if="user.isAdmin">You are an admin.</p>
     </section>
-    <section class="w-2/3 mx-auto">
+    <section class="mx-auto">
       <h1 class="text-lg font-semibold text-blue-900 text-center pb-3">Associated Operators</h1>
-      <p>
-        <span v-if="operators.length">{{ operators }}</span>
-        <span v-else>You haven't joined any organizations yet. Add one!</span>
-      </p>
-      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" @submit.prevent="joinShop">
-        <section class="relative mb-6 pb-3">
-          <SearchSelect 
+      <div>
+        <div class="flex flex-wrap" v-if="user.operators.length">
+          <div class="w-full mx-2 md:w-1/4" v-for="record in user.operators" :key="record._id">
+            <p class="w-full">{{ record.operator.name }}</p>
+            <div class="flex justify-between w-full h-5 text-sm invisible hover:visible">
+              <!-- v-if="record.canManage" -->
+              <span>manager</span>
+              <span>leave</span>
+            </div>
+          </div>
+        </div>
+        <p v-else>You haven't joined any organizations yet. Add one!</p>
+      </div>
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" @submit.prevent="requestJoinShop">
+          <SearchSelect
+            label="Select a Shop"
             v-model="shopToJoin"
             :options="operatorNames"
             :filter-function="applySearchFilter"
           ></SearchSelect>
-        </section>
-        <section v-show="shopToJoin !== null" class="relative mb-6 pb-3">
-          <label
-            for="shop-password"
-            class="block text-blue-800 font-bold text-sm mb-2"
-            >Shop Password</label
-          >
-          <input
+          <BaseInput
+            v-show="shopToJoin !== null"
+            label="Shop Password"
             id="shop-password"
-            v-model="newShopPassword"
+            v-model.trim="$v.newShopPassword.$model"
             type="text"
             name="shop-password"
-            class="shadow appearance-none rounded border-blue-200 border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-          />
-          <p v-if="errors" class="absolute bottom-0 inset-x-0">
-            <span v-if="!$v.formResponses.email.required" class="error">
-              This field is required.
-            </span>
-          </p>
-        </section>
+          >
+            <p v-if="errors" class="absolute bottom-0 inset-x-0">
+              <span v-if="!$v.newShopPassword.required" class="error">
+                This field is required.
+              </span>
+              <!-- TODO: Incorrect password -->
+              <span v-if="!$v.newShopPassword.isCorrect" class="error">
+                Password is incorrect.
+              </span>
+            </p>
+          </BaseInput>
+          <ButtonPrimary v-show="shopToJoin !== null && newShopPassword !== null" type="submit">
+            Join
+          </ButtonPrimary>
       </form>
     </section>
-    <section class="border-t-2 border-blue">
-      <p>Lesson Scores:</p>
+    <section class="w-2/3 mx-auto">
+      <h1 class="text-lg font-semibold text-blue-900 text-center pb-3">Lesson Scores</h1>
       <div v-if="status === 'loading'">
         <div>
           <p>Loading...</p>
@@ -63,54 +73,81 @@
 </template>
 
 <script>
-import { PageHeading, SearchSelect } from '@/components/BaseUI'
-import { mapGetters } from 'vuex'
 import Api from '@/services/Api'
+import { PageHeading, SearchSelect, ButtonPrimary, BaseInput } from '@/components/BaseUI'
+import { required } from 'vuelidate/lib/validators'
+import { mapState, mapGetters, mapActions } from 'vuex'
+
+// Custom Validator
+function isCorrect() {
+  const fullShop = this.operators.find(o => o.name === this.shopToJoin)
+  return fullShop.password === this.newShopPassword
+}
 
 export default {
   name: 'Me',
   components: {
     PageHeading,
     SearchSelect,
+    ButtonPrimary,
+    BaseInput
   },
   data() {
     return {
       status: 'loading', // success, failure
       updatePasswordModal: false,
       userScores: undefined,
-      operatorOptions: [],
       shopToJoin: null,
+      errors: false,
+      formTouched: true,
+      newShopPassword: null,
+    }
+  },
+  validations: {
+    newShopPassword: {
+      required,
+      isCorrect
+    }
+  },
+  watch: {
+    shopToJoin: function (newValue, oldValue) {
+      this.newShopPassword = null
+      this.errors = null
+      this.$v.$reset()
+      console.log(newValue)
     }
   },
   computed: {
-    ...mapGetters('user', [
-      'userId',
-      'name',
-      'email',
-      'operators',
-      'lessonScores',
-      'isAdmin'
-    ]),
-    operatorNames() {
-      return this.operatorOptions.map(o => o.name)
-    }
+    ...mapState('operator', ['operators']),
+    ...mapGetters('operator', ['operatorByName', 'operatorNames']),
+    ...mapState('user', ['user']),
   },
   async created() {
     try {
-      const { data: userScores } = await Api.get(`user/${this.userId}/scores`)
+      const { data: userScores } = await Api.get(`user/${this.user._id}/scores`)
       this.status = 'success'
       this.userScores = userScores
-      const { data: operatorOptions } = await Api.get(`operators`)
-      this.operatorOptions = operatorOptions
     } catch (error) {
       console.log(error)
     }
   },
   methods: {
+    ...mapActions('user', ['joinShop']),
     applySearchFilter(search, options) {
       return options.filter(option => {
         return option.toLowerCase().startsWith(search.toLowerCase())
       })
+    },
+    requestJoinShop() {
+      this.formTouched = !this.$v.newShopPassword.$dirty
+      this.errors = this.$v.newShopPassword.$error
+      if (this.errors === false && this.formTouched === false) {
+        const { _id: shopId} = this.operatorByName(this.shopToJoin)
+        this.joinShop({
+          shopId,
+          shopPassword: this.newShopPassword
+        })
+      }
     }
   },
 }
