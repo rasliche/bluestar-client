@@ -154,6 +154,12 @@ const router = new Router({
         import(/* webpackChunkName: "bluestar-bingo" */ './views/extras/BlueStarBingo.vue')
     },
     {
+      path: '/buoymanager',
+      name: 'buoy-lemonade-stand',
+      component: () => 
+        import(/* webpackChunkName: "buoy-lemonade-stand" */ './views/extras/BuoyLemonadeStand.vue')
+    },
+    {
       path: '/404',
       name: '404',
       component: () => import(/* webpackChunkName: "NotFound" */ './views/NotFound.vue')
