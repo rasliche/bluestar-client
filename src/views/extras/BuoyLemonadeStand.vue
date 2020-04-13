@@ -11,7 +11,7 @@
       <p>Buoys Available: {{ buoys.available }}</p>
       <p>Coverage: {{ buoyCoverage }}%</p>
     </div>
-    <div>
+    <div class="border rounded-md">
       <h3>Event Log</h3>
       <p v-for="(event, index) in eventLog" :key="index">{{ event }}</p>
     </div>
@@ -48,18 +48,30 @@ export default {
   },
   methods: {
     loseBuoys() {
-      const lost = 1
+      const lost = Math.floor(Math.random() * 3)
       this.buoys.available -= lost
-      this.eventLog.push(`Lost ${lost} buoys.`)
+      this.eventLog.push(`Lost ${lost} buoy${lost > 1 ? 's': ''}.`)
     },
     installAndReplaceBuoys() {
-
+      const divers = this.staff + Math.floor(Math.random() * 5 - 7)
+      let installed = 0
+      let replaced = 0
+      if (divers >= 4) {
+        installed += Math.floor(Math.random() * 2)
+      } else {
+        replaced += Math.floor(Math.random() * 8)
+      }
+      this.buoys.available += (installed + replaced)
+      this.eventLog.push(`Fixed ${replaced} buoy${replaced > 1 ? 's': ''}.`)
+      this.buoys.total += installed
+      this.eventLog.push(`Installed ${installed} buoy${installed > 1 ? 's': ''}.`)
     },
     checkForHurricane() {
 
     },
     nextDay() {
       this.loseBuoys()
+      this.installAndReplaceBuoys()
       this.days++
     }
   }
