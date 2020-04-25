@@ -27,7 +27,7 @@ export const mutations = {
   },
   ADD_SHOP_TO_USER: (state, shop) => {
     state.user.operators.push(shop)
-    state.users.find(u => u._id === state.user._id).operators.push(shop)
+    // state.users.find(u => u._id === state.user._id).operators.push(shop)
   }
 }
 
