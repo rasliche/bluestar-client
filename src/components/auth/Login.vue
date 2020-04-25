@@ -127,10 +127,8 @@ export default {
           }
           if (e.message === 'Network Error') {
             notification.text = `There was an error logging in. Are you online?`
-          } else {
-            notification.text = `There was an error logging in: ${e.message}`
+            this.add(notification)
           }
-          this.add(notification)
           clearTimeout(spinnerTimer)
           this.uiState = 'idle'
           if (e.response) { this.formFeedback = e.response.data }
