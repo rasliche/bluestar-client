@@ -133,20 +133,28 @@ export default {
   },
   methods: {
     ...mapActions('user', ['joinShop']),
+    ...mapActions('notification', ['add']),
     applySearchFilter(search, options) {
       return options.filter(option => {
         return option.toLowerCase().startsWith(search.toLowerCase())
       })
     },
-    requestJoinShop() {
+    async requestJoinShop() {
       this.formTouched = !this.$v.newShopPassword.$dirty
       this.errors = this.$v.newShopPassword.$error
       if (this.errors === false && this.formTouched === false) {
-        const { _id: shopId} = this.operatorByName(this.shopToJoin)
-        this.joinShop({
-          shopId,
-          shopPassword: this.newShopPassword
-        })
+        try {
+          const { _id: shopId} = this.operatorByName(this.shopToJoin)
+          await this.joinShop({
+            shopId,
+            shopPassword: this.newShopPassword
+          })
+        } catch (e) {
+          this.add({
+            type: 'error',
+            text: `${e.response.data}`
+          })
+        }
       }
     }
   },
